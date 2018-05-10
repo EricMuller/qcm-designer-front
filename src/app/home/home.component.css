@@ -1,0 +1,23 @@
+md-sidenav,
+md-sidenav.md-locked-open,
+md-sidenav.md-closed.md-locked-open-add-active {
+  min-width: 200px !important;
+  width: 85vw !important;
+  max-width: 400px !important;
+}
+
+
+#right-toolbar-content {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  height: 50px;
+}
+
+
+.spacer {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}

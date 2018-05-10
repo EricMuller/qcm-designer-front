@@ -1,0 +1,60 @@
+
+/*.customWidthClass {*/
+  /*flex: 0 0 75px;*/
+/*}*/
+
+/*.mat-column-select {*/
+  /*overflow: initial;*/
+/*}*/
+
+/*.mat-header-row, .mat-row {*/
+  /*border-bottom-style: none;*/
+/*}*/
+
+/*.mat-list-item-content{*/
+  /*border-bottom-style: none;*/
+/*}*/
+
+/*!*.mat-toolbar-row, .mat-toolbar-single-row {*!*/
+  /*!*background-color: #fff;*!*/
+/*!*}*!*/
+
+
+/*.my-full-screen-dialog .mat-dialog-container {*/
+  /*max-width: none;*/
+  /*width: 100vw;*/
+  /*height: 100vh;*/
+/*}*/
+
+
+/*.mat-list-item.active {*/
+  /*background-color:#123456 !important;*/
+  /*color: white;*/
+/*}*/
+
+
+/*.mat-card {*/
+
+  /*-webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05) !important;*/
+  /*box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05) !important;*/
+  /*margin: 15px;*/
+  /*padding: 10px !important;*/
+  /*border-radius: 4px;*/
+
+/*}*/
+
+/*.mat-card .mat-card-content{*/
+  /*padding: 0px !important;*/
+/*}*/
+
+
+.mat-list-item-content{
+  padding: 0 10px 50px ;
+}
+
+/*.check-margin {*/
+  /*margin: 0 20px;*/
+/*}*/
+/*.mat-checkbox-inner-container-no-side-margin {*/
+  /*margin-right: 10px;*/
+/*}*/

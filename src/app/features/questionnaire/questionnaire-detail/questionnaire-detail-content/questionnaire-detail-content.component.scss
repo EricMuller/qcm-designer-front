@@ -1,0 +1,30 @@
+.example-form {
+  min-width: 250px;
+  max-width: 500px;
+  width: 100%;
+}
+
+//.example-full-width {
+//  width: 100%;
+//}
+
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+  border-bottom-style: none;
+}
+
+/*.example-headers-align .mat-expansion-panel-header-description {*/
+/*justify-content: space-between;*/
+/*align-items: center;*/
+/*}*/
+
+
+.mat-list-item-content{
+  border-bottom-style: none;
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+  background-color: #fff;
+}

@@ -1,0 +1,26 @@
+<mat-card style="box-shadow: unset">
+  <mat-card-content>
+    <!---->
+    <form #qForm="ngForm" class="example-form">
+      <div style="display:flex;flex-direction: column">
+        <mat-form-field >
+          <textarea matInput placeholder="question" [(ngModel)]="question.question" name="title"></textarea>
+        </mat-form-field>
+
+        <!--<mat-form-field >-->
+          <!--<textarea matInput placeholder="Description"  [(ngModel)]="questionnaire.description" name="description"></textarea>-->
+        <!--</mat-form-field>-->
+
+        <!--<mat-form-field *ngIf="categories| async as categories;">-->
+          <!--<mat-select placeholder="Category" [formControl]="categoryControl" [(ngModel)]="questionnaire.category"-->
+                      <!--name="category" [compareWith]="compareById">-->
+            <!--<mat-option>&#45;&#45;</mat-option>-->
+            <!--<mat-option *ngFor="let category of categories" [value]="category">{{category.libelle}}</mat-option>-->
+          <!--</mat-select>-->
+        <!--</mat-form-field>-->
+
+      </div>
+    </form>
+
+  </mat-card-content>
+</mat-card>

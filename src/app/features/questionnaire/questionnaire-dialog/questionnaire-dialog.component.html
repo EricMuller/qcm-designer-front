@@ -1,0 +1,10 @@
+<h1  mat-dialog-title>Edit Questionnaire</h1>
+<mat-dialog-content>
+  <div style="display: flex;flex-direction: column">
+  <app-questionnaire-detail-content [questionnaire]="questionnaire"></app-questionnaire-detail-content>
+  </div>
+</mat-dialog-content>
+<div mat-dialog-actions style="justify-content:flex-end">
+  <button md-dialog-close mat-raised-button (click)="closeDialog()">cancel</button>
+  <button mat-raised-button (click)="save()">Save</button>
+</div>

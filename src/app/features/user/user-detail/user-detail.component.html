@@ -1,0 +1,30 @@
+
+<mat-card>
+
+<mat-card-header>
+
+<mat-toolbar>
+  <a mat-icon-button>
+    <mat-icon>account_circle</mat-icon>
+  </a>
+  <h1>User</h1>
+</mat-toolbar>
+
+</mat-card-header>
+  <mat-card-content>
+    <div class="user-container">
+      <div>Id :  {{this.getUser().id}}</div>
+      <div>Name :  {{this.getUser().firstName}}</div>
+      <div>Last name :{{this.getUser().lastName}}</div>
+      <div>Email :{{this.getUser().email}}</div>
+      <div>Email Verified :{{this.getUser().emailVerified}}</div>
+      <div>Token:<textarea style="width:900px;height: 200px; word-wrap:break-word;border: none">bearer&nbsp;{{this.token | async }}</textarea></div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+
+
+
+
+

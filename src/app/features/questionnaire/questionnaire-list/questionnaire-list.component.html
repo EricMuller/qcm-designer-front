@@ -1,0 +1,147 @@
+<mat-card *ngIf="totalElements">
+
+  <mat-card-header>
+    <mat-toolbar>
+
+      <div>
+        <button mat-icon-button *ngIf="multiSelection() < 2">
+          <mat-icon>list</mat-icon>
+        </button>
+        <span *ngIf="!multiSelection()" style="align-items: center ">My Questionnaire(s)</span>
+
+      </div>
+
+      <div class="check-margin">
+        <mat-checkbox mat-icon-button *ngIf="multiSelection() > 1" (change)="multiSelectionChecked($event)"
+                      [checked]="pageSelection()"></mat-checkbox>
+        <span *ngIf="multiSelection()" style="align-items: center ">My Questionnaires ({{multiSelection()}})</span>
+      </div>
+
+      <div flex></div>
+      <!--<button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="questionnaireMenu">-->
+      <!--<mat-icon>more_vert</mat-icon>-->
+      <!--</button>-->
+      <!-- line menu -->
+      <!--<mat-menu #questionnaireMenu="matMenu" yPosition="below">-->
+      <!--<a *ngFor="let q of tagsSelected" >-->
+        <!--<span class="label label-info">{{q.libelle}}</span>-->
+      <!--</a>-->
+
+      <a mat-icon-button [@tdPulse]="pulseState" (click)="search(true)">
+        <mat-icon>replay</mat-icon>
+      </a>
+      <!--<a mat-icon-button (click)="openQuestionnaireDialog()">-->
+      <!--<mat-icon>fiber_new</mat-icon>-->
+      <!--</a>-->
+      <!--<a mat-icon-button>-->
+      <!--<mat-icon>delete</mat-icon>-->
+      <!--</a>-->
+      <mat-menu #filterMenu="matMenu">
+        <button mat-menu-item *ngFor="let q of tagsSelected">
+          <span class="label label-info">{{q.libelle}}
+          </span>
+        </button>
+      </mat-menu>
+
+      <mat-icon matBadge="22" matBadgePosition="above after">home</mat-icon>
+
+      <button mat-icon-button [matMenuTriggerFor]="filterMenu">
+        <mat-icon matBadge="22" matBadgePosition="above after">filter_list</mat-icon>
+      </button>
+
+    </mat-toolbar>
+  </mat-card-header>
+
+  <mat-card-content>
+
+    <!--(mouseover)='over(questionnaire)'-->
+    <mat-nav-list>
+      <div *ngFor="let questionnaire of questionnaires | async as q; index as i">
+        <mat-list-item class="list" style="overflow: hidden"
+                       [class.active]="i == selectedRow"
+                       attr.entityId="questionnaireId_{{questionnaire.id}}">
+          <!--<mat-checkbox matListIcon [(ngModel)]="questionnaire.isChecked"></mat-checkbox>-->
+          <!--<img *ngIf="!questionnaire.hideImg" matListAvatar [src]="imgQuestion(questionnaire)"/>-->
+          <!--<mat-icon matListIcon>question_answer</mat-icon>-->
+          <!--<mat-icon matListAvatar>person</mat-icon>-->
+          <!--<mat-chip-list matListIcon><mat-chip>{{firstLetter(questionnaire)}}</mat-chip></mat-chip-list>-->
+
+          <button mat-icon-button matListAvatar (click)="setClickedRow(questionnaire)">
+            <mat-icon matListIcon *ngIf="!isSelected(questionnaire)">question_answer</mat-icon>
+            <mat-checkbox *ngIf="isSelected(questionnaire)" matListAvatar [checked]="isSelected(questionnaire)"
+                          [(indeterminate)]="indeterminate" [labelPosition]="labelPosition"
+                          [disabled]="disabled"></mat-checkbox>
+            <!--<mat-icon matListIcon *ngIf="isSelected(questionnaire)" color="primary">done</mat-icon>-->
+          </button>
+          <!--<button mat-mini-fab matListAvatar color="primary"><mat-icon>done</mat-icon></button>-->
+          <!--<mat-icon matListIcon>question_answer</mat-icon>-->
+          <h4 matLine class="cursor-pointer" [routerLink]="['/questionnaires/'+ questionnaire.id ]">
+            <!--[routerLink]="['/questionnaires/'+ questionnaire.questionId +'/questions']">-->
+            Questionnaire
+            {{questionnaire.id}} - {{questionnaire.title}} </h4>
+          <!--  menu -->
+          <span *ngIf="questionnaire.epic" class="label label-danger"> {{questionnaire.epic?.libelle}}</span>
+          <span *ngFor="let tag of questionnaire.tags" class="label label-info" (click)="swapTag(tag)">{{tag.libelle}}</span>
+
+          <button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="questionnaireMenu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <!-- line menu -->
+          <mat-menu #questionnaireMenu="matMenu" yPosition="below">
+            <button mat-menu-item [routerLink]="['/questionnaires/'+ questionnaire.id ]">
+              <mat-icon>edit</mat-icon>
+              Update
+            </button>
+            <button mat-menu-item>
+              <mat-icon>delete</mat-icon>
+              Delete
+            </button>
+          </mat-menu>
+        </mat-list-item>
+        <!--<a  mat-fab color="primary" class="mat-fab-bottom-right z-3 fixed fab-pad"><mat-icon>add</mat-icon></a>-->
+
+      </div>
+
+
+      <!--<mat-list-item *ngIf=" !last
+      ">-->
+      <!--<div flex></div>-->
+      <!--<button *ngIf="!last" mat-button [@tdPulse]="pulseState" (click)="search(false)" color="primary" [disabled]="last">-->
+      <!--Next result(s)-->
+      <!--<mat-icon>expand_more</mat-icon>-->
+      <!--</button>-->
+      <!--</mat-list-item>-->
+    </mat-nav-list>
+
+    <div>
+      <mat-paginator #paginator *ngIf=" ( (questionnaires | async)?.length == pageSize ) || last   "
+                     [length]="totalElements"
+                     [pageSize]="pageSize" [showFirstLastButtons]="true"
+                     (page)="onPaginateChange($event)"></mat-paginator>
+    </div>
+    <button *ngIf="multiSelection() < 2" mat-fab color="primary" class="mat-fab-bottom-right z-2 fixed"
+            (click)="createQuestionnaire($event)">
+      <mat-icon>add</mat-icon>
+    </button>
+    <app-fab  mat-fab  *ngIf="multiSelection() > 1">
+      <app-fab-toggle [iconOff]="'mode_edit'" [iconOn]="'replay'"></app-fab-toggle>
+      <app-fab-button [color]="'accent'" [icon]="'delete'" (onClick)="deleteSelectedQuestionnaires()"></app-fab-button>
+    </app-fab>
+  </mat-card-content>
+
+
+</mat-card>
+
+
+<mat-card class="empty" *ngIf="(questionnaires | async)?.length ==0 ">
+  <mat-card-content class="empty">
+    <div style="display:flex;justify-content: center;flex-direction: column;align-items: center;height: 100%;">
+      <div><img src="./assets/images/norecord.png"/></div>
+      <p>You don't have any Questionnaires.</p>
+      <button mat-raised-button color="primary" (click)="createQuestionnaire($event)">ADD A QUESTIONNAIRE</button>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+
+

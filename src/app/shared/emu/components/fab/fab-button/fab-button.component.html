@@ -1,0 +1,12 @@
+<!--<a-->
+  <!--#anchor-->
+  <!--href="#"-->
+  <!--class="fab-item"-->
+  <!--(click)="onClick.emit($event)">-->
+      <!--<span-->
+        <!--[class]="'icon-' + icon">-->
+      <!--</span>-->
+  <!--<ng-content></ng-content>-->
+<!--</a>-->
+
+<div #anchor class="element"><button mat-fab (click)="onClick.emit($event)" [color]="color"><mat-icon>{{icon}}</mat-icon><ng-content></ng-content></button></div>

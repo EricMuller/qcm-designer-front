@@ -1,0 +1,20 @@
+<mat-toolbar>
+  <button mat-icon-button [routerLink]="['/questionnaires/list']">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  Questionnaire {{questionnaire.title}}
+
+  <div flex></div>
+  <ng-content select="[menu-buttons]"></ng-content>
+  <!--<button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="questionnaireMenu">-->
+    <!--<mat-icon>more_vert</mat-icon>-->
+  <!--</button>-->
+  <!-- line menu -->
+  <!--<mat-menu #questionnaireMenu="matMenu" yPosition="below">-->
+    <!--<ng-content select="[menu-items]"></ng-content>-->
+    <!--<button mat-menu-item>-->
+      <!--<mat-icon>delete</mat-icon>-->
+      <!--Delete-->
+    <!--</button>-->
+  <!--</mat-menu>-->
+</mat-toolbar>

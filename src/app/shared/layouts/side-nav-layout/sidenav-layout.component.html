@@ -1,0 +1,66 @@
+<!--<mat-toolbar flex  #apptoolbar >-->
+<!--style="height: 80px"-->
+<mat-toolbar class="topbar" color="primary">
+
+
+
+    <div style="width: 175px;padding-left: 25px">{{appName}}</div>
+
+  <div>
+    <button mat-icon-button class="td-menu-button"
+            (click)="leftsidenav.toggle()"
+            matTooltip="Main menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <!--<div style="font-size: 22px">{{title}}</div>-->
+  <!-- user menu -->
+  <mat-icon class="mat-icon-logo"></mat-icon>
+  <div flex></div>
+  <ng-content select="[right-toolbar-content]"></ng-content>
+  <app-login-menu></app-login-menu>
+</mat-toolbar>
+
+<!--</mat-toolbar>-->
+
+
+<div>
+  <mat-sidenav-container entityId="sidenav-container" full>
+
+    <!-- RIGHT TOOL BAR MENU-->
+    <mat-sidenav class="fixed-right" #rightsidenav
+                 align="end"
+                 mode="side"
+                 opened="false"
+                 style="width:600px;border-left:1px solid #ccc">
+
+      <!--<template [ngTemplateOutlet]="rightsidenavRef"></template>-->
+      <ng-content select="[right-sidenav-content]"></ng-content>
+    </mat-sidenav>
+
+    <!--LEFT SIDE NAV MENU media.registerQuery('gt-sm')  | async-->
+    <!--[mode]="(media.registerQuery('gt-sm') | async) ? 'side' : 'over'"-->
+    <mat-sidenav #leftsidenav
+                 mode="side"
+                 [opened]="true"
+                 style="width:240px;/*border-right: 1px solid rgba(0, 0, 0, 0.12) */">
+      <ng-content select="[left-sidenav-content]"></ng-content>
+    </mat-sidenav>
+
+    <!--ROUTER  class="fixed-content"-->
+
+      <mat-sidenav-content >
+        <!--flex style="background-color:#fff;height: 95%"-->
+        <div class="page-content" >
+          <ng-content></ng-content>
+        </div>
+      </mat-sidenav-content>
+
+  </mat-sidenav-container>
+</div>
+
+
+<!--<ng-template #error>-->
+<!--<td-message label="Error!" sublabel="You have been disconnected !" color="warn" icon="error"></td-message>-->
+<!--</ng-template>-->
+

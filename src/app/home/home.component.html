@@ -1,0 +1,51 @@
+<!--The whole content below can be removed with the new code.-->
+
+
+<!--<app-top-tool-bar title="Welcome to QCM Online" icon="menu">-->
+<!--&lt;!&ndash;<div right-toolbar-content>&ndash;&gt;-->
+<!--&lt;!&ndash;<button mat-icon-button routerLink="/questionnaires" routerLinkActive="active">&ndash;&gt;-->
+<!--&lt;!&ndash;<mat-icon>question_answer</mat-icon>&ndash;&gt;-->
+<!--&lt;!&ndash;</button>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--</app-top-tool-bar>-->
+
+<!--<div right-toolbar-content id="right-toolbar-content">-->
+<!--<div flex></div>-->
+<!--</div>-->
+
+<!--<mat-nav-list left-sidenav-content >-->
+<!--<a mat-menu-item [routerLinkActive]="['active']" routerLink="/questionnaires" class="nav-item">-->
+<!--<mat-icon matListIcon>question_answer</mat-icon>-->
+<!--Questionnaires-->
+<!--</a>-->
+<!--</mat-nav-list>-->
+
+<mat-toolbar flex color="primary" #apptoolbar >
+  <div><h1>{{title}}!!</h1></div>
+  <div flex></div>
+  <a mat-icon-button [routerLinkActive]="['active']" routerLink="/questionnaires"><mat-icon>search</mat-icon></a>
+  <app-login-menu></app-login-menu>
+</mat-toolbar>
+<!--&lt;!&ndash;&ndash;&gt;-->
+<!--<div style="text-align:center;display: flex; justify-content: center;flex-direction: column">-->
+  <!--&lt;!&ndash;<a [routerLinkActive]="['active']" routerLink="/questionnaires">&ndash;&gt;-->
+    <!--&lt;!&ndash;<div><img src="./assets/QCM-512.png"/></div>&ndash;&gt;-->
+    <!--&lt;!&ndash;&lt;!&ndash;<div><img src="./assets/questionnaire3.jpg"/></div>&ndash;&gt;&ndash;&gt;-->
+  <!--&lt;!&ndash;</a>&ndash;&gt;-->
+
+  <!--&lt;!&ndash;<button mat-fab color="primary" class="mat-fab-bottom-right z-2 fixed" [routerLink]="['/questionnaires/0']"><mat-icon>add</mat-icon></button>&ndash;&gt;-->
+  <!--<div style="text-align: right;padding-right: 100px"  >-->
+
+  <!--</div>-->
+<!--</div>-->
+<!--<div style="height: 100%">-->
+<!--<a target="_blank" href="https://qcm.webmarks.net/swagger/swagger-ui.html" class="mat-fab-bottom-right z-2 fixed"-->
+   <!--style="color: #2a2a2a;text-decoration: none;">Swagger REST API</a>-->
+<!--</div>-->
+
+<mat-toolbar color='primary'>
+  <span class='spacer'></span>
+  <h3>© Copyright Angular Apps 2017.</h3>
+  <span class='spacer'></span>
+</mat-toolbar>
+<!--</app-sidenav-layout>-->

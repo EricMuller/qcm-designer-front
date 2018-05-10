@@ -1,0 +1,24 @@
+
+<app-sidenav-layout appName="QCM Online" title="My Questionnaires" #layout >
+
+  <div right-toolbar-content entityId="right-toolbar-content">
+    <!--<td-search-box hide-xs flex #searchBoxcv   [ngClass]="{'push-left push-right mat-whiteframe-z1 bgc-white tc-black': searchBoxcv.searchVisible }"></td-search-box>-->
+    <div flex></div>
+    <button mat-icon-button routerLink="/questionnaires/list">
+      <mat-icon>view_comfy</mat-icon>
+    </button>
+  </div>
+
+  <app-questionnaire-left-side-nav left-sidenav-content></app-questionnaire-left-side-nav>
+
+  <div right-sidenav-content>  </div>
+
+  <router-outlet></router-outlet>
+
+</app-sidenav-layout>
+
+
+
+
+
+
