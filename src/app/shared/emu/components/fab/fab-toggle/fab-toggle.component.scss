@@ -1,6 +1,13 @@
 .element {
-  padding: 2px;
+  padding: 10px;
+  //-webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05) !important;
+  //box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05) !important;
+
 
 }
 
 
+
+button.mat-fab-bottom-right.z-2.fixed.mat-fab.ng-tns-c16-4.mat-primary.ng-star-inserted{
+  background: #7b1fa2;
+}

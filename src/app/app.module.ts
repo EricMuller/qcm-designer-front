@@ -11,6 +11,7 @@ import {CoreModule} from './core/core.module';
 import {LayoutsModule} from './shared/layouts/layouts.module';
 import {QuestionnaireModule} from './features/questionnaire/questionnaire.module';
 import {HomeComponent} from './home/home.component';
+import {MaterialModule} from './shared/material/material.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {HomeComponent} from './home/home.component';
     ApiModule.forRoot(),
     AppRoutingModule,
     CoreModule,
-    CovalentModule,
+    MaterialModule,
+    // CovalentModule,
     LayoutsModule,
     QuestionnaireModule
   ],

@@ -24,7 +24,7 @@ export class QuestionnaireLeftSideNavComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.questionnaireSelectionService.currentObservable.subscribe(message => this.questionnairesSelected = message);
+    this.questionnaireSelectionService.current$.subscribe(message => this.questionnairesSelected = message);
   }
 
   ngOnDestroy(): void {

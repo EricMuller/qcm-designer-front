@@ -7,13 +7,17 @@
     <button mat-icon-button routerLink="/questionnaires/list">
       <mat-icon>view_comfy</mat-icon>
     </button>
+    <button mat-icon-button (click)="toggle()">
+      <mat-icon>settings</mat-icon>
+    </button>
   </div>
 
   <app-questionnaire-left-side-nav left-sidenav-content></app-questionnaire-left-side-nav>
 
-  <div right-sidenav-content>  </div>
+  <app-questionnaire-left-side-nav right-sidenav-content></app-questionnaire-left-side-nav>
 
   <router-outlet></router-outlet>
+
 
 </app-sidenav-layout>
 

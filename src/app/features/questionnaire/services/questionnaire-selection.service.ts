@@ -9,16 +9,15 @@ import {ReplaySubject} from 'rxjs/ReplaySubject';
 @Injectable()
 export class QuestionnaireSelectionService {
 
+  private current = new BehaviorSubject<Array<Questionnaire>>([]);
 
-  public questionnaires: Questionnaire[] = [];
+  private deleted = new ReplaySubject<Questionnaire>();
 
-  private currentSubject = new BehaviorSubject<Array<Questionnaire>>([]);
+  public current$: Observable<any> = this.current.asObservable();
 
-  public currentObservable: Observable<any> = this.currentSubject.asObservable();
+  public deleted$: Observable<Questionnaire> = this.deleted.asObservable();
 
-  private deleteSubject = new ReplaySubject<Questionnaire>();
-
-  public deletedObservable: Observable<Questionnaire> = this.deleteSubject.asObservable();
+  private questionnaires: Questionnaire[] = [];
 
   constructor(private questionnaireService: QuestionnaireService) {
   }
@@ -27,10 +26,10 @@ export class QuestionnaireSelectionService {
     const itemIndex = this.questionnaires.findIndex(item => item.id === q.id);
     if (itemIndex === -1) {
       this.questionnaires.push(q);
-      this.currentSubject.next(this.questionnaires);
+      this.current.next(this.questionnaires);
     } else {
       this.questionnaires.splice(itemIndex, 1);
-      this.currentSubject.next(this.questionnaires);
+      this.current.next(this.questionnaires);
     }
   }
 
@@ -38,11 +37,11 @@ export class QuestionnaireSelectionService {
     const itemIndex = this.questionnaires.findIndex(item => item.id === q.id);
     if (select && itemIndex === -1) {
       this.questionnaires.push(q);
-      this.currentSubject.next(this.questionnaires);
+      this.current.next(this.questionnaires);
     }
     else if (!select && itemIndex !== -1) {
       this.questionnaires.splice(itemIndex, 1);
-      this.currentSubject.next(this.questionnaires);
+      this.current.next(this.questionnaires);
     }
   }
 
@@ -53,7 +52,6 @@ export class QuestionnaireSelectionService {
   public size(): number {
     return this.questionnaires ? this.questionnaires.length : 0;
   }
-
 
   public deleteQuestionnaire(questionnaire: Questionnaire): Observable<Questionnaire> {
     return this.questionnaireService.deleteQuestionnaireById(questionnaire.id).mergeMap((data) => {
@@ -67,8 +65,7 @@ export class QuestionnaireSelectionService {
       const id: number = q.id;
       this.questionnaireService.deleteQuestionnaireById(id).subscribe((data) => {
           this.select(q, false);
-          // this.removeById(id);
-          this.deleteSubject.next(q);
+          this.deleted.next(q);
         }
       )
     }

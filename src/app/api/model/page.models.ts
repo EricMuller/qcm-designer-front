@@ -4,7 +4,7 @@ export class Page {
   size: number;
   totalElements: number;
   totalPages: number;
-  content: any;
+  content: any[];
   last: boolean;
   numberOfElements: number;
 }

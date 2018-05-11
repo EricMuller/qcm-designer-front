@@ -7,16 +7,15 @@ import {ReplaySubject} from 'rxjs/ReplaySubject';
 @Injectable()
 export class TagSelectionService {
 
+  private current = new BehaviorSubject<Array<Tag>>([]);
 
-  public tags: Tag[] = [];
+  private deleted = new ReplaySubject<Tag>();
 
-  private currentSubject = new BehaviorSubject<Array<Tag>>([]);
+  public current$: Observable<any> = this.current.asObservable();
 
-  public currentObservable: Observable<any> = this.currentSubject.asObservable();
+  public deleted$: Observable<Tag> = this.deleted.asObservable();
 
-  private deleteSubject = new ReplaySubject<Tag>();
-
-  public deletedObservable: Observable<Tag> = this.deleteSubject.asObservable();
+  private tags: Tag[] = [];
 
   constructor() {
   }
@@ -25,10 +24,10 @@ export class TagSelectionService {
     const itemIndex = this.tags.findIndex(item => item.id === q.id);
     if (itemIndex === -1) {
       this.tags.push(q);
-      this.currentSubject.next(this.tags);
+      this.current.next(this.tags);
     } else {
       this.tags.splice(itemIndex, 1);
-      this.currentSubject.next(this.tags);
+      this.current.next(this.tags);
     }
   }
 
@@ -36,11 +35,11 @@ export class TagSelectionService {
     const itemIndex = this.tags.findIndex(item => item.id === q.id);
     if (select && itemIndex === -1) {
       this.tags.push(q);
-      this.currentSubject.next(this.tags);
+      this.current.next(this.tags);
     } else {
       if (!select && itemIndex !== -1) {
         this.tags.splice(itemIndex, 1);
-        this.currentSubject.next(this.tags);
+        this.current.next(this.tags);
       }
     }
   }

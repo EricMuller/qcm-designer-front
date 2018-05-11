@@ -7,7 +7,7 @@
       <!--</span>-->
   <!--<ng-content></ng-content>-->
 <!--</a>-->
-<div class="element"><button mat-fab color="primary" (click)="onClick.emit($event)">
+<div class="element"><button mat-fab color="primary" (click)="onClick.emit($event)" class="toggle">
   <mat-icon *ngIf="!edition">{{iconOff}}</mat-icon>
   <mat-icon *ngIf="edition">{{iconOn}}</mat-icon>
   <ng-content></ng-content>

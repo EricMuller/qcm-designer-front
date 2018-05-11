@@ -3,7 +3,7 @@ import {Question} from 'app/api/model/question.model'
 import {NotifierService} from '../../../core/simple-notifier.service';
 import {Observable} from 'rxjs/Observable';
 import {ActivatedRoute} from '@angular/router';
-import {MatDialog, MatDialogConfig, MatPaginator, MatSort} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatPaginator, MatSidenav, MatSort} from '@angular/material';
 import {QuestionnaireDialogComponent} from '../questionnaire-dialog/questionnaire-dialog.component';
 import {Questionnaire} from '../../../api/model/questionnaire.model';
 import {QuestionDialogComponent} from '../../question/question-dialog/question-dialog.component';
@@ -33,6 +33,8 @@ export class QuestionnaireQuestionListComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('sidenavright')
+  private sidenavright: MatSidenav;
 
   constructor(private questionService: QuestionService,
               private dialog: MatDialog,

@@ -24,7 +24,7 @@ export class QuestionnaireService {
     return this.http.delete<Questionnaire>(API.QUESTIONNAIRES + id.toString());
   }
   public getQuestionnaireById(id: Number) {
-    return this.http.get<Questionnaire>(API.QUESTIONNAIRES + id.toString()).share();
+    return this.http.get<Questionnaire>(API.QUESTIONNAIRES + id.toString());
   }
 
   public postQuestionnaire(q: Questionnaire) {
@@ -32,7 +32,7 @@ export class QuestionnaireService {
   }
 
   public getPageQuestionsProjectionByQuestionnaireId(questionnaireId: Number): Observable<Questionnaire[]> {
-    return this.http.get<Questionnaire[]>(API.QUESTIONNAIRES + questionnaireId.toString() + '/questions').share();
+    return this.http.get<Questionnaire[]>(API.QUESTIONNAIRES + questionnaireId.toString() + '/questions');
   }
 
 }

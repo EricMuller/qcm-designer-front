@@ -1,0 +1,30 @@
+<mat-card>
+  <mat-card-header>
+
+  </mat-card-header>
+  <mat-card-content>
+    <mat-toolbar>
+
+      <div>
+        <button mat-icon-button (click)="filter()">
+          <mat-icon>filter_list</mat-icon>
+        </button>
+        <span style="align-items: center ">My Filter(s)</span>
+      </div>
+      <div flex></div>
+      <a mat-icon-button [@tdPulse]="pulseState" (click)="close()">
+        <mat-icon>close_outline</mat-icon>
+      </a>
+    </mat-toolbar>
+    <!--<div flex>-->
+    <!--&lt;!&ndash;<button mat-menu-item >&ndash;&gt;-->
+    <!--<div *ngFor="let q of tagsSelected" class="label label-info">{{q.libelle}}</div>-->
+    <!--&lt;!&ndash;</button>&ndash;&gt;-->
+    <!--</div>-->
+    <mat-selection-list #tags>
+      <mat-list-option *ngFor="let q of tagsSelected">
+        {{q.libelle}}
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-card-content>
+</mat-card>

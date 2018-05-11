@@ -2,7 +2,7 @@
 import {QuestionnaireListComponent} from './questionnaire-list/questionnaire-list.component';
 import {QuestionnaireDetailComponent} from './questionnaire-detail/questionnaire-detail.component';
 import {QuestionnaireLeftSideNavComponent} from './questionnaire-left-side-nav/questionnaire-left-side-nav.component';
-import {CovalentModule} from '../../shared/covalent/covalent.module';
+// import {CovalentModule} from '../../shared/covalent/covalent.module';
 import {AngularModule} from '../../shared/angular/angular.module';
 import {LayoutsModule} from '../../shared/layouts/layouts.module';
 import {QuestionnaireImportComponent} from './questionnaire-import/questionnaire-import.component';
@@ -24,6 +24,9 @@ import {QuestionnaireSelectionService} from './services/questionnaire-selection.
 import {SearchStore} from './services/questionnaire-store.service';
 import {TagModule} from '../tag/tag.module';
 import {TagSelectionService} from '../tag/services/tag-selection.service';
+import {CovalentModule} from '../../shared/covalent/covalent.module';
+import {FilterModule} from '../filter/filter.module';
+import { QuestionnaireNavListComponent } from './questionnaire-list/questionnaire-nav-list/questionnaire-nav-list.component';
 
 
 @NgModule({
@@ -36,7 +39,8 @@ import {TagSelectionService} from '../tag/services/tag-selection.service';
     UserModule,
     EmuModule,
     EpicModule,
-    TagModule
+    TagModule,
+    FilterModule
   ],
   declarations: [
     QuestionnaireToolBarComponent,
@@ -48,7 +52,8 @@ import {TagSelectionService} from '../tag/services/tag-selection.service';
     QuestionnaireDialogComponent,
     QuestionnaireIndexComponent,
     QuestionnaireDetailContentComponent,
-    QuestionnaireQuestionListComponent
+    QuestionnaireQuestionListComponent,
+    QuestionnaireNavListComponent
   ], entryComponents: [QuestionnaireDialogComponent, QuestionnaireToolBarComponent, EpicDialogComponent],
   providers: [SearchStore, QuestionnaireSelectionService, TagSelectionService]
 })

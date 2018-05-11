@@ -10,7 +10,6 @@ import {QuestionnaireResolver} from './features/questionnaire/resolvers/question
 import {QuestionnairesResolver} from './features/questionnaire/resolvers/questionnaires-resolver.service';
 import {QuestionnaireIndexComponent} from './features/questionnaire/questionnaire-index/questionnaire-index.component';
 import {PageQuestionsByQuestionnaireResolver} from './features/questionnaire/resolvers/page-questions-questionnaire-resolver.service';
-import {QuestionAppComponent} from './features/question/question-app/question-app.component';
 import {QuestionListComponent} from './features/question/question-list/question-list.component';
 import {HomeComponent} from './home/home.component';
 import {QuestionsResolver} from './features/question/resolvers/questions-resolver.service';
@@ -33,8 +32,8 @@ const routes: Routes = [
       path: 'questionnaires', component: QuestionnaireAppComponent,
       children: [
         {
-        path: 'user',
-        component: UserDetailComponent,
+          path: 'user',
+          component: UserDetailComponent,
         },
         {
           path: 'list', component: QuestionnaireListComponent, canActivate: [UserGuardService],
@@ -77,9 +76,9 @@ const routes: Routes = [
           },
           {
             path: 'list', component: QuestionListComponent, canActivate: [UserGuardService],
-             resolve: {
-                questions: QuestionsResolver
-             }
+            resolve: {
+              questions: QuestionsResolver
+            }
           },
           {path: 'import', component: QuestionnaireImportComponent, canActivate: [UserGuardService]},
           {
