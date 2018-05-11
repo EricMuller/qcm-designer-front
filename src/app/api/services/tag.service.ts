@@ -11,7 +11,7 @@ export class TagService {
   }
 
   public getTags() {
-    return this.http.get<Page>(API.TAGS).share();
+    return this.http.get<Page>(API.TAGS);
   }
 
   public posTag(tag: Tag) {

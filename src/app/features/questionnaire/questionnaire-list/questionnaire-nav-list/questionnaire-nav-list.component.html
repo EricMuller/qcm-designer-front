@@ -4,24 +4,16 @@
     <mat-list-item class="list" style="overflow: hidden"
                    [class.active]="i == selectedRow"
                    attr.entityId="questionnaireId_{{questionnaire.id}}">
-      <!--<mat-checkbox matListIcon [(ngModel)]="questionnaire.isChecked"></mat-checkbox>-->
-      <!--<img *ngIf="!questionnaire.hideImg" matListAvatar [src]="imgQuestion(questionnaire)"/>-->
-      <!--<mat-icon matListIcon>question_answer</mat-icon>-->
-      <!--<mat-icon matListAvatar>person</mat-icon>-->
-      <!--<mat-chip-list matListIcon><mat-chip>{{firstLetter(questionnaire)}}</mat-chip></mat-chip-list>-->
 
       <button mat-icon-button matListAvatar (click)="setClickedRow(questionnaire)">
         <mat-icon matListIcon *ngIf="!isSelected(questionnaire)">question_answer</mat-icon>
         <mat-checkbox *ngIf="isSelected(questionnaire)" matListAvatar [checked]="isSelected(questionnaire)"
                       [(indeterminate)]="indeterminate" [labelPosition]="labelPosition"
                       [disabled]="disabled"></mat-checkbox>
-        <!--<mat-icon matListIcon *ngIf="isSelected(questionnaire)" color="primary">done</mat-icon>-->
-      </button>
-      <!--<button mat-mini-fab matListAvatar color="primary"><mat-icon>done</mat-icon></button>-->
-      <!--<mat-icon matListIcon>question_answer</mat-icon>-->
-      <h4 matLine class="cursor-pointer" (click)="setClickedRow(questionnaire)">
-        <!--[routerLink]="['/questionnaires/'+ questionnaire.id ]">-->
-        Questionnaire {{questionnaire.id}} - {{questionnaire.title}} </h4>
+        </button>
+
+        <h4 matLine class="cursor-pointer" (click)="setClickedRow(questionnaire)">
+          Questionnaire {{questionnaire.id}} - {{questionnaire.title}} </h4>
       <!--  menu -->
       <span *ngIf="questionnaire.epic" class="label label-danger"> {{questionnaire.epic?.libelle}}</span>
       <span *ngFor="let tag of questionnaire.tags" class="label label-info"
@@ -38,14 +30,6 @@
         </button>
       </mat-menu>
     </mat-list-item>
-    <!--<a  mat-fab color="primary" class="mat-fab-bottom-right z-3 fixed fab-pad"><mat-icon>add</mat-icon></a>-->
   </div>
-  <!--<mat-list-item *ngIf=" !last
-  ">-->
-  <!--<div flex></div>-->
-  <!--<button *ngIf="!last" mat-button [@tdPulse]="pulseState" (click)="search(false)" color="primary" [disabled]="last">-->
-  <!--Next result(s)-->
-  <!--<mat-icon>expand_more</mat-icon>-->
-  <!--</button>-->
-  <!--</mat-list-item>-->
+
 </mat-nav-list>

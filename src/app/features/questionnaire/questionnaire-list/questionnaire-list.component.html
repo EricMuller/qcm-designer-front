@@ -1,34 +1,24 @@
-<app-filter-search-card *ngIf="showFilterCard" #matSearch [tagsSelected]="selectedTags"
-                        (onClosed)="swapFilterCard()"></app-filter-search-card>
+
+<app-filter-search-card *ngIf="showFilterView" #matSearch [tagsSelected]="selectedTags" (onClosed)="swapFilterCard()"></app-filter-search-card>
 
 
-<mat-card *ngIf="totalElements && !showFilterCard">
+<mat-card *ngIf="totalElements && !showFilterView">
   <mat-card-content>
 
     <mat-toolbar>
 
       <div>
         <button mat-icon-button *ngIf="modeSelection()" (click)="swapSelectedList()">
-          <mat-icon *ngIf="showSelectedQuestionnaires" [color]="accent">list</mat-icon>
-          <mat-icon *ngIf="!showSelectedQuestionnaires">list</mat-icon>
+          <mat-icon *ngIf="showSelectedView" [color]="accent">list</mat-icon>
+          <mat-icon *ngIf="!showSelectedView">list</mat-icon>
         </button>
-        <span *ngIf="!modeSelection()" style="align-items: center ">My Questionnaire(s)</span>
+        <span *ngIf="!showSelectedView" style="align-items: center ">My Questionnaire(s) ({{modeSelection()}} selected)</span>
       </div>
 
-      <div class="check-margin">
-        <span *ngIf="modeSelection()" style="align-items: center ">{{modeSelection()}} Questionnaires selected  </span>
-        <!--<mat-checkbox mat-icon-button *ngIf="multiSelection() > 1" (change)="multiSelectionChecked($event)"-->
-        <!--[checked]="pageSelection()"></mat-checkbox>-->
-      </div>
+      <span *ngIf="showSelectedView" style="align-items: center ">{{modeSelection()}} Questionnaire(s) selected  </span>
+
       <div flex></div>
-      <!--<button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="questionnaireMenu">-->
-      <!--<mat-icon>more_vert</mat-icon>-->
-      <!--</button>-->
-      <!-- line menu -->
-      <!--<mat-menu #questionnaireMenu="matMenu" yPosition="below">-->
-      <!--<a *ngFor="let q of tagsSelected" >-->
-      <!--<span class="label label-info">{{q.libelle}}</span>-->
-      <!--</a>-->
+
       <button mat-icon-button (click)="multiSelect()">
         <mat-icon>select_all</mat-icon>
       </button>
@@ -36,31 +26,17 @@
       <a mat-icon-button [@tdPulse]="pulseState" (click)="refresh(true)">
         <mat-icon>replay</mat-icon>
       </a>
-      <!--<a mat-icon-button (click)="openQuestionnaireDialog()">-->
-      <!--<mat-icon>fiber_new</mat-icon>-->
-      <!--</a>-->
-      <!--<a mat-icon-button>-->
-      <!--<mat-icon>delete</mat-icon>-->
-      <!--</a>-->
-      <mat-menu #filterMenu="matMenu">
-        <!--<button mat-menu-item *ngFor="let q of tagsSelected">-->
-        <!--<span class="label label-info">{{q.libelle}}-->
-        <!--</span>-->
-        <!--</button>-->
-      </mat-menu>
-      <!--<mat-icon matBadge="22" matBadgePosition="above after">home</mat-icon>-->
+
       <button mat-icon-button (click)="swapFilterCard()">
         <mat-icon matBadge="22" matBadgePosition="above after">filter_list</mat-icon>
       </button>
     </mat-toolbar>
 
-    <app-questionnaire-nav-list [questionnaires]="questionnaires"
-                                *ngIf="!showSelectedQuestionnaires"></app-questionnaire-nav-list>
-    <app-questionnaire-nav-list [questionnaires]="questionnairesSelected"
-                                *ngIf="showSelectedQuestionnaires"></app-questionnaire-nav-list>
+    <app-questionnaire-nav-list [questionnaires]="elements" *ngIf="!showSelectedView"></app-questionnaire-nav-list>
+    <app-questionnaire-nav-list [questionnaires]="selected" *ngIf="showSelectedView"></app-questionnaire-nav-list>
 
-
-    <mat-paginator #paginator *ngIf="  !showSelectedQuestionnaires  && (( questionnaires?.length == pageSize ) || last ) "
+    <mat-paginator #paginator
+                   *ngIf="  !showSelectedView  && (( elements?.length == pageSize ) || last ) "
                    [length]="totalElements"
                    [pageSize]="pageSize" [showFirstLastButtons]="true"
                    (page)="onPaginateChange($event)"></mat-paginator>
@@ -80,7 +56,7 @@
 </mat-card>
 
 
-<mat-card class="empty" *ngIf="(questionnaires )?.length ==0 ">
+<mat-card class="empty" *ngIf="(elements)?.length ==0 ">
   <mat-card-content class="empty">
     <div style="display:flex;justify-content: center;flex-direction: column;align-items: center;height: 100%;">
       <div><img src="./assets/images/norecord.png"/></div>

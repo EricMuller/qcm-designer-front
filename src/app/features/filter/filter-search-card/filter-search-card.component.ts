@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Tag} from '../../../api/model/tag.model';
 import {TdPulseAnimation} from '@covalent/core';
+import {TagService} from '../../../api/services/tag.service';
 
 @Component({
   selector: 'app-filter-search-card',
@@ -12,7 +13,12 @@ import {TdPulseAnimation} from '@covalent/core';
 })
 export class FilterSearchCardComponent implements OnInit {
 
-  constructor() {
+  public showSelectedTags = false;
+
+  public pulseState = false;
+
+  constructor(private tagService: TagService) {
+
   }
 
   @Input()
@@ -22,6 +28,7 @@ export class FilterSearchCardComponent implements OnInit {
   private closed = new EventEmitter<boolean>();
 
   ngOnInit() {
+    console.log('ngOnInit FilterSearchCardComponent');
   }
 
   public close() {

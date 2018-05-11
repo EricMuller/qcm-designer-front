@@ -6,7 +6,7 @@
     <mat-toolbar>
 
       <div>
-        <button mat-icon-button (click)="filter()">
+        <button mat-icon-button>
           <mat-icon>filter_list</mat-icon>
         </button>
         <span style="align-items: center ">My Filter(s)</span>
@@ -26,5 +26,14 @@
         {{q.libelle}}
       </mat-list-option>
     </mat-selection-list>
+
+    <!--<mat-paginator #paginator-->
+                   <!--*ngIf="  !showSelectedTags  && (( tags?.length == pageSize ) || last ) "-->
+                   <!--[length]="totalElements"-->
+                   <!--[pageSize]="pageSize" [showFirstLastButtons]="true"-->
+                   <!--(page)="onPaginateChange($event)"></mat-paginator>-->
+
+
+
   </mat-card-content>
 </mat-card>
