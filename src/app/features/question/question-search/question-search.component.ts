@@ -6,7 +6,7 @@ import {Questionnaire} from '../../../api/model/questionnaire.model';
 import {Question} from '../../../api/model/question.model';
 import {Observable} from 'rxjs/Observable';
 import {QuestionService} from '../../../api/services/question.service';
-import {SearchStore} from '../../questionnaire/services/questionnaire-store.service';
+import {SearchStore} from '../../questionnaire/services/questionnaire-search-store.service';
 
 @Component({
   selector: 'app-question-search',

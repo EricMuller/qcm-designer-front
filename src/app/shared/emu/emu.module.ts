@@ -4,8 +4,8 @@ import {MaterialModule} from '../material/material.module';
 import {FabToggleComponent} from './components/fab/fab-toggle/fab-toggle.component';
 import {FabMenuComponent} from './components/fab/fab-menu.component';
 import {FabButtonComponent} from './components/fab/fab-button/fab-button.component';
-import {SelectableListComponent} from './components/data-source-selectable-list/selectable-list.component';
 import {AngularModule} from '../angular/angular.module';
+import {SelectableListComponent} from './components/selectable-list/selectable-list.component';
 
 
 @NgModule({

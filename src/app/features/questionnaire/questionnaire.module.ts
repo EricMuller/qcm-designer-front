@@ -19,14 +19,13 @@ import {UserModule} from '../user/user.module';
 import {EmuModule} from '../../shared/emu/emu.module';
 import {EpicDialogComponent} from '../epic/epic-dialog/epic-dialog.component';
 import {EpicModule} from '../epic/epic.module';
-import {DefaultSelectionListStore} from '../../shared/emu/components/data-source-selectable-list/data-selectable-list/default-list-selection-store.service';
-import {SearchStore} from './services/questionnaire-store.service';
+import {SearchStore} from './services/questionnaire-search-store.service';
 import {TagModule} from '../tag/tag.module';
 import {CovalentModule} from '../../shared/covalent/covalent.module';
 import {FilterModule} from '../filter/filter.module';
 import {QuestionnaireNavListComponent} from './questionnaire-list/questionnaire-nav-list/questionnaire-nav-list.component';
-import {QuestionnaireSelectionStore} from './services/questionnaire-selection-store.service';
-import {QuestionnaireDataSource} from './services/questionnaire-data-source.service';
+import {QuestionnaireStore} from './stores/questionnaire-store.service';
+import {SelectStore} from '../../shared/emu/stores/selection-store';
 
 
 @NgModule({
@@ -55,7 +54,7 @@ import {QuestionnaireDataSource} from './services/questionnaire-data-source.serv
     QuestionnaireQuestionListComponent,
     QuestionnaireNavListComponent
   ], entryComponents: [QuestionnaireDialogComponent, QuestionnaireToolBarComponent, EpicDialogComponent],
-  providers: [SearchStore, DefaultSelectionListStore, QuestionnaireSelectionStore, QuestionnaireDataSource, QuestionnaireSelectionStore]
+  providers: [SearchStore, QuestionnaireStore]
 })
 export class QuestionnaireModule {
 }

@@ -1,9 +1,8 @@
 <app-selectable-list #list
-                     [selectionStore]="tagSelectionStore"
-                     [dataSource]="tagDataSource"
+                     [dataSelectionStore]="tagStore"
                      [entityName]="'tag'"
-                     [closable]="true"
-                     (onClosed)="closeCard()">
+                     [modeFilter]="true"
+                     (onClosed)="closeCard($event)">
 
   <app-tag-nav-list elements-view [elements]="list.elements"></app-tag-nav-list>
   <app-tag-nav-list selected-view [elements]="list.selected"></app-tag-nav-list>

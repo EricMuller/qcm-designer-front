@@ -4,6 +4,7 @@ import {Questionnaire} from '../model/questionnaire.model';
 import {Observable} from 'rxjs/Observable';
 import {Page} from './page';
 import {API} from './api';
+import {Filter} from '../../features/filter/filter';
 
 @Injectable()
 export class QuestionnaireService {
@@ -11,18 +12,21 @@ export class QuestionnaireService {
   constructor(private http: HttpClient) {
   }
 
-  // public getQuestionnaires(): Observable<Questionnaire[]> {
-  //   return this.http.get<Questionnaire[]>('/api/v1/questionnaires').share();
-  // }
-
   public getQuestionnaires(page?: number, size?: number, sort?: string): Observable<Page> {
     const requestUrl = `${API.QUESTIONNAIRES}?size=${size}&page=${page}&sort=${sort}`;
-    return this.http.get<Page>(requestUrl);
+    return this.http.get<Page>(requestUrl).publishLast().refCount();
+  }
+
+  public getQuestionnairesByFilters(filters: Filter[], page?: number, size?: number, sort?: string): Observable<Page> {
+    const filterstring = btoa(JSON.stringify(filters));
+    const requestUrl = `${API.QUESTIONNAIRES}filters/?filters=${filterstring}&size=${size}&page=${page}&sort=${sort}`;
+    return this.http.get<Page>(requestUrl).publishLast().refCount();
   }
 
   public deleteQuestionnaireById(id: Number) {
     return this.http.delete<Questionnaire>(API.QUESTIONNAIRES + id.toString());
   }
+
   public getQuestionnaireById(id: Number) {
     return this.http.get<Questionnaire>(API.QUESTIONNAIRES + id.toString());
   }
@@ -32,7 +36,7 @@ export class QuestionnaireService {
   }
 
   public getPageQuestionsProjectionByQuestionnaireId(questionnaireId: Number): Observable<Questionnaire[]> {
-    return this.http.get<Questionnaire[]>(API.QUESTIONNAIRES + questionnaireId.toString() + '/questions');
+    return this.http.get<Questionnaire[]>(API.QUESTIONNAIRES + questionnaireId.toString() + '/questions').publishLast().refCount();
   }
 
 }

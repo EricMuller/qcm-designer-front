@@ -4,8 +4,9 @@ import {Epic} from '../../../api/model/epic.model';
 import {EpicDialogComponent} from '../../epic/epic-dialog/epic-dialog.component';
 import {Questionnaire} from '../../../api/model/questionnaire.model';
 import {Tag} from '../../../api/model/tag.model';
-import {QuestionnaireSelectionStore} from '../services/questionnaire-selection-store.service';
-import {TagSelectionStore} from '../../tag/services/tag-selection-store';
+import {QuestionnaireStore} from '../stores/questionnaire-store.service';
+import {TagStore} from '../../tag/stores/tag-store.service';
+
 
 
 @Component({
@@ -20,12 +21,12 @@ export class QuestionnaireLeftSideNavComponent implements OnInit, OnDestroy {
   public tagsSelected: Tag[] = [];
 
   constructor(private dialog: MatDialog,
-              private questionnaireSelectionService: QuestionnaireSelectionStore,
-              private tagSelectionService: TagSelectionStore) {
+              private questionnaireStore: QuestionnaireStore,
+              private tagStore: TagStore) {
   }
 
   ngOnInit() {
-    this.questionnaireSelectionService.current$.subscribe(message => this.questionnairesSelected = message);
+    this.questionnaireStore.selected$.subscribe(message => this.questionnairesSelected = message);
   }
 
   ngOnDestroy(): void {

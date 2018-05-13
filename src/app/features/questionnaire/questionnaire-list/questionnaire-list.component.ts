@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TdPulseAnimation} from '@covalent/core';
-import {TagSelectionStore} from '../../tag/services/tag-selection-store';
-import {QuestionnaireDataSource} from '../services/questionnaire-data-source.service';
-import {QuestionnaireSelectionStore} from '../services/questionnaire-selection-store.service';
+import {QuestionnaireStore} from '../stores/questionnaire-store.service';
+import {TagStore} from '../../tag/stores/tag-store.service';
 
 
 @Component({
@@ -15,10 +14,7 @@ import {QuestionnaireSelectionStore} from '../services/questionnaire-selection-s
 })
 export class QuestionnaireListComponent implements OnInit {
 
-  constructor(
-    public selectionStore: QuestionnaireSelectionStore,
-    public dataSource: QuestionnaireDataSource,
-    public filterStore: TagSelectionStore) {
+  constructor(public questionnaireStore: QuestionnaireStore, public tagStore: TagStore) {
   }
 
   ngOnInit() {

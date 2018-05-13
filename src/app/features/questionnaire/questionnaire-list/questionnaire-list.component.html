@@ -1,14 +1,13 @@
 <app-selectable-list #list
-                     [selectionStore]="selectionStore"
-                     [dataSource]="dataSource"
-                     [filterStore]="filterStore"
+                     [dataSelectionStore]="questionnaireStore"
+                     [filterStore]="tagStore"
                      [entityName]="'questionnaire'"
                      [filterable]="true">
 
   <app-questionnaire-nav-list elements-view  [elements]="list.elements"></app-questionnaire-nav-list>
   <app-questionnaire-nav-list selected-view [elements]="list.selected"></app-questionnaire-nav-list>
 
-  <app-filter-search-card filter-view (onClosed)="list.onSwapFilterView()"></app-filter-search-card>
+  <app-filter-search-card filter-view (onClosed)="list.onCloseFilterView($event)"></app-filter-search-card>
 
 </app-selectable-list>
 
