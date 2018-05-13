@@ -1,13 +1,13 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {TagSelectionService} from './services/tag-selection.service';
+import {TagSelectionStore} from './services/tag-selection-store';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   declarations: [],
-  providers: [TagSelectionService]
+  providers: [TagSelectionStore]
 })
 export class TagModule {
 }

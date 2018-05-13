@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Questionnaire} from '../model/questionnaire.model';
 import {Observable} from 'rxjs/Observable';
-import {Page} from '../model/page.models';
+import {Page} from './page';
 import {API} from './api';
 
 @Injectable()

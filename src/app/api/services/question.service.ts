@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Question} from '../model/question.model'
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Rx';
-import {Page} from '../model/page.models';
+import {Page} from './page';
 import {API} from './api';
 
 
@@ -20,8 +20,7 @@ export class QuestionService {
     return this.http.get<Question[]>(API.QUESTIONS + '?questionnaireId=' + questionnaireId.toString()).share();
   }
 
-  public getPageQuestions(page?: number, size?: number, sort?: string): Observable<Page> {
-
+  public getQuestions(page?: number, size?: number, sort?: string): Observable<Page> {
     const requestUrl = `${API.QUESTIONS}?size=${size}&page=${page}&sort=${sort}`;
     return this.http.get<Page>(requestUrl);
   }

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {QuestionnaireService} from '../../../api/services/questionnaire.service';
-import {Page} from '../../../api/model/page.models';
+import {Page} from '../../../api/services/page';
 import {environment} from '../../../../environments/environment';
 
 @Injectable()

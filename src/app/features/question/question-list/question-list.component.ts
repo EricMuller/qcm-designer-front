@@ -5,7 +5,7 @@ import {TdPulseAnimation} from '@covalent/core';
 import {NotifierService} from '../../../core/simple-notifier.service';
 import {MatDialog, MatPaginator} from '@angular/material';
 import {ActivatedRoute} from '@angular/router';
-import {Page} from '../../../api/model/page.models';
+import {Page} from '../../../api/services/page';
 import {environment} from '../../../../environments/environment';
 import {QuestionService} from '../../../api/services/question.service';
 
@@ -81,7 +81,7 @@ export class QuestionListComponent implements OnInit {
   }
 
   public onPaginateChange(event: any) {
-    this.questionService.getPageQuestions(event.pageIndex, this.pageSize, 'dateModification').subscribe((page) => {
+    this.questionService.getQuestions(event.pageIndex, this.pageSize, 'dateModification').subscribe((page) => {
         this.getPage(page, true);
       }
     );

@@ -1,39 +1,11 @@
-<mat-card>
-  <mat-card-header>
+<app-selectable-list #list
+                     [selectionStore]="tagSelectionStore"
+                     [dataSource]="tagDataSource"
+                     [entityName]="'tag'"
+                     [closable]="true"
+                     (onClosed)="closeCard()">
 
-  </mat-card-header>
-  <mat-card-content>
-    <mat-toolbar>
+  <app-tag-nav-list elements-view [elements]="list.elements"></app-tag-nav-list>
+  <app-tag-nav-list selected-view [elements]="list.selected"></app-tag-nav-list>
+</app-selectable-list>
 
-      <div>
-        <button mat-icon-button>
-          <mat-icon>filter_list</mat-icon>
-        </button>
-        <span style="align-items: center ">My Filter(s)</span>
-      </div>
-      <div flex></div>
-      <a mat-icon-button [@tdPulse]="pulseState" (click)="close()">
-        <mat-icon>close_outline</mat-icon>
-      </a>
-    </mat-toolbar>
-    <!--<div flex>-->
-    <!--&lt;!&ndash;<button mat-menu-item >&ndash;&gt;-->
-    <!--<div *ngFor="let q of tagsSelected" class="label label-info">{{q.libelle}}</div>-->
-    <!--&lt;!&ndash;</button>&ndash;&gt;-->
-    <!--</div>-->
-    <mat-selection-list #tags>
-      <mat-list-option *ngFor="let q of tagsSelected">
-        {{q.libelle}}
-      </mat-list-option>
-    </mat-selection-list>
-
-    <!--<mat-paginator #paginator-->
-                   <!--*ngIf="  !showSelectedTags  && (( tags?.length == pageSize ) || last ) "-->
-                   <!--[length]="totalElements"-->
-                   <!--[pageSize]="pageSize" [showFirstLastButtons]="true"-->
-                   <!--(page)="onPaginateChange($event)"></mat-paginator>-->
-
-
-
-  </mat-card-content>
-</mat-card>

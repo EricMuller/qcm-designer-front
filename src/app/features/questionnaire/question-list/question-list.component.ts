@@ -7,7 +7,7 @@ import {MatDialog, MatDialogConfig, MatPaginator, MatSidenav, MatSort} from '@an
 import {QuestionnaireDialogComponent} from '../questionnaire-dialog/questionnaire-dialog.component';
 import {Questionnaire} from '../../../api/model/questionnaire.model';
 import {QuestionDialogComponent} from '../../question/question-dialog/question-dialog.component';
-import {Page} from '../../../api/model/page.models';
+import {Page} from '../../../api/services/page';
 import {QuestionService} from '../../../api/services/question.service';
 
 @Component({
@@ -114,7 +114,7 @@ export class QuestionnaireQuestionListComponent implements OnInit {
   }
 
   public onPaginateChange(event: any) {
-    this.questionService.getPageQuestions(event.pageIndex, 10, 'dateModification').subscribe((page) => {
+    this.questionService.getQuestions(event.pageIndex, 10, 'dateModification').subscribe((page) => {
         this.getPage(page, true);
       }
     );

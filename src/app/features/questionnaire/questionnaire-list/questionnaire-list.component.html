@@ -1,70 +1,16 @@
+<app-selectable-list #list
+                     [selectionStore]="selectionStore"
+                     [dataSource]="dataSource"
+                     [filterStore]="filterStore"
+                     [entityName]="'questionnaire'"
+                     [filterable]="true">
 
-<app-filter-search-card *ngIf="showFilterView" #matSearch [tagsSelected]="selectedTags" (onClosed)="swapFilterCard()"></app-filter-search-card>
+  <app-questionnaire-nav-list elements-view  [elements]="list.elements"></app-questionnaire-nav-list>
+  <app-questionnaire-nav-list selected-view [elements]="list.selected"></app-questionnaire-nav-list>
 
+  <app-filter-search-card filter-view (onClosed)="list.onSwapFilterView()"></app-filter-search-card>
 
-<mat-card *ngIf="totalElements && !showFilterView">
-  <mat-card-content>
-
-    <mat-toolbar>
-
-      <div>
-        <button mat-icon-button *ngIf="modeSelection()" (click)="swapSelectedList()">
-          <mat-icon *ngIf="showSelectedView" [color]="accent">list</mat-icon>
-          <mat-icon *ngIf="!showSelectedView">list</mat-icon>
-        </button>
-        <span *ngIf="!showSelectedView" style="align-items: center ">My Questionnaire(s) ({{modeSelection()}} selected)</span>
-      </div>
-
-      <span *ngIf="showSelectedView" style="align-items: center ">{{modeSelection()}} Questionnaire(s) selected  </span>
-
-      <div flex></div>
-
-      <button mat-icon-button (click)="multiSelect()">
-        <mat-icon>select_all</mat-icon>
-      </button>
-
-      <a mat-icon-button [@tdPulse]="pulseState" (click)="refresh(true)">
-        <mat-icon>replay</mat-icon>
-      </a>
-
-      <button mat-icon-button (click)="swapFilterCard()">
-        <mat-icon matBadge="22" matBadgePosition="above after">filter_list</mat-icon>
-      </button>
-    </mat-toolbar>
-
-    <app-questionnaire-nav-list [questionnaires]="elements" *ngIf="!showSelectedView"></app-questionnaire-nav-list>
-    <app-questionnaire-nav-list [questionnaires]="selected" *ngIf="showSelectedView"></app-questionnaire-nav-list>
-
-    <mat-paginator #paginator
-                   *ngIf="  !showSelectedView  && (( elements?.length == pageSize ) || last ) "
-                   [length]="totalElements"
-                   [pageSize]="pageSize" [showFirstLastButtons]="true"
-                   (page)="onPaginateChange($event)"></mat-paginator>
-
-
-    <button *ngIf="modeSelection() < 2" mat-fab color="primary" class="mat-fab-bottom-right z-2 fixed"
-            (click)="createQuestionnaire($event)">
-      <mat-icon>add</mat-icon>
-    </button>
-
-    <app-fab mat-fab *ngIf="modeSelection() > 1">
-      <app-fab-toggle [iconOff]="'mode_edit'" [iconOn]="'replay'"></app-fab-toggle>
-      <app-fab-button [color]="'accent'" [icon]="'delete'" (onClick)="deleteSelectedQuestionnaires()"></app-fab-button>
-    </app-fab>
-
-  </mat-card-content>
-</mat-card>
-
-
-<mat-card class="empty" *ngIf="(elements)?.length ==0 ">
-  <mat-card-content class="empty">
-    <div style="display:flex;justify-content: center;flex-direction: column;align-items: center;height: 100%;">
-      <div><img src="./assets/images/norecord.png"/></div>
-      <p>You don't have any Questionnaires.</p>
-      <button mat-raised-button color="primary" (click)="createQuestionnaire($event)">ADD A QUESTIONNAIRE</button>
-    </div>
-  </mat-card-content>
-</mat-card>
+</app-selectable-list>
 
 
 

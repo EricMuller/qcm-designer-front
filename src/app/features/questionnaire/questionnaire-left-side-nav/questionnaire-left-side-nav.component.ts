@@ -3,9 +3,10 @@ import {MatDialog, MatDialogConfig} from '@angular/material';
 import {Epic} from '../../../api/model/epic.model';
 import {EpicDialogComponent} from '../../epic/epic-dialog/epic-dialog.component';
 import {Questionnaire} from '../../../api/model/questionnaire.model';
-import {QuestionnaireSelectionService} from '../services/questionnaire-selection.service';
-import {TagSelectionService} from '../../tag/services/tag-selection.service';
 import {Tag} from '../../../api/model/tag.model';
+import {QuestionnaireSelectionStore} from '../services/questionnaire-selection-store.service';
+import {TagSelectionStore} from '../../tag/services/tag-selection-store';
+
 
 @Component({
   selector: 'app-questionnaire-left-side-nav',
@@ -19,8 +20,8 @@ export class QuestionnaireLeftSideNavComponent implements OnInit, OnDestroy {
   public tagsSelected: Tag[] = [];
 
   constructor(private dialog: MatDialog,
-              private questionnaireSelectionService: QuestionnaireSelectionService,
-              private tagSelectionService: TagSelectionService) {
+              private questionnaireSelectionService: QuestionnaireSelectionStore,
+              private tagSelectionService: TagSelectionStore) {
   }
 
   ngOnInit() {

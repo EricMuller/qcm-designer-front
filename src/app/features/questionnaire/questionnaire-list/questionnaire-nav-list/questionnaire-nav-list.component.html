@@ -1,6 +1,6 @@
 <mat-nav-list>
   <!--(mouseover)='over(questionnaire)'-->
-  <div *ngFor="let questionnaire of questionnaires as q; index as i">
+  <div *ngFor="let questionnaire of elements as q; index as i">
     <mat-list-item class="list" style="overflow: hidden"
                    [class.active]="i == selectedRow"
                    attr.entityId="questionnaireId_{{questionnaire.id}}">

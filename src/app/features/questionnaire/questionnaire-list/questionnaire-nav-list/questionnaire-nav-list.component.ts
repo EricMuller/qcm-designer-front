@@ -1,9 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Questionnaire} from '../../../../api/model/questionnaire.model';
-import {Observable} from 'rxjs/Observable';
-import {QuestionnaireSelectionService} from '../../services/questionnaire-selection.service';
 import {Tag} from '../../../../api/model/tag.model';
-import {TagSelectionService} from '../../../tag/services/tag-selection.service';
+import {TagSelectionStore} from '../../../tag/services/tag-selection-store';
+import {QuestionnaireSelectionStore} from '../../services/questionnaire-selection-store.service';
 
 @Component({
   selector: 'app-questionnaire-nav-list',
@@ -13,9 +12,10 @@ import {TagSelectionService} from '../../../tag/services/tag-selection.service';
 export class QuestionnaireNavListComponent implements OnInit {
 
   @Input()
-  public questionnaires: Observable<Questionnaire[]>;
+  public elements: Questionnaire[];
 
-  constructor(private questionnaireSelectionService: QuestionnaireSelectionService, private tagSelectionService: TagSelectionService) {
+  constructor(private selectionStore: QuestionnaireSelectionStore,
+              private tagSelectionStore: TagSelectionStore) {
   }
 
   ngOnInit() {
@@ -23,18 +23,16 @@ export class QuestionnaireNavListComponent implements OnInit {
 
   public isSelected(questionnaire: Questionnaire):
     boolean {
-    return this.questionnaireSelectionService.isSelected(questionnaire);
+    return this.selectionStore.isSelected(questionnaire);
   }
-
 
   public swapTag(tag: Tag) {
     console.log(tag);
-    this.tagSelectionService.swap(tag);
+    this.tagSelectionStore.swapElement(tag);
   }
 
   public setClickedRow = function (questionnaire: Questionnaire) {
-    // this.questionnaireStore.selected = questionnaire.id;
-    this.questionnaireSelectionService.swap(questionnaire);
+    this.selectionStore.swapElement(questionnaire);
   }
 
 }

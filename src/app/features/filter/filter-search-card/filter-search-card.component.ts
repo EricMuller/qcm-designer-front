@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Tag} from '../../../api/model/tag.model';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {TdPulseAnimation} from '@covalent/core';
-import {TagService} from '../../../api/services/tag.service';
+import {TagSelectionStore} from '../../tag/services/tag-selection-store';
+import {TagDataSource} from '../services/tag-data-source.service';
+
 
 @Component({
   selector: 'app-filter-search-card',
@@ -9,30 +10,24 @@ import {TagService} from '../../../api/services/tag.service';
   styleUrls: ['./filter-search-card.component.scss'],
   animations: [
     TdPulseAnimation(),
-  ]
+  ], providers: [TagDataSource, TagSelectionStore]
 })
 export class FilterSearchCardComponent implements OnInit {
 
-  public showSelectedTags = false;
-
-  public pulseState = false;
-
-  constructor(private tagService: TagService) {
-
-  }
-
-  @Input()
-  public tagsSelected: Tag[];
 
   @Output('onClosed')
-  private closed = new EventEmitter<boolean>();
+  private onClosed = new EventEmitter<boolean>();
 
-  ngOnInit() {
-    console.log('ngOnInit FilterSearchCardComponent');
+  constructor(
+    public tagDataSource: TagDataSource,
+    public tagSelectionStore: TagSelectionStore) {
   }
 
-  public close() {
-    this.closed.emit(true);
+  ngOnInit() {
+  }
+
+  public closeCard() {
+    this.onClosed.emit(true);
   }
 
 }

@@ -4,16 +4,18 @@ import {MaterialModule} from '../material/material.module';
 import {FabToggleComponent} from './components/fab/fab-toggle/fab-toggle.component';
 import {FabMenuComponent} from './components/fab/fab-menu.component';
 import {FabButtonComponent} from './components/fab/fab-button/fab-button.component';
-import { DataSelectableListComponent } from './components/data-selectable-list/data-selectable-list.component';
+import {SelectableListComponent} from './components/data-source-selectable-list/selectable-list.component';
+import {AngularModule} from '../angular/angular.module';
 
 
 @NgModule({
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    AngularModule
   ],
-  exports: [FabMenuComponent, FabToggleComponent, FabButtonComponent],
-  declarations: [FabMenuComponent, FabToggleComponent, FabButtonComponent, DataSelectableListComponent]
+  exports: [FabMenuComponent, FabToggleComponent, FabButtonComponent, SelectableListComponent],
+  declarations: [FabMenuComponent, FabToggleComponent, FabButtonComponent, SelectableListComponent]
 })
 export class EmuModule {
 }

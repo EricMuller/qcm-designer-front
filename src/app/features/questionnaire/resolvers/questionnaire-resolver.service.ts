@@ -12,10 +12,9 @@ export class QuestionnaireResolver implements Resolve<Questionnaire> {
   }
 
   resolve(route: ActivatedRouteSnapshot): Observable<Questionnaire> | Promise<Questionnaire> | Questionnaire {
-    if(route.params.id > 0 ) {
+    if (route.params.id > 0) {
       return this.questionnaireService.getQuestionnaireById(route.params.id);
-    }else{
-
+    } else {
       return Observable.of(new Questionnaire())
     }
   }

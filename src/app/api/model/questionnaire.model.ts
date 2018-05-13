@@ -12,9 +12,10 @@
 import {Question} from './question.model';
 import {Epic} from './epic.model';
 import {Tag} from './tag.model';
+import {Entity} from './entity';
 
 
-export class Questionnaire {
+export class Questionnaire implements Entity {
   id?: number;
   title?: string;
   description?: string;
@@ -22,5 +23,4 @@ export class Questionnaire {
   questions?: Array<Question>;
   version?: number;
   tags?: Tag[] = [];
-
 }

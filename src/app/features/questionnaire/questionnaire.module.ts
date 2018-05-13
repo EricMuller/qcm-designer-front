@@ -2,7 +2,6 @@
 import {QuestionnaireListComponent} from './questionnaire-list/questionnaire-list.component';
 import {QuestionnaireDetailComponent} from './questionnaire-detail/questionnaire-detail.component';
 import {QuestionnaireLeftSideNavComponent} from './questionnaire-left-side-nav/questionnaire-left-side-nav.component';
-// import {CovalentModule} from '../../shared/covalent/covalent.module';
 import {AngularModule} from '../../shared/angular/angular.module';
 import {LayoutsModule} from '../../shared/layouts/layouts.module';
 import {QuestionnaireImportComponent} from './questionnaire-import/questionnaire-import.component';
@@ -20,13 +19,14 @@ import {UserModule} from '../user/user.module';
 import {EmuModule} from '../../shared/emu/emu.module';
 import {EpicDialogComponent} from '../epic/epic-dialog/epic-dialog.component';
 import {EpicModule} from '../epic/epic.module';
-import {QuestionnaireSelectionService} from './services/questionnaire-selection.service';
+import {DefaultSelectionListStore} from '../../shared/emu/components/data-source-selectable-list/data-selectable-list/default-list-selection-store.service';
 import {SearchStore} from './services/questionnaire-store.service';
 import {TagModule} from '../tag/tag.module';
-import {TagSelectionService} from '../tag/services/tag-selection.service';
 import {CovalentModule} from '../../shared/covalent/covalent.module';
 import {FilterModule} from '../filter/filter.module';
-import { QuestionnaireNavListComponent } from './questionnaire-list/questionnaire-nav-list/questionnaire-nav-list.component';
+import {QuestionnaireNavListComponent} from './questionnaire-list/questionnaire-nav-list/questionnaire-nav-list.component';
+import {QuestionnaireSelectionStore} from './services/questionnaire-selection-store.service';
+import {QuestionnaireDataSource} from './services/questionnaire-data-source.service';
 
 
 @NgModule({
@@ -55,7 +55,7 @@ import { QuestionnaireNavListComponent } from './questionnaire-list/questionnair
     QuestionnaireQuestionListComponent,
     QuestionnaireNavListComponent
   ], entryComponents: [QuestionnaireDialogComponent, QuestionnaireToolBarComponent, EpicDialogComponent],
-  providers: [SearchStore, QuestionnaireSelectionService, TagSelectionService]
+  providers: [SearchStore, DefaultSelectionListStore, QuestionnaireSelectionStore, QuestionnaireDataSource, QuestionnaireSelectionStore]
 })
 export class QuestionnaireModule {
 }

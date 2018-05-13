@@ -5,7 +5,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {NotifierService} from '../../../core/simple-notifier.service';
 import {FabMenuComponent} from '../../../shared/emu/components/fab/fab-menu.component';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {QuestionnaireSelectionService} from '../services/questionnaire-selection.service';
+import {SelectionListStore} from '../../../shared/emu/components/data-source-selectable-list/data-selectable-list/default-list-selection-store.service';
+import {QuestionnaireSelectionStore} from '../services/questionnaire-selection-store.service';
 
 
 @Component({
@@ -27,7 +28,7 @@ export class QuestionnaireDetailComponent implements OnInit {
               private route: ActivatedRoute,
               private notifierService: NotifierService,
               private router: Router,
-              private questionnaireSelectionService: QuestionnaireSelectionService) {
+              private questionnaireSelectionService: QuestionnaireSelectionStore) {
 
     this.route.data.subscribe(data => {
       this.questionnaire = data.questionnaire;
@@ -63,7 +64,7 @@ export class QuestionnaireDetailComponent implements OnInit {
 
   public deleteQuestionnaire(q: Questionnaire) {
 
-    this.questionnaireSelectionService.deleteQuestionnaire(q).subscribe(
+    this.questionnaireSelectionService.deleteElement(q).subscribe(
       (d) => {
         this.notifierService.notifySuccess(d.title + ' deleted', 2000);
         this.router.navigate(['/questionnaires/list']);
@@ -86,7 +87,8 @@ export class QuestionnaireDetailComponent implements OnInit {
 
     // q.tags.slice(0);
     // q.tags.push(updatedTag);
-    for (const i in this.questionnaireForm.controls) {
+
+    for(const i in this.questionnaireForm.controls) {
       this.questionnaireForm.controls[i].markAsTouched();
     }
 
