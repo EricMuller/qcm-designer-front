@@ -1,0 +1,34 @@
+
+
+
+
+<app-selectable-list #list
+                     [dataSelectionStore]="tagStore"
+                     [emptyMessage]="'CREATE A NEW TAG'"
+                     (onClosed)="closeCard($event)">
+
+  <mat-toolbar>
+    <div>
+      <button mat-icon-button *ngIf="list.modeSelection$ | async" (click)="list.swapSelectedMode()">
+        <mat-icon>list</mat-icon>
+      </button>
+      <span style="align-items: center ">Filter my Questionnaires  ({{list.selectionSize()}} selected)</span>
+    </div>
+    <div flex></div>
+
+    <button *ngIf="!list.isSelectedMode()" mat-icon-button (click)="list.selectAll()">
+      <mat-icon>select_all</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <app-tag-nav-list elements-view [elements]="list.elements"></app-tag-nav-list>
+  <app-tag-nav-list selected-view [elements]="list.selected"></app-tag-nav-list>
+</app-selectable-list>
+
+
+
+<div fab-tool-bar>
+  <button mat-fab color="primary" class="mat-fab-bottom-right z-2 fixed"  routerLink="/questionnaires/list">
+    <mat-icon>filter_list</mat-icon>
+  </button>
+</div>

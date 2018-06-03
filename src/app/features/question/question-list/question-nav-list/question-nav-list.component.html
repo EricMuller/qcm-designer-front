@@ -1,0 +1,32 @@
+<mat-nav-list>
+  <!--(mouseover)='over(question)'-->
+  <div *ngFor="let question of elements as q; index as i">
+    <mat-list-item class="list" style="overflow: hidden"
+                   [class.active]="i == selectedRow"
+                   attr.entityId="questionId_{{question.id}}">
+
+      <button mat-icon-button matListAvatar (click)="setClickedRow(question)">
+        <mat-icon matListIcon *ngIf="!isSelected(question)">question_answer</mat-icon>
+        <mat-checkbox *ngIf="isSelected(question)" matListAvatar [checked]="isSelected(question)"
+                      [(indeterminate)]="indeterminate" [labelPosition]="labelPosition"
+                      [disabled]="disabled"></mat-checkbox>
+      </button>
+
+      <h4 matLine class="cursor-pointer" [routerLink]="['/questions/'+ question.id ]" > {{question.id}} - {{question.question}} </h4>
+      <!--  menu -->
+      <span *ngFor="let tag of question.tags" class="label label-info" (click)="swapTag(tag)">{{tag.libelle}}</span>
+
+      <button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="questionMenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <!-- line menu -->
+      <mat-menu #questionMenu="matMenu" yPosition="below">
+        <button mat-menu-item [routerLink]="['/questions/'+ question.id ]">
+          <mat-icon>details</mat-icon>
+          Details
+        </button>
+      </mat-menu>
+    </mat-list-item>
+  </div>
+
+</mat-nav-list>
