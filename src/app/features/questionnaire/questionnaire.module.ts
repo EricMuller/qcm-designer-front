@@ -17,15 +17,15 @@ import {NgModule} from '@angular/core';
 import {QuestionModule} from '../question/question.module';
 import {UserModule} from '../user/user.module';
 import {EmuModule} from '../../shared/emu/emu.module';
-import {EpicDialogComponent} from '../epic/epic-dialog/epic-dialog.component';
-import {EpicModule} from '../epic/epic.module';
+import {CategoryModule} from '../category/category.module';
 import {SearchStore} from './services/questionnaire-search-store.service';
 import {TagModule} from '../tag/tag.module';
 import {CovalentModule} from '../../shared/covalent/covalent.module';
-import {FilterModule} from '../filter/filter.module';
 import {QuestionnaireNavListComponent} from './questionnaire-list/questionnaire-nav-list/questionnaire-nav-list.component';
 import {QuestionnaireStore} from './stores/questionnaire-store.service';
-import {SelectStore} from '../../shared/emu/stores/selection-store';
+import {QuestionnaireFilterComponent} from './search/questionnaire-filter/questionnaire-filter.component';
+import {CategoryDialogComponent} from '../category/category-dialog/category-dialog.component';
+import { QuestionnaireFormComponent } from './questionnaire-form/questionnaire-form.component';
 
 
 @NgModule({
@@ -37,9 +37,8 @@ import {SelectStore} from '../../shared/emu/stores/selection-store';
     QuestionModule,
     UserModule,
     EmuModule,
-    EpicModule,
-    TagModule,
-    FilterModule
+    CategoryModule,
+    TagModule
   ],
   declarations: [
     QuestionnaireToolBarComponent,
@@ -52,8 +51,10 @@ import {SelectStore} from '../../shared/emu/stores/selection-store';
     QuestionnaireIndexComponent,
     QuestionnaireDetailContentComponent,
     QuestionnaireQuestionListComponent,
-    QuestionnaireNavListComponent
-  ], entryComponents: [QuestionnaireDialogComponent, QuestionnaireToolBarComponent, EpicDialogComponent],
+    QuestionnaireNavListComponent,
+    QuestionnaireFilterComponent,
+    QuestionnaireFormComponent
+  ], entryComponents: [QuestionnaireDialogComponent, QuestionnaireToolBarComponent, CategoryDialogComponent],
   providers: [SearchStore, QuestionnaireStore]
 })
 export class QuestionnaireModule {

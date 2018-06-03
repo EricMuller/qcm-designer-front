@@ -12,10 +12,10 @@
                       [disabled]="disabled"></mat-checkbox>
         </button>
 
-        <h4 matLine class="cursor-pointer" (click)="setClickedRow(questionnaire)">
+        <h4 matLine class="cursor-pointer" [routerLink]="['/questionnaires/'+ questionnaire.id ]">
           Questionnaire {{questionnaire.id}} - {{questionnaire.title}} </h4>
       <!--  menu -->
-      <span *ngIf="questionnaire.epic" class="label label-danger"> {{questionnaire.epic?.libelle}}</span>
+      <span *ngIf="questionnaire.category" class="label label-danger"> {{questionnaire.category?.libelle}}</span>
       <span *ngFor="let tag of questionnaire.tags" class="label label-info"
             (click)="swapTag(tag)">{{tag.libelle}}</span>
 

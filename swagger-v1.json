@@ -447,7 +447,7 @@
     "Question": {
       "type": "object",
       "properties": {
-        "epic": {
+        "category": {
           "$ref": "#/definitions/Category"
         },
         "id": {

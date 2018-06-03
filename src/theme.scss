@@ -236,6 +236,12 @@ $custom-typography: mat-typography-config(
     color: map-get($primary, 800) !important;
   }
 
+  .mat-radio-label {
+    width: 80% !important;
+  }
+  .mat-radio-label-content  {
+    width: 80% !important;
+  }
 
 }
 

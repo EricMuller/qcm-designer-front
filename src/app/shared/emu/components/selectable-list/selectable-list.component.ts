@@ -1,18 +1,19 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {TdPulseAnimation} from '@covalent/core';
-import {MatDialog, MatPaginator} from '@angular/material';
-import {ActivatedRoute, Router} from '@angular/router';
+import {MatPaginator} from '@angular/material';
 import {environment} from '../../../../../environments/environment';
 import {Observable} from 'rxjs/Observable';
 import {Page} from '../../../../api/services/page';
 import {Entity} from '../../../../api/model/entity';
 import {DataSelectionStore, FilterStore} from '../../stores/store-api';
-import {Filter} from '../../../../features/filter/filter';
+import {Filter} from '../../filter/filter';
+import {Subject} from 'rxjs/Subject';
+import {ReplaySubject} from 'rxjs/ReplaySubject';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
-enum View {
+enum ViewMode {
   List = 1,
   Select,
-  Filter
 }
 
 @Component({
@@ -29,7 +30,6 @@ export class SelectableListComponent<T extends Entity> implements OnInit {
   public selected: T[] = [];
   public filters: Filter[];
 
-
   public resultsLength = 0;
   public pageIndex = 0;
   public totalElements = 0;
@@ -37,27 +37,34 @@ export class SelectableListComponent<T extends Entity> implements OnInit {
   public numberOfElements = 0;
 
   public pageSize: number = environment.PAGE_SIZE;
+  // delete paginator issue
+  public curentPageSize = 0;
 
   public pulseState = false;
   public selectedRow: number;
-  public modeSelection = false;
 
-  public currentView: View = View.List;
+  private _modeSelection: Subject<boolean> = new ReplaySubject<boolean>(1);
+  readonly modeSelection$: Observable<boolean> = this._modeSelection.asObservable();
 
-  public loadingData = false;
+  public currentView: ViewMode = ViewMode.List;
 
-  public entity = 'record';
+  private _loadingData: Subject<boolean> = new BehaviorSubject(false);
+  readonly loadingData$: Observable<boolean> = this._loadingData.asObservable();
+
+  public loadingData: boolean = false;
 
   @Input() dataSelectionStore: DataSelectionStore<T>;
   @Input() filterStore: FilterStore;
-  @Input() entityName;
-  @Input() modeFilter = false;
+  @Input() emptyMessage = 'Create a new one';
+
   @Input() name: string;
-  @Input() public filterable = false;
+
   @Output('onClosed') onClosed = new EventEmitter<boolean>();
+  @Output('onCreate') onCreate = new EventEmitter<boolean>();
+  @Output('onClearFilter') onClearFilter = new EventEmitter<boolean>();
   @ViewChild('paginator') paginator: MatPaginator;
 
-  constructor(private dialog: MatDialog, private route: ActivatedRoute, private router: Router) {
+  constructor() {
   }
 
   ngOnInit(): void {
@@ -67,8 +74,8 @@ export class SelectableListComponent<T extends Entity> implements OnInit {
         if (itemIndex !== -1) {
           this.elements.splice(itemIndex, 1);
           if (this.elements.length === 0) {
-            this.onRefresh(true);
-            this.modeSelection = false;
+            this.refresh(true);
+            this._modeSelection.next(false)
           }
         }
       }
@@ -77,15 +84,15 @@ export class SelectableListComponent<T extends Entity> implements OnInit {
     this.dataSelectionStore.selected$.subscribe((selected) => {
         this.selected = <T[]> selected;
         if (this.selected.length > 0) {
-          this.modeSelection = true;
+          this._modeSelection.next(true)
         } else {
-          this.modeSelection = false;
-          this.currentView = View.List;
+          this._modeSelection.next(false)
+          this.currentView = ViewMode.List;
         }
       }
     );
 
-    this.onRefresh(true);
+    this.refresh(true);
   }
 
   private getContentPage(page: Page, cleanBefore ?: boolean) {
@@ -102,20 +109,23 @@ export class SelectableListComponent<T extends Entity> implements OnInit {
     for (const item of page.content) {
       this.elements.push(item);
     }
+    this.curentPageSize = this.elements.length;
     this.numberOfElements += page.numberOfElements;
     this.totalElements = page.totalElements;
   }
 
   retrieveElements(pageIndex: number, pageSize: number, sort: string, cleanBefore ?: boolean): Observable<boolean> {
     let filters = []
-    if (this.filterable) {
+    if (this.filterStore) {
       filters = this.filterStore.filters();
     }
+    this.loadingData = true;
     return this.dataSelectionStore.getPageByFilters(filters, pageIndex, pageSize, sort).mergeMap((page) => {
         this.getContentPage(page, cleanBefore);
         if (!this.elements.length) {
-          this.modeSelection = false;
+          this._modeSelection.next(false)
         }
+        this.loadingData = false;
         return Observable.of(true);
       }
     );
@@ -128,57 +138,39 @@ export class SelectableListComponent<T extends Entity> implements OnInit {
     );
   }
 
-  onCreateElement(event): Promise<boolean> {
-    return this.router.navigate([`/${this.entityName}s/0`]);
-  }
-
-  clearFilters() {
-    this.filterStore.unSelectAllElement();
-    this.onRefresh(true);
-  }
-
   onValidFilter(event) {
     this.onClosed.emit(true);
   }
 
-  onDeleteSelectedElements() {
+  public deleteSelectedElements() {
     this.dataSelectionStore.deleteElements(this.selected);
   }
 
-  onRefresh(reset: boolean) {
-    this.loadingData = true;
+  refresh(reset: boolean) {
+
     this.retrieveElements(this.pageIndex, this.pageSize, 'id', reset).subscribe((b) => {
-      this.loadingData = false;
       this.pulseState = !this.pulseState;
     });
-
   }
 
-  onSelectAll() {
+  public selectAll() {
     this.elements.forEach((q) => {
       this.dataSelectionStore.selectElement(q, true);
     });
   }
 
-  onFilterView() {
-    this.currentView = View.Filter;
-  }
-
-  onCloseFilterView(valid) {
-    this.currentView = View.List;
-    if (valid) {
-      this.filters = this.filterStore.filters();
-
-    }
-  }
-
-  onSwapSelectedView() {
-    if (this.currentView === View.List) {
-      this.currentView = View.Select;
+  swapSelectedMode() {
+    if (this.currentView === ViewMode.List) {
+      this.currentView = ViewMode.Select;
     } else {
-      this.currentView = View.List;
+      this.currentView = ViewMode.List;
     }
   }
+
+  isSelectedMode(): boolean {
+    return this.currentView === ViewMode.Select;
+  }
+
 
   selectionSize(): number {
     return this.dataSelectionStore.selectedSize();
@@ -188,20 +180,13 @@ export class SelectableListComponent<T extends Entity> implements OnInit {
     return this.filterStore ? this.filterStore.selectedSize() : 0;
   }
 
-  onCloseCard(event): void {
-    this.onClosed.emit(false);
+  public clearFilter() {
+    this.filterStore.unSelectAllElement();
+    this.refresh(true);
   }
 
-  isFilterView(): boolean {
-    return this.currentView === View.Filter;
-  }
-
-  isSelectedView(): boolean {
-    return this.currentView === View.Select;
-  }
-
-  isListView(): boolean {
-    return this.currentView === View.List;
+  onCreateElement(event): void {
+    this.onCreate.emit(true);
   }
 
 

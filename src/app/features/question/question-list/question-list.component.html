@@ -1,86 +1,40 @@
-<mat-card *ngIf="totalElements">
 
-  <mat-card-header>
-    <mat-toolbar >
-      <div style="align-items: center ">My Question(s)</div>
+<app-selectable-list #list [dataSelectionStore]="questionStore" [filterStore]="tagStore" (onCreate)="create()">
 
-      <!--<button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="questionnaireMenu">-->
-      <!--<mat-icon>more_vert</mat-icon>-->
-      <!--</button>-->
-      <!-- line menu -->
-      <!--<mat-menu #questionnaireMenu="matMenu" yPosition="below">-->
-      <!--<td-chips color="accent"-->
-                <!--[items]="filteredObjects"-->
-                <!--[(ngModel)]="objectsModel"-->
-                <!--placeholder="Type here"-->
-                <!--(inputChange)="filterObjects($event)"-->
-                <!--requireMatch>-->
-        <!--<ng-template td-chip let-chip="chip">-->
-          <!--<mat-icon>location_city</mat-icon>-->
-          <!--{{chip.city}}, (Pop: {{chip.population}})-->
-        <!--</ng-template>-->
-        <!--<ng-template td-autocomplete-option let-option="option">-->
-          <!--<div layout="row" layout-align="start center">-->
-            <!--<mat-icon>location_city</mat-icon>-->
-            <!--{{option.city}}-->
-          <!--</div>-->
-        <!--</ng-template>-->
-      <!--</td-chips>-->
-      <div flex></div>
-      <button mat-icon-button [@tdPulse]="pulseState" (click)="search(true)" matTooltip="Filter">
-        <mat-icon>filter_list</mat-icon>
-      </button>
-
-      <a mat-icon-button [@tdPulse]="pulseState" (click)="search(true)" matTooltip="Refresh">
-        <mat-icon>replay</mat-icon>
-      </a>
-      <a mat-icon-button matTooltip="New Question">
-        <mat-icon>fiber_new</mat-icon>
-      </a>
-      <a mat-icon-button matTooltip="Delete Question">
-        <mat-icon>delete</mat-icon>
-      </a>
-    </mat-toolbar>
-  </mat-card-header>
-
-  <mat-card-content>
-    <mat-nav-list>
-      <mat-list-item *ngFor="let question of questions  | async">
-        <mat-icon matListIcon>help</mat-icon>
-        <!--<img  matListAvatar [src]="imgQuestion()"/>-->
-          <!--<div>-->
-          <!--<div>-->
-            <!--<a mat-icon-button style="max-width: 600px;overflow: hidden" matTooltip="Edit">-->
-              <!--<mat-icon color="primary">create</mat-icon>-->
-            <!--</a>-->
-          <!--</div>-->
-        <span matLine>{{question.id}} - {{question.question}}</span>
-        <span *ngFor="let tag of question.tags" class="label label-info"  >{{tag.libelle}}</span>
-
-      </mat-list-item>
-    </mat-nav-list>
-
+  <mat-toolbar>
     <div>
-      <mat-paginator #paginator *ngIf="((questions | async)?.length == pageSize ) || last " [length]="totalElements" [pageSize]="pageSize"
-                     [showFirstLastButtons]="true"
-                     (page)="onPaginateChange($event)"></mat-paginator>
+      <button mat-icon-button *ngIf="list.modeSelection$ |async" (click)="list.swapSelectedMode()">
+        <mat-icon>list</mat-icon>
+      </button>
+      <span style="align-items: center ">My Questions ({{list.selectionSize()}} selected)</span>
+      <span>({{list.filterSize()}} filter(s))</span>
     </div>
-    <!--<div *ngIf="(questions | async)?.length ==0 "-->
-         <!--style="display:flex;justify-content: center;flex-direction: column;align-items: center;height: 80%;">-->
-      <!--<div><img src="./assets/images/norecord.png"/></div>-->
-      <!--<p>You don't have any Questions.</p>-->
-      <!--<button mat-raised-button color="primary">ADD A QUESTION</button>-->
-    <!--</div>-->
-  </mat-card-content>
-</mat-card>
+    <div flex></div>
+    <button *ngIf="!list.isSelectedMode()" mat-icon-button (click)="list.selectAll()">
+      <mat-icon>select_all</mat-icon>
+    </button>
+    <a *ngIf="!list.isSelectedMode()" mat-icon-button [@tdPulse]="pulseState"
+       (click)="list.refresh(true);list.paginator.firstPage();">
+      <mat-icon>replay</mat-icon>
+    </a>
+    <button mat-icon-button routerLink="/questions/filters">
+      <mat-icon matBadge="22" matBadgePosition="above after">filter_list</mat-icon>
+    </button>
+  </mat-toolbar>
 
 
-<mat-card class="empty" *ngIf="(questions | async)?.length ==0 ">
-  <mat-card-content class="empty">
-    <div style="display:flex;justify-content: center;flex-direction: column;align-items: center;height: 100%;">
-      <div><img src="./assets/images/norecord.png"/></div>
-      <p>You don't have any Questions.</p>
-      <button mat-raised-button color="primary">ADD A QUESTION</button>
-    </div>
-  </mat-card-content>
-</mat-card>
+  <app-question-nav-list elements-view [elements]="list.elements"></app-question-nav-list>
+  <app-question-nav-list selected-view [elements]="list.selected"></app-question-nav-list>
+</app-selectable-list>
+
+
+<app-fab *ngIf="list.selectionSize()" mat-fab>
+  <app-fab-toggle [iconOff]="'mode_edit'" [iconOn]="'replay'"></app-fab-toggle>
+  <app-fab-button [icon]="'delete'" [color]="'accent'"  (onClick)="list.deleteSelectedElements()"></app-fab-button>
+  <app-fab-button [icon]="'add'"    [color]="'primary'" (onClick)="create()"> </app-fab-button>
+</app-fab>
+
+<button *ngIf="!list.selectionSize()" mat-fab color="primary" class="mat-fab-bottom-right z-2 fixed" (click)="create()">
+  <mat-icon>add</mat-icon>
+</button>
+

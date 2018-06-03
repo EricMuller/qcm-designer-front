@@ -2,7 +2,7 @@
 <!--<mat-card-content>-->
 <!---->
 
-<form #qForm="ngForm" class="example-form" [formGroup]="questionnaireForm">
+<form #qForm="ngForm" class="example-form" [formGroup]="form">
   <div style="display:flex;flex-direction: column">
     <mat-form-field class="example-full-width">
       <input name="title" formControlName="title" placeholder="Title" matInput [(ngModel)]="questionnaire.title">
@@ -17,11 +17,11 @@
 
     </mat-form-field>
 
-    <mat-form-field *ngIf="epics as epics;">
-      <mat-select name="epic"
-                  formControlName="epic"
-                  placeholder="Epic"
-                  [(ngModel)]="questionnaire.epic"
+    <mat-form-field *ngIf="categories as epics;">
+      <mat-select name="category"
+                  formControlName="category"
+                  placeholder="Category"
+                  [(ngModel)]="questionnaire.category"
                   [compareWith]="compareById">
         <mat-option>--</mat-option>
         <mat-option *ngFor="let epic of epics" [value]="epic">{{epic.libelle}}</mat-option>

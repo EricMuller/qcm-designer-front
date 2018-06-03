@@ -1,12 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {MatDialog, MatDialogConfig} from '@angular/material';
-import {Epic} from '../../../api/model/epic.model';
-import {EpicDialogComponent} from '../../epic/epic-dialog/epic-dialog.component';
 import {Questionnaire} from '../../../api/model/questionnaire.model';
 import {Tag} from '../../../api/model/tag.model';
 import {QuestionnaireStore} from '../stores/questionnaire-store.service';
-import {TagStore} from '../../tag/stores/tag-store.service';
-
 
 
 @Component({
@@ -20,9 +15,7 @@ export class QuestionnaireLeftSideNavComponent implements OnInit, OnDestroy {
   public questionnairesSelected: Questionnaire[] = [];
   public tagsSelected: Tag[] = [];
 
-  constructor(private dialog: MatDialog,
-              private questionnaireStore: QuestionnaireStore,
-              private tagStore: TagStore) {
+  constructor(private questionnaireStore: QuestionnaireStore) {
   }
 
   ngOnInit() {
@@ -33,26 +26,5 @@ export class QuestionnaireLeftSideNavComponent implements OnInit, OnDestroy {
 
   }
 
-  public createEpic() {
 
-    this.openEpicDialog();
-  }
-
-  public openEpicDialog(epic?: Epic) {
-    const config = new MatDialogConfig();
-    config.data = {epic: new Epic()}
-    config.panelClass = 'my-full-screen-dialog';
-    const dialogRef = this.dialog.open(EpicDialogComponent, config);
-    dialogRef.afterClosed().subscribe(q => {
-      if (q) {
-        // const itemIndex = this._questionnaires.findIndex(item => item.id === q.id);
-        // if (itemIndex === -1) {
-        //   this._questionnaires.push(q);
-        // } else {
-        //   this._questionnaires[itemIndex] = q;
-        // }
-        // this.scrollIntoView('questionnaireId_' + q.id.toString());
-      }
-    });
-  }
 }

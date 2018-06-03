@@ -1,61 +1,62 @@
-<mat-card>
+<!--<mat-card>-->
 
-  <mat-card-header>
-    <!--<app-questionnaire-tool-bar [questionnaire]="questionnaire"></app-questionnaire-tool-bar>-->
-    <mat-toolbar>
-      <a mat-icon-button [routerLink]="['/questionnaires/list']">
-        <mat-icon>arrow_back</mat-icon>
-      </a>
-      <div *ngIf="!questionnaire.id">Create Questionnaire</div>
-      <div *ngIf="questionnaire.id">Edit Questionnaire</div>
+<!--<mat-card-header>-->
+<!--&lt;!&ndash;<app-questionnaire-tool-bar [questionnaire]="questionnaire"></app-questionnaire-tool-bar>&ndash;&gt;-->
+<!--<mat-toolbar>-->
+<!--<a mat-icon-button [routerLink]="['/questionnaires/list']">-->
+<!--<mat-icon>arrow_back</mat-icon>-->
+<!--</a>-->
+<!--<div *ngIf="!questionnaire.id">Create Questionnaire</div>-->
+<!--<div *ngIf="questionnaire.id">Edit Questionnaire</div>-->
 
-      <div flex></div>
-      <ng-content select="[menu-buttons]"></ng-content>
-      <button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="questionnaireMenu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <!-- line menu -->
-      <mat-menu #questionnaireMenu="matMenu" yPosition="below">
-        <ng-content select="[menu-items]"></ng-content>
-        <button mat-menu-item>
-          <mat-icon>delete</mat-icon>
-          Delete
-        </button>
-      </mat-menu>
-    </mat-toolbar>
+<!--<div flex></div>-->
+<!--<ng-content select="[menu-buttons]"></ng-content>-->
+<!--<button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="questionnaireMenu">-->
+<!--<mat-icon>more_vert</mat-icon>-->
+<!--</button>-->
+<!--&lt;!&ndash; line menu &ndash;&gt;-->
+<!--<mat-menu #questionnaireMenu="matMenu" yPosition="below">-->
+<!--<ng-content select="[menu-items]"></ng-content>-->
+<!--<button mat-menu-item (onclick)="createCategory()">-->
+<!--<mat-icon>add</mat-icon>-->
+<!--Create category-->
+<!--</button>-->
+<!--</mat-menu>-->
+<!--</mat-toolbar>-->
 
-  </mat-card-header>
-  <mat-card-content>
-    <app-questionnaire-detail-content [questionnaire]="questionnaire" [edition]="edition"
-                                      [form]="questionnaireForm"></app-questionnaire-detail-content>
-  </mat-card-content>
-</mat-card>
-<!--<button mat-fab color="primary" class="mat-fab-bottom-right z-2 fixed"><mat-icon>create</mat-icon></button>-->
+<!--</mat-card-header>-->
+<!--<mat-card-content>-->
+<!--<app-questionnaire-detail-content [questionnaire]="questionnaire" [edition]="edition"-->
+<!--[form]="questionnaireForm"></app-questionnaire-detail-content>-->
+<!--</mat-card-content>-->
+<!--</mat-card>-->
+<!--&lt;!&ndash;<button mat-fab color="primary" class="mat-fab-bottom-right z-2 fixed"><mat-icon>create</mat-icon></button>&ndash;&gt;-->
 
-<app-fab (toggleEvent)="toggleFabEvent($event)">
-  <app-fab-toggle [iconOff]="'mode_edit'" [iconOn]="'replay'" ></app-fab-toggle>
-  <app-fab-button [icon]="'save'"  [color]="'primary'" (onClick)="saveQuestionnaire(questionnaire)"></app-fab-button>
-  <app-fab-button [icon]="'delete'" [color]="'accent'" (onClick)="deleteQuestionnaire(questionnaire)"></app-fab-button>
-</app-fab>
+<!--<app-fab (toggleEvent)="toggleFabEvent($event)">-->
+<!--<app-fab-toggle [iconOff]="'mode_edit'" [iconOn]="'replay'" ></app-fab-toggle>-->
+<!--<app-fab-button [icon]="'save'"  [color]="'primary'" (onClick)="saveQuestionnaire(questionnaire)"></app-fab-button>-->
+<!--<app-fab-button [icon]="'delete'" [color]="'accent'" (onClick)="deleteQuestionnaire(questionnaire)"></app-fab-button>-->
+<!--</app-fab>-->
 
-<!--<mat-accordion class="example-headers-align">-->
-<!--<mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true" *ngFor="let question of results  | async">-->
-<!--<mat-expansion-panel-header>-->
-<!--<mat-panel-description>-->
+<!--&lt;!&ndash;<mat-accordion class="example-headers-align">&ndash;&gt;-->
+<!--&lt;!&ndash;<mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true" *ngFor="let question of results  | async">&ndash;&gt;-->
+<!--&lt;!&ndash;<mat-expansion-panel-header>&ndash;&gt;-->
+<!--&lt;!&ndash;<mat-panel-description>&ndash;&gt;-->
 
-<!--<img matListAvatar src="./assets/question-simple.png" style="width: 32px;height: 32px"/>-->
+<!--&lt;!&ndash;<img matListAvatar src="./assets/question-simple.png" style="width: 32px;height: 32px"/>&ndash;&gt;-->
 
-<!--<span style="padding-left: 10px;text-align: center"> {{question.number}}.{{question.question}}</span>-->
-<!--</mat-panel-description>-->
-<!--</mat-expansion-panel-header>-->
+<!--&lt;!&ndash;<span style="padding-left: 10px;text-align: center"> {{question.number}}.{{question.question}}</span>&ndash;&gt;-->
+<!--&lt;!&ndash;</mat-panel-description>&ndash;&gt;-->
+<!--&lt;!&ndash;</mat-expansion-panel-header>&ndash;&gt;-->
 
-<!--{{question.reponse}}-->
+<!--&lt;!&ndash;{{question.reponse}}&ndash;&gt;-->
 
-<!--<mat-action-row>-->
-<!--<button mat-button color="primary" (click)="nextStep()">Next</button>-->
-<!--</mat-action-row>-->
-<!--</mat-expansion-panel>-->
-<!--</mat-accordion>-->
+<!--&lt;!&ndash;<mat-action-row>&ndash;&gt;-->
+<!--&lt;!&ndash;<button mat-button color="primary" (click)="nextStep()">Next</button>&ndash;&gt;-->
+<!--&lt;!&ndash;</mat-action-row>&ndash;&gt;-->
+<!--&lt;!&ndash;</mat-expansion-panel>&ndash;&gt;-->
+<!--&lt;!&ndash;</mat-accordion>&ndash;&gt;-->
 
+<app-questionnaire-form [questionnaire]="questionnaire"></app-questionnaire-form>
 
 

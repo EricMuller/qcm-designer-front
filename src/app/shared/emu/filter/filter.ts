@@ -1,16 +1,14 @@
 
-export class FilterRequest {
-  filters: Filter[];
-}
+
 
 export class Filter {
 
   value?: number;
-  type: string;
+  name: string;
 
   constructor(value: number, type: string) {
     this.value = value;
-    this.type = type;
+    this.name = type;
   }
 
 }

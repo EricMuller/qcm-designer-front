@@ -1,4 +1,3 @@
-import {Questionnaire} from '../../../api/model/questionnaire.model';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
@@ -31,6 +30,7 @@ export class SelectStore<T extends Entity> implements SelectionStore<T> {
 
   swapElement(q: T) {
     const itemIndex = this.selected.findIndex(item => item.id === q.id);
+
     if (itemIndex === -1) {
       this.selected.push(q);
       this._selected.next(this.selected);
@@ -55,7 +55,7 @@ export class SelectStore<T extends Entity> implements SelectionStore<T> {
 
   }
 
-  isSelected(q: Questionnaire): boolean {
+  isSelected(q: T): boolean {
     return q ? this.selected.findIndex(item => item.id === q.id) !== -1 : false;
   }
 

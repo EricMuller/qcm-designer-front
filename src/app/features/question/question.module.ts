@@ -11,18 +11,31 @@ import {QuestionSearchComponent} from './question-search/question-search.compone
 import {QuestionToolBarComponent} from './question-tool-bar/question-tool-bar.component';
 import {QuestionLeftSideNavComponent} from './question-left-side-nav/question-left-side-nav.component';
 import {UserModule} from '../user/user.module';
+import {EmuModule} from '../../shared/emu/emu.module';
+import {QuestionNavListComponent} from './question-list/question-nav-list/question-nav-list.component';
+import {QuestionStore} from './stores/question-store.service';
+import {QuestionFilterComponent} from './search/question-filter/question-filter.component';
+import {TagModule} from '../tag/tag.module';
+import {MaterialModule} from '../../shared/material/material.module';
+import { QuestionFormComponent } from './question-form/question-form.component';
+
 
 @NgModule({
   imports: [
+    AngularModule,
     CommonModule,
     CovalentModule,
-    AngularModule,
+    EmuModule,
     LayoutsModule,
-    UserModule
+    MaterialModule,
+    UserModule,
+    TagModule
   ],
   exports: [QuestionListComponent],
-  declarations: [QuestionListComponent, QuestionDialogComponent, QuestionDetailComponent, QuestionAppComponent, QuestionSearchComponent, QuestionToolBarComponent, QuestionLeftSideNavComponent],
-  entryComponents: [QuestionDialogComponent]
+  declarations: [QuestionListComponent, QuestionDialogComponent, QuestionDetailComponent, QuestionAppComponent, QuestionSearchComponent,
+    QuestionToolBarComponent, QuestionLeftSideNavComponent, QuestionNavListComponent, QuestionFilterComponent, QuestionFormComponent],
+  entryComponents: [QuestionDialogComponent],
+  providers: [QuestionStore]
 })
 export class QuestionModule {
 }

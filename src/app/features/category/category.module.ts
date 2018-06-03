@@ -1,10 +1,11 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {EpicDialogComponent} from './epic-dialog/epic-dialog.component';
-import {EpicDetailContentComponent} from './epic-detail-content/epic-detail-content.component';
+
 import {AngularModule} from '../../shared/angular/angular.module';
 import {LayoutsModule} from '../../shared/layouts/layouts.module';
 import {MaterialModule} from '../../shared/material/material.module';
+import {CategoryDetailContentComponent} from './category-detail-content/category-detail-content.component';
+import {CategoryDialogComponent} from './category-dialog/category-dialog.component';
 
 @NgModule({
   imports: [
@@ -13,8 +14,8 @@ import {MaterialModule} from '../../shared/material/material.module';
     MaterialModule,
     LayoutsModule,
   ],
-  exports: [EpicDetailContentComponent],
-  declarations: [EpicDialogComponent, EpicDetailContentComponent]
+  exports: [CategoryDetailContentComponent],
+  declarations: [CategoryDialogComponent, CategoryDetailContentComponent]
 })
-export class EpicModule {
+export class CategoryModule {
 }

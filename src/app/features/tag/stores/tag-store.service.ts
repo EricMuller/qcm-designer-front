@@ -7,7 +7,7 @@ import {Page} from '../../../api/services/page';
 import {TagService} from '../../../api/services/tag.service';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
 import {Subject} from 'rxjs/Subject';
-import {Filter} from '../../filter/filter';
+import {Filter} from '../../../shared/emu/filter/filter';
 
 @Injectable()
 export class TagStore extends SelectStore<Tag> implements DataSelectionStore<Tag>, FilterStore {
@@ -53,11 +53,13 @@ export class TagStore extends SelectStore<Tag> implements DataSelectionStore<Tag
 
   filters(): Filter[] {
     return this.selected.map((tag) => {
-        return new Filter(tag.id, 'tag');
-      });
+      return new Filter(tag.id, 'tag_id');
+    });
   }
 
-
+  saveElement(element: Tag): Observable<Tag> {
+    return null;
+  }
 
 
 }

@@ -1,7 +1,7 @@
 import {Observable} from 'rxjs/Observable';
 import {Page} from '../../../api/services/page';
 import {Entity} from '../../../api/model/entity';
-import {Filter} from '../../../features/filter/filter';
+import {Filter} from '../filter/filter';
 
 export interface DataSelectionStore<T> extends DataStore<T>, SelectionStore<T> {
 
@@ -18,6 +18,8 @@ export interface DataStore<T> {
   deleteElement(element: T): Observable<T>;
 
   deleteElements(elements: T[]): void;
+
+  saveElement(element: T): Observable<T>;
 
 }
 
@@ -39,8 +41,5 @@ export interface SelectionStore<T extends Entity> {
 
 export interface FilterStore extends SelectionStore<any> {
   filters(): Filter[];
-
 }
-
-
 

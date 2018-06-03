@@ -8,7 +8,7 @@ import {ReplaySubject} from 'rxjs/ReplaySubject';
 import {Questionnaire} from '../../../api/model/questionnaire.model';
 import {SelectStore} from '../../../shared/emu/stores/selection-store';
 import {DataSelectionStore} from '../../../shared/emu/stores/store-api';
-import {Filter} from '../../filter/filter';
+import {Filter} from '../../../shared/emu/filter/filter';
 
 
 @Injectable()
@@ -38,6 +38,7 @@ export class QuestionnaireStore extends SelectStore<Questionnaire> implements Da
     });
   }
 
+
   deleteElements(questionnaires: Questionnaire[]) {
     for (const q of questionnaires) {
       const id: number = q.id;
@@ -57,4 +58,11 @@ export class QuestionnaireStore extends SelectStore<Questionnaire> implements Da
     return obs;
   }
 
+  saveElement(element: Questionnaire): Observable<Questionnaire> {
+    if (element.id > 0) {
+     return  this.backend.putQuestionnaire(element);
+    } else {
+      return this.backend.postQuestionnaire(element);
+    }
+  }
 }

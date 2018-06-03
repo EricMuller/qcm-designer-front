@@ -1,4 +1,4 @@
-export class Epic {
+export class Category {
 
   id: string;
   libelle: string;

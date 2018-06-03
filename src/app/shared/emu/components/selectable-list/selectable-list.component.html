@@ -1,84 +1,39 @@
-<ng-content *ngIf="isFilterView()" select="[filter-view]"></ng-content>
 
-<mat-card *ngIf="!isFilterView() && totalElements">
+
+
+<mat-card *ngIf="totalElements">
+
   <mat-card-content>
 
-    <mat-toolbar>
-
-      <div>
-        <button mat-icon-button *ngIf="modeSelection" (click)="onSwapSelectedView()">
-          <mat-icon *ngIf="modeSelection" [color]="accent">list</mat-icon>
-          <mat-icon *ngIf="!modeSelection">list</mat-icon>
-        </button>
-
-        <span style="align-items: center ">My {{entityName}}(s) ({{selectionSize()}} selected)</span>
-        <span *ngIf="filterable" >({{filterSize()}} filter(s))</span>
-      </div>
-
-      <div flex></div>
-
-      <button mat-icon-button (click)="onSelectAll()">
-        <mat-icon>select_all</mat-icon>
-      </button>
-
-      <a *ngIf="isListView()" mat-icon-button [@tdPulse]="pulseState"
-         (click)="onRefresh(true);this.paginator.firstPage();">
-        <mat-icon>replay</mat-icon>
-      </a>
-
-      <button *ngIf="filterable" mat-icon-button (click)="onFilterView()">
-        <mat-icon matBadge="22" matBadgePosition="above after">filter_list</mat-icon>
-      </button>
-
-      <a *ngIf="modeFilter" mat-icon-button [@tdPulse]="pulseState" (click)="onCloseCard($event)">
-        <mat-icon>close_outline</mat-icon>
-      </a>
-
-    </mat-toolbar>
-
-    <ng-content *ngIf="isListView()" select="[elements-view]"></ng-content>
-    <ng-content *ngIf="isSelectedView()" select="[selected-view]"></ng-content>
+    <ng-content></ng-content>
+    <ng-content *ngIf="!isSelectedMode()" select="[elements-view]"></ng-content>
+    <ng-content *ngIf="isSelectedMode()" select="[selected-view]"></ng-content>
 
     <mat-paginator #paginator
-                   *ngIf="isListView()  && (( elements?.length == pageSize ) || last ) "
+                   *ngIf="!isSelectedMode()  && ( (( curentPageSize == pageSize )) || last ) "
                    [length]="totalElements"
                    [pageSize]="pageSize" [showFirstLastButtons]="true"
                    (page)="onPaginateChange($event)"></mat-paginator>
 
-
-    <div *ngIf="modeFilter">
-      <button  mat-fab color="primary" class="mat-fab-bottom-right z-2 fixed"
-              (click)="onValidFilter($event)">
-        <mat-icon>save</mat-icon>
-      </button>
-    </div>
-    <div *ngIf="!modeFilter">
-      <button *ngIf="!modeSelection" mat-fab color="primary" class="mat-fab-bottom-right z-2 fixed"  (click)="onCreateElement($event)">
-        <mat-icon>add</mat-icon>
-      </button>
-      <app-fab *ngIf="modeSelection" mat-fab>
-        <app-fab-toggle [iconOff]="'mode_edit'" [iconOn]="'replay'"></app-fab-toggle>
-        <app-fab-button [color]="'accent'" [icon]="'delete'" (onClick)="onDeleteSelectedElements()"></app-fab-button>
-      </app-fab>
-    </div>
-
-
   </mat-card-content>
 </mat-card>
 
+<!--<mat-progress-bar mode="query" *ngIf="loadingData$ | async"></mat-progress-bar>-->
+<mat-card *ngIf="loadingData" class="empty">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</mat-card>
 
-<mat-card class="empty" *ngIf="!loadingData && (elements)?.length ==0 ">
-  <mat-card-content class="empty">
-    <div style="display:flex;justify-content: center;flex-direction: column;align-items: center;height: 100%;">
+<mat-card *ngIf="!loadingData " class="empty">
+  <mat-card-content *ngIf="(elements)?.length ==0 " class="empty">
+    <span style="display:flex;justify-content: center;flex-direction: column;align-items: center;height: 100%;">
       <div><img src="./assets/images/norecord.png"/></div>
-      <p>You don't have any {{entityName}}s.</p>
-      <button mat-raised-button color="primary" (click)="onCreateElement($event)">ADD A
-        {{entityName}}
-      </button>
-      <button mat-raised-button color="primary" (click)="clearFilters($event)">Clear Filters(S) </button>
-    </div>
+      <p>No records found !</p>
+      <div>
+      <!--<span><button mat-raised-button color="primary" (click)="onCreateElement($event)">{{emptyMessage}}</button></span>-->
+      <span *ngIf="filterStore"><button  mat-raised-button color="primary" (click)="clearFilter()">Clear Filters</button> </span>
+        </div>
+      <!--<button mat-raised-button color="primary" (click)="clearFilters($event)">Clear Filters(S)</button>-->
+    </span>
   </mat-card-content>
 </mat-card>
-
-
 

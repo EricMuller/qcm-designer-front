@@ -10,7 +10,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {User} from './api/model/user.model';
 import {Observable} from 'rxjs/Rx';
 import {UserService} from './api/services/user.service';
-import {EpicService} from './api/services/epic.service';
+import {CategoryService} from './api/services/category.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -30,7 +30,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
-      providers: [CookieService, EpicService, {provide: UserService, useClass: MockUserService}]
+      providers: [CookieService, CategoryService, {provide: UserService, useClass: MockUserService}]
     }).compileComponents();
   }));
 

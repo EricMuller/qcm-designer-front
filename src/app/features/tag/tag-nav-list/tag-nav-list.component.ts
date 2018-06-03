@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Tag} from '../../../../api/model/tag.model';
-import {TagStore} from '../../../tag/stores/tag-store.service';
+import {Tag} from '../../../api/model/tag.model';
+import {TagStore} from '../stores/tag-store.service';
 
 
 @Component({
@@ -14,7 +14,7 @@ export class TagNavListComponent implements OnInit {
   public elements: Tag[];
 
 
-  constructor(private tagSelectionStore: TagStore) {
+  constructor(private tagStore: TagStore) {
   }
 
   ngOnInit() {
@@ -22,11 +22,11 @@ export class TagNavListComponent implements OnInit {
 
   public isSelected(tag: Tag):
     boolean {
-    return this.tagSelectionStore.isSelected(tag);
+    return this.tagStore.isSelected(tag);
   }
 
   public setClickedRow = function (tag: Tag) {
-    this.tagSelectionStore.swapElement(tag);
+    this.tagStore.swapElement(tag);
   }
 
 }

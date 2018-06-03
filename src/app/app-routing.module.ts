@@ -17,6 +17,11 @@ import {QuestionsQuestionnaireResolver} from './features/questionnaire/resolvers
 import {QuestionSearchComponent} from './features/question/question-search/question-search.component';
 import {UserDetailComponent} from './features/user/user-detail/user-detail.component';
 import {QuestionnaireListComponent} from './features/questionnaire/questionnaire-list/questionnaire-list.component';
+import {QuestionnaireFilterComponent} from './features/questionnaire/search/questionnaire-filter/questionnaire-filter.component';
+import {QuestionFilterComponent} from './features/question/search/question-filter/question-filter.component';
+import {QuestionDetailComponent} from './features/question/question-detail/question-detail.component';
+import {QuestionResolver} from './features/question/resolvers/question-resolver.service';
+
 
 const routes: Routes = [
     {
@@ -36,10 +41,12 @@ const routes: Routes = [
           component: UserDetailComponent,
         },
         {
-          path: 'list', component: QuestionnaireListComponent, canActivate: [UserGuardService],
-          resolve: {
-            page: QuestionnairesResolver,
-          }
+          path: 'filters',
+          component: QuestionnaireFilterComponent,
+        },
+        {
+          path: 'list', component: QuestionnaireListComponent, canActivate: [UserGuardService]
+
         },
         {
           path: ':id/questions', component: QuestionnaireQuestionListComponent, canActivate: [UserGuardService],
@@ -64,10 +71,13 @@ const routes: Routes = [
       ]
     },
     {
-      path: 'home', component: HomeComponent,
-    },
+      path: 'home', component:
+      HomeComponent,
+    }
+    ,
     {
-      path: 'questions', component: QuestionnaireAppComponent, canActivate: [UserGuardService],
+      path: 'questions', component:
+      QuestionnaireAppComponent, canActivate: [UserGuardService],
       children:
         [
           {
@@ -75,16 +85,23 @@ const routes: Routes = [
             component: UserDetailComponent,
           },
           {
-            path: 'list', component: QuestionListComponent, canActivate: [UserGuardService],
-            resolve: {
-              questions: QuestionsResolver
-            }
+            path: 'filters',
+            component: QuestionFilterComponent,
+          },
+          {
+            path: 'list', component: QuestionListComponent, canActivate: [UserGuardService]
           },
           {path: 'import', component: QuestionnaireImportComponent, canActivate: [UserGuardService]},
           {
             path: 'search', component: QuestionSearchComponent, canActivate: [UserGuardService],
             resolve: {
               questionnaires: QuestionnairesResolver,
+            }
+          },
+          {
+            path: ':id', component: QuestionDetailComponent, canActivate: [UserGuardService],
+            resolve: {
+              question: QuestionResolver
             }
           },
           {path: '**', redirectTo: 'search', pathMatch: 'full'}
@@ -103,7 +120,7 @@ const routes: Routes = [
   exports: [
     RouterModule
   ],
-  providers: [QuestionnaireResolver, QuestionnairesResolver, PageQuestionsByQuestionnaireResolver, QuestionsResolver
+  providers: [QuestionnaireResolver, QuestionnairesResolver, PageQuestionsByQuestionnaireResolver, QuestionsResolver, QuestionResolver
     , QuestionsQuestionnaireResolver]
 })
 export class AppRoutingModule {

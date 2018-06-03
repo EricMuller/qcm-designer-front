@@ -4,7 +4,7 @@ import {Questionnaire} from '../model/questionnaire.model';
 import {Observable} from 'rxjs/Observable';
 import {Page} from './page';
 import {API} from './api';
-import {Filter} from '../../features/filter/filter';
+import {Filter} from '../../shared/emu/filter/filter';
 
 @Injectable()
 export class QuestionnaireService {
@@ -18,8 +18,8 @@ export class QuestionnaireService {
   }
 
   public getQuestionnairesByFilters(filters: Filter[], page?: number, size?: number, sort?: string): Observable<Page> {
-    const filterstring = btoa(JSON.stringify(filters));
-    const requestUrl = `${API.QUESTIONNAIRES}filters/?filters=${filterstring}&size=${size}&page=${page}&sort=${sort}`;
+    const filterString = btoa(JSON.stringify(filters));
+    const requestUrl = `${API.QUESTIONNAIRES}?size=${size}&page=${page}&sort=${sort}&filters=${filterString}`;
     return this.http.get<Page>(requestUrl).publishLast().refCount();
   }
 
@@ -33,6 +33,10 @@ export class QuestionnaireService {
 
   public postQuestionnaire(q: Questionnaire) {
     return this.http.post<Questionnaire>(API.QUESTIONNAIRES, q);
+  }
+
+  public putQuestionnaire(q: Questionnaire) {
+    return this.http.put<Questionnaire>(API.QUESTIONNAIRES, q);
   }
 
   public getPageQuestionsProjectionByQuestionnaireId(questionnaireId: Number): Observable<Questionnaire[]> {

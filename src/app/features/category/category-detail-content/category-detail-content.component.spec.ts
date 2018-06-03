@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EpicDetailContentComponent } from './epic-detail-content.component';
+import { CategoryDetailContentComponent } from './category-detail-content.component';
 
 describe('CategoryDetailContentComponent', () => {
-  let component: EpicDetailContentComponent;
-  let fixture: ComponentFixture<EpicDetailContentComponent>;
+  let component: CategoryDetailContentComponent;
+  let fixture: ComponentFixture<CategoryDetailContentComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EpicDetailContentComponent ]
+      declarations: [ CategoryDetailContentComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EpicDetailContentComponent);
+    fixture = TestBed.createComponent(CategoryDetailContentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

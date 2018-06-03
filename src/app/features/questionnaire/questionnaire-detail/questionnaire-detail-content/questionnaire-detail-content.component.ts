@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Epic} from '../../../../api/model/epic.model';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {EpicService} from '../../../../api/services/epic.service';
+import {Category} from '../../../../api/model/category.model';
+import {FormGroup} from '@angular/forms';
+import {CategoryService} from '../../../../api/services/category.service';
 import {Questionnaire} from '../../../../api/model/questionnaire.model';
 import {TagService} from '../../../../api/services/tag.service';
 import {Tag} from '../../../../api/model/tag.model';
@@ -20,24 +20,24 @@ export class QuestionnaireDetailContentComponent implements OnInit {
   public edition: boolean;
 
   @Input('form')
-  public questionnaireForm: FormGroup;
+  public form: FormGroup;
 
-  public epics: Epic[];
+  public categories: Category[];
 
   public tags: Tag[];
 
   public filteredObjects: Tag[];
 
-  constructor(private epicService: EpicService, private tagService: TagService) {
+  constructor(private categoryService: CategoryService, private tagService: TagService) {
   }
 
   ngOnInit() {
 
-    this.epicService.getEpics().subscribe((epics => {
-      this.epics = epics;
+    this.categoryService.getCategories().subscribe((categories => {
+      this.categories = categories;
     }));
     // this.categories = this.categorieService.getCategories();
-    this.tagService.getTags().subscribe((page => {
+    this.tagService.getTags(0, 100, 'libelle').subscribe((page => {
       this.tags = page.content;
       this.filterObjects('');
     }));
@@ -48,7 +48,7 @@ export class QuestionnaireDetailContentComponent implements OnInit {
   }
 
   public addTagEvent(event) {
-     console.log(event);
+    console.log(event);
   }
 
   filterObjects(value: string): void {

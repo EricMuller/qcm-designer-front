@@ -8,7 +8,7 @@ import {
   MatGridListModule,
   MatPaginatorModule,
   MatProgressBarModule,
-  MatProgressSpinnerModule,
+  MatProgressSpinnerModule, MatRadioModule,
   MatSliderModule,
   MatSortModule,
   MatTableModule, MatTabsModule
@@ -45,6 +45,7 @@ import {MatTooltipModule} from '@angular/material';
     MatMenuModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
+    MatRadioModule,
     MatSelectModule,
     MatSliderModule,
     MatSidenavModule,

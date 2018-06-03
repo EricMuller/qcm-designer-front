@@ -10,16 +10,16 @@
  * Do not edit the class manually.
  */
 import {Question} from './question.model';
-import {Epic} from './epic.model';
+import {Category} from './category.model';
 import {Tag} from './tag.model';
 import {Entity} from './entity';
 
 
-export class Questionnaire implements Entity {
-  id?: number;
+export class Questionnaire extends Entity {
+
   title?: string;
   description?: string;
-  epic?: Epic;
+  category?: Category;
   questions?: Array<Question>;
   version?: number;
   tags?: Tag[] = [];

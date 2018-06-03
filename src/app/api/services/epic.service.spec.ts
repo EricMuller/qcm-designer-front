@@ -1,16 +1,16 @@
 import { TestBed, inject } from '@angular/core/testing';
 import {HttpClientModule} from '@angular/common/http';
-import {EpicService} from './epic.service';
+import {CategoryService} from './category.service';
 
 describe('CategoryService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule],
-      providers: [EpicService]
+      providers: [CategoryService]
     });
   });
 
-  it('should be created', inject([EpicService], (service: EpicService) => {
+  it('should be created', inject([CategoryService], (service: CategoryService) => {
     expect(service).toBeTruthy();
   }));
 });

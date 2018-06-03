@@ -13,10 +13,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Observable} from 'rxjs/Rx';
 import {NotifierService} from '../../../core/simple-notifier.service';
 
-import {QuestionnaireService} from '../../../api/services/questionnaire.service';
+import {QuestionService} from '../../../api/services/questionnaire.service';
 import {Questionnaire} from '../../../api/model/questionnaire.model';
-import {EpicService} from '../../../api/services/epic.service';
-import {Epic} from '../../../api/model/epic.model';
+import {CategoryService} from '../../../api/services/category.service';
+import {Category} from '../../../api/model/category.model';
 
 
 
@@ -31,8 +31,8 @@ describe('QuestionnaireListComponent', () => {
         HttpClientModule, BrowserAnimationsModule, RouterTestingModule],
       declarations: [QuestionnaireListComponent],
       providers: [ NotifierService,
-        {provide: EpicService, useClass: MockCategoryService},
-        {provide: QuestionnaireService, useClass: MockQuestionnaireService}
+        {provide: CategoryService, useClass: MockCategoryService},
+        {provide: QuestionService, useClass: MockQuestionnaireService}
       ]
     })
       .compileComponents();
@@ -60,9 +60,9 @@ class MockQuestionnaireService {
 
 
 class MockCategoryService {
-  public getCategories(): Observable<Epic[]> {
+  public getCategories(): Observable<Category[]> {
 
-    const category = new Epic();
+    const category = new Category();
     category.id = '1';
     return Observable.of([category]);
 

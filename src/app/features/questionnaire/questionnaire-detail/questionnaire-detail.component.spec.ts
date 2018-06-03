@@ -3,7 +3,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {QuestionnaireDetailComponent} from './questionnaire-detail.component';
 import {MatCardModule, MatIconModule, MatListModule, MatSnackBarModule, MatToolbarModule} from '@angular/material';
 import {HttpClientModule} from '@angular/common/http';
-import {QuestionnaireService} from '../../../api/services/questionnaire.service';
+import {QuestionService} from '../../../api/services/questionnaire.service';
 import {NotifierService} from '../../../core/simple-notifier.service';
 import {RouterTestingModule} from '@angular/router/testing';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -19,7 +19,7 @@ describe('QuestionnaireDetailComponent', () => {
         MatIconModule, MatToolbarModule, MatCardModule, MatListModule, MatSnackBarModule
       ],
       declarations: [QuestionnaireDetailComponent],
-      providers: [QuestionService, QuestionnaireService, NotifierService]
+      providers: [QuestionService, QuestionService, NotifierService]
     })
       .compileComponents();
   }));
