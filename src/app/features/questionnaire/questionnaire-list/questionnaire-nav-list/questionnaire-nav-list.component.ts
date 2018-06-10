@@ -1,8 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Questionnaire} from '../../../../api/model/questionnaire.model';
-import {Tag} from '../../../../api/model/tag.model';
-import {QuestionnaireStore} from '../../stores/questionnaire-store.service';
-import {TagStore} from '../../../tag/stores/tag-store.service';
+import {QuestionnaireStore} from '../../../stores/questionnaire-store.service';
+
 
 @Component({
   selector: 'app-questionnaire-nav-list',
@@ -15,7 +14,7 @@ export class QuestionnaireNavListComponent implements OnInit {
   public elements: Questionnaire[];
 
   constructor(private questionnaireStore: QuestionnaireStore,
-              private tagStore: TagStore) {
+              private tagStore: QuestionnaireStore) {
   }
 
   ngOnInit() {
@@ -26,7 +25,7 @@ export class QuestionnaireNavListComponent implements OnInit {
     return this.questionnaireStore.isSelected(questionnaire);
   }
 
-  public swapTag(tag: Tag) {
+  public swapTag(tag: Questionnaire) {
     console.log(tag);
     this.tagStore.swapElement(tag);
   }

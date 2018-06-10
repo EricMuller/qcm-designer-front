@@ -4,8 +4,8 @@
       <a mat-icon-button [routerLink]="['/questions/list']">
         <mat-icon>arrow_back</mat-icon>
       </a>
-      <div *ngIf="!question.id">Create Question</div>
-      <div *ngIf="question.id">Edit Question {{question.id}}</div>
+      <div *ngIf="!question.id">Create a New Question</div>
+      <div *ngIf="question.id">Edit Question n°{{question.id}}</div>
 
       <div flex></div>
       <ng-content select="[menu-buttons]"></ng-content>
@@ -65,10 +65,10 @@
           <div formArrayName="responses">
             <div *ngFor="let responseCtrl of  responses.controls; let i=index" [formGroupName]="i" class="responses-container" >
               <mat-form-field class="full-width">
-                <textarea formControlName="response" matInput placeholder="response" class="text-input"></textarea>
+                <textarea formControlName="response" matInput placeholder="response" class="text-input" rows="15"></textarea>
                 <mat-error *ngIf="responseCtrl.get('response').hasError('required')">field required</mat-error>
               </mat-form-field>
-              <button mat-icon-button color="accent" (click)="removeResponse(i);" *ngIf="edition"><mat-icon>delete</mat-icon></button>
+              <div style="align-self: flex-start"><button mat-icon-button color="accent" (click)="removeResponse(i);" *ngIf="edition"><mat-icon>delete</mat-icon></button></div>
             </div>
           </div>
         </ng-template>
@@ -78,10 +78,10 @@
             <div *ngFor="let responseCtrl of responses.controls; index as i " [formGroupName]="i" class="responses-container" >
               <mat-checkbox formControlName="good" [checked]="responseCtrl.good" style="flex-grow: 1;align-self: center"></mat-checkbox>
               <mat-form-field style="flex: 10 0 50px">
-                <textarea formControlName="response" matInput placeholder="response" class="text-input"></textarea>
+                <textarea formControlName="response" matInput placeholder="response" class="text-input" ></textarea>
                 <mat-error *ngIf="responseCtrl.get('response').hasError('required')">field required</mat-error>
               </mat-form-field>
-              <button mat-icon-button color="accent" (click)="removeResponse(i);" *ngIf="edition"><mat-icon>delete</mat-icon></button>
+              <div style="align-self: flex-start"><button mat-icon-button color="accent" (click)="removeResponse(i);" *ngIf="edition"><mat-icon>delete</mat-icon></button></div>
             </div>
           </div>
         </ng-template>

@@ -11,8 +11,8 @@
  */
 import {Question} from './question.model';
 import {Category} from './category.model';
-import {Tag} from './tag.model';
 import {Entity} from './entity';
+import {Tag} from './tag.model';
 
 
 export class Questionnaire extends Entity {

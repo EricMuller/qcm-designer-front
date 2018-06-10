@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Tag} from '../../../api/model/tag.model';
-import {TagStore} from '../stores/tag-store.service';
+import {TagStore} from '../../stores/tag-store.service';
 
 
 @Component({
@@ -26,7 +26,7 @@ export class TagNavListComponent implements OnInit {
   }
 
   public setClickedRow = function (tag: Tag) {
-    this.tagStore.swapElement(tag);
+    this.filterStore.swapElement(tag);
   }
 
 }

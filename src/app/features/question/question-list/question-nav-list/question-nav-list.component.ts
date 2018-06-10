@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Question} from '../../../../api';
-import {QuestionStore} from '../../stores/question-store.service';
-import {TagStore} from '../../../tag/stores/tag-store.service';
-import {Tag} from '../../../../api/model/tag.model';
+import {QuestionStore} from '../../../stores/question-store.service';
 import {Router} from '@angular/router';
+import {TagStore} from '../../../stores/tag-store.service';
+import {Tag} from '../../../../api/model/tag.model';
 
 @Component({
   selector: 'app-question-nav-list',
@@ -28,7 +28,6 @@ export class QuestionNavListComponent implements OnInit {
   }
 
   public swapTag(tag: Tag) {
-    console.log(tag);
     this.tagStore.swapElement(tag);
   }
 

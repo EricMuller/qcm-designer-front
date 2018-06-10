@@ -5,7 +5,7 @@ import {Observable} from 'rxjs/Rx';
 import {Page} from './page';
 import {API} from './api';
 import {Questionnaire} from '../model/questionnaire.model';
-import {Filter} from '../../shared/emu/filter/filter';
+import {Filter} from '../../features/shared/ui/filter/filter';
 
 
 @Injectable()

@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material';
-import {SideNavLayoutComponent} from '../../../shared/layouts/side-nav-layout/sidenav-layout.component';
+import {SideNavLayoutComponent} from '../../shared/layouts/side-nav-layout/sidenav-layout.component';
 
 @Component({
   selector: 'app-questionnaire-app',

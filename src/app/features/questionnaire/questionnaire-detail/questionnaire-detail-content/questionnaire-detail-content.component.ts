@@ -6,6 +6,7 @@ import {Questionnaire} from '../../../../api/model/questionnaire.model';
 import {TagService} from '../../../../api/services/tag.service';
 import {Tag} from '../../../../api/model/tag.model';
 
+
 @Component({
   selector: 'app-questionnaire-detail-content',
   templateUrl: './questionnaire-detail-content.component.html',
@@ -26,7 +27,10 @@ export class QuestionnaireDetailContentComponent implements OnInit {
 
   public tags: Tag[];
 
-  public filteredObjects: Tag[];
+  public filteredObjects: Questionnaire[];
+
+  public  selectedable= true;
+  public  removable= true;
 
   constructor(private categoryService: CategoryService, private tagService: TagService) {
   }

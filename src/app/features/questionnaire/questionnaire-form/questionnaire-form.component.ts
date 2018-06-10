@@ -1,18 +1,19 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {QuestionnaireStore} from '../stores/questionnaire-store.service';
+import {QuestionnaireStore} from '../../stores/questionnaire-store.service';
 import {FormArray, FormGroup} from '@angular/forms';
 import {Questionnaire} from '../../../api/model/questionnaire.model';
 import {MatChipInputEvent, MatDialog, MatDialogConfig} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Category} from '../../../api/model/category.model';
 import {NotifierService} from '../../../core/simple-notifier.service';
-import {Tag} from '../../../api/model/tag.model';
 import {TagService} from '../../../api/services/tag.service';
 import {CategoryService} from '../../../api/services/category.service';
 import {TdDialogService} from '@covalent/core';
-import {EditableFormComponent} from '../../../shared/emu/components/editable-form/editableFormComponent';
+import {EditableFormComponent} from '../../shared/forms/editable-form/editableFormComponent';
 import {QuestionnaireFormBuilder} from './questionnaire-form-builder';
 import {CategoryDialogComponent} from '../../category/category-dialog/category-dialog.component';
+import {QuestionStore} from '../../stores/question-store.service';
+import {Tag} from '../../../api/model/tag.model';
 
 
 @Component({
@@ -32,6 +33,7 @@ export class QuestionnaireFormComponent extends EditableFormComponent<Questionna
     protected notifierService: NotifierService,
     protected router: Router,
     protected questionnaireStore: QuestionnaireStore,
+    protected questionStore: QuestionStore,
     private dialog: MatDialog,
     private categoryService: CategoryService, private tagService: TagService,
     private formBuilder: QuestionnaireFormBuilder) {
@@ -93,7 +95,6 @@ export class QuestionnaireFormComponent extends EditableFormComponent<Questionna
   }
 
   protected onSaveForm(data) {
-
     this.questionnaire = data;
     this.fabMenu.opened = false;
     this.notifierService.notifySuccess(data.title, 2000);
@@ -105,8 +106,23 @@ export class QuestionnaireFormComponent extends EditableFormComponent<Questionna
   }
 
   public createCategory() {
-    console.log('createCategory');
     this.openCategoryDialog();
+  }
+
+  public viewQuestionsByQuestionnaire() {
+    // this.openCategoryDialog();
+    // this.questionnaireStore.unSelectAllElement();
+    this.questionnaireStore.selectElement(this.questionnaire, true);
+    this.router.navigate(['/questions/list']);
+  }
+
+  public nbSelectedQuestion(): number {
+    return this.questionStore.selectedSize();
+  }
+
+  public add(): void {
+
+
   }
 
   public openCategoryDialog() {

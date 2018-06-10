@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {
+  MatButtonToggleModule,
   MatChipsModule,
   MatDialogModule,
   MatExpansionModule,
@@ -33,6 +34,7 @@ import {MatTooltipModule} from '@angular/material';
   ],
   exports: [
     MatButtonModule,
+    MatButtonToggleModule,
     MatCardModule,
     MatCheckboxModule,
     MatChipsModule,

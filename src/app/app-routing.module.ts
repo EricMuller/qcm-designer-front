@@ -4,7 +4,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {QuestionnaireQuestionListComponent} from './features/questionnaire/question-list/question-list.component';
 import {QuestionnaireDetailComponent} from './features/questionnaire/questionnaire-detail/questionnaire-detail.component';
 import {UserGuardService} from './core/user-guard.service';
-import {QuestionnaireImportComponent} from './features/questionnaire/questionnaire-import/questionnaire-import.component';
+import {QuestionnaireImportComponent} from './features/import/questionnaire-import/questionnaire-import.component';
 import {QuestionnaireAppComponent} from './features/questionnaire/questionnaire-app/questionnaire-app.component';
 import {QuestionnaireResolver} from './features/questionnaire/resolvers/questionnaire-resolver.service';
 import {QuestionnairesResolver} from './features/questionnaire/resolvers/questionnaires-resolver.service';
@@ -17,21 +17,29 @@ import {QuestionsQuestionnaireResolver} from './features/questionnaire/resolvers
 import {QuestionSearchComponent} from './features/question/question-search/question-search.component';
 import {UserDetailComponent} from './features/user/user-detail/user-detail.component';
 import {QuestionnaireListComponent} from './features/questionnaire/questionnaire-list/questionnaire-list.component';
-import {QuestionnaireFilterComponent} from './features/questionnaire/search/questionnaire-filter/questionnaire-filter.component';
-import {QuestionFilterComponent} from './features/question/search/question-filter/question-filter.component';
+import {QuestionnaireFilterComponent} from './features/questionnaire/questionnaire-filter/questionnaire-filter.component';
+import {QuestionFilterComponent} from './features/question/question-filter/question-filter.component';
 import {QuestionDetailComponent} from './features/question/question-detail/question-detail.component';
 import {QuestionResolver} from './features/question/resolvers/question-resolver.service';
+import {ImportAppComponent} from './features/import/import-app/import-app.component';
 
 
 const routes: Routes = [
     {
       path: '',
-      redirectTo: 'questionnaires',
+      redirectTo: 'questions',
       pathMatch: 'full'
     },
     {
       path: 'user',
       component: UserDetailComponent,
+    },
+    {
+      path: 'import', component: ImportAppComponent,
+      children: [
+        {
+          path: 'questionnaires', component: QuestionnaireImportComponent, canActivate: [UserGuardService],
+        }]
     },
     {
       path: 'questionnaires', component: QuestionnaireAppComponent,
@@ -55,13 +63,12 @@ const routes: Routes = [
             questions: QuestionsQuestionnaireResolver
           }
         },
-        {
-          path: 'import', component: QuestionnaireImportComponent, canActivate: [UserGuardService],
-        },
+
         {
           path: ':id', component: QuestionnaireDetailComponent, canActivate: [UserGuardService],
           resolve: {
             questionnaire: QuestionnaireResolver
+            // questions: QuestionsQuestionnaireResolver
           }
         },
 
@@ -104,7 +111,7 @@ const routes: Routes = [
               question: QuestionResolver
             }
           },
-          {path: '**', redirectTo: 'search', pathMatch: 'full'}
+          {path: '**', redirectTo: 'list', pathMatch: 'full'}
         ]
     }
 

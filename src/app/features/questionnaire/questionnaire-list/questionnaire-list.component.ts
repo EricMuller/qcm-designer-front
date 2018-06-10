@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {TdPulseAnimation} from '@covalent/core';
-import {QuestionnaireStore} from '../stores/questionnaire-store.service';
-import {TagStore} from '../../tag/stores/tag-store.service';
+import {QuestionnaireStore} from '../../stores/questionnaire-store.service';
 import {Router} from '@angular/router';
+import {TagStore} from '../../stores/tag-store.service';
 
 
 @Component({
@@ -14,6 +14,8 @@ import {Router} from '@angular/router';
   ]
 })
 export class QuestionnaireListComponent implements OnInit {
+
+  public filter = false;
 
   constructor(public questionnaireStore: QuestionnaireStore, public tagStore: TagStore, private router: Router) {
   }

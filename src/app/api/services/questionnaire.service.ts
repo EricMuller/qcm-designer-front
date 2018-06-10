@@ -4,7 +4,8 @@ import {Questionnaire} from '../model/questionnaire.model';
 import {Observable} from 'rxjs/Observable';
 import {Page} from './page';
 import {API} from './api';
-import {Filter} from '../../shared/emu/filter/filter';
+import {Filter} from '../../features/shared/ui/filter/filter';
+import {Question} from '..';
 
 @Injectable()
 export class QuestionnaireService {
@@ -41,6 +42,10 @@ export class QuestionnaireService {
 
   public getPageQuestionsProjectionByQuestionnaireId(questionnaireId: Number): Observable<Questionnaire[]> {
     return this.http.get<Questionnaire[]>(API.QUESTIONNAIRES + questionnaireId.toString() + '/questions').publishLast().refCount();
+  }
+
+  public putQuestion(id: Number, question: Question) {
+    return this.http.put<Questionnaire>(API.QUESTIONNAIRES + id.toString() + '/questions', question);
   }
 
 }

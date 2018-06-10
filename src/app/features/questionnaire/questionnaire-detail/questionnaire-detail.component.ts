@@ -15,6 +15,7 @@ export class QuestionnaireDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute) {
     this.route.data.subscribe(data => {
       this.questionnaire = data.questionnaire;
+      // this.questions = data.questions.content;
     });
   }
 

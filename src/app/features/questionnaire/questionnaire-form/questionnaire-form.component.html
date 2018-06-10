@@ -17,8 +17,8 @@
       <!-- line menu -->
       <mat-menu #questionnaireMenu="matMenu" yPosition="below">
         <!--<ng-content select="[menu-items]"></ng-content>-->
-        <button mat-menu-item (click)="createCategory()"> <mat-icon>add</mat-icon>Create a new category
-        </button>
+        <button mat-menu-item (click)="createCategory()"> <mat-icon>add</mat-icon>Create a new category</button>
+          <button mat-menu-item (click)="viewQuestionsByQuestionnaire()"> <mat-icon>list</mat-icon>Questions </button>
       </mat-menu>
     </mat-toolbar>
 
@@ -63,13 +63,15 @@
       </div>
     </form>
     <!--<pre>{{form.value | json}}</pre>-->
+
   </mat-card-content>
 </mat-card>
 
 <app-fab (toggleEvent)="toggleEdition($event)">
   <app-fab-toggle [iconOff]="'mode_edit'" [iconOn]="'replay'" ></app-fab-toggle>
-  <app-fab-button [icon]="'save'"  [color]="'primary'" (onClick)="saveForm()"></app-fab-button>
-  <app-fab-button [icon]="'delete'" [color]="'accent'" (onClick)="deleteForm()"></app-fab-button>
+  <app-fab-button [icon]="'save'"  matTooltip="Save Questionnaire" [matTooltipPosition]="'left'"[color]="'primary'" (onClick)="saveForm()"></app-fab-button>
+  <app-fab-button [icon]="'delete'" matTooltip="Delete Questionnaire" [matTooltipPosition]="'left'"[color]="'accent'" (onClick)="deleteForm()"></app-fab-button>
+  <app-fab-button *ngIf="nbSelectedQuestion()" [icon]="'question_answer'"   matTooltip="Add {{nbSelectedQuestion()}} Selected  Question(s)" [matTooltipPosition]="'left'" [color]="'primary'" (onClick)="add()"> </app-fab-button>
 </app-fab>
 
 

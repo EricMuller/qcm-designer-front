@@ -1,0 +1,26 @@
+
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title> Selected Questions </mat-panel-title>
+    <mat-panel-description>This is a list of Selected  </mat-panel-description>
+  </mat-expansion-panel-header>
+  <mat-card>
+    <mat-card-header *ngIf="!nbSelectedQuestion()"><mat-icon>lightbulb_outline</mat-icon>Please Select some Question(s) to add in that Questionnaire</mat-card-header>
+    <mat-card-header *ngIf="nbSelectedQuestion()">Selected Question:</mat-card-header>
+    <mat-nav-list>
+      <a mat-list-item href="..." *ngFor="let q of selected"> {{ q.question }} </a>
+    </mat-nav-list>
+  </mat-card>
+</mat-expansion-panel>
+
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title> Questions   </mat-panel-title>
+    <mat-panel-description>This is a list f questions </mat-panel-description>
+  </mat-expansion-panel-header>
+  <mat-card>
+    <mat-nav-list>
+      <a mat-list-item href="..." *ngFor="let q of questions"> {{ q.question }} </a>
+    </mat-nav-list>
+  </mat-card>
+</mat-expansion-panel>
