@@ -12,6 +12,19 @@
   flex: 1 1 auto;
 }
 
+.form {
+  width: 90%;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+/*.list {*/
+  /*width: 90%;*/
+  /*padding-left: 10px;*/
+  /*padding-top: 10px;*/
+/*}*/
+
+
 [tabindex]:focus {
   outline: none;
 }

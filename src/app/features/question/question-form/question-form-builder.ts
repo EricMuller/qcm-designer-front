@@ -18,6 +18,7 @@ export class QuestionFormBuilder {
       id: new FormControl({value: question.id, disabled: true}),
       version: new FormControl({value: question.version, disabled: true}),
       type: new FormControl({value: question.type, disabled: true}, Validators.required),
+      status: new FormControl({value: question.status, disabled: true}, Validators.required),
       question: new FormControl({value: question.question, disabled: true}, Validators.required),
       responses: this.createResponsesControl(question, true),
       options: new FormControl({value: this.getOptions(question), disabled: true}),

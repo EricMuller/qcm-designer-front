@@ -1,20 +1,15 @@
-
-<mat-card>
-  <mat-card-header>
-    <mat-toolbar>
-      <div>
-        <span style="align-items: center ">Filter my Questions </span>
-      </div>
-      <div flex></div>
+<mat-toolbar>
+  <div>
+    <span style="align-items: center ">Filter my Questions </span>
+  </div>
+  <div flex></div>
 
 
-      <button mat-icon-button (click)="closeCard($event)">
-        <mat-icon>undo</mat-icon>
-      </button>
-    </mat-toolbar>
-  </mat-card-header>
+  <button mat-icon-button (click)="closeCard($event)">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
 
-</mat-card>
 
 <app-questionnaire-select></app-questionnaire-select>
 
@@ -22,40 +17,40 @@
 
 
 <!--<app-selectable-list #list-->
-                     <!--[dataSelectionStore]="tagStore"-->
-                     <!--[sortBy]="'libelle'"-->
-                     <!--[emptyMessage]="'CREATE A NEW TAG'"-->
-                     <!--(onClosed)="closeCard($event)">-->
+<!--[dataSelectionStore]="tagStore"-->
+<!--[sortBy]="'libelle'"-->
+<!--[emptyMessage]="'CREATE A NEW TAG'"-->
+<!--(onClosed)="closeCard($event)">-->
 
-  <!--<mat-toolbar>-->
-    <!--<div>-->
-      <!--<button mat-icon-button *ngIf="list.modeSelection$ |async" (click)="list.swapSelectedMode()">-->
-        <!--<mat-icon>list</mat-icon>-->
-      <!--</button>-->
-      <!--<span style="align-items: center ">Filter my Questions  ({{list.selectionSize()}} selected)</span>-->
-    <!--</div>-->
-    <!--<div flex></div>-->
+<!--<mat-toolbar>-->
+<!--<div>-->
+<!--<button mat-icon-button *ngIf="list.modeSelection$ |async" (click)="list.swapSelectedMode()">-->
+<!--<mat-icon>list</mat-icon>-->
+<!--</button>-->
+<!--<span style="align-items: center ">Filter my Questions  ({{list.selectionSize()}} selected)</span>-->
+<!--</div>-->
+<!--<div flex></div>-->
 
-    <!--<button *ngIf="!list.isSelectedMode()" mat-icon-button (click)="list.selectAll()">-->
-      <!--<mat-icon>select_all</mat-icon>-->
-    <!--</button>-->
-    <!--<button  mat-icon-button (click)="closeCard($event);">-->
-      <!--<mat-icon>undo</mat-icon>-->
-    <!--</button>-->
-  <!--</mat-toolbar>-->
+<!--<button *ngIf="!list.isSelectedMode()" mat-icon-button (click)="list.selectAll()">-->
+<!--<mat-icon>select_all</mat-icon>-->
+<!--</button>-->
+<!--<button  mat-icon-button (click)="closeCard($event);">-->
+<!--<mat-icon>undo</mat-icon>-->
+<!--</button>-->
+<!--</mat-toolbar>-->
 
 
-  <!--<div style="margin: 10px;padding-left: 10px">-->
-    <!--<mat-button-toggle *ngFor="let q of questionnaires"><mat-icon>question_answer</mat-icon>{{q.title}}</mat-button-toggle>-->
-   <!--</div>-->
+<!--<div style="margin: 10px;padding-left: 10px">-->
+<!--<mat-button-toggle *ngFor="let q of questionnaires"><mat-icon>question_answer</mat-icon>{{q.title}}</mat-button-toggle>-->
+<!--</div>-->
 
-  <!--<app-tag-nav-list elements-view [elements]="list.elements"></app-tag-nav-list>-->
-  <!--<app-tag-nav-list selected-view [elements]="list.selected"></app-tag-nav-list>-->
+<!--<app-tag-nav-list elements-view [elements]="list.elements"></app-tag-nav-list>-->
+<!--<app-tag-nav-list selected-view [elements]="list.selected"></app-tag-nav-list>-->
 <!--</app-selectable-list>-->
 
 
 <!--<div fab-tool-bar>-->
-  <!--<button mat-fab color="primary" class="mat-fab-bottom-right z-2 fixed" routerLink="/questions/list">-->
-    <!--<mat-icon>filter_list</mat-icon>-->
-  <!--</button>-->
+<!--<button mat-fab color="primary" class="mat-fab-bottom-right z-2 fixed" routerLink="/questions/list">-->
+<!--<mat-icon>filter_list</mat-icon>-->
+<!--</button>-->
 <!--</div>-->

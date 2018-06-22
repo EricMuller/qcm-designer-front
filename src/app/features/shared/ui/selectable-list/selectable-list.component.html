@@ -1,9 +1,7 @@
 
 
 
-<mat-card *ngIf="totalElements">
-
-  <mat-card-content>
+<div *ngIf="totalElements">
 
     <ng-content></ng-content>
     <ng-content *ngIf="!isSelectedMode()" select="[elements-view]"></ng-content>
@@ -14,17 +12,15 @@
                    [length]="totalElements"
                    [pageSize]="pageSize" [showFirstLastButtons]="true"
                    (page)="onPaginateChange($event)"></mat-paginator>
-
-  </mat-card-content>
-</mat-card>
+</div>
 
 <!--<mat-progress-bar mode="query" *ngIf="loadingData$ | async"></mat-progress-bar>-->
-<mat-card *ngIf="loadingData" class="empty">
+<div *ngIf="loadingData" class="empty">
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-</mat-card>
+</div>
 
-<mat-card *ngIf="!loadingData " class="empty">
-  <mat-card-content *ngIf="(elements)?.length ==0 " class="empty">
+<div *ngIf="!loadingData " class="empty">
+  <div *ngIf="(elements)?.length ==0 " class="empty">
     <span style="display:flex;justify-content: center;flex-direction: column;align-items: center;height: 100%;">
       <div><img src="./assets/images/norecord.png"/></div>
       <p>No records found !</p>
@@ -34,6 +30,6 @@
         </div>
       <!--<button mat-raised-button color="primary" (click)="clearFilters($event)">Clear Filters(S)</button>-->
     </span>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>
 

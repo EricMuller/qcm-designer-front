@@ -1,49 +1,59 @@
-
 <app-questionnaire-filter [hidden]="!filter" (onClosed)="filter=false;"></app-questionnaire-filter>
 
-<div [hidden]="filter">
-<app-selectable-list #list
-                     [dataSelectionStore]="questionnaireStore"
-                     [sortBy]="'id'"
-                     [filterStore]="tagStore"
-                     (onCreate)="create()">
-  <mat-toolbar>
-    <div>
-      <button mat-icon-button *ngIf="list.modeSelection$ |async " (click)="list.swapSelectedMode()">
-        <mat-icon>list</mat-icon>
-      </button>
-      <span *ngIf="list.isSelectedMode()" style="align-items: center ">My Selected Questionnaires ({{list.selectionSize()}})</span>
-      <span *ngIf="!list.isSelectedMode()" style="align-items: center ">My Questionnaires</span>
-      <span *ngIf="list.filterSize()">({{list.filterSize()}} filter(s))</span>
-    </div>
-    <div flex></div>
-    <a  mat-icon-button routerLink="/questions/list" matTooltip="List Questions" >
-      <mat-icon>help</mat-icon>
-    </a>
-    <button *ngIf="!list.isSelectedMode()" mat-icon-button (click)="list.selectAll()" matTooltip="Select all">
-      <mat-icon>select_all</mat-icon>
+
+
+<div [hidden]="filter" fxLayout="row">
+  <div fxFlex>
+    <app-selectable-list #list
+                         [dataSelectionStore]="questionnaireStore"
+                         [sortBy]="'id'"
+                         [filterStore]="tagStore"
+                         (onCreate)="create()">
+
+      <mat-toolbar>
+        <div>
+          <button mat-icon-button *ngIf="list.modeSelection$ |async " (click)="list.swapSelectedMode()">
+            <mat-icon>list</mat-icon>
+          </button>
+          <span *ngIf="list.isSelectedMode()" style="align-items: center ">My Selected Questionnaires ({{list.selectionSize()}})</span>
+          <span *ngIf="!list.isSelectedMode()" style="align-items: center ">My Questionnaires</span>
+          <span *ngIf="list.filterSize()">({{list.filterSize()}} filter(s))</span>
+        </div>
+        <div flex></div>
+        <a mat-icon-button routerLink="/questions/list" matTooltip="List Questions">
+          <mat-icon>help</mat-icon>
+        </a>
+        <button *ngIf="!list.isSelectedMode()" mat-icon-button (click)="list.selectAll()" matTooltip="Select all">
+          <mat-icon>select_all</mat-icon>
+        </button>
+        <a *ngIf="!list.isSelectedMode()" mat-icon-button [@tdPulse]="pulseState"
+           (click)="list.refresh(true);list.paginator.firstPage();" matTooltip="Refresh">
+          <mat-icon>replay</mat-icon>
+        </a>
+        <button mat-icon-button (click)="filter=!filter" matTooltip="Filter">
+          <mat-icon matBadge="22" matBadgePosition="above after">filter_list</mat-icon>
+        </button>
+      </mat-toolbar>
+
+      <app-questionnaire-nav-list elements-view [elements]="list.elements"></app-questionnaire-nav-list>
+      <app-questionnaire-nav-list selected-view [elements]="list.selected"></app-questionnaire-nav-list>
+    </app-selectable-list>
+
+  </div>
+
+    <app-fab *ngIf="list.selectionSize()" mat-fab >
+      <app-fab-toggle [iconOff]="'mode_edit'" matTooltip="Edit selected Questionnaire" [matTooltipPosition]="'left'"
+                      [iconOn]="'replay'"></app-fab-toggle>
+      <app-fab-button [color]="'accent'" matTooltip="Delete Questionnaire" [matTooltipPosition]="'left'"
+                      [icon]="'delete'"
+                      (onClick)="list.deleteSelectedElements()"></app-fab-button>
+      <app-fab-button [icon]="'add'" matTooltip="New Questionnaire" [matTooltipPosition]="'left'" [color]="'primary'"
+                      (onClick)="create()"></app-fab-button>
+    </app-fab>
+
+    <button *ngIf="!list.selectionSize()" matTooltip="New Questionnaire" [matTooltipPosition]="'left'" mat-fab
+            color="primary" class="mat-fab-bottom-right z-2 fixed" (click)="create()">
+      <mat-icon>add</mat-icon>
     </button>
-    <a *ngIf="!list.isSelectedMode()" mat-icon-button [@tdPulse]="pulseState"
-       (click)="list.refresh(true);list.paginator.firstPage();" matTooltip="Refresh">
-      <mat-icon>replay</mat-icon>
-    </a>
-    <button mat-icon-button (click)="filter=!filter" matTooltip="Filter">
-      <mat-icon matBadge="22" matBadgePosition="above after">filter_list</mat-icon>
-    </button>
-  </mat-toolbar>
 
-  <app-questionnaire-nav-list elements-view [elements]="list.elements"></app-questionnaire-nav-list>
-  <app-questionnaire-nav-list selected-view [elements]="list.selected"></app-questionnaire-nav-list>
-</app-selectable-list>
-
-
-<app-fab *ngIf="list.selectionSize()" mat-fab>
-  <app-fab-toggle [iconOff]="'mode_edit'" matTooltip="Edit selected Questionnaire"  [matTooltipPosition]="'left'" [iconOn]="'replay'"></app-fab-toggle>
-  <app-fab-button [color]="'accent'"  matTooltip="Delete Questionnaire"  [matTooltipPosition]="'left'"  [icon]="'delete'" (onClick)="list.deleteSelectedElements()"></app-fab-button>
-  <app-fab-button [icon]="'add'"     matTooltip="New Questionnaire"  [matTooltipPosition]="'left'"  [color]="'primary'" (onClick)="create()"> </app-fab-button>
-</app-fab>
-
-<button *ngIf="!list.selectionSize()" matTooltip="New Questionnaire"  [matTooltipPosition]="'left'" mat-fab color="primary" class="mat-fab-bottom-right z-2 fixed" (click)="create()">
-  <mat-icon>add</mat-icon>
-</button>
 </div>

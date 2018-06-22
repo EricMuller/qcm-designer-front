@@ -10,6 +10,12 @@ import {QuestionFormBuilder} from './question-form-builder';
 import {MatChipInputEvent} from '@angular/material';
 import {Tag} from '../../../api/model/tag.model';
 
+enum Status {
+  DRAFT = 'Draft',
+  TOVALIDATE = ' To Validate',
+  VALIDATED = 'Validated'
+
+}
 
 enum QuestionType {
   FREE_TEXT = 'Free Text',
@@ -28,6 +34,7 @@ export class QuestionFormComponent extends EditableFormComponent<Question> imple
   @Input()
   public question: Question;
   public types = [];
+  public status = [];
   public good: boolean;
 
   constructor(protected   store: QuestionStore,
@@ -36,6 +43,7 @@ export class QuestionFormComponent extends EditableFormComponent<Question> imple
               private formBuilder: QuestionFormBuilder) {
     super(store, notifierService, router);
     this.types = this.getQuestionTypesEnum();
+    this.status = this.getStatusEnum();
   }
 
   public addResponse() {
@@ -45,6 +53,8 @@ export class QuestionFormComponent extends EditableFormComponent<Question> imple
 
   protected createForm(): FormGroup {
     return this.formBuilder.createForm(this.question);
+
+
   }
 
 
@@ -57,6 +67,16 @@ export class QuestionFormComponent extends EditableFormComponent<Question> imple
       types.push(type);
     });
     return types;
+  }
+
+  public getStatusEnum(): any[] {
+    const keys = Object.keys(Status);
+    const status = [];
+    keys.map(Key => {
+      const type = {'id': Key, 'name': Status[Key]};
+      status.push(type);
+    });
+    return status;
   }
 
   protected onDeleteForm(t: Question) {

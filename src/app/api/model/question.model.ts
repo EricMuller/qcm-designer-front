@@ -10,5 +10,6 @@ export class Question extends Entity {
   responses: Response[];
   tags?: Tag[];
   type: string;
+  status: string;
   version?: number;
 }

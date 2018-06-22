@@ -12,6 +12,7 @@ import {QuestionnaireModule} from './features/questionnaire/questionnaire.module
 import {HomeComponent} from './home/home.component';
 import {MaterialModule} from './shared/material/material.module';
 import {QuestionStore} from './features/stores/question-store.service';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 
 @NgModule({
@@ -24,8 +25,8 @@ import {QuestionStore} from './features/stores/question-store.service';
     ApiModule.forRoot(),
     AppRoutingModule,
     CoreModule,
+    FlexLayoutModule,
     MaterialModule,
-    // CovalentModule,
     LayoutsModule,
     QuestionnaireModule
   ], providers: [QuestionStore],

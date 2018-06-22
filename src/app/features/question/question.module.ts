@@ -22,6 +22,7 @@ import {UiModule} from '../shared/ui/ui.module';
 import {LayoutsModule} from '../shared/layouts/layouts.module';
 import {QuestionnaireSelectComponent} from './questionnaire-select/questionnaire-select.component';
 import {TagQuestionnaireFilterStore} from '../stores/tag-questionnaire-filter-store-s.service';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import {TagQuestionnaireFilterStore} from '../stores/tag-questionnaire-filter-st
     NavigationModule,
     SharedModule,
     UiModule,
+    FlexLayoutModule
   ],
   declarations: [QuestionListComponent, QuestionDialogComponent, QuestionDetailComponent, QuestionAppComponent, QuestionSearchComponent,
     QuestionToolBarComponent, QuestionNavListComponent, QuestionFilterComponent, QuestionFormComponent, QuestionnaireSelectComponent],

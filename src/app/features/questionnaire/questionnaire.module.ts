@@ -31,6 +31,7 @@ import {NavigationModule} from '../navigation/navigation.module';
 import {SharedModule} from '../shared/shared.module';
 import {FabModule} from '../navigation/fab/fab.module';
 import {UiModule} from '../shared/ui/ui.module';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import {UiModule} from '../shared/ui/ui.module';
     NavigationModule,
     SharedModule,
     UiModule,
+    FlexLayoutModule
   ],
   declarations: [
     QuestionnaireToolBarComponent,

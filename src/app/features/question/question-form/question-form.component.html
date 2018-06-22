@@ -1,116 +1,138 @@
-<mat-card style="box-shadow: unset">
-  <mat-card-header>
-    <mat-toolbar>
-      <a mat-icon-button [routerLink]="['/questions/list']">
-        <mat-icon>arrow_back</mat-icon>
-      </a>
-      <div *ngIf="!question.id">Create a New Question</div>
-      <div *ngIf="question.id">Edit Question n°{{question.id}}</div>
+<mat-toolbar>
+  <a mat-icon-button [routerLink]="['/questions/list']">
+    <mat-icon>arrow_back</mat-icon>
+  </a>
+  <div *ngIf="!question.id">Create a New Question</div>
+  <div *ngIf="question.id">Edit Question n°{{question.id}}</div>
 
-      <div flex></div>
-      <ng-content select="[menu-buttons]"></ng-content>
-      <button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="questionMenu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <!-- line menu -->
-      <mat-menu #questionMenu="matMenu" yPosition="below">
-        <ng-content select="[menu-items]"></ng-content>
-        <button mat-menu-item>
-          <mat-icon>delete</mat-icon>
-          Delete
-        </button>
-      </mat-menu>
-    </mat-toolbar>
-  </mat-card-header>
-  <mat-card-content>
-    <!---->
+  <div flex></div>
+  <ng-content select="[menu-buttons]"></ng-content>
+  <button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="questionMenu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <!-- line menu -->
+  <mat-menu #questionMenu="matMenu" yPosition="below">
+    <ng-content select="[menu-items]"></ng-content>
+    <button mat-menu-item>
+      <mat-icon>delete</mat-icon>
+      Delete
+    </button>
+  </mat-menu>
+</mat-toolbar>
 
-    <form class="example-form" [formGroup]="form">
+<!---->
 
-      <mat-form-field>
-        <mat-select formControlName="type" placeholder="Type"  >
-          <mat-option *ngFor="let type of types" [value]="type.id">{{ type.name }}</mat-option>
-          <mat-error *ngIf="form.get('type').hasError('required')">field required</mat-error>
-        </mat-select>
-      </mat-form-field>
+<form class="form" [formGroup]="form" fxLayout="column">
 
+  <mat-form-field fxFlex>
+    <mat-select formControlName="type" placeholder="Type">
+      <mat-option *ngFor="let type of types" [value]="type.id">{{ type.name }}</mat-option>
+      <mat-error *ngIf="form.get('type').hasError('required')">field required</mat-error>
+    </mat-select>
+  </mat-form-field>
 
-      <div  [ngSwitch]="form?.controls.type?.value" style="display:flex;flex-direction: column">
+  <mat-form-field fxFlex>
+    <mat-select formControlName="status" placeholder="Status">
+      <mat-option *ngFor="let s of status" [value]="s.id">{{ s.name }}</mat-option>
+      <mat-error *ngIf="form.get('status').hasError('required')">field required</mat-error>
+    </mat-select>
+  </mat-form-field>
 
-        <!--todo: component-->
-        <mat-form-field>
-          <mat-chip-list #chipList >
-            <mat-chip *ngFor="let tag of tags.controls; index as i" [selectable]="selectable"
-                      [removable]="edition" (remove)="removeChip(i)">
-              {{tag.get('libelle')?.value}}
-              <mat-icon matChipRemove *ngIf="edition">cancel</mat-icon>
-            </mat-chip>
-            <input placeholder="New Tag..."
-                   [matChipInputFor]="chipList"
-                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                   [matChipInputAddOnBlur]="addOnBlur"
-                   (matChipInputTokenEnd)="addChip($event)" [disabled]="!edition"/>
-          </mat-chip-list>
-        </mat-form-field>
+  <div [ngSwitch]="form?.controls.type?.value" style="display:flex;flex-direction: column">
 
-        <mat-form-field class="full-width">
-          <textarea formControlName="question" #input matInput placeholder="Question" maxlength="1024"></textarea>
-          <!--<mat-icon prefix>comment_question</mat-icon>-->
-          <!--<mat-hint>Hint</mat-hint>-->
-          <mat-hint align="end">{{input.value?.length || 0}}/1024</mat-hint>
-          <mat-error *ngIf="form.get('question').hasError('required')">field required</mat-error>
-        </mat-form-field>
+    <!--todo: component-->
+    <mat-form-field fxFlex>
+      <mat-chip-list #chipList>
+        <mat-chip *ngFor="let tag of tags.controls; index as i" [selectable]="selectable"
+                  [removable]="edition" (remove)="removeChip(i)">
+          {{tag.get('libelle')?.value}}
+          <mat-icon matChipRemove *ngIf="edition">cancel</mat-icon>
+        </mat-chip>
+        <input placeholder="New Tag..."
+               [matChipInputFor]="chipList"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               [matChipInputAddOnBlur]="addOnBlur"
+               (matChipInputTokenEnd)="addChip($event)" [disabled]="!edition"/>
+      </mat-chip-list>
+    </mat-form-field>
 
-        <ng-template [ngSwitchCase]="'FREE_TEXT'">
-          <div formArrayName="responses">
-            <div *ngFor="let responseCtrl of  responses.controls; let i=index" [formGroupName]="i" class="responses-container" >
-              <mat-form-field class="full-width">
-                <textarea formControlName="response" matInput placeholder="response" class="text-input" rows="15"></textarea>
-                <mat-error *ngIf="responseCtrl.get('response').hasError('required')">field required</mat-error>
-              </mat-form-field>
-              <div style="align-self: flex-start"><button mat-icon-button color="accent" (click)="removeResponse(i);" *ngIf="edition"><mat-icon>delete</mat-icon></button></div>
-            </div>
+    <mat-form-field fxFlex>
+      <textarea formControlName="question" #input matInput placeholder="Question" maxlength="1024"></textarea>
+      <!--<mat-icon prefix>comment_question</mat-icon>-->
+      <!--<mat-hint>Hint</mat-hint>-->
+      <mat-hint align="end">{{input.value?.length || 0}}/1024</mat-hint>
+      <mat-error *ngIf="form.get('question').hasError('required')">field required</mat-error>
+    </mat-form-field>
+
+    <ng-template [ngSwitchCase]="'FREE_TEXT'">
+      <div formArrayName="responses" fxFlex>
+        <div *ngFor="let responseCtrl of  responses.controls; let i=index" [formGroupName]="i"
+             class="responses-container">
+          <mat-form-field fxFlex>
+            <textarea formControlName="response" matInput placeholder="response" class="text-input"
+                      rows="15"></textarea>
+            <mat-error *ngIf="responseCtrl.get('response').hasError('required')">field required</mat-error>
+          </mat-form-field>
+          <div style="align-self: flex-start">
+            <button mat-icon-button color="accent" (click)="removeResponse(i);" *ngIf="edition">
+              <mat-icon>delete</mat-icon>
+            </button>
           </div>
-        </ng-template>
-
-        <ng-template [ngSwitchCase]="'MULTIPLE_ANSWER'">
-          <div formArrayName="responses">
-            <div *ngFor="let responseCtrl of responses.controls; index as i " [formGroupName]="i" class="responses-container" >
-              <mat-checkbox formControlName="good" [checked]="responseCtrl.good" style="flex-grow: 1;align-self: center"></mat-checkbox>
-              <mat-form-field style="flex: 10 0 50px">
-                <textarea formControlName="response" matInput placeholder="response" class="text-input" ></textarea>
-                <mat-error *ngIf="responseCtrl.get('response').hasError('required')">field required</mat-error>
-              </mat-form-field>
-              <div style="align-self: flex-start"><button mat-icon-button color="accent" (click)="removeResponse(i);" *ngIf="edition"><mat-icon>delete</mat-icon></button></div>
-            </div>
-          </div>
-        </ng-template>
-
-        <ng-template [ngSwitchCase]="'MULTIPLE_CHOICE'">
-          <div>
-            <mat-radio-group formControlName="options" id="group" class="radio-group full-width"
-                             formArrayName="responses" (change)="onSelectResponse($event)">
-              <div *ngFor="let responseCtrl of responses.controls; index as i " [formGroupName]="i" class="responses-container" >
-                <!--<pre> {{r.value |json }}</pre>-->
-                <mat-radio-button class="radio-button full-width" [value]="i" [checked]="responseCtrl.good" [disabled]="!edition">
-                  <textarea formControlName="response" matInput placeholder="response" class="text-input "></textarea>
-                  <mat-error *ngIf="responseCtrl.get('response').hasError('required')">field required</mat-error>
-                </mat-radio-button>
-                <button mat-icon-button color="accent" (click)="removeResponse(i);" *ngIf="edition"><mat-icon>delete</mat-icon></button>
-              </div>
-            </mat-radio-group>
-          </div>
-        </ng-template>
-
-        <ng-template [ngSwitchCase]="'TRUE_FALSE'">false</ng-template>
-
-        <ng-template *ngSwitchDefault>Please select a type above.</ng-template>
-
+        </div>
       </div>
-    </form>
-    <!--<pre>{{form.value | json}}</pre>-->
-  </mat-card-content>
-</mat-card>
+    </ng-template>
+
+    <ng-template [ngSwitchCase]="'MULTIPLE_ANSWER'">
+      <div formArrayName="responses">
+        <div *ngFor="let responseCtrl of responses.controls; index as i " [formGroupName]="i"
+             class="responses-container">
+          <mat-checkbox formControlName="good" [checked]="responseCtrl.good"  style="flex-grow: 1;align-self: center"></mat-checkbox>
+
+
+          <div *ngIf="!edition" flex>{{responseCtrl.get('response').value}}</div>
+
+          <mat-form-field *ngIf="edition" style="flex: 10 0 50px">
+            <textarea formControlName="response" matInput placeholder="response" class="text-input"></textarea>
+            <mat-error *ngIf="responseCtrl.get('response').hasError('required')">field required</mat-error>
+          </mat-form-field>
+          <div style="align-self: flex-start">
+            <button mat-icon-button color="accent" (click)="removeResponse(i);" *ngIf="edition">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template [ngSwitchCase]="'MULTIPLE_CHOICE'">
+      <div>
+        <mat-radio-group formControlName="options" id="group" class="radio-group full-width"
+                         formArrayName="responses" (change)="onSelectResponse($event)">
+          <div *ngFor="let responseCtrl of responses.controls; index as i " [formGroupName]="i"
+               class="responses-container">
+            <!--<pre> {{r.value |json }}</pre>-->
+            <mat-radio-button class="radio-button full-width" [value]="i" [checked]="responseCtrl.good"
+                              [disabled]="!edition">
+              <textarea formControlName="response" matInput placeholder="response" class="text-input "></textarea>
+              <mat-error *ngIf="responseCtrl.get('response').hasError('required')">field required</mat-error>
+            </mat-radio-button>
+            <button mat-icon-button color="accent" (click)="removeResponse(i);" *ngIf="edition">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </mat-radio-group>
+      </div>
+    </ng-template>
+
+    <ng-template [ngSwitchCase]="'TRUE_FALSE'">false</ng-template>
+
+    <ng-template *ngSwitchDefault>Please select a type above.</ng-template>
+
+  </div>
+</form>
+
+<!--<pre>{{form.value | json}}</pre>-->
+
 
 <app-fab (toggleEvent)="toggleEdition($event)">
   <app-fab-toggle [iconOff]="'mode_edit'" [iconOn]="'replay'"></app-fab-toggle>

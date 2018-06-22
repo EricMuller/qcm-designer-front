@@ -4,6 +4,6 @@ export const environment = {
   KEYCLOAK_REALM: 'qcm',
   KEYCLOAK_CLIENTID: 'qcm-designer-web',
   // BACKEND_URL: 'http://localhost:8000/api'
-  PAGE_SIZE: 8,
+  PAGE_SIZE: 100,
   API_URL: 'http://localhost:8080/api/v1/'
 };
