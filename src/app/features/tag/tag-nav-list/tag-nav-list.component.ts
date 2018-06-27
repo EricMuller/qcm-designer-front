@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Tag} from '../../../api/model/tag.model';
+import {Tag} from '../../../api/qcm/model/tag.model';
 import {TagStore} from '../../stores/tag-store.service';
 
 

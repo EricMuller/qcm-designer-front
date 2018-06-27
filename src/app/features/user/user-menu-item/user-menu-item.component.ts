@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from '../../../api/model/user.model';
+import {User} from '../../../api/qcm/model/user.model';
 import {UserGuardService} from '../../../core/user-guard.service';
 
 @Component({

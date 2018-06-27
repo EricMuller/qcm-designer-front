@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserGuardService} from '../../../core/user-guard.service';
-import {User} from '../../../api/model/user.model';
+import {User} from '../../../api/qcm/model/user.model';
 import {Observable} from 'rxjs/Observable';
 
 @Component({

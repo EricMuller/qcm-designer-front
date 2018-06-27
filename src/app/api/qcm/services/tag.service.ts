@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {API} from './api';
 import {Page} from './page';
 import {Observable} from 'rxjs/Observable';
-import {Filter} from '../../features/shared/ui/filter/filter';
+import {Filter} from '../../../features/shared/ui/filter/filter';
 import {Tag} from '../model/tag.model';
 
 @Injectable()

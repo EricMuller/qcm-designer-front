@@ -7,10 +7,10 @@ import {HttpClientModule} from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterTestingModule} from '@angular/router/testing';
-import {User} from './api/model/user.model';
+import {User} from './api/qcm/model/user.model';
 import {Observable} from 'rxjs/Rx';
-import {UserService} from './api/services/user.service';
-import {CategoryService} from './api/services/category.service';
+import {UserService} from './api/qcm/services/user.service';
+import {CategoryService} from './api/qcm/services/category.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {

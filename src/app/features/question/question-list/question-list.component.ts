@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {TdPulseAnimation} from '@covalent/core';
 import {QuestionStore} from '../../stores/question-store.service';
 import {Router} from '@angular/router';
-import {Questionnaire} from '../../../api/model/questionnaire.model';
+import {Questionnaire} from '../../../api/qcm/model/questionnaire.model';
 import {QuestionnaireStore} from '../../stores/questionnaire-store.service';
 import {Question} from '../../../api';
 import {NotifierService} from '../../../core/simple-notifier.service';

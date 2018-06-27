@@ -15,11 +15,11 @@ import {TagService} from './services/tag.service';
   declarations: [],
   providers: [QuestionService, QuestionnaireService, UserService, CategoryService, TagService]
 })
-export class ApiModule {
+export class ApiQcmModule {
 
   static forRoot(): ModuleWithProviders {
     return {
-      ngModule: ApiModule,
+      ngModule: ApiQcmModule,
       providers: [QuestionService, QuestionService, UserService, TagService]
     };
   }

@@ -3,7 +3,7 @@ import {Question} from '../../../../api';
 import {QuestionStore} from '../../../stores/question-store.service';
 import {Router} from '@angular/router';
 import {TagStore} from '../../../stores/tag-store.service';
-import {Tag} from '../../../../api/model/tag.model';
+import {Tag} from '../../../../api/qcm/model/tag.model';
 
 @Component({
   selector: 'app-question-nav-list',

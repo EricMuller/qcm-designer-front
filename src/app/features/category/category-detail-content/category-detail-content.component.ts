@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Category} from '../../../api/model/category.model';
+import {Category} from '../../../api/qcm/model/category.model';
 
 @Component({
   selector: 'app-category-detail-content',

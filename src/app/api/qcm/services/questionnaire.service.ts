@@ -4,8 +4,8 @@ import {Questionnaire} from '../model/questionnaire.model';
 import {Observable} from 'rxjs/Observable';
 import {Page} from './page';
 import {API} from './api';
-import {Filter} from '../../features/shared/ui/filter/filter';
-import {Question} from '..';
+import {Filter} from '../../../features/shared/ui/filter/filter';
+import {Question} from '../../index';
 
 @Injectable()
 export class QuestionnaireService {

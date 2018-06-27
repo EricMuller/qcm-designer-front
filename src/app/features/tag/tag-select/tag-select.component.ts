@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Letter} from '../../questionnaire/questionnaire-filter/Letter';
-import {Tag} from '../../../api/model/tag.model';
+import {Tag} from '../../../api/qcm/model/tag.model';
 import {MatChip} from '@angular/material';
 import {TagStore} from '../../stores/tag-store.service';
 import {Filter} from '../../shared/ui/filter/filter';

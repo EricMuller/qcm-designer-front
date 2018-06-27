@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot} from '@angular/router';
-import {UserService} from '../api/services/user.service';
+import {UserService} from '../api/qcm/services/user.service';
 import {Observable} from 'rxjs/Rx';
-import {User} from '../api/model/user.model';
+import {User} from '../api/qcm/model/user.model';
 import {NotifierService} from './simple-notifier.service';
 import {Subject} from 'rxjs/Subject';
 import {KeycloakService} from './security/keycloak.service';

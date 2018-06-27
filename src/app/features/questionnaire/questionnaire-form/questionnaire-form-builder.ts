@@ -1,7 +1,7 @@
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Injectable} from '@angular/core';
-import {Questionnaire} from '../../../api/model/questionnaire.model';
-import {Tag} from '../../../api/model/tag.model';
+import {Questionnaire} from '../../../api/qcm/model/questionnaire.model';
+import {Tag} from '../../../api/qcm/model/tag.model';
 
 @Injectable()
 export class QuestionnaireFormBuilder {

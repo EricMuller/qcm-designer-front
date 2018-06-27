@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserGuardService} from '../../../../core/user-guard.service';
 import {Router} from '@angular/router';
 import {TdPulseAnimation} from '@covalent/core';
-import {User} from '../../../../api/model/user.model';
+import {User} from '../../../../api/qcm/model/user.model';
 
 @Component({
   selector: 'app-login-menu',

@@ -2,12 +2,12 @@ import {Injectable} from '@angular/core';
 import {SelectStore} from './selection-store';
 import {DataSelectionStore, FilterStore} from './store-api';
 import {Observable} from 'rxjs/Observable';
-import {Page} from '../../api/services/page';
-import {TagService} from '../../api/services/tag.service';
+import {Page} from '../../api/qcm/services/page';
+import {TagService} from '../../api/qcm/services/tag.service';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
 import {Subject} from 'rxjs/Subject';
 import {Filter} from '../shared/ui/filter/filter';
-import {Tag} from '../../api/model/tag.model';
+import {Tag} from '../../api/qcm/model/tag.model';
 
 
 

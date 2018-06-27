@@ -4,7 +4,7 @@ import {HomeComponent} from './home.component';
 import {MatCardModule} from '@angular/material';
 import {HttpClientModule} from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
-import {UserService} from '../api/services/user.service';
+import {UserService} from '../api/qcm/services/user.service';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {User} from '../../api/model/user.model';
+import {User} from '../../api/qcm/model/user.model';
 import {environment} from '../../../environments/environment';
 
 declare var Keycloak: any;

@@ -1,6 +1,6 @@
 import {Observable} from 'rxjs/Observable';
-import {Page} from '../../api/services/page';
-import {Entity} from '../../api/model/entity';
+import {Page} from '../../api/qcm/services/page';
+import {Entity} from '../../api/qcm/model/entity';
 import {Filter} from '../shared/ui/filter/filter';
 
 export interface DataSelectionStore<T> extends DataStore<T>, SelectionStore<T> {

@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {Questionnaire} from '../../../api/model/questionnaire.model';
-import {QuestionnaireService} from '../../../api/services/questionnaire.service';
+import {Questionnaire} from '../../../api/qcm/model/questionnaire.model';
+import {QuestionnaireService} from '../../../api/qcm/services/questionnaire.service';
 
 @Component({
   selector: 'app-questionnaire-dialog',

@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {QuestionnaireService} from '../../api/services/questionnaire.service';
+import {QuestionnaireService} from '../../api/qcm/services/questionnaire.service';
 import {Observable} from 'rxjs/Observable';
-import {Page} from '../../api/services/page';
+import {Page} from '../../api/qcm/services/page';
 import {Subject} from 'rxjs/Subject';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
 
-import {Questionnaire} from '../../api/model/questionnaire.model';
+import {Questionnaire} from '../../api/qcm/model/questionnaire.model';
 import {SelectStore} from './selection-store';
 import {DataSelectionStore} from './store-api';
 import {Filter} from '../shared/ui/filter/filter';

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Rx';
-import {User} from 'app/api/model/user.model';
+import {User} from 'app/api/qcm/model/user.model';
 import {CookieService} from 'ngx-cookie-service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {API} from './api';

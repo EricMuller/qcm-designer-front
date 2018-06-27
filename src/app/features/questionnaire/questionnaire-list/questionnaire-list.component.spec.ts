@@ -13,10 +13,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Observable} from 'rxjs/Rx';
 import {NotifierService} from '../../../core/simple-notifier.service';
 
-import {QuestionService} from '../../../api/services/questionnaire.service';
-import {Questionnaire} from '../../../api/model/questionnaire.model';
-import {CategoryService} from '../../../api/services/category.service';
-import {Category} from '../../../api/model/category.model';
+import {QuestionService} from '../../../api/qcm/services/questionnaire.service';
+import {Questionnaire} from '../../../api/qcm/model/questionnaire.model';
+import {CategoryService} from '../../../api/qcm/services/category.service';
+import {Category} from '../../../api/qcm/model/category.model';
 
 
 

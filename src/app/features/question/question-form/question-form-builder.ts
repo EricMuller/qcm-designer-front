@@ -1,8 +1,8 @@
-import {Response} from '../../../api/model/response.model';
+import {Response} from '../../../api/qcm/model/response.model';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Injectable} from '@angular/core';
 import {Question} from '../../../api';
-import {Tag} from '../../../api/model/tag.model';
+import {Tag} from '../../../api/qcm/model/tag.model';
 
 
 

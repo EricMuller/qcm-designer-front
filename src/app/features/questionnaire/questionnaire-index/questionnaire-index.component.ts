@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from '../../../api/services/user.service';
+import {UserService} from '../../../api/qcm/services/user.service';
 import {Subscription} from 'rxjs/Subscription';
 
 @Component({

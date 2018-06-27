@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 /* shared*/
 /* boostrap*/
-import {ApiModule} from './api/api.module';
+import {ApiQcmModule} from './api/qcm/api-qcm.module';
 import {AppRoutingModule} from './app-routing.module';
 import {AngularModule} from './shared/angular/angular.module';
 import {CoreModule} from './core/core.module';
@@ -22,7 +22,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
   ],
   imports: [
     AngularModule,
-    ApiModule.forRoot(),
+    ApiQcmModule.forRoot(),
     AppRoutingModule,
     CoreModule,
     FlexLayoutModule,

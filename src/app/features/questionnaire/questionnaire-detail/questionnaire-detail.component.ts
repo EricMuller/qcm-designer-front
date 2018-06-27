@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Questionnaire} from '../../../api/model/questionnaire.model';
+import {Questionnaire} from '../../../api/qcm/model/questionnaire.model';
 
 
 @Component({

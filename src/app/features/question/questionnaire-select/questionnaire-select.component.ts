@@ -3,7 +3,7 @@ import {Letter} from '../../questionnaire/questionnaire-filter/Letter';
 import {MatChip} from '@angular/material';
 import {Filter} from '../../shared/ui/filter/filter';
 import {QuestionnaireStore} from '../../stores/questionnaire-store.service';
-import {Questionnaire} from '../../../api/model/questionnaire.model';
+import {Questionnaire} from '../../../api/qcm/model/questionnaire.model';
 
 @Component({
   selector: 'app-questionnaire-select',

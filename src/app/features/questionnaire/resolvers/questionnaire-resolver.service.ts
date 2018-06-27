@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve} from '@angular/router';
-import {Questionnaire} from '../../../api/model/questionnaire.model';
+import {Questionnaire} from '../../../api/qcm/model/questionnaire.model';
 import {Observable} from 'rxjs/Observable';
-import {QuestionnaireService} from '../../../api/services/questionnaire.service';
+import {QuestionnaireService} from '../../../api/qcm/services/questionnaire.service';
 
 
 @Injectable()

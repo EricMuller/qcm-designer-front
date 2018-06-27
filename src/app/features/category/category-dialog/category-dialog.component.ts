@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {CategoryService} from '../../../api/services/category.service';
-import {Category} from '../../../api/model/category.model';
+import {CategoryService} from '../../../api/qcm/services/category.service';
+import {Category} from '../../../api/qcm/model/category.model';
 
 @Component({
   selector: 'app-category-dialog',

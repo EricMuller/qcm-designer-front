@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {TdPulseAnimation} from '@covalent/core';
 import {QuestionnaireStore} from '../../stores/questionnaire-store.service';
-import {Questionnaire} from '../../../api/model/questionnaire.model';
+import {Questionnaire} from '../../../api/qcm/model/questionnaire.model';
 import {TagStore} from '../../stores/tag-store.service';
 
 @Component({
