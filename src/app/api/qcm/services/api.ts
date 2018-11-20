@@ -1,7 +1,8 @@
 export const API = {
-  CATEGORY: '/api/v1/categories/',
-  TAGS: '/api/v1/tags/',
-  USERS: '/api/v1/users/',
-  QUESTIONNAIRES: '/api/v1/questionnaires/',
-  QUESTIONS: '/api/v1/questions/',
+  CATEGORY: '/qcm/api/v1/categories/',
+  TAGS: '/qcm/api/v1/tags/',
+  USERS: '/users/api/v1/users/',
+  QUESTIONNAIRES: '/qcm/api/v1/questionnaires/',
+  QUESTIONS: '/qcm/api/v1/questions/',
+  UPLOAD: '/qcm/api/v1/upload/',
 }

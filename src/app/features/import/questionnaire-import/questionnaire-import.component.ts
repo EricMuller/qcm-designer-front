@@ -3,6 +3,7 @@ import {TdFileInputComponent, TdLoadingFactory, TdLoadingService} from '@covalen
 import {Observable} from 'rxjs/Observable';
 import {NotifierService} from '../../../core/simple-notifier.service';
 import {HttpClient} from '@angular/common/http';
+import {API} from '../../../api';
 
 @Component({
   selector: 'app-questionnaire-import',
@@ -13,7 +14,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class QuestionnaireImportComponent implements OnInit {
 
-  private apiEndPoint = '/api/v1/upload/questionnaire';
+  private apiEndPoint = API.UPLOAD+ '/questionnaire';
 
   public sample =
     {
