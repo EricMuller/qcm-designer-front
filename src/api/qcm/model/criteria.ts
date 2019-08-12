@@ -1,7 +1,6 @@
 
 
-
-export class Filter {
+export class Criteria {
 
   value?: string;
   name: string;

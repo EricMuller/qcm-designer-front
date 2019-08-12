@@ -3,17 +3,18 @@ import {CommonModule} from '@angular/common';
 import {QuestionnaireLeftSideNavComponent} from './questionnaire-left-side-nav/questionnaire-left-side-nav.component';
 import {AngularModule} from '../../shared/angular/angular.module';
 import {LayoutsModule} from '../shared/layouts/layouts.module';
-import {CovalentModule} from '../../shared/covalent/covalent.module';
+
 import {StoresModule} from '../stores/stores.module';
 import {UserModule} from '../user/user.module';
 import {QuestionLeftSideNavComponent} from './question-left-side-nav/question-left-side-nav.component';
 import {FabModule} from './fab/fab.module';
+import {MaterialModule} from '@app/shared/material/material.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    CovalentModule,
     AngularModule,
+    MaterialModule,
     LayoutsModule,
     StoresModule,
     UserModule,

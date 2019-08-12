@@ -2,11 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {TdPulseAnimation} from '@covalent/core';
 import {QuestionStore} from '../../stores/question-store.service';
 import {Router} from '@angular/router';
-import {Questionnaire} from '../../../api/qcm/model/questionnaire.model';
+
 import {QuestionnaireStore} from '../../stores/questionnaire-store.service';
-import {Question} from '../../../api';
 import {NotifierService} from '../../../core/simple-notifier.service';
 import {TagQuestionnaireFilterStore} from '../../stores/tag-questionnaire-filter-store-s.service';
+import {Questionnaire} from '@api/qcm/model/questionnaire.model';
+import {Question} from '@api/qcm/model/question.model';
 
 @Component({
   selector: 'app-question-list',

@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
-import {Question} from '../../../api';
+
 import {ActivatedRoute} from '@angular/router';
+import {Question} from '@api/qcm/model/question.model';
 
 
 @Component({

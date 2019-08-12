@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
-import {Page} from '../../api/qcm/services/page';
+
 import {DataSelectionStore} from './store-api';
 import {Subject} from 'rxjs/Subject';
 import {SelectStore} from './selection-store';
-import {Filter} from '../shared/ui/filter/filter';
+import {Criteria} from '@api/qcm/model/criteria';
 import {Observable} from 'rxjs/Observable';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
-import {Question} from '../../api/index';
-import {QuestionService} from '../../api/qcm/services/question.service';
-import {Questionnaire} from '../../api/qcm/model/questionnaire.model';
+import {Question} from '@api/qcm/model/question.model';
+import {Page} from '@api/qcm/services/page';
+import {QuestionService} from '@api/qcm/services/question.service';
 
 
 @Injectable()
@@ -48,7 +48,7 @@ export class QuestionStore extends SelectStore<Question> implements DataSelectio
     }
   }
 
-  getPageByFilters(filters: Filter[], page?: number, size?: number, sort?: string): Observable<Page> {
+  getPageByCriteria(filters: Criteria[], page?: number, size?: number, sort?: string): Observable<Page> {
     const obs = this.backend.getQuestionsByFilters(filters, page, size, sort);
     obs.subscribe(
       p => {

@@ -21,8 +21,7 @@
       "prefix": "app",
       "styles": [
         "styles.css",
-        "theme.scss",
-        "../node_modules/@covalent/core/common/platform.scss"
+        "theme.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

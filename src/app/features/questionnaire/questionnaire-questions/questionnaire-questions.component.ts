@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Question} from '../../../api';
 import {QuestionStore} from '../../stores/question-store.service';
+import {Question} from '@api/qcm/model/question.model';
 
 @Component({
   selector: 'app-questionnaire-questions',

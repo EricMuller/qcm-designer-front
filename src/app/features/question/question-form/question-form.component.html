@@ -38,7 +38,7 @@
     </mat-select>
   </mat-form-field>
 
-  <div [ngSwitch]="form?.controls.type?.value" style="display:flex;flex-direction: column">
+  <div [ngSwitch]="form?.controls['type']?.value" style="display:flex;flex-direction: column">
 
     <!--todo: component-->
     <mat-form-field fxFlex>
@@ -86,7 +86,7 @@
       <div formArrayName="responses">
         <div *ngFor="let responseCtrl of responses.controls; index as i " [formGroupName]="i"
              class="responses-container">
-          <mat-checkbox formControlName="good" [checked]="responseCtrl.good"  style="flex-grow: 1;align-self: center"></mat-checkbox>
+          <mat-checkbox formControlName="good" [checked]="responseCtrl['good']"  style="flex-grow: 1;align-self: center"></mat-checkbox>
 
 
           <div *ngIf="!edition" flex>{{responseCtrl.get('response').value}}</div>
@@ -111,7 +111,7 @@
           <div *ngFor="let responseCtrl of responses.controls; index as i " [formGroupName]="i"
                class="responses-container">
             <!--<pre> {{r.value |json }}</pre>-->
-            <mat-radio-button class="radio-button full-width" [value]="i" [checked]="responseCtrl.good"
+            <mat-radio-button class="radio-button full-width" [value]="i" [checked]="responseCtrl['good']"
                               [disabled]="!edition">
               <textarea formControlName="response" matInput placeholder="response" class="text-input "></textarea>
               <mat-error *ngIf="responseCtrl.get('response').hasError('required')">field required</mat-error>

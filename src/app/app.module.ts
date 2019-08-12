@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 /* shared*/
 /* boostrap*/
-import {ApiQcmModule} from './api/qcm/api-qcm.module';
+
 import {AppRoutingModule} from './app-routing.module';
 import {AngularModule} from './shared/angular/angular.module';
 import {CoreModule} from './core/core.module';
@@ -13,6 +13,7 @@ import {HomeComponent} from './home/home.component';
 import {MaterialModule} from './shared/material/material.module';
 import {QuestionStore} from './features/stores/question-store.service';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {ApiQcmModule} from '@api/qcm/api-qcm.module';
 
 
 @NgModule({

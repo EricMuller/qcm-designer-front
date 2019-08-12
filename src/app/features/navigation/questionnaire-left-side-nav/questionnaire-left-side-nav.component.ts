@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Questionnaire} from '../../../api/qcm/model/questionnaire.model';
+
 import {QuestionnaireStore} from '../../stores/questionnaire-store.service';
+import {Questionnaire} from '@api/qcm/model/questionnaire.model';
 
 
 

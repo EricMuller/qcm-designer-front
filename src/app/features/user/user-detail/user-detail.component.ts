@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserGuardService} from '../../../core/user-guard.service';
-import {User} from '../../../api/qcm/model/user.model';
 import {Observable} from 'rxjs/Observable';
+import {User} from '@api/qcm/model/user.model';
 
 @Component({
   selector: 'app-user-detail',

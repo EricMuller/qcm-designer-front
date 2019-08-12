@@ -3,8 +3,9 @@ import {HttpClient} from '@angular/common/http';
 import {API} from './api';
 import {Page} from './page';
 import {Observable} from 'rxjs/Observable';
-import {Filter} from '../../../features/shared/ui/filter/filter';
+
 import {Tag} from '../model/tag.model';
+import {Criteria} from '@api/qcm/model/criteria';
 
 @Injectable()
 export class TagService {
@@ -22,10 +23,10 @@ export class TagService {
     return this.http.get<Page>(requestUrl);
   }
 
-  public getTagsByFilters(filters: Filter[], page?: number, size?: number, sort?: string): Observable<Page> {
-    const filterString = btoa(JSON.stringify(filters));
+  public getTagsByCriteria(criteria: Criteria[], page?: number, size?: number, sort?: string): Observable<Page> {
+    const search = btoa(JSON.stringify(criteria));
 
-    const requestUrl = `${API.TAGS}?size=${size}&page=${page}&sort=${sort}&filters=${filterString}`;
+    const requestUrl = `${API.TAGS}?size=${size}&page=${page}&sort=${sort}&search=${search}`;
     return this.http.get<Page>(requestUrl).publishLast().refCount();
   }
 

@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
-import {User} from '../../api/qcm/model/user.model';
+
 import {environment} from '../../../environments/environment';
+import {User} from '@api/qcm/model/user.model';
 
 declare var Keycloak: any;
 
@@ -35,9 +36,9 @@ export class KeycloakService {
 
           KeycloakService.auth.authz.loadUserProfile().success(data => {
             this.user = new User();
-            this.user.username = data.username;
-            this.user.firstName = data.firstName;
-            this.user.lastName = data.lastName;
+            this.user.user_name = data.username;
+            this.user.first_name = data.first_name;
+            this.user.last_name = data.last_name;
             this.user.email = data.email;
 
             resolve();

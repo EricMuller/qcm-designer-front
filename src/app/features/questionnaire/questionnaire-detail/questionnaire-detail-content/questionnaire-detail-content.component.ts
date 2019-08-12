@@ -1,10 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Category} from '../../../../api/qcm/model/category.model';
 import {FormGroup} from '@angular/forms';
-import {CategoryService} from '../../../../api/qcm/services/category.service';
-import {Questionnaire} from '../../../../api/qcm/model/questionnaire.model';
-import {TagService} from '../../../../api/qcm/services/tag.service';
-import {Tag} from '../../../../api/qcm/model/tag.model';
+import {Questionnaire} from '@api/qcm/model/questionnaire.model';
+import {Category} from '@api/qcm/model/category.model';
+import {Tag} from '@api/qcm/model/tag.model';
+import {CategoryService} from '@api/qcm/services/category.service';
+import {TagService} from '@api/qcm/services/tag.service';
+
 
 
 @Component({

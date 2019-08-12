@@ -1,21 +1,21 @@
 {
   "/qcm/api": {
-    "target": "https://qcm-rest-api.herokuapp.com:443/",
+    "target": "https://qcm.webmarks.net:443/",
     "secure": true,
     "changeOrigin": true
   },
   "/users/api": {
-    "target": "https://qcm-rest-api.herokuapp.com:443/",
+    "target": "https://qcm.webmarks.net:443/",
     "secure": true,
     "changeOrigin": true
   },
   "/login": {
-    "target": "https://qcm-rest-api.herokuapp.com:443",
+    "target": "https://qcm.webmarks.net:443",
     "secure": true,
     "changeOrigin": true
   },
   "/logout": {
-    "target": "https://qcm-rest-api.herokuapp.com:443",
+    "target": "https://qcm.webmarks.net:443",
     "secure": true,
     "changeOrigin": true
   }

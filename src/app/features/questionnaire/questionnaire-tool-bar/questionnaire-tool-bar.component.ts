@@ -1,5 +1,5 @@
-import {Questionnaire} from '../../../api/qcm/model/questionnaire.model';
 import {Component, Input, OnInit} from '@angular/core';
+import {Questionnaire} from '@api/qcm/model/questionnaire.model';
 
 @Component({
   selector: 'app-questionnaire-tool-bar',

@@ -1,16 +1,16 @@
 import {Injectable} from '@angular/core';
-import {QuestionnaireService} from '../../api/qcm/services/questionnaire.service';
+
 import {Observable} from 'rxjs/Observable';
-import {Page} from '../../api/qcm/services/page';
+
 import {Subject} from 'rxjs/Subject';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
-
-import {Questionnaire} from '../../api/qcm/model/questionnaire.model';
 import {SelectStore} from './selection-store';
 import {DataSelectionStore} from './store-api';
-import {Filter} from '../shared/ui/filter/filter';
-import {Question} from '../../api';
-
+import {Questionnaire} from '@api/qcm/model/questionnaire.model';
+import {Page} from '@api/qcm/services/page';
+import {QuestionnaireService} from '@api/qcm/services/questionnaire.service';
+import {Criteria} from '@api/qcm/model/criteria';
+import {Question} from '@api/qcm/model/question.model';
 
 @Injectable()
 export class QuestionnaireStore extends SelectStore<Questionnaire> implements DataSelectionStore<Questionnaire> {
@@ -50,7 +50,7 @@ export class QuestionnaireStore extends SelectStore<Questionnaire> implements Da
     }
   }
 
-  getPageByFilters(filters: Filter[], page?: number, size?: number, sort?: string): Observable<Page> {
+  getPageByCriteria(filters: Criteria[], page?: number, size?: number, sort?: string): Observable<Page> {
     const obs = this.backend.getQuestionnairesByFilters(filters, page, size, sort);
     obs.subscribe(
       p => {
@@ -72,9 +72,9 @@ export class QuestionnaireStore extends SelectStore<Questionnaire> implements Da
 
   }
 
-  filters(): Filter[] {
+  filters(): Criteria[] {
     return this.selected.map((q) => {
-      return new Filter(q.id.toString(), 'questionnaire_id');
+      return new Criteria(q.id.toString(), 'questionnaire_id');
     });
   }
 

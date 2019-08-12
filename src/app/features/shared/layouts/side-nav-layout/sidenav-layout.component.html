@@ -35,7 +35,7 @@
   <!--[mode]="(media.registerQuery('gt-sm') | async) ? 'side' : 'over'"-->
   <!--mode="side"-->
   <mat-sidenav #leftsidenav
-               [mode]="(media.registerQuery('gt-sm') | async) ? 'side' : 'over'"
+               [mode]="( isGtSm() | async) ? 'side' : 'over'"
                [opened]="false"
                style="width:240px;/*border-right: 1px solid rgba(0, 0, 0, 0.12) */">
     <ng-content select="[left-sidenav-content]"></ng-content>

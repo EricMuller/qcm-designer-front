@@ -19,7 +19,7 @@ import {UserModule} from '../user/user.module';
 import {CategoryModule} from '../category/category.module';
 import {SearchStore} from './services/questionnaire-search-store.service';
 import {TagModule} from '../tag/tag.module';
-import {CovalentModule} from '../../shared/covalent/covalent.module';
+
 import {QuestionnaireNavListComponent} from './questionnaire-list/questionnaire-nav-list/questionnaire-nav-list.component';
 import {QuestionnaireStore} from '../stores/questionnaire-store.service';
 import {QuestionnaireFilterComponent} from './questionnaire-filter/questionnaire-filter.component';
@@ -32,13 +32,14 @@ import {SharedModule} from '../shared/shared.module';
 import {FabModule} from '../navigation/fab/fab.module';
 import {UiModule} from '../shared/ui/ui.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {MaterialModule} from '@app/shared/material/material.module';
 
 
 @NgModule({
   imports: [
     CommonModule,
-    CovalentModule,
     AngularModule,
+    MaterialModule,
     LayoutsModule,
     QuestionModule,
     UserModule,

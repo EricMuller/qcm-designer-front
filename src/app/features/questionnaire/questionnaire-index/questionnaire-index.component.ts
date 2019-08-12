@@ -1,13 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {UserService} from '../../../api/qcm/services/user.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
+import {UserService} from '@api/qcm/services/user.service';
+
 
 @Component({
   selector: 'app-questionnaire-index',
   templateUrl: './questionnaire-index.component.html',
   styleUrls: ['./questionnaire-index.component.scss']
 })
-export class QuestionnaireIndexComponent implements OnInit {
+export class QuestionnaireIndexComponent implements OnInit, OnDestroy {
 
   public title;
 
@@ -15,14 +16,14 @@ export class QuestionnaireIndexComponent implements OnInit {
 
   constructor(private userService: UserService) {
 
-    const MESSAGE = 'Welcome to QCM online ';
+    const MESSAGE = 'Welcome to Open QCM ';
 
     this.title = MESSAGE;
 
     this.subscription = this.userService.getCurrentUser()
       .subscribe((user) => {
           if (user) {
-            this.title = 'welcome ' + user.username + ' to QCM online ';
+            this.title = 'welcome ' + user.user_name + ' to Open QCM ';
           }
         },
         (error) => {

@@ -4,12 +4,10 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  application: 'Qcm localhost',
   production: false,
   KEYCLOAK_URL: 'https://keycloak.webmarks.net/auth',
   KEYCLOAK_REALM: 'qcm',
   KEYCLOAK_CLIENTID: 'qcm-designer-web',
   PAGE_SIZE: 100,
   QCM_REST_API_HOST: 'http://localhost:8080'
-  // QCM_REST_API_HOST: 'https://qcm-rest-api.herokuapp.com/'
 };

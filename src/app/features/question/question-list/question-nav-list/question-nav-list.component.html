@@ -12,7 +12,8 @@
                       [disabled]="disabled"></mat-checkbox>
       </button>
 
-      <h4 matLine class="cursor-pointer" [routerLink]="['/questions/'+ question.id ]" > {{question.id}} - {{question.question}} </h4>
+      <h4 matLine class="cursor-pointer" [routerLink]="['/questions/'+ question.id ]"> {{question.id}}
+        - {{question.question}} </h4>
       <!--  menu -->
       <span *ngFor="let tag of question.tags" class="label label-info" (click)="swapTag(tag)">{{tag.libelle}}</span>
 

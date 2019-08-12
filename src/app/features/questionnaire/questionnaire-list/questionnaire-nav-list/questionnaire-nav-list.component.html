@@ -15,7 +15,7 @@
 
         </div>
 
-      <h4 matLine class="cursor-pointer"  style="max-width:600px;overflow: hidden" [routerLink]="['/questionnaires/'+ questionnaire.id ]" >Questionnaire {{questionnaire.id}} - {{questionnaire.title}} </h4>
+      <h4 matLine class="cursor-pointer"  style="max-width:600px;overflow: hidden" [routerLink]="['/questionnaires/'+ questionnaire.id ]" >{{questionnaire.title}} </h4>
 
       <!--  menu -->
       <span *ngIf="questionnaire.category" class="label label-danger"> {{questionnaire.category?.libelle}}</span>

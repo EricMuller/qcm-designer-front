@@ -1,11 +1,13 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot} from '@angular/router';
-import {UserService} from '../api/qcm/services/user.service';
+
 import {Observable} from 'rxjs/Rx';
-import {User} from '../api/qcm/model/user.model';
+
 import {NotifierService} from './simple-notifier.service';
 import {Subject} from 'rxjs/Subject';
 import {KeycloakService} from './security/keycloak.service';
+import {UserService} from '@api/qcm/services/user.service';
+import {User} from '@api/qcm/model/user.model';
 
 @Injectable()
 export class UserGuardService implements CanActivate, CanActivateChild {

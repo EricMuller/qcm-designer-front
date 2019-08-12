@@ -1,9 +1,10 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Letter} from '../../questionnaire/questionnaire-filter/Letter';
 import {MatChip} from '@angular/material';
-import {Filter} from '../../shared/ui/filter/filter';
+import {Criteria} from '@api/qcm/model/criteria';
 import {QuestionnaireStore} from '../../stores/questionnaire-store.service';
-import {Questionnaire} from '../../../api/qcm/model/questionnaire.model';
+import {Questionnaire} from '@api/qcm/model/questionnaire.model';
+
 
 @Component({
   selector: 'app-questionnaire-select',
@@ -71,9 +72,9 @@ export class QuestionnaireSelectComponent implements OnInit {
   }
 
   public selectLetter(letter) {
-    const filters: Filter[] = [new Filter(letter, 'firstLetter')];
+    const criteria: Criteria[] = [new Criteria(letter, 'firstLetter')];
 
-    this.questionnaireStore.getPageByFilters(filters, 0, 100, 'title');
+    this.questionnaireStore.getPageByCriteria(criteria, 0, 100, 'title');
   }
 
 }

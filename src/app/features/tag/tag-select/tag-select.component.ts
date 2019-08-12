@@ -1,9 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Letter} from '../../questionnaire/questionnaire-filter/Letter';
-import {Tag} from '../../../api/qcm/model/tag.model';
 import {MatChip} from '@angular/material';
 import {TagStore} from '../../stores/tag-store.service';
-import {Filter} from '../../shared/ui/filter/filter';
+import {Tag} from '@api/qcm/model/tag.model';
+import {Criteria} from '@api/qcm/model/criteria';
 
 @Component({
   selector: 'app-tag-filter',
@@ -71,9 +71,9 @@ export class TagSelectComponent implements OnInit {
   }
 
   public selectLetter(letter) {
-    const filters: Filter[] = [new Filter(letter, 'firstLetter')];
+    const criteria: Criteria[] = [new Criteria(letter, 'firstLetter')];
 
-    this.tagStore.getPageByFilters(filters, 0, 100, 'libelle');
+    this.tagStore.getPageByCriteria(criteria, 0, 100, 'libelle');
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserGuardService} from '../../../core/user-guard.service';
-import {User} from '../../../api/qcm/model/user.model';
+import {User} from '@api/qcm/model/user.model';
+
 
 @Component({
   selector: 'app-question-left-side-nav',

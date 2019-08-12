@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Tag} from '../../../api/qcm/model/tag.model';
 import {TagStore} from '../../stores/tag-store.service';
+import {Tag} from '@api/qcm/model/tag.model';
 
 
 @Component({

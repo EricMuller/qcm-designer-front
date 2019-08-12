@@ -5,7 +5,7 @@ import {Observable} from 'rxjs/Rx';
 import {Page} from './page';
 import {API} from './api';
 import {Questionnaire} from '../model/questionnaire.model';
-import {Filter} from '../../../features/shared/ui/filter/filter';
+import {Criteria} from '@api/qcm/model/criteria';
 
 
 @Injectable()
@@ -22,9 +22,10 @@ export class QuestionService {
     return this.http.get<Question[]>(API.QUESTIONS + '?questionnaireId=' + questionnaireId.toString()).share();
   }
 
-  public getQuestionsByFilters(filters: Filter[], page?: number, size?: number, sort?: string): Observable<Page> {
-    const filterString = btoa(JSON.stringify(filters));
-    const requestUrl = `${API.QUESTIONS}?size=${size}&page=${page}&sort=${sort}&filters=${filterString}`;
+  public getQuestionsByFilters(criteria: Criteria[], page?: number, size?: number, sort?: string): Observable<Page> {
+    console.log(criteria);
+    const search = btoa(JSON.stringify(criteria));
+    const requestUrl = `${API.QUESTIONS}?size=${size}&page=${page}&sort=${sort}&search=${search}`;
     return this.http.get<Page>(requestUrl).publishLast().refCount();
   }
 

@@ -1,5 +1,9 @@
 {
-  "/api": {
+  "/qcm/api": {
+    "target": "http://localhost:8080/",
+    "secure": false
+  },
+  "/users/api": {
     "target": "http://localhost:8080/",
     "secure": false
   },

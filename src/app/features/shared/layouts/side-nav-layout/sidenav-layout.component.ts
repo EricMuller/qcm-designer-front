@@ -4,12 +4,13 @@ import {TdMediaService} from '@covalent/core';
 import {Subscription} from 'rxjs/Subscription';
 import {UserGuardService} from '../../../../core/user-guard.service';
 import {Router} from '@angular/router';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-sidenav-layout',
   templateUrl: './sidenav-layout.component.html',
-  styleUrls: ['./sidenav-layout.component.scss'],
-  providers: [TdMediaService]
+  styleUrls: ['./sidenav-layout.component.scss']
+
 })
 export class SideNavLayoutComponent implements OnInit, OnDestroy {
 
@@ -36,7 +37,7 @@ export class SideNavLayoutComponent implements OnInit, OnDestroy {
   public style = 'width:300px;border-right: 1px solid rgba(0, 0, 0, 0.12)';
 
 
-  constructor(public media: TdMediaService, private _ngZone: NgZone) {
+  constructor(private _ngZone: NgZone) {
   }
 
   public login(event): void {
@@ -48,22 +49,25 @@ export class SideNavLayoutComponent implements OnInit, OnDestroy {
   }
 
   checkScreen(): void {
-    this._ngZone.run(() => {
-      this.isSmallScreen = this.media.query('sm'); // or '(min-width: 960px) and (max-width: 1279px)'
-    });
+    // this._ngZone.run(() => {
+    //   this.isSmallScreen = this.media.query('sm'); // or '(min-width: 960px) and (max-width: 1279px)'
+    // });
   }
 
   watchScreen(): void {
-    this._querySubscription = this.media.registerQuery('sm').subscribe((matches: boolean) => {
-      this._ngZone.run(() => {
-        this.isSmallScreen = matches;
-      });
-    });
+    // this._querySubscription = this.media.registerQuery('sm').subscribe((matches: boolean) => {
+    //   this._ngZone.run(() => {
+    //     this.isSmallScreen = matches;
+    //   });
+    // });
+  }
+  isGtSm(): Observable<boolean> {
+    // media.registerQuery('gt-sm')
+    return Observable.of(true);
   }
 
   ngOnDestroy(): void {
-    this._querySubscription.unsubscribe();
+    // this._querySubscription.unsubscribe();
   }
-
 
 }

@@ -12,12 +12,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {Observable} from 'rxjs/Rx';
 import {NotifierService} from '../../../core/simple-notifier.service';
-
-import {QuestionService} from '../../../api/qcm/services/questionnaire.service';
-import {Questionnaire} from '../../../api/qcm/model/questionnaire.model';
-import {CategoryService} from '../../../api/qcm/services/category.service';
-import {Category} from '../../../api/qcm/model/category.model';
-
+import {CategoryService} from 'api/qcm/services/category.service';
+import {QuestionService} from '../../../../api/qcm/services/question.service';
+import {Questionnaire} from '../../../../api/qcm/model/questionnaire.model';
+import {Category} from '../../../../api/qcm/model/category.model';
 
 
 describe('QuestionnaireListComponent', () => {

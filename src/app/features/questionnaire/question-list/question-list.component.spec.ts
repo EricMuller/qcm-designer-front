@@ -6,7 +6,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {NotifierService} from '../../../core/simple-notifier.service';
 import {RouterTestingModule} from '@angular/router/testing';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {QuestionService} from '../../../api/qcm/services/question.service';
+import {QuestionService} from 'api/qcm/services/question.service';
+
 
 describe('QuestionListComponent', () => {
   let component: QuestionnaireQuestionListComponent;

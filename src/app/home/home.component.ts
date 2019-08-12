@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {UserService} from 'app/api/qcm/services/user.service'
 import {Subscription} from 'rxjs/Subscription';
+import {UserService} from '@api/qcm/services/user.service';
+
 
 @Component({
   selector: 'app-home',
@@ -16,14 +17,14 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(private userService: UserService) {
 
-    const MESSAGE = 'Welcome to QCM online ';
+    const MESSAGE = 'Welcome to Open QCM  ';
 
     this.title = MESSAGE;
 
     this.subscription = this.userService.getCurrentUser()
       .subscribe((user) => {
           if (user) {
-            this.title = 'Welcome ' + user.username + ' to QCM online ';
+            this.title = 'Welcome ' + user.user_name + ' to Open QCM ';
           }
         },
         (error) => {

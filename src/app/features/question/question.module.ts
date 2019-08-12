@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {QuestionListComponent} from './question-list/question-list.component';
-import {CovalentModule} from '../../shared/covalent/covalent.module';
+
 import {AngularModule} from '../../shared/angular/angular.module';
 import {QuestionDialogComponent} from './question-dialog/question-dialog.component';
 import {QuestionDetailComponent} from './question-detail/question-detail.component';
@@ -29,7 +29,6 @@ import {FlexLayoutModule} from '@angular/flex-layout';
   imports: [
     AngularModule,
     CommonModule,
-    CovalentModule,
     MaterialModule,
     UserModule,
     TagModule,
@@ -44,7 +43,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     QuestionToolBarComponent, QuestionNavListComponent, QuestionFilterComponent, QuestionFormComponent, QuestionnaireSelectComponent],
   entryComponents: [QuestionDialogComponent, QuestionLeftSideNavComponent],
   exports: [QuestionListComponent],
-  providers :[TagQuestionnaireFilterStore]
+  providers: [TagQuestionnaireFilterStore]
 })
 export class QuestionModule {
 }

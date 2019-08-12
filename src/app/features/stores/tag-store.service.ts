@@ -2,12 +2,14 @@ import {Injectable} from '@angular/core';
 import {SelectStore} from './selection-store';
 import {DataSelectionStore, FilterStore} from './store-api';
 import {Observable} from 'rxjs/Observable';
-import {Page} from '../../api/qcm/services/page';
-import {TagService} from '../../api/qcm/services/tag.service';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
 import {Subject} from 'rxjs/Subject';
-import {Filter} from '../shared/ui/filter/filter';
-import {Tag} from '../../api/qcm/model/tag.model';
+import {Tag} from '@api/qcm/model/tag.model';
+import {Page} from '@api/qcm/services/page';
+import {TagService} from '@api/qcm/services/tag.service';
+import {Criteria} from '@api/qcm/model/criteria';
+
+
 
 
 
@@ -43,8 +45,8 @@ export class TagStore extends SelectStore<Tag> implements DataSelectionStore<Tag
     }
   }
 
-  getPageByFilters(filters: Filter[], page?: number, size?: number, sort?: string): Observable<Page> {
-    const obs = this.backend.getTagsByFilters(filters, page, size, sort);
+  getPageByCriteria(criteria: Criteria[], page?: number, size?: number, sort?: string): Observable<Page> {
+    const obs = this.backend.getTagsByCriteria(criteria, page, size, sort);
     obs.subscribe(
       p => {
         this._page.next(p);
@@ -53,9 +55,9 @@ export class TagStore extends SelectStore<Tag> implements DataSelectionStore<Tag
   }
 
 
-  filters(): Filter[] {
+  filters(): Criteria[] {
     return this.selected.map((tag) => {
-      return new Filter(tag.id.toString(), 'tag_id');
+      return new Criteria(tag.id.toString(), 'tag_id');
     });
   }
 

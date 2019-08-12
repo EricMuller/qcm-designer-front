@@ -1,14 +1,16 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
-import {Response} from '../../../api/qcm/model/response.model';
-import {Question} from '../../../api';
+import {Response} from '@api/qcm/model/response.model';
+
 import {QuestionStore} from '../../stores/question-store.service';
 import {NotifierService} from '../../../core/simple-notifier.service';
 import {Router} from '@angular/router';
 import {EditableFormComponent} from '../../shared/forms/editable-form/editableFormComponent';
 import {QuestionFormBuilder} from './question-form-builder';
 import {MatChipInputEvent} from '@angular/material';
-import {Tag} from '../../../api/qcm/model/tag.model';
+import {Question} from '@api/qcm/model/question.model';
+import {Tag} from '@api/qcm/model/tag.model';
+
 
 enum Status {
   DRAFT = 'Draft',

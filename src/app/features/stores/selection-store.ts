@@ -1,8 +1,8 @@
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
-import {Entity} from '../../api/qcm/model/entity';
 import {SelectionStore} from './store-api';
+import {Entity} from '@api/qcm/model/entity';
 
 
 export class SelectStore<T extends Entity> implements SelectionStore<T> {

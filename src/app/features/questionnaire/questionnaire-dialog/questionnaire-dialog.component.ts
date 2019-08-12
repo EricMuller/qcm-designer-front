@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {Questionnaire} from '../../../api/qcm/model/questionnaire.model';
-import {QuestionnaireService} from '../../../api/qcm/services/questionnaire.service';
+import {QuestionnaireService} from '@api/qcm/services/questionnaire.service';
+
 
 @Component({
   selector: 'app-questionnaire-dialog',
@@ -10,7 +10,7 @@ import {QuestionnaireService} from '../../../api/qcm/services/questionnaire.serv
 })
 export class QuestionnaireDialogComponent implements OnInit {
 
-  public questionnaire: Questionnaire;
+  public questionnaire;
 
   constructor(public dialogRef: MatDialogRef<QuestionnaireDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any, private questionnaireService: QuestionnaireService) {

@@ -23,27 +23,27 @@
 <!--</mat-menu>-->
 
 <mat-menu #appMenuApp="matMenu">
-  <td-menu *ngIf="isAuthentified()">
-    <div td-menu-header class="mat-subheading-2 push-none">
-      <div>
-        <span><b>{{this.getUser().firstName}} {{this.getUser().lastName}}</b></span>
-        <span td-menu-header class="mat-subheading-1 push-none">{{this.getUser().email}}</span>
-      </div>
-    </div>
+<!--  <td-menu *ngIf="isAuthentified()">-->
+<!--    <div td-menu-header class="mat-subheading-2 push-none">-->
+<!--      <div>-->
+<!--        <span><b>{{this.getUser().first_name}} {{this.getUser().last_name}}</b></span>-->
+<!--        <span td-menu-header class="mat-subheading-1 push-none">{{this.getUser().email}}</span>-->
+<!--      </div>-->
+<!--    </div>-->
 
-    <mat-nav-list dense>
-      <button *ngIf="isAuthentified()" mat-menu-item class="profile-img" (click)="profile()">
-        <mat-icon style="font-size: 32px">account_circle</mat-icon>
-        Profile
-      </button>
-    </mat-nav-list>
+<!--    <mat-nav-list dense>-->
+<!--      <button *ngIf="isAuthentified()" mat-menu-item class="profile-img" (click)="profile()">-->
+<!--        <mat-icon style="font-size: 32px">account_circle</mat-icon>-->
+<!--        Profile-->
+<!--      </button>-->
+<!--    </mat-nav-list>-->
 
-    <a *ngIf="isAuthentified()" mat-menu-item (click)="logout()">
-      <mat-icon>exit_to_app</mat-icon>
-      logout
-    </a>
+<!--    <a *ngIf="isAuthentified()" mat-menu-item (click)="logout()">-->
+<!--      <mat-icon>exit_to_app</mat-icon>-->
+<!--      logout-->
+<!--    </a>-->
 
-  </td-menu>
+<!--  </td-menu>-->
   <!--<a *ngIf="!isAuthentified()" mat-menu-item href="/login/webmarks">-->
   <!--<mat-icon>content_copy</mat-icon>-->
   <!--log with webmarks.net-->

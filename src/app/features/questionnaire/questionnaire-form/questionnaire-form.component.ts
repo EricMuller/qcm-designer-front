@@ -1,19 +1,20 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {QuestionnaireStore} from '../../stores/questionnaire-store.service';
 import {FormArray, FormGroup} from '@angular/forms';
-import {Questionnaire} from '../../../api/qcm/model/questionnaire.model';
 import {MatChipInputEvent, MatDialog, MatDialogConfig} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Category} from '../../../api/qcm/model/category.model';
 import {NotifierService} from '../../../core/simple-notifier.service';
-import {TagService} from '../../../api/qcm/services/tag.service';
-import {CategoryService} from '../../../api/qcm/services/category.service';
 import {TdDialogService} from '@covalent/core';
 import {EditableFormComponent} from '../../shared/forms/editable-form/editableFormComponent';
 import {QuestionnaireFormBuilder} from './questionnaire-form-builder';
 import {CategoryDialogComponent} from '../../category/category-dialog/category-dialog.component';
 import {QuestionStore} from '../../stores/question-store.service';
-import {Tag} from '../../../api/qcm/model/tag.model';
+import {Questionnaire} from '@api/qcm/model/questionnaire.model';
+import {Category} from '@api/qcm/model/category.model';
+import {CategoryService} from '@api/qcm/services/category.service';
+import {TagService} from '@api/qcm/services/tag.service';
+import {Tag} from '@api/qcm/model/tag.model';
+
 
 
 @Component({

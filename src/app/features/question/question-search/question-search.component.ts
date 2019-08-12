@@ -2,11 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {NotifierService} from '../../../core/simple-notifier.service';
 import {ActivatedRoute} from '@angular/router';
 import {MatDialog} from '@angular/material';
-import {Questionnaire} from '../../../api/qcm/model/questionnaire.model';
-import {Question} from '../../../api/qcm/model/question.model';
+
+
 import {Observable} from 'rxjs/Observable';
-import {QuestionService} from '../../../api/qcm/services/question.service';
+
 import {SearchStore} from '../../questionnaire/services/questionnaire-search-store.service';
+import {Questionnaire} from '@api/qcm/model/questionnaire.model';
+import {Question} from '@api/qcm/model/question.model';
+import {QuestionService} from '@api/qcm/services/question.service';
 
 @Component({
   selector: 'app-question-search',

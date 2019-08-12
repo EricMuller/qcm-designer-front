@@ -14,10 +14,10 @@
   <mat-card-content>
     <div class="user-container">
       <div>Id :  {{this.getUser().id}}</div>
-      <div>Name :  {{this.getUser().firstName}}</div>
-      <div>Last name :{{this.getUser().lastName}}</div>
+      <div>Name : {{this.getUser().first_name}}</div>
+      <div>Last name :{{this.getUser().last_name}}</div>
       <div>Email :{{this.getUser().email}}</div>
-      <div>Email Verified :{{this.getUser().emailVerified}}</div>
+      <div>Email Verified :{{this.getUser().email_verified}}</div>
       <div>Token:<textarea style="width:900px;height: 200px; word-wrap:break-word;border: none">bearer&nbsp;{{this.token | async }}</textarea></div>
     </div>
   </mat-card-content>

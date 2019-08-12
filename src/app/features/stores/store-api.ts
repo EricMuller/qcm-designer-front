@@ -1,11 +1,12 @@
 import {Observable} from 'rxjs/Observable';
-import {Page} from '../../api/qcm/services/page';
-import {Entity} from '../../api/qcm/model/entity';
-import {Filter} from '../shared/ui/filter/filter';
+import {Criteria} from '@api/qcm/model/criteria';
+import {Page} from '@api/qcm/services/page';
+import {Entity} from '@api/qcm/model/entity';
+
 
 export interface DataSelectionStore<T> extends DataStore<T>, SelectionStore<T> {
 
-  getPageByFilters(filters: Filter[], page?: number, size?: number, sort?: string): Observable<Page>;
+  getPageByCriteria(filters: Criteria[], page?: number, size?: number, sort?: string): Observable<Page>;
 
 }
 
@@ -40,7 +41,7 @@ export interface SelectionStore<T extends Entity> {
 }
 
 export interface FilterStore  {
-  filters(): Filter[];
+  filters(): Criteria[];
   clearFilter();
 }
 

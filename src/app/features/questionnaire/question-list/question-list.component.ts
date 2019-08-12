@@ -1,14 +1,18 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Question} from 'app/api/qcm/model/question.model'
+
 import {NotifierService} from '../../../core/simple-notifier.service';
 import {Observable} from 'rxjs/Observable';
 import {ActivatedRoute} from '@angular/router';
 import {MatDialog, MatDialogConfig, MatPaginator, MatSidenav, MatSort} from '@angular/material';
 import {QuestionnaireDialogComponent} from '../questionnaire-dialog/questionnaire-dialog.component';
-import {Questionnaire} from '../../../api/qcm/model/questionnaire.model';
+
 import {QuestionDialogComponent} from '../../question/question-dialog/question-dialog.component';
-import {Page} from '../../../api/qcm/services/page';
-import {QuestionService} from '../../../api/qcm/services/question.service';
+import {Question} from '@api/qcm/model/question.model';
+import {Questionnaire} from '@api/qcm/model/questionnaire.model';
+import {Page} from '@api/qcm/services/page';
+import {QuestionService} from '@api/qcm/services/question.service';
+
+
 
 @Component({
   selector: 'app-question',

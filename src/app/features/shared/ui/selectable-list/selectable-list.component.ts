@@ -3,12 +3,12 @@ import {TdPulseAnimation} from '@covalent/core';
 import {MatPaginator} from '@angular/material';
 import {environment} from '../../../../../environments/environment';
 import {Observable} from 'rxjs/Observable';
-import {Page} from '../../../../api/qcm/services/page';
-import {Entity} from '../../../../api/qcm/model/entity';
 import {DataSelectionStore, FilterStore} from '../../../../features/stores/store-api';
 import {Subject} from 'rxjs/Subject';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Entity} from '@api/qcm/model/entity';
+import {Page} from '@api/qcm/services/page';
 
 enum ViewMode {
   List = 1,
@@ -27,7 +27,7 @@ export class SelectableListComponent<T extends Entity> implements OnInit {
 
   public elements: T[] = [];
   public selected: T[] = [];
-  // public filters: Filter[];
+  // public filters: Criteria[];
 
   public resultsLength = 0;
   public pageIndex = 0;
@@ -122,7 +122,7 @@ export class SelectableListComponent<T extends Entity> implements OnInit {
       filters = this.filterStore.filters();
     }
     this.loadingData = true;
-    return this.dataSelectionStore.getPageByFilters(filters, pageIndex, pageSize, sort).mergeMap((page) => {
+    return this.dataSelectionStore.getPageByCriteria(filters, pageIndex, pageSize, sort).mergeMap((page) => {
         this.getContentPage(page, cleanBefore);
         if (!this.elements.length) {
           this._modeSelection.next(false)

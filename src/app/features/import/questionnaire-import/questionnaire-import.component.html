@@ -10,17 +10,17 @@
 
       <p>{{fileSelectMsg}}</p>
       <p>{{fileUploadMsg}}</p>
-      <td-file-upload #singleFileUpload [(ngModel)]="files" (select)="selectEvent($event)"
-                      (upload)="uploadEvent($event)"
-                      (cancel)="cancelEvent()" required>
-        <mat-icon>file_upload</mat-icon>
-        <span>{{ singleFileUpload.value?.name }}</span>
-        <ng-template td-file-input-label>
-          <mat-icon>attach_file</mat-icon>
-          <span>Choose a file...</span>
-          <span [hidden]="!singleFileUpload?.required">*</span>
-        </ng-template>
-      </td-file-upload>
+<!--      <td-file-upload #singleFileUpload [(ngModel)]="files" (select)="selectEvent($event)"-->
+<!--                      (upload)="uploadEvent($event)"-->
+<!--                      (cancel)="cancelEvent()" required>-->
+<!--        <mat-icon>file_upload</mat-icon>-->
+<!--        <span>{{ singleFileUpload.value?.name }}</span>-->
+<!--        <ng-template td-file-input-label>-->
+<!--          <mat-icon>attach_file</mat-icon>-->
+<!--          <span>Choose a file...</span>-->
+<!--          <span [hidden]="!singleFileUpload?.required">*</span>-->
+<!--        </ng-template>-->
+<!--      </td-file-upload>-->
   </mat-card-content>
 </mat-card>
 <!--<ng-template tdLoading [tdLoadingUntil]="!loading" tdLoadingStrategy="overlay">-->

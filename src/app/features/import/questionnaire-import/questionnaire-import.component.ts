@@ -3,7 +3,8 @@ import {TdFileInputComponent, TdLoadingFactory, TdLoadingService} from '@covalen
 import {Observable} from 'rxjs/Observable';
 import {NotifierService} from '../../../core/simple-notifier.service';
 import {HttpClient} from '@angular/common/http';
-import {API} from '../../../api';
+import {API} from '@api/qcm/services/api';
+
 
 @Component({
   selector: 'app-questionnaire-import',
@@ -14,7 +15,7 @@ import {API} from '../../../api';
 })
 export class QuestionnaireImportComponent implements OnInit {
 
-  private apiEndPoint = API.UPLOAD+ '/questionnaire';
+  private apiEndPoint = API.UPLOAD + '/questionnaire';
 
   public sample =
     {
@@ -29,8 +30,8 @@ export class QuestionnaireImportComponent implements OnInit {
   public fileSelectMsg = 'No file selected yet.';
   public fileUploadMsg = 'No file uploaded yet.';
 
-  @ViewChild('singleFileUpload')
-  public singleFileUpload: TdFileInputComponent;
+  // @ViewChild('singleFileUpload')
+  // public singleFileUpload: TdFileInputComponent;
 
   public loading = false;
 
