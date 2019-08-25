@@ -26,7 +26,7 @@ deploy:
   provider: heroku
   skip_cleanup: true
   api_key:
-    secure: ${HEROKU-API-KEY}
+    secure: $HEROKU-API-KEY
   app: qcm-angular-frontend
   on:
     repo: EricMuller/qcm-angular-frontend
