@@ -2,14 +2,11 @@
   <!--(mouseover)='over(questionnaire)'-->
   <div *ngFor="let questionnaire of elements as q; index as i" style="min-height: 0;" >
     <mat-list-item class="list mat-elevation-z4 list-item"
-                   [class.active]="i == selectedRow"
-                   attr.entityId="questionnaireId_{{questionnaire.id}}">
+                                  attr.entityId="questionnaireId_{{questionnaire.id}}">
 
       <button mat-icon-button matListAvatar (click)="setClickedRow(questionnaire)">
         <mat-icon matListIcon *ngIf="!isSelected(questionnaire)">question_answer</mat-icon>
-        <mat-checkbox *ngIf="isSelected(questionnaire)" matListAvatar [checked]="isSelected(questionnaire)"
-                      [(indeterminate)]="indeterminate" [labelPosition]="labelPosition"
-                      [disabled]="disabled"></mat-checkbox>
+        <mat-checkbox *ngIf="isSelected(questionnaire)" matListAvatar [checked]="isSelected(questionnaire)"></mat-checkbox>
         </button>
         <div >
 

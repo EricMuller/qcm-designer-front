@@ -11,7 +11,7 @@ export class KeycloakService {
 
   static auth: any = {};
 
-  static user: User;
+  private  user: User;
 
   static init(): Promise<any> {
     const keycloakAuth: any = Keycloak({
@@ -51,11 +51,11 @@ export class KeycloakService {
           KeycloakService.auth.authz.loadUserProfile()
             .success(data => {
 
-              KeycloakService.user = new User();
-              KeycloakService.user.user_name = data.username;
-              KeycloakService.user.first_name = data.first_name;
-              KeycloakService.user.last_name = data.last_name;
-              KeycloakService.user.email = data.email;
+              this.user = new User();
+              this.user.user_name = data.username;
+              this.user.first_name = data.first_name;
+              this.user.last_name = data.last_name;
+              this.user.email = data.email;
             });
         }
       );
@@ -120,7 +120,7 @@ export class KeycloakService {
   }
 
   getUser(): User {
-    return KeycloakService.user;
+    return this.user;
   }
 
 }

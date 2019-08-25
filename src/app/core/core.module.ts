@@ -14,6 +14,10 @@ export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
+export function translateCacheServiceFactory(translateService: TranslateService, translateCacheSettings:TranslateCacheSettings) {
+  return new TranslateCacheService(translateService, translateCacheSettings)
+}
+
 @NgModule({
   imports: [HttpClientModule, MatSnackBarModule,
     TranslateModule.forRoot({
@@ -26,9 +30,7 @@ export function createTranslateLoader(http: HttpClient) {
     TranslateCacheModule.forRoot({
       cacheService: {
         provide: TranslateCacheService,
-        useFactory: (translateService, translateCacheSettings) => {
-          return new TranslateCacheService(translateService, translateCacheSettings)
-        },
+        useFactory: translateCacheServiceFactory,
         deps: [TranslateService, TranslateCacheSettings]
       }
     })

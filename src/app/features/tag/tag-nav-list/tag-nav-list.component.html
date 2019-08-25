@@ -1,16 +1,14 @@
 <mat-nav-list>
   <h3 mat-subheader>Tags</h3>
-  <!--(mouseover)='over(questionnaire)'-->
+  <!--(mouseover)='over(questionnaire)' [class.active]="i == selectedRow"-->
   <div *ngFor="let tag of elements as q; index as i">
     <mat-list-item class="list" style="overflow: hidden"
-                   [class.active]="i == selectedRow"
+
                    attr.entityId="tagId_{{tag.id}}">
 
       <button mat-icon-button matListAvatar (click)="setClickedRow(tag)">
         <mat-icon matListIcon *ngIf="!isSelected(tag)">question_answer</mat-icon>
-        <mat-checkbox *ngIf="isSelected(tag)" matListAvatar [checked]="isSelected(tag)"
-                      [(indeterminate)]="indeterminate" [labelPosition]="labelPosition"
-                      [disabled]="disabled"></mat-checkbox>
+        <mat-checkbox *ngIf="isSelected(tag)" matListAvatar [checked]="isSelected(tag)" ></mat-checkbox>
       </button>
 
       <h4 matLine class="cursor-pointer" (click)="setClickedRow(tag)">{{tag.libelle}} </h4>
