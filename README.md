@@ -32,6 +32,11 @@ Qcm Angular Frontend uses a number of open source projects to work properly:
 
 * [Travis] - Test and Deploy with Confidence [travis-ci](https://travis-ci.com/)
 * [Heroku] - Fully managed container-based cloud platform, with integrated data services. [heroku.com](https://www.heroku.com)
+* [Snyk] - Finding & fixing vulnerabilities in your dependencies. [snyk.io](https://snyk.io)
+
+### Deploy
+
+<a href="https://qcm-angular-frontend.herokuapp.com/swagger-ui.html#" target="_blank">![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)</a>
 
 
 ### Todos
