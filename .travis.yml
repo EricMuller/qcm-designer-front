@@ -15,3 +15,11 @@ before_script:
 
 script:
   - ng build --prod
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: "483d9f20-0dc6-4600-87f7-971de7b1498c"
+  app: qcm-angular-frontend
+  on:
+    repo: EricMuller/qcm-angular-frontend
