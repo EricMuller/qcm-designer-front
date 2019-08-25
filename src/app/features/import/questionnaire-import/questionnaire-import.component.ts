@@ -12,7 +12,7 @@ import {QcmApi} from '@app/shared/qcm-rest-api/qcm-api';
 })
 export class QuestionnaireImportComponent implements OnInit {
 
-  private apiEndPoint = QcmApi.UPLOAD + 'json';
+  public apiEndPoint = QcmApi.UPLOAD + 'json';
 
   public sample =
     {
