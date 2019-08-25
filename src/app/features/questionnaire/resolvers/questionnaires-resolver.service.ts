@@ -1,9 +1,11 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
+import {Page} from '@app/shared/qcm-rest-api/services/page';
+import {QuestionnaireService} from '@app/shared/qcm-rest-api/services/questionnaire.service';
+import {Observable} from 'rxjs';
 import {environment} from '../../../../environments/environment';
-import {QuestionnaireService} from '@api/qcm/services/questionnaire.service';
-import {Page} from '@api/qcm/services/page';
+
+
 
 @Injectable()
 export class QuestionnairesResolver {

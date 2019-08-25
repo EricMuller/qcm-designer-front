@@ -5,6 +5,8 @@
 
 export const environment = {
   production: false,
+  application: 'QCM ',
+  KEYCLOAK: true,
   KEYCLOAK_URL: 'https://keycloak.webmarks.net/auth',
   KEYCLOAK_REALM: 'qcm',
   KEYCLOAK_CLIENTID: 'qcm-designer-web',

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {UserGuardService} from '../../../core/user-guard.service';
-import {User} from '@api/qcm/model/user.model';
+import {KeycloakGuardService} from '@app/core/auth/keycloak-guard.service';
+import {User} from '@app/core/auth/user.model';
+
 
 @Component({
   selector: 'app-user-menu-item',
@@ -9,7 +10,7 @@ import {User} from '@api/qcm/model/user.model';
 })
 export class UserMenuItemComponent implements OnInit {
 
-  constructor(private userGuardService: UserGuardService) { }
+  constructor(private userGuardService: KeycloakGuardService) { }
 
   ngOnInit() {
   }

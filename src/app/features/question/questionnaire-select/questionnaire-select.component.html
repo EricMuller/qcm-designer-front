@@ -1,22 +1,24 @@
-<mat-card>
-  <mat-card-header>Questionnaire(s)</mat-card-header>
+
+<mat-card class="mat-elevation-z0">
   <mat-chip-list>
     <mat-chip *ngFor="let questionnaire of selected " (removed)="unSelectItem(questionnaire)" selected="true" color="primary">{{questionnaire.title}}
       <mat-icon matChipRemove>cancel</mat-icon>
     </mat-chip>
   </mat-chip-list>
 </mat-card>
-<mat-card>
+
+<mat-card class="mat-elevation-z0">
   <mat-chip-list [(ngModel)]="letter"  [selectable]="selectable">
-    Filter Questionnaire(s) by First Letter:
     <mat-chip (click)="selectLetter('')">All</mat-chip>
     <mat-chip *ngFor="let l of letters" (click)="selectLetter(l.name)" [value]="l.name" selected="letter === l.name">{{l.name}}</mat-chip>
   </mat-chip-list>
 </mat-card>
-<mat-card>
-  <mat-chip-list   [selectable]="selectable" >
-    <mat-chip *ngFor="let tag of  questionnaires" (click)="selectItem(tag)" [removable]="removable" [selectable] ="selectable" [value]="tag.id" >{{tag.title}}
 
+<mat-card class="mat-elevation-z0">
+  <mat-chip-list   [selectable]="selectable" >
+    <mat-chip *ngFor="let tag of  questionnaires" (click)="selectItem(tag)"
+              [removable]="removable" [selectable] ="selectable" [value]="tag.id" >
+      {{tag.title}}
     </mat-chip>
     <!--<mat-chip *ngIf="nextLink" class='tag-cloud' (click)="next()">...</mat-chip>-->
     <!--<div *ngFor="let tag of  tags" >disabled:{{disabled}}/{{tag.name}}:{{tag.color}}:{{tag.selected}} / </div>-->

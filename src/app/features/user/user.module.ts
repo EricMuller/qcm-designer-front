@@ -2,9 +2,9 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {UserDetailComponent} from './user-detail/user-detail.component';
 import {AngularModule} from '../../shared/angular/angular.module';
-
 import {UserMenuItemComponent} from './user-menu-item/user-menu-item.component';
 import {MaterialModule} from '@app/shared/material/material.module';
+import {UserRoutingModule} from '@app/features/user/user-routing.module';
 
 @NgModule({
   imports: [

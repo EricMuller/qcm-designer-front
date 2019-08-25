@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {
+  MatBadgeModule,
   MatButtonToggleModule,
   MatChipsModule,
   MatDialogModule,
@@ -33,6 +34,7 @@ import {MatTooltipModule} from '@angular/material';
     CommonModule
   ],
   exports: [
+    MatBadgeModule,
     MatButtonModule,
     MatButtonToggleModule,
     MatCardModule,
@@ -60,6 +62,7 @@ import {MatTooltipModule} from '@angular/material';
     MatExpansionModule,
     MatProgressBarModule,
     PortalModule
+
   ],
   declarations: []
 })

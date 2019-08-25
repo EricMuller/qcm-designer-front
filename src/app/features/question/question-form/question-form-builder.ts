@@ -1,10 +1,9 @@
 
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Injectable} from '@angular/core';
-import {Question} from '@api/qcm/model/question.model';
-import {Tag} from '@api/qcm/model/tag.model';
-import {Response} from '@api/qcm/model/response.model';
-
+import {Question} from '@app/shared/qcm-rest-api/model/question.model';
+import {Reponse} from '@app/shared/qcm-rest-api/model/response.model';
+import {Tag} from '@app/shared/qcm-rest-api/model/tag.model';
 
 
 
@@ -36,12 +35,12 @@ export class QuestionFormBuilder {
         responseFormArray.push(this.createResponseControl(response, disabled));
       }));
     } else {
-      responseFormArray.push(this.createResponseControl(new Response(), disabled));
+      responseFormArray.push(this.createResponseControl(new Reponse(), disabled));
     }
     return responseFormArray;
   }
 
-  public createResponseControl(response: Response, disabled: boolean) {
+  public createResponseControl(response: Reponse, disabled: boolean) {
     return this.fb.group({
       // response: 'test',
       id: new FormControl({value: response.id ? response.id : 0, disabled: disabled}),

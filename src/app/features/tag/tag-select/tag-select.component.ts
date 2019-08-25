@@ -1,12 +1,15 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Letter} from '../../questionnaire/questionnaire-filter/Letter';
+import {Criteria} from '@app/shared/qcm-rest-api/model/criteria';
+import {Tag} from '@app/shared/qcm-rest-api/model/tag.model';
+
 import {MatChip} from '@angular/material';
-import {TagStore} from '../../stores/tag-store.service';
-import {Tag} from '@api/qcm/model/tag.model';
-import {Criteria} from '@api/qcm/model/criteria';
+import {Letter} from '@app/features/tag/tag-select/Letter';
+import {TagStore} from '@app/shared/stores/tag-store.service';
+
+
 
 @Component({
-  selector: 'app-tag-filter',
+  selector: 'app-tag-select',
   templateUrl: './tag-select.component.html',
   styleUrls: ['./tag-select.component.scss']
 })

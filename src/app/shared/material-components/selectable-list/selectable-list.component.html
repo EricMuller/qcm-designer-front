@@ -1,0 +1,77 @@
+<div [hidden]="!totalElements">
+
+  <mat-toolbar>
+    <ng-content toolbar-view></ng-content>
+
+    <button mat-icon-button matBadge="{{selectionSize()}}" matBadgePosition="before" matBadgeColor="accent"
+            matTooltip="{{'qcm.selectable-list.menu.viewSelected' | translate }}"
+            *ngIf="modeSelection$ |async" (click)="swapSelectedMode()">
+      <mat-icon>visibility</mat-icon>
+    </button>
+    <mat-spinner [diameter]="16" [hidden]="!loadingData"></mat-spinner>
+
+
+    <button *ngIf="!isSelectedMode()" mat-icon-button (click)="selectAll()"
+            matTooltip="{{'qcm.selectable-list.menu.selectAll' | translate }}">
+      <mat-icon>select_all</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <ng-content *ngIf="!isSelectedMode()" select="[elements-view]"></ng-content>
+
+  <ng-content *ngIf="isSelectedMode()" select="[selected-view]"></ng-content>
+
+</div>
+
+
+<div *ngIf="!loadingData " class="empty">
+  <div *ngIf="(elements)?.length ==0 " class="empty">
+    <span style="display:flex;justify-content: center;flex-direction: column;align-items: center;height: 100%;">
+      <div><img src="./assets/images/norecord.png"/></div>
+      <p>{{'qcm.selectable-list.empty' | translate }}</p>
+      <div>
+      <!--<span><button mat-raised-button color="primary" (click)="onCreateElement($event)">{{emptyMessage}}</button></span>-->
+          <span [hidden]="filterSize() == 0 ">
+            <button mat-raised-button color="primary" (click)="clearCriterias()" >
+              {{'qcm.selectable-list.clear-filters' | translate }}</button>
+            </span>
+        </div>
+      <!--<button mat-raised-button color="primary" (click)="clearFilters($event)">Clear Filters(S)</button>-->
+    </span>
+  </div>
+</div>
+
+<div  [hidden]="!totalElements" fxlayout fxlayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
+<mat-paginator #paginator [hidden]="!totalElements"
+               [length]="totalElements" [pageSize]="pageSize" [showFirstLastButtons]="true"
+               (page)="onPaginateChange($event)"></mat-paginator>
+</div>
+
+<!--FAB -->
+<div *ngIf="!selectionSize()" fxlayout fxlayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
+  <button mat-mini-fab (click)="onCreateElement($event)" color="primary"
+          matTooltip="{{'qcm.selectable-list.menu.new' | translate }}">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+<!--FAB MULTI -->
+<div *ngIf="selectionSize()" fxlayout fxlayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
+
+  <app-fab-toggle #toggle [iconOff]="'mode_edit'" [iconOn]="'replay'"
+                  toolTipOff="{{'qcm.selectable-list.toggle.off' | translate }}"
+                  toolTipOn="{{'qcm.selectable-list.toggle.on' | translate }}"
+
+                  fxFlex="10%"></app-fab-toggle>
+
+  <button mat-mini-fab (click)="onCreateElement($event)" *ngIf="toggle.opened"
+          matTooltip="{{'qcm.selectable-list.menu.new' | translate }}" color="primary">
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <button mat-mini-fab (click)="deleteSelectedElements()" *ngIf="toggle.opened"
+          matTooltip="{{'qcm.selectable-list.menu.deleteAll' | translate }}" color="accent">
+    <mat-icon>delete</mat-icon>
+  </button>
+
+</div>

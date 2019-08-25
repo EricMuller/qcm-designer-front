@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {UserGuardService} from '../../../core/user-guard.service';
-import {Observable} from 'rxjs/Observable';
-import {User} from '@api/qcm/model/user.model';
+import {KeycloakGuardService} from '@app/core/auth/keycloak-guard.service';
+import {User} from '@app/core/auth/user.model';
+
+
+
+import {Observable} from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-user-detail',
@@ -12,7 +15,7 @@ export class UserDetailComponent implements OnInit {
 
   public token: Observable<string>;
 
-  constructor(private userGuardService: UserGuardService) {
+  constructor(private userGuardService: KeycloakGuardService) {
     this.token = this.userGuardService.getToken();
   }
 
@@ -22,6 +25,5 @@ export class UserDetailComponent implements OnInit {
   public getUser(): User {
     return this.userGuardService.getUser();
   }
-
 
 }

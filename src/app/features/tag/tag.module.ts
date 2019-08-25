@@ -1,20 +1,21 @@
-import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {TagNavListComponent} from './tag-nav-list/tag-nav-list.component';
-import {AngularModule} from '../../shared/angular/angular.module';
-import {MaterialModule} from '../../shared/material/material.module';
-import {StoresModule} from '../stores/stores.module';
-import {TagSelectComponent} from './tag-select/tag-select.component';
-import {TagStore} from '../stores/tag-store.service';
+import {NgModule} from '@angular/core';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {CoreModule} from '@app/core/core.module';
+import {AngularModule} from '@app/shared/angular/angular.module';
+import {MaterialModule} from '@app/shared/material/material.module';
+import {TagStore} from '@app/shared/stores/tag-store.service';
 
+import {TagNavListComponent} from './tag-nav-list/tag-nav-list.component';
+import {TagSelectComponent} from './tag-select/tag-select.component';
 
 
 @NgModule({
   imports: [
-    CommonModule, AngularModule, MaterialModule, StoresModule
+    CommonModule, AngularModule, MaterialModule, CoreModule.forRoot(), FlexLayoutModule
   ],
   declarations: [TagNavListComponent, TagSelectComponent],
-  providers: [TagStore], exports: [TagNavListComponent, TagSelectComponent]
+  exports: [TagNavListComponent, TagSelectComponent]
 })
 export class TagModule {
 

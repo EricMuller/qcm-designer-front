@@ -1,20 +1,20 @@
 
 
-<app-questionnaire-tool-bar [questionnaire]="questionnaire">
-  <a menu-buttons mat-icon-button (click)="openQuestionDialog()">
-    <mat-icon>fiber_new</mat-icon>
-  </a>
-  <button menu-items mat-menu-item (click)="editQuestionnaire(questionnaire)">
-    <mat-icon>edit</mat-icon>
-    Update
-  </button>
+<!--<app-questionnaire-tool-bar [questionnaire]="questionnaire">-->
+<!--  <a menu-buttons mat-icon-button (click)="openQuestionDialog()">-->
+<!--    <mat-icon>fiber_new</mat-icon>-->
+<!--  </a>-->
+<!--  <button menu-items mat-menu-item (click)="editQuestionnaire(questionnaire)">-->
+<!--    <mat-icon>edit</mat-icon>-->
+<!--    Update-->
+<!--  </button>-->
 
-</app-questionnaire-tool-bar>
+<!--</app-questionnaire-tool-bar>-->
 
 
 <mat-nav-list>
   <mat-list-item *ngFor="let question of questions  | async">
-    <div style="margin-right: 0px" attr.entityId="questionId_{{question.questionId}}">
+    <div style="margin-right: 0px" attr.entityId="questionId_{{question.id}}">
       <div>
         <a mat-icon-button style="max-width: 600px;overflow: hidden" matTooltip="Edit"
            (click)="openQuestionDialog(question)">
@@ -22,7 +22,7 @@
         </a>
       </div>
     </div>
-    <span>{{question.questionId}} - {{question.question}}</span>
+    <span>{{question.id}} - {{question.question}}</span>
   </mat-list-item>
 </mat-nav-list>
 

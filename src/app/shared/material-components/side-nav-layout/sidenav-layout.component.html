@@ -1,0 +1,63 @@
+<mat-sidenav-container class="sidenav-container">
+
+  <!-- LEFT SIDE NAV MENU /*[attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"*/-->
+  <mat-sidenav class="sidenav" #leftsidenav
+               [mode]="'push'">
+
+    <mat-toolbar color="primary">
+      <a routerLink="/">
+        <div style="padding-right: 5px"><img src="/favicon.ico"></div>
+      </a> {{appName}}.
+    </mat-toolbar>
+
+    <mat-nav-list>
+      <a mat-list-item *ngFor="let menu of navigationSideMenu" [routerLinkActive]="['active']"
+         routerLink="{{menu.link}}">{{menu.label | translate }}</a>
+    </mat-nav-list>
+
+    <!--    <ng-content select="[left-sidenav-content]"></ng-content>-->
+
+  </mat-sidenav>
+
+  <mat-sidenav-content class="sidenav-content">
+
+    <!-- TOP TOOL BAR MENU-->
+    <mat-toolbar class="toolbar" color="primary">
+
+      <div *ngIf="(isHandset$ | async)">
+        <button mat-icon-button class="td-menu-button" (click)="leftsidenav.toggle()" matTooltip="Main menu">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+
+      <a routerLink="/">
+        <div style="padding-right: 5px"><img src="/favicon.ico"></div>
+      </a> {{appName}}.
+
+      <div class="spacer"></div>
+      <div *ngIf="!(isHandset$ | async)">
+        <button mat-button class="nav-button" *ngFor="let menu of navigationSideMenu" [routerLinkActive]="['active']"
+                routerLink="{{menu.link}}">{{menu.label | translate }}
+        </button>
+      </div>
+
+      <button mat-icon-button>
+        <mat-icon>settings</mat-icon>
+      </button>
+
+      <app-login-menu></app-login-menu>
+      <span *ngIf="language$ | async as language">
+      <mat-select [ngModel]="language" (selectionChange)="onLanguageSelect($event)">
+        <mat-option *ngFor="let lang of translate.getLangs()" [value]="lang">{{lang }}</mat-option>
+      </mat-select>
+      </span>
+
+    </mat-toolbar>
+
+    <div class="page-content">
+      <ng-content></ng-content>
+    </div>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+

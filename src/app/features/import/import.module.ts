@@ -1,20 +1,22 @@
-import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
+import {MaterialFileUploadComponent} from '@app/features/import/material-file-upload/material-file-upload.component';
+import {QuestionnaireImportComponent} from '@app/features/import/questionnaire-import/questionnaire-import.component';
+import {AngularModule} from '@app/shared/angular/angular.module';
+import {MaterialComponentsModule} from '@app/shared/material-components/material-components.module';
+import {MaterialModule} from '@app/shared/material/material.module';
+import {TranslateModule} from '@ngx-translate/core';
 import {ImportAppComponent} from './import-app/import-app.component';
-import {NavigationModule} from '../navigation/navigation.module';
-import {MaterialModule} from '../../shared/material/material.module';
-import {AngularModule} from '../../shared/angular/angular.module';
-import {LayoutsModule} from '../shared/layouts/layouts.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    NavigationModule,
     AngularModule,
     MaterialModule,
-    LayoutsModule
+    MaterialComponentsModule,
+    TranslateModule,
   ],
-  declarations: [ImportAppComponent]
+  declarations: [ImportAppComponent, QuestionnaireImportComponent, MaterialFileUploadComponent]
 })
 export class ImportModule {
 }

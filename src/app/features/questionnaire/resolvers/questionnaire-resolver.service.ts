@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
-import {Questionnaire} from '@api/qcm/model/questionnaire.model';
-import {QuestionnaireService} from '@api/qcm/services/questionnaire.service';
+import {Questionnaire} from '@app/shared/qcm-rest-api/model/questionnaire.model';
+import {QuestionnaireService} from '@app/shared/qcm-rest-api/services/questionnaire.service';
+import {Observable, of} from 'rxjs';
 
 
 
@@ -16,7 +16,7 @@ export class QuestionnaireResolver implements Resolve<Questionnaire> {
     if (route.params.id > 0) {
       return this.questionnaireService.getQuestionnaireById(route.params.id);
     } else {
-      return Observable.of(new Questionnaire())
+      return of(new Questionnaire())
     }
   }
 }

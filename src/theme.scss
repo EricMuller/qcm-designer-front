@@ -1,252 +1,57 @@
-/*
- * Copyright (C) 2016-2017 by Teradata Corporation. All rights reserved.
- * TERADATA CORPORATION CONFIDENTIAL AND TRADE SECRET
- */
+//@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import 'themes/styles-variables';
 @import '~@angular/material/theming';
-@import '~@covalent/core/theming/all-theme';
-// Plus imports for other components in your app.
-
-// Include the base styles for Angular Material core. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
+// always include only once per project
 @include mat-core();
+// import our custom theme
+@import 'themes/light-blue-theme';
+@import 'themes/dark-blue-theme';
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue.
-//  #2a56c6
-$primary: mat-palette($mat-blue, 800, 100, 900);
-$accent: mat-palette($mat-pink, A400, 100, 900);
 
-// The warn palette is optional (defaults to red).
-$warn: mat-palette($mat-red, 600, 100, 900);
-
-// Create the theme object (a Sass map containing all of the palettes).
-$theme: mat-light-theme($primary, $accent, $warn);
-
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-//@include angular-material-theme($theme);
-
-@include covalent-theme($theme);
-
-// Active icon color in list nav
-mat-nav-list, mat-list {
-  [mat-list-item].active {
-    mat-icon[matListAvatar] {
-      background-color: mat-color($accent);
-      color: mat-color($accent, default-contrast);
-    }
-    mat-icon[matListIcon] {
-      color: mat-color($accent);
-    }
-  }
+@import 'app/shared/material-components/side-nav-layout/sidenav-laout.component.scss-theme';
+@mixin custom-components-theme($theme) {
+ @include sidenav-layout-component-theme($theme);
 }
 
-$custom-typography: mat-typography-config(
-  $font-family: 'Roboto, monospace',
-  $headline: mat-typography-level(32px, 48px, 700),
-  $body-1: mat-typography-level(14px, 24px, 500)
-);
-
-@include mat-core($custom-typography);
-
-/* ------------------------------------------------------------------------------- */
-//$foreground: map-get($theme, foreground);
-//$background: map-get($theme, background);
-//
-//// Apply theme for this app
-//
-//// NGX Charts
-//[ngx-charts-axis-label] text {
-//  fill: mat-color($foreground, secondary-text);
-//}
-//
-//tick text {
-//  fill: mat-color($foreground, disabled);
-//}
-//
-//.gridline-path {
-//  &.gridline-path-horizontal,
-//  &.gridline-path-vertical {
-//    stroke: rgba(black, 0.06);
-//  }
-//}
-
-//.legend-title-text {
-//  color: mat-color($foreground, secondary-text);
-//}
-//
-//mat-card-title {
-//  &:hover {
-//    cursor: grab;
-//    cursor: -moz-grab;
-//    cursor: -webkit-grab;
-//  }
-//  &:active {
-//    cursor: grabbing;
-//    cursor: -moz-grabbing;
-//    cursor: -webkit-grabbing;
-//  }
-//}
-//
-//.td-search-box {
-//  .td-search-icon.mat-icon-button {
-//    margin: 0;
-//    height: 50px;
-//    .mat-icon {
-//      margin-top: -10px;
-//    }
-//  }
-//  td-search-input {
-//    margin-left: 0 !important;
-//    margin-bottom: 5px;
-//    .mat-form-field {
-//      width: auto;
-//      height: 100%;
-//    }
-//    .mat-form-field-wrapper {
-//      padding-bottom: 0;
-//    }
-//    .mat-input-infix {
-//      padding: 0;
-//    }
-//    .mat-form-field-infix {
-//      border-top: 0;
-//    }
-//  }
-//}
-
-.qcm {
-  @include angular-material-theme($theme);
-
-  //.mat-primary{
-  //  background: #9c27b0 !important;
-  //}
-  .mat-color-primary {
-    color: map-get($primary, 500) !important;
-  }
-  .mat-color-accent {
-    color: map-get($primary, 500);
-  }
-  .mat-color-warn {
-    color: #f44336;
-  }
-
-  .mat-bg-primary {
-    background: map-get($primary, 500) !important;
-    color: #ffffff !important;
-  }
-  .mat-bg-accent {
-    background-color: map-get($accent, 500);
-    color: black;
-  }
-  .mat-bg-warn {
-    background-color: #f44336;
-    color: white;
-  }
-
-  .mat-card-header-text {
-    margin: 0 0px;
-  }
-
-  .mat-card-content {
-    background-color: #fafafa !important;
-  }
-
-  .mat-card {
-    //-webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05) !important;
-    //box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05) !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-    margin: 15px;
-    //padding: 10px !important;
-    border-radius: 4px;
-  }
-
-  .empty.mat-card {
-    margin: 0px;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-    margin: 15px;
-  }
-
-  empty.mat-card-content {
-
-  }
-
-  .push-md {
-    margin: 30px;
-  }
-
-  .mat-paginator {
-    background-color: #fafafa !important;
-    margin-right: 15px;
-  }
-
-  mat-toolbar.mat-toolbar.ng-tns-c16-4.mat-toolbar-single-row {
-    background: #fafafa !important;
-    padding-right: 25px;
-  }
-
-  .mat-toolbar.topbar {
-    box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.5);
-    position: relative;
-    z-index: 2;
-  }
-  mat-toolbar.detail.mat-toolbar.mat-toolbar-single-row {
-    background-color: #fafafa !important;
-  }
-
-  .mat-drawer {
-    background-color: #fafafa !important;
-  }
-
-  // bug
-  .mat-drawer-container[full] {
-    top: 60px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: absolute;
-  }
-
-  mat-sidenav.mat-drawer {
-    padding: 5px;
-  }
-
-  .mat-drawer.mat-drawer-side {
-    z-index: 2;
-    //-webkit-box-shadow: 2px 0px 20px rgba(0, 0, 0, 0.05) !important;
-    //box-shadow: 2px 0px 20px rgba(0, 0, 0, 0.05) !important;
-  }
-
-  background-color: #fafafa;
-
-  .mat-fab.mat-fab-bottom-right{
-    right: 25px;
-  }
-
-  .mat-card mat-card-content {
-    padding: 10px !important;
-  }
-
-  a.nav-item.mat-menu-item.active {
-    font-weight: 500;
-  }
-
-  // left bar
-  a.nav-item.mat-menu-item.active > .mat-icon:not([color]){
-    color: map-get($primary, 800) !important;
-  }
-
-  .mat-radio-label {
-    width: 80% !important;
-  }
-  .mat-radio-label-content  {
-    width: 80% !important;
-  }
-
+// specify theme class eg: <body class="my-theme"> ... </body>
+.dark-blue-theme {
+   @include angular-material-theme($dark-blue-theme);
 }
 
+.light-blue-theme {
+  @include custom-components-theme($light-blue-theme);
+  @include angular-material-theme($light-blue-theme);
+}
 
+.page-content {
+  height: 100%;
+}
+.mat-fab.mat-fab-bottom-right {
+  right: 25px;
+  float: right;
+  bottom: 25px;
+  position: absolute;
+}
+
+.mat-fab-bottom-center {
+  flex: 1 1 auto;
+  vertical-align: center;
+  align-items: center;
+  width: 100%;
+  right: 25px;
+  bottom: 25px;
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+
+.app-loading {
+  .logo {
+    width: 100px;
+    height: 100px;
+
+    // this way asset gets processed by webpack
+    background: url(./assets/favicon.ico) center center no-repeat;
+  }
+}

@@ -1,68 +1,62 @@
+<div class="page-center">
+
+  <div class="page-header" fxlayout fxlayout="column" fxLayout.xs="column" fxLayoutAlign="center center">
+    <div fxFlex="80%" class="page-search"><input type="Text"></div>
+    <a mat-icon-button *ngIf="!list.isSelectedMode()" (click)="list.refresh(true);"
+       matTooltip="{{'qcm.form.menu.search' | translate}}">
+      <mat-icon>replay</mat-icon>
+    </a>
+    <button mat-icon-button (click)="filter=!filter;" matTooltip="{{'qcm.form.menu.filter' | translate}}">
+
+      <mat-icon *ngIf="list.filterSize()>0" matBadge="{{list.filterSize()}}" matBadgeColor="warn"
+                matBadgePosition="above after">filter_list
+      </mat-icon>
+      <mat-icon *ngIf="list.filterSize()==0">filter_list</mat-icon>
+    </button>
+  </div>
+
+  <div fxLayout fxlayout="column" fxLayoutAlign="center center" fxLayout.xs="column" [hidden]="!filter">
+     <span>
+      <h1>{{'qcm.question.filtre.title' |translate}}</h1>
+      ({{'qcm.question.filtre.found' | translate:{ 'nb': list.totalElements } }})
+    </span>
+  </div>
+  <div fxLayout fxLayoutAlign="center center" fxLayout.xs="column" [hidden]="!filter">
+    <div>{{'qcm.tag-select.title' | translate}}:</div>
+    <app-tag-select></app-tag-select>
+    <div>{{'qcm.questionnaire-select.title' | translate}}:</div>
+    <app-questionnaire-select></app-questionnaire-select>
+  </div>
 
 
+  <div fxlayout [hidden]="filter">
 
-<div [hidden]="filter" fxLayout="row">
-  <div fxFlex>
-    <app-question-filter [hidden]="!filter" (onClosed)="filter=false;"></app-question-filter>
-
-    <app-selectable-list #list
-                         [dataSelectionStore]="questionStore"
+    <app-selectable-list #list [criteriaStore]="questionStore"
                          [sortBy]="'id'"
-                         [filterStore]="filterStore"
                          (onCreate)="create()">
 
-      <mat-toolbar>
-        <div style="display: flex;">
-          <button mat-icon-button *ngIf="list.modeSelection$ |async" (click)="list.swapSelectedMode()">
-            <mat-icon>list</mat-icon>
-          </button>
+      <div toolbar-view style="display: flex;">
+         <span *ngIf="!list.isSelectedMode()"
+               style="align-items: center "> {{ "qcm.question.list.title" | translate}}</span>
+        <span *ngIf="list.isSelectedMode()"
+              style="align-items: center ">{{ "qcm.question.selected.title" |translate }}</span>
+      </div>
 
-          <span *ngIf="!list.isSelectedMode()" style="align-items: center ">My Questions </span>
-          <span *ngIf="list.isSelectedMode()" style="align-items: center ">My Selected Questions ({{list.selectionSize()}})</span>
-          <span *ngIf="list.filterStore.filters().length">({{list.filterSize()}} filter(s))</span>
+      <div toolbar-view class="spacer"></div>
 
-        </div>
-        <div flex></div>
-        <a mat-icon-button routerLink="/questionnaires/list" matTooltip="Liste Questionnaires">
-          <mat-icon>question_answer</mat-icon>
-        </a>
-        <button *ngIf="!list.isSelectedMode()" mat-icon-button (click)="list.selectAll()" matTooltip="Select All">
-          <mat-icon>select_all</mat-icon>
-        </button>
-        <a *ngIf="!list.isSelectedMode()" mat-icon-button [@tdPulse]="pulseState"
-           (click)="list.refresh(true);list.paginator.firstPage();" matTooltip="Refresh">
-          <mat-icon>replay</mat-icon>
-        </a>
-        <button mat-icon-button (click)="filter=!filter;" matTooltip="Filter">
-          <mat-icon matBadge="22" matBadgePosition="above after">filter_list</mat-icon>
-        </button>
-      </mat-toolbar>
       <app-question-nav-list elements-view [elements]="list.elements"></app-question-nav-list>
+
       <app-question-nav-list selected-view [elements]="list.selected"></app-question-nav-list>
+
     </app-selectable-list>
 
   </div>
 
-  <app-fab *ngIf="list.selectionSize()" mat-fab>
-    <app-fab-toggle [iconOff]="'mode_edit'" [iconOn]="'replay'"></app-fab-toggle>
-    <app-fab-button [icon]="'add'" matTooltip="New Question" [matTooltipPosition]="'left'" [color]="'primary'"
-                    (onClick)="create()"></app-fab-button>
-    <app-fab-button [icon]="'delete'" matTooltip="Delete Selected Questions" [matTooltipPosition]="'left'"
-                    [color]="'accent'"
-                    (onClick)="list.deleteSelectedElements()"></app-fab-button>
-    <app-fab-button *ngIf="currentQuestionnaire" [icon]="'question_answer'"
-                    matTooltip="Add Selected Question TO {{currentQuestionnaire.title}}" [matTooltipPosition]="'left'"
-                    [color]="'primary'"
-                    (onClick)="add(currentQuestionnaire)"></app-fab-button>
+  <!--    <app-fab-button *ngIf="currentQuestionnaire" [icon]="'question_answer'"-->
+  <!--                    matTooltip="Add Selected Question TO {{currentQuestionnaire.title}}" [matTooltipPosition]="'left'"-->
+  <!--                    [color]="'primary'"-->
+  <!--                    (onClick)="add(currentQuestionnaire)"></app-fab-button>-->
 
-  </app-fab>
-
-  <button *ngIf="!list.selectionSize()" mat-fab color="primary" class="mat-fab-bottom-right z-2 fixed"
-          (click)="create()">
-    <mat-icon>add</mat-icon>
-  </button>
 </div>
-
-
 
 

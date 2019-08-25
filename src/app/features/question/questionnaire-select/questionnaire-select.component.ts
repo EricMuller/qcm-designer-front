@@ -1,9 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Letter} from '../../questionnaire/questionnaire-filter/Letter';
 import {MatChip} from '@angular/material';
-import {Criteria} from '@api/qcm/model/criteria';
-import {QuestionnaireStore} from '../../stores/questionnaire-store.service';
-import {Questionnaire} from '@api/qcm/model/questionnaire.model';
+import {Criteria} from '@app/shared/qcm-rest-api/model/criteria';
+import {Questionnaire} from '@app/shared/qcm-rest-api/model/questionnaire.model';
+import {Letter} from '@app/features/tag/tag-select/Letter';
+import {QuestionnaireStore} from '@app/shared/stores/questionnaire-store.service';
 
 
 @Component({
@@ -68,6 +68,7 @@ export class QuestionnaireSelectComponent implements OnInit {
   }
 
   public selectItem(tag: Questionnaire) {
+
     this.questionnaireStore.selectElement(tag, true);
   }
 

@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {QuestionnaireService} from '@api/qcm/services/questionnaire.service';
+import {QuestionnaireService} from '@app/shared/qcm-rest-api/services/questionnaire.service';
+
 
 
 @Component({

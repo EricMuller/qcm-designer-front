@@ -2,20 +2,28 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {QuestionnaireListComponent} from './questionnaire-list.component';
 import {
-  MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatProgressSpinnerModule,
-  MatSelectModule, MatSidenavModule, MatSnackBarModule
+  MatCardModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatProgressSpinnerModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSnackBarModule
 } from '@angular/material';
 import {RouterTestingModule} from '@angular/router/testing';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-import {Observable} from 'rxjs/Rx';
-import {NotifierService} from '../../../core/simple-notifier.service';
-import {CategoryService} from 'api/qcm/services/category.service';
-import {QuestionService} from '../../../../api/qcm/services/question.service';
-import {Questionnaire} from '../../../../api/qcm/model/questionnaire.model';
-import {Category} from '../../../../api/qcm/model/category.model';
+import {Observable, of} from 'rxjs';
+import {NotifierService} from '../../../core/notifications/simple-notifier.service';
+import {CategoryService} from 'app/shared/qcm-rest-api/services/category.service';
+import {QuestionService} from '../../../shared/qcm-rest-api/services/question.service';
+import {Questionnaire} from '../../../shared/qcm-rest-api/model/questionnaire.model';
+import {Category} from '../../../shared/qcm-rest-api/model/category.model';
 
 
 describe('QuestionnaireListComponent', () => {
@@ -28,7 +36,7 @@ describe('QuestionnaireListComponent', () => {
         MatSelectModule, ReactiveFormsModule, FormsModule, MatSnackBarModule, MatInputModule,
         HttpClientModule, BrowserAnimationsModule, RouterTestingModule],
       declarations: [QuestionnaireListComponent],
-      providers: [ NotifierService,
+      providers: [NotifierService,
         {provide: CategoryService, useClass: MockCategoryService},
         {provide: QuestionService, useClass: MockQuestionnaireService}
       ]
@@ -52,7 +60,7 @@ class MockQuestionnaireService {
   public getQuestionnaires(): Observable<Questionnaire[]> {
     const questionnaire = new Questionnaire();
     questionnaire.id = 1;
-    return Observable.of([questionnaire]);
+    return of([questionnaire]);
   }
 };
 
@@ -62,7 +70,7 @@ class MockCategoryService {
 
     const category = new Category();
     category.id = '1';
-    return Observable.of([category]);
+    return of([category]);
 
   }
 };

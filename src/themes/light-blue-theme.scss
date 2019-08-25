@@ -1,0 +1,42 @@
+// define 3 theme color
+// mat-palette accepts $palette-name, main, lighter and darker variants
+$mat-light-theme-background: (
+  status-bar: map_get($mat-grey, 100),
+  app-bar:    map_get($mat-grey, 100),
+  background: map_get($mat-grey, 100),
+  hover:      rgba(black, 0.04), // TODO(kara): check style with Material Design UX
+  card:       map_get($mat-grey, 100),
+  dialog:     white,
+  disabled-button: rgba(black, 0.12),
+  raised-button: white,
+  focused-button: $dark-focused,
+  selected-button: map_get($mat-grey, 300),
+  selected-disabled-button: map_get($mat-grey, 400),
+  disabled-button-toggle: map_get($mat-grey, 200),
+  unselected-chip: map_get($mat-grey, 300),
+  disabled-list-option: map_get($mat-grey, 200),
+);
+
+
+$lbt-primary: mat-palette($mat-indigo, 700, 300, 900);
+$lbt-accent: mat-palette($mat-light-blue);
+$lbt-warn: mat-palette($mat-deep-orange, A200);
+
+$lbt-primary: mat-palette($mat-indigo, 800, 300, 900);
+$lbt-accent: mat-palette($mat-light-blue);
+$lbt-accent: mat-palette($mat-pink, 600);
+
+// create theme (use mat-mat-light-theme for themes with dark backgrounds)
+$light-blue-theme: mat-light-theme($lbt-primary,$lbt-accent,$lbt-warn);
+
+$background-color: mat-color($mat-grey, 700, 0.9);
+
+
+// Insert custom background color
+//$background-color: map_get($mat-blue-grey, 50);
+//$background: map-get($light-blue-theme, background);
+//$background: map_merge($background, (background: $background-color));
+//$light-blue-theme: map_merge($light-blue-theme, (background: $background));
+
+
+

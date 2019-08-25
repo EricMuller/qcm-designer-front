@@ -1,9 +1,9 @@
 <mat-nav-list>
   <!--(mouseover)='over(question)'-->
-  <div *ngFor="let question of elements as q; index as i">
-    <mat-list-item class="list"
+
+    <mat-list-item class="list mat-elevation-z4 list-item" *ngFor="let question of elements as q; index as i"
                    [class.active]="i == selectedRow"
-                   attr.entityId="questionId_{{question.id}}">
+                   attr.entityId="questionId_{{question.id}}" >
 
       <button mat-icon-button matListAvatar (click)="setClickedRow(question)">
         <mat-icon matListIcon *ngIf="!isSelected(question)">question_answer</mat-icon>
@@ -27,7 +27,8 @@
           Details
         </button>
       </mat-menu>
+
     </mat-list-item>
-  </div>
+
 
 </mat-nav-list>

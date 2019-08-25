@@ -1,9 +1,10 @@
-import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
+import {AngularModule} from '@app/shared/angular/angular.module';
+import {MaterialComponentsModule} from '@app/shared/material-components/material-components.module';
+import {MaterialModule} from '@app/shared/material/material.module';
 
-import {AngularModule} from '../../shared/angular/angular.module';
-import {LayoutsModule} from '../shared/layouts/layouts.module';
-import {MaterialModule} from '../../shared/material/material.module';
+
 import {CategoryDetailContentComponent} from './category-detail-content/category-detail-content.component';
 import {CategoryDialogComponent} from './category-dialog/category-dialog.component';
 
@@ -12,7 +13,7 @@ import {CategoryDialogComponent} from './category-dialog/category-dialog.compone
     CommonModule,
     AngularModule,
     MaterialModule,
-    LayoutsModule,
+    MaterialComponentsModule,
   ],
   exports: [CategoryDetailContentComponent],
   declarations: [CategoryDialogComponent, CategoryDetailContentComponent]

@@ -1,0 +1,27 @@
+@import '~@angular/material/theming';
+
+@mixin snack-theme($theme) {
+  // Extract whichever individual palettes you need from the theme.
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .mat-snack-bar-container {
+    background-color: mat-color($primary);
+   // color: $font-color-default;
+  }
+  //Added with panelClass property
+  .snack-error {
+    button {
+      color: mat-color($warn)
+    }
+  }
+  //Added with panelClass property
+  .snack-success {
+    button {
+      color: mat-color($primary)
+    }
+  }
+}

@@ -1,11 +1,15 @@
-<mat-toolbar>
+<div class="page-center">
+<mat-toolbar class="toolbar-form">
+
   <a mat-icon-button [routerLink]="['/questions/list']">
     <mat-icon>arrow_back</mat-icon>
   </a>
-  <div *ngIf="!question.id">Create a New Question</div>
-  <div *ngIf="question.id">Edit Question n°{{question.id}}</div>
 
-  <div flex></div>
+  <div *ngIf="question.id && !edition">{{'qcm.question.view.title' | translate}}{{question.id}}</div>
+  <div *ngIf="question.id && edition">{{'qcm.question.edit.title' | translate}}  {{question.id}}</div>
+  <div *ngIf="!question.id">{{'qcm.question.create.title' | translate}}</div>
+
+  <div class="spacer"></div>
   <ng-content select="[menu-buttons]"></ng-content>
   <button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="questionMenu">
     <mat-icon>more_vert</mat-icon>
@@ -15,13 +19,12 @@
     <ng-content select="[menu-items]"></ng-content>
     <button mat-menu-item>
       <mat-icon>delete</mat-icon>
-      Delete
+      {{'qcm.form.menu.delete' | translate }}
     </button>
   </mat-menu>
 </mat-toolbar>
 
 <!---->
-
 <form class="form" [formGroup]="form" fxLayout="column">
 
   <mat-form-field fxFlex>
@@ -40,11 +43,12 @@
 
   <div [ngSwitch]="form?.controls['type']?.value" style="display:flex;flex-direction: column">
 
-    <!--todo: component-->
+    <!--todo: component -->
     <mat-form-field fxFlex>
       <mat-chip-list #chipList>
-        <mat-chip *ngFor="let tag of tags.controls; index as i" [selectable]="selectable"
-                  [removable]="edition" (remove)="removeChip(i)">
+        <mat-chip *ngFor="let tag of tags.controls; index as i"
+                 [selectable]="edition"
+                  [removable]="edition" (removed)="removeChip(i)">
           {{tag.get('libelle')?.value}}
           <mat-icon matChipRemove *ngIf="edition">cancel</mat-icon>
         </mat-chip>
@@ -70,7 +74,7 @@
              class="responses-container">
           <mat-form-field fxFlex>
             <textarea formControlName="response" matInput placeholder="response" class="text-input"
-                      rows="15"></textarea>
+                      rows="5"></textarea>
             <mat-error *ngIf="responseCtrl.get('response').hasError('required')">field required</mat-error>
           </mat-form-field>
           <div style="align-self: flex-start">
@@ -86,7 +90,8 @@
       <div formArrayName="responses">
         <div *ngFor="let responseCtrl of responses.controls; index as i " [formGroupName]="i"
              class="responses-container">
-          <mat-checkbox formControlName="good" [checked]="responseCtrl['good']"  style="flex-grow: 1;align-self: center"></mat-checkbox>
+          <mat-checkbox formControlName="good" [checked]="responseCtrl['good']"
+                        style="flex-grow: 1;align-self: center"></mat-checkbox>
 
 
           <div *ngIf="!edition" flex>{{responseCtrl.get('response').value}}</div>
@@ -133,11 +138,42 @@
 
 <!--<pre>{{form.value | json}}</pre>-->
 
+<div fxlayout fxlayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
 
-<app-fab (toggleEvent)="toggleEdition($event)">
-  <app-fab-toggle [iconOff]="'mode_edit'" [iconOn]="'replay'"></app-fab-toggle>
-  <app-fab-button [icon]="'save'" [color]="'primary'" (onClick)="saveForm()"></app-fab-button>
-  <app-fab-button [icon]="'delete'" [color]="'accent'" (onClick)="deleteForm()"></app-fab-button>
-  <app-fab-button [icon]="'add'" [color]="'primary'" (onClick)="addResponse()"></app-fab-button>
-</app-fab>
+  <app-fab-toggle #toggle [iconOff]="'mode_edit'" [iconOn]="'replay'"
+                  toolTipOff="{{'qcm.form.toggle.off' | translate }}"
+                  toolTipOn="{{'qcm.form.toggle.on' | translate }}"
+                  (toggleEvent)="toggleEdition($event)"
+                  fxFlex="10%"></app-fab-toggle>
+
+  <button mat-mini-fab (click)="saveForm()" [hidden]="!toggle.opened"
+          matTooltip="{{'qcm.form.menu.save' | translate }}" color="primary">
+    <mat-icon>save</mat-icon>
+  </button>
+
+  <button mat-mini-fab (click)="deleteForm()" [hidden]="!toggle.opened"
+          matTooltip="{{'qcm.form.menu.deleteAll' | translate }}" color="accent">
+    <mat-icon>delete</mat-icon>
+  </button>
+
+  <div [ngSwitch]="form?.controls['type']?.value" style="display:flex;flex-direction: column">
+    <ng-template [ngSwitchCase]="'MULTIPLE_CHOICE'">
+      <button mat-mini-fab (click)="addResponse()" [hidden]="!toggle.opened"
+              matTooltip="{{'qcm.form.menu.new-response' | translate }}" color="primary">
+        <mat-icon>add</mat-icon>
+      </button>
+    </ng-template>
+
+    <ng-template [ngSwitchCase]="'MULTIPLE_ANSWER'">
+      <button mat-mini-fab (click)="addResponse()" [hidden]="!toggle.opened"
+              matTooltip="{{'qcm.form.menu.new-response' | translate }}" color="primary">
+        <mat-icon>add</mat-icon>
+      </button>
+    </ng-template>
+  </div>
+</div>
+
+
+</div>
+
 

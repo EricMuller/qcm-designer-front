@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
 import {ActivatedRouteSnapshot} from '@angular/router';
-import {QuestionService} from '@api/qcm/services/question.service';
-import {Question} from '@api/qcm/model/question.model';
+import {Question} from '@app/shared/qcm-rest-api/model/question.model';
+import {QuestionService} from '@app/shared/qcm-rest-api/services/question.service';
+import {Observable, of} from 'rxjs';
 
 
 @Injectable()
@@ -15,7 +15,9 @@ export class QuestionResolver {
     if (route.params.id > 0) {
       return this.questionService.getQuestionById(route.params.id);
     } else {
-      return Observable.of(new Question())
+      const question = new Question();
+      question.id = 0;
+      return of(question);
     }
   }
 }

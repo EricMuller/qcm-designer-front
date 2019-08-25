@@ -1,0 +1,64 @@
+{
+  "qcm.questionnaire.create.title": "Creer un nouveau questionnaire",
+  "qcm.questionnaire.edit.title": "Editer le questionnaire",
+
+  "qcm.questionnaire.filter.title": "Filtrer Mes Questionnaires",
+  "qcm.questionnaire.list.title": "Mes Questionnaires",
+  "qcm.questionnaire.list.title.short": "Mes Questionnaires",
+  "qcm.questionnaire.selected.title" : "Mes Questionnaires selectionné(s)",
+
+  "qcm.questionnaire.menu.category.create" : "Creer une nouvelle categorie",
+  "qcm.questionnaire.menu.questions.list" : "Voir les questions du questionnaire",
+
+  "qcm.questionnaire.form.input.title.placeholder" : "Titre",
+  "qcm.questionnaire.form.input.description.placeholder" : "Description",
+  "qcm.questionnaire.form.input.category.placeholder" : "Catégorie",
+  "qcm.questionnaire.form.input.tag.placeholder" : "Etiquette",
+
+  "qcm.question.filter.title": "Filtrer Mes Questions",
+  "qcm.question.create.title": "Creer une nouvelle question",
+  "qcm.question.edit.title": "Edition de la question",
+  "qcm.question.view.title": "Visualisation de la question",
+
+  "qcm.question.list.title": "Mes Questions",
+  "qcm.question.list.title.short": "Mes questions",
+  "qcm.question.selected.title" : "Liste des Questions selectionnée(s)",
+
+  "menu.questions" : "Mes Questions",
+  "menu.questionnaires" : "Mes Questionnaires",
+  "menu.import" : "Import",
+  "menu.about" : "A propos",
+  "menu.login": "Connection",
+
+  "qcm.selectable-list.menu.selectAll": "Selectionner tous les enregistrements",
+  "qcm.electable-list.menu.viewSelected": "Voir tous les enregistrements selectionnés",
+  "qcm.selectable-list.menu.new" : "Creer un enregistrement",
+  "qcm.selectable-list.menu.deleteAll":"Supprimer les enregistrements selectionnés",
+  "qcm.selectable-list.toggle.off":"Mode edition",
+  "qcm.selectable-list.toggle.on":"Annuler edition",
+  "qcm.selectable-list.empty": "Pas d'engistrements trouvés",
+  "qcm.selectable-list.clear-filters": "Effacer les filtres",
+
+  "qcm.questionnaire.filtre.title": "Filtrer les questionnaires",
+  "qcm.questionnaire.filtre.found": "{{nb}} enregistrement(s)",
+  "qcm.question.filtre.title": "Filtrer les questions",
+  "qcm.question.filtre.found": "{{nb}} enregistrement(s)",
+  "qcm.tag-select.select-letter":"Filtrer par Lettre" ,
+  "qcm.tag-select.title": "Mes Etiquetes",
+
+  "qcm.questionnaire-select.select-letter":"Filtrer par Lettre" ,
+  "qcm.questionnaire-select.title": "Mes Questionnaires",
+
+  "qcm.form.menu.new": "Creer un enregistremnt",
+  "qcm.form.menu.new-response": "Ajouter un enregistremnt",
+  "qcm.form.menu.save":"Sauvegarder l' enregistrement",
+  "qcm.form.menu.deleteAll": "Supprimer les enregistremenst",
+  "qcm.form.menu.delete": "Supprimer l' enregistrement",
+  "qcm.form.menu.search": "Rechercher",
+  "qcm.form.menu.selectAll": "Selectionner tous les enregistrements",
+  "qcm.form.menu.filter": "Filtrer les enregistrements",
+  "qcm.form.toggle.off":"Mode edition",
+  "qcm.form.toggle.on":"Annuler edition",
+
+  "qcm.import.title": "Selectionner un fichier json à importer"
+}

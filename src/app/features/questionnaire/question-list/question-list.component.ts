@@ -1,16 +1,16 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
+import {Question} from '@app/shared/qcm-rest-api/model/question.model';
+import {Questionnaire} from '@app/shared/qcm-rest-api/model/questionnaire.model';
+import {Page} from '@app/shared/qcm-rest-api/services/page';
+import {QuestionService} from '@app/shared/qcm-rest-api/services/question.service';
 
-import {NotifierService} from '../../../core/simple-notifier.service';
-import {Observable} from 'rxjs/Observable';
+import {NotifierService} from '../../../core/notifications/simple-notifier.service';
+import {Observable, of} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {MatDialog, MatDialogConfig, MatPaginator, MatSidenav, MatSort} from '@angular/material';
 import {QuestionnaireDialogComponent} from '../questionnaire-dialog/questionnaire-dialog.component';
 
 import {QuestionDialogComponent} from '../../question/question-dialog/question-dialog.component';
-import {Question} from '@api/qcm/model/question.model';
-import {Questionnaire} from '@api/qcm/model/questionnaire.model';
-import {Page} from '@api/qcm/services/page';
-import {QuestionService} from '@api/qcm/services/question.service';
 
 
 
@@ -35,10 +35,9 @@ export class QuestionnaireQuestionListComponent implements OnInit {
   public last = false;
   public numberOfElements = 0;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild('sidenavright')
-  private sidenavright: MatSidenav;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild('sidenavright', {static: false}) private sidenavright: MatSidenav;
 
   constructor(private questionService: QuestionService,
               private dialog: MatDialog,
@@ -59,7 +58,7 @@ export class QuestionnaireQuestionListComponent implements OnInit {
   }
 
   get questions(): Observable<Question[]> {
-    return Observable.of(this._questions);
+    return of(this._questions);
   }
 
   //

@@ -2,99 +2,79 @@
 <html lang="en" class="fullscreen">
 <head>
   <meta charset="utf-8">
-  <title>Open QCM</title>
+  <title>QCM</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!--<link rel="icon" domain="image/x-icon" href="favicon.ico">-->
-  <link rel="icon" domain="image/x-icon" href="/favicon.ico" />
-  <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-  <!--<link href="./assets/indigo-pink.css" rel="stylesheet">-->
-  <meta name="application-name" content="Qcm Quickstart">
+  <link rel="icon" domain="image/x-icon" href="/favicon.ico"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+  <meta name="application-name" content="Qcm">
   <meta name="theme-color" content="#1976d2">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <script src="https://keycloak.webmarks.net/auth/js/keycloak.js"></script>
-
-</head>
-<!--<body style="margin: 0px;height: 100%">-->
-<body class="qcm">
-<app-root>
-  <style>
-    /* Center the loader */
-    #loader {
+  <!-- inline spinner styles to be able to display spinner right away -->
+  <style type="text/css">
+    body, html {
+      height: 100%;
+    }
+    .app-loading {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+    .app-loading .spinner {
+      height: 200px;
+      width: 200px;
+      animation: rotate 2s linear infinite;
+      transform-origin: center center;
       position: absolute;
-      left: 50%;
-      top: 50%;
-      z-index: 1;
-      width: 150px;
-      height: 150px;
-      margin: -75px 0 0 -75px;
-      border: 16px solid #f3f3f3;
-      border-radius: 50%;
-      border-top: 16px solid #3498db;
-      width: 120px;
-      height: 120px;
-      -webkit-animation: spin 2s linear infinite;
-      animation: spin 2s linear infinite;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
     }
-
-    @-webkit-keyframes spin {
-      0% {
-        -webkit-transform: rotate(0deg);
-      }
-      100% {
-        -webkit-transform: rotate(360deg);
-      }
+    .app-loading .spinner .path {
+      stroke-dasharray: 1, 200;
+      stroke-dashoffset: 0;
+      animation: dash 1.5s ease-in-out infinite;
+      stroke-linecap: round;
+      stroke: #ddd;
     }
-
-    @keyframes spin {
-      0% {
-        transform: rotate(0deg);
-      }
+    @keyframes rotate {
       100% {
         transform: rotate(360deg);
       }
     }
-
-    /* Add animation to "page content" */
-    .animate-bottom {
-      position: relative;
-      -webkit-animation-name: animatebottom;
-      -webkit-animation-duration: 1s;
-      animation-name: animatebottom;
-      animation-duration: 1s
-    }
-
-    @-webkit-keyframes animatebottom {
-      from {
-        bottom: -100px;
-        opacity: 0
+    @keyframes dash {
+      0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
       }
-      to {
-        bottom: 0px;
-        opacity: 1
+      50% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -35px;
       }
-    }
-
-    @keyframes animatebottom {
-      from {
-        bottom: -100px;
-        opacity: 0
+      100% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -124px;
       }
-      to {
-        bottom: 0;
-        opacity: 1
-      }
-    }
-
-    #myDiv {
-      display: none;
-      text-align: center;
     }
   </style>
-  <div entityId="loader"></div>
-</app-root>
+</head>
 
+<body>
+<app-root>
+  <div class="app-loading">
+    <div class="logo"></div>
+    <svg class="spinner" viewBox="25 25 50 50">
+      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+    </svg>
+  </div>
+</app-root>
+  <script src="https://keycloak.webmarks.net/auth/js/keycloak.js"></script>
 </body>
 </html>

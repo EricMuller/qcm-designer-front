@@ -1,10 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-
-import {QuestionStore} from '../../../stores/question-store.service';
 import {Router} from '@angular/router';
-import {TagStore} from '../../../stores/tag-store.service';
-import {Question} from '@api/qcm/model/question.model';
-import {Tag} from '@api/qcm/model/tag.model';
+import {Question} from '@app/shared/qcm-rest-api/model/question.model';
+import {Tag} from '@app/shared/qcm-rest-api/model/tag.model';
+import {QuestionStore} from '@app/shared/stores/question-store.service';
+import {TagStore} from '@app/shared/stores/tag-store.service';
 
 
 @Component({

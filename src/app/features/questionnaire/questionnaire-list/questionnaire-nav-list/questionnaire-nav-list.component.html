@@ -1,7 +1,7 @@
 <mat-nav-list>
   <!--(mouseover)='over(questionnaire)'-->
   <div *ngFor="let questionnaire of elements as q; index as i" style="min-height: 0;" >
-    <mat-list-item class="list"
+    <mat-list-item class="list mat-elevation-z4 list-item"
                    [class.active]="i == selectedRow"
                    attr.entityId="questionnaireId_{{questionnaire.id}}">
 

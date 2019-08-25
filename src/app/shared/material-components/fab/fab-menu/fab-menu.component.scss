@@ -1,0 +1,17 @@
+
+.fab-bottom-right
+{
+  display: flex;
+  top: auto;
+  right:  25px;
+  bottom: 25px;
+  left: auto;
+  position: absolute;
+  //flex-direction: column-reverse;
+  flex-direction: row-reverse;
+  position: absolute;
+  align-items: center;
+ // align-content: space-between;
+
+//  //z-index: 2;
+}

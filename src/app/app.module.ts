@@ -1,46 +1,40 @@
+import {OverlayContainer} from '@angular/cdk/overlay';
 import {NgModule} from '@angular/core';
-// application
-import {AppComponent} from './app.component';
-/* shared*/
-/* boostrap*/
-
-import {AppRoutingModule} from './app-routing.module';
-import {AngularModule} from './shared/angular/angular.module';
-import {CoreModule} from './core/core.module';
-import {LayoutsModule} from './features/shared/layouts/layouts.module';
-import {QuestionnaireModule} from './features/questionnaire/questionnaire.module';
-import {HomeComponent} from './home/home.component';
-import {MaterialModule} from './shared/material/material.module';
-import {QuestionStore} from './features/stores/question-store.service';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {ApiQcmModule} from '@api/qcm/api-qcm.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MaterialComponentsModule} from '@app/shared/material-components/material-components.module';
+import {QcmRestApiModule} from '@app/shared/qcm-rest-api/qcm-rest-api.module';
+import {AppRoutingModule} from './app-routing.module';
+
+import {AppComponent} from './app/app.component';
+import {CoreModule} from './core/core.module';
+import {HomeComponent} from './features/home/home.component';
+import {QuestionStore} from './shared/stores/question-store.service';
+import {AngularModule} from './shared/angular/angular.module';
+import {MaterialModule} from './shared/material/material.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-  ],
+    HomeComponent],
   imports: [
+    BrowserAnimationsModule,
     AngularModule,
-    ApiQcmModule.forRoot(),
-    AppRoutingModule,
-    CoreModule,
-    FlexLayoutModule,
     MaterialModule,
-    LayoutsModule,
-    QuestionnaireModule
-  ], providers: [QuestionStore],
+    QcmRestApiModule.forRoot(),
+    CoreModule.forRoot(),
+    FlexLayoutModule,
+    AppRoutingModule,
+    MaterialComponentsModule,
+  ],
+  providers: [QuestionStore],
   bootstrap: [AppComponent]
 })
 export class AppModule {
 
-}
+  constructor(overlayContainer: OverlayContainer) {
+    overlayContainer.getContainerElement().classList.add('light-blue-theme');
+  }
 
-// debug router trace in app-routing.module.ts
-// @NgModule({
-//   imports: [
-//     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
-//   ],
-//   exports: [RouterModule]
-// })
+}

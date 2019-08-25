@@ -1,17 +1,57 @@
-import {NgModule} from '@angular/core';
-import {UserGuardService} from './user-guard.service';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
+import {ModuleWithProviders, NgModule} from '@angular/core';
+import {MatSnackBarModule} from '@angular/material';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {CookieService} from 'ngx-cookie-service';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {NotifierService} from './simple-notifier.service';
-import {KeycloakService} from './security/keycloak.service';
-import {KeyCloakInterceptor} from './security/KeycloakInterceptor.http';
+import {TranslateCacheModule, TranslateCacheService, TranslateCacheSettings} from 'ngx-translate-cache';
+import {KeycloakGuardService} from './auth/keycloak-guard.service';
+import {KeycloakService} from './auth/keycloak.service';
+import {KeyCloakInterceptor} from './http-interceptors/KeycloakInterceptor.http';
+import {NotifierService} from './notifications/simple-notifier.service';
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
-  imports: [],
+  imports: [HttpClientModule, MatSnackBarModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    }),
+    TranslateCacheModule.forRoot({
+      cacheService: {
+        provide: TranslateCacheService,
+        useFactory: (translateService, translateCacheSettings) => {
+          return new TranslateCacheService(translateService, translateCacheSettings)
+        },
+        deps: [TranslateService, TranslateCacheSettings]
+      }
+    })
+  ],
   declarations: [],
-  providers: [NotifierService, UserGuardService, CookieService,
-    KeycloakService,
-    {provide: HTTP_INTERCEPTORS, useClass: KeyCloakInterceptor, multi: true}]
+  providers: [NotifierService, KeycloakGuardService, CookieService, KeycloakService,
+    {provide: HTTP_INTERCEPTORS, useClass: KeyCloakInterceptor, multi: true}],
+  exports: [TranslateModule]
+
 })
 export class CoreModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: CoreModule,
+      providers: [NotifierService, KeycloakGuardService, CookieService, KeycloakService]
+    };
+  }
+
+  constructor(private translate: TranslateService, private translateCacheService: TranslateCacheService) {
+    translateCacheService.init();
+    translate.setDefaultLang('fr');
+    translate.addLangs(['fr', 'en', 'ru']);
+    const browserLang = translateCacheService.getCachedLanguage() || translate.getBrowserLang();
+    translate.use(browserLang.match(/en|ru/) ? browserLang : 'en');
+  }
 }

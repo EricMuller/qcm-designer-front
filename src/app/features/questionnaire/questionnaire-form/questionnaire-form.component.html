@@ -1,84 +1,93 @@
+<div class="page-center">
+  <mat-toolbar>
+    <a mat-icon-button [routerLink]="['/questionnaires/list']">
+      <mat-icon>arrow_back</mat-icon>
+    </a>
+    <div *ngIf="!questionnaire.id">{{'qcm.questionnaire.create.title' |translate}}</div>
+    <div *ngIf="questionnaire.id">{{'qcm.questionnaire.edit.title' |translate}} {{questionnaire.id}}</div>
 
-<mat-toolbar>
-  <a mat-icon-button [routerLink]="['/questionnaires/list']">
-    <mat-icon>arrow_back</mat-icon>
-  </a>
-  <div *ngIf="!questionnaire.id">Create Questionnaire</div>
-  <div *ngIf="questionnaire.id">Edit Questionnaire {{questionnaire.id}}</div>
-
-  <div flex></div>
-  <!--<ng-content select="[menu-buttons]"></ng-content>-->
-  <button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="questionnaireMenu">
-    <mat-icon>more_vert</mat-icon>
-  </button>
-  <!-- line menu -->
-  <mat-menu #questionnaireMenu="matMenu" yPosition="below">
-    <!--<ng-content select="[menu-items]"></ng-content>-->
-    <button mat-menu-item (click)="createCategory()">
-      <mat-icon>add</mat-icon>
-      Create a new category
+    <div class="spacer"></div>
+    <!--<ng-content select="[menu-buttons]"></ng-content>-->
+    <button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="questionnaireMenu">
+      <mat-icon>more_vert</mat-icon>
     </button>
-    <button mat-menu-item (click)="viewQuestionsByQuestionnaire()">
-      <mat-icon>list</mat-icon>
-      Questions
+    <!-- line menu -->
+    <mat-menu #questionnaireMenu="matMenu" yPosition="below">
+      <!--<ng-content select="[menu-items]"></ng-content>-->
+      <button mat-menu-item (click)="createCategory()">
+        <mat-icon>add</mat-icon>
+        {{'qcm.questionnaire.menu.category.create' |translate}}
+      </button>
+      <button mat-menu-item (click)="viewQuestionsByQuestionnaire()">
+        <mat-icon>list</mat-icon>
+        {{'qcm.questionnaire.menu.questions.list' |translate}}
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+  <div class="form" fxLayout='column'>
+    <form class="example-form" [formGroup]="form">
+      <div style="display:flex;flex-direction: column">
+        <mat-form-field class="example-full-width">
+          <input formControlName="title" placeholder="{{'qcm.questionnaire.form.input.title.placeholder' |translate}}"
+                 matInput>
+        </mat-form-field>
+
+        <mat-form-field>
+        <textarea formControlName="description"
+                  placeholder="{{'qcm.questionnaire.form.input.description.placeholder' |translate}}"
+                  matInput></textarea>
+
+        </mat-form-field>
+
+        <mat-form-field *ngIf="categories as epics;">
+          <mat-select formControlName="category"
+                      placeholder="{{'qcm.questionnaire.form.input.category.placeholder' |translate}}"
+                      [compareWith]="compareById">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let epic of epics" [value]="epic">{{epic.libelle}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="chip-tags">
+          <mat-chip-list #chipList>
+            <mat-chip *ngFor="let tag of tags.controls; index as i" [selectable]="edition"
+                      [removable]="edition" (remove)="removeChip(i)">
+              {{tag.get('libelle')?.value}}
+              <mat-icon matChipRemove *ngIf="edition">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="{{'qcm.questionnaire.form.input.tag.placeholder' |translate}}"
+                   [matChipInputFor]="chipList"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   [matChipInputAddOnBlur]="addOnBlur"
+                   (matChipInputTokenEnd)="addChip($event)" [disabled]="!edition"/>
+          </mat-chip-list>
+        </mat-form-field>
+
+      </div>
+    </form>
+    <!--<pre>{{form.value | json}}</pre>-->
+
+  </div>
+
+
+  <div fxlayout fxlayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
+
+    <app-fab-toggle #toggle [iconOff]="'mode_edit'" [iconOn]="'replay'"
+                    toolTipOff="{{'qcm.form.toggle.off' | translate }}"
+                    toolTipOn="{{'qcm.form.toggle.on' | translate }}"
+                    (toggleEvent)="toggleEdition($event)"
+                    fxFlex="10%"></app-fab-toggle>
+
+
+    <button mat-mini-fab (click)="saveForm()" [hidden]="!toggle.opened"
+            matTooltip="{{'qcm.form.menu.save' | translate }}" color="primary">
+      <mat-icon>save</mat-icon>
     </button>
-  </mat-menu>
-</mat-toolbar>
 
-<div  class="form">
+    <button mat-mini-fab (click)="deleteForm()" [hidden]="!toggle.opened"
+            matTooltip="{{'qcm.form.menu.deleteAll' | translate }}" color="accent">
+      <mat-icon>delete</mat-icon>
+    </button>
 
-        <form #qForm="ngForm" class="example-form" [formGroup]="form">
-          <div style="display:flex;flex-direction: column">
-            <mat-form-field class="example-full-width">
-              <input formControlName="title" placeholder="Title" matInput>
-            </mat-form-field>
-
-            <mat-form-field>
-              <textarea formControlName="description" placeholder="Description" matInput></textarea>
-
-            </mat-form-field>
-
-            <mat-form-field *ngIf="categories as epics;">
-              <mat-select formControlName="category"
-                          placeholder="Category"
-                          [compareWith]="compareById">
-                <mat-option>--</mat-option>
-                <mat-option *ngFor="let epic of epics" [value]="epic">{{epic.libelle}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-
-            <mat-form-field class="chip-tags">
-              <mat-chip-list #chipList>
-                <mat-chip *ngFor="let tag of tags.controls; index as i" [selectable]="selectable"
-                          [removable]="edition" (remove)="removeChip(i)">
-                  {{tag.get('libelle')?.value}}
-                  <mat-icon matChipRemove *ngIf="edition">cancel</mat-icon>
-                </mat-chip>
-                <input placeholder="New Tag..."
-                       [matChipInputFor]="chipList"
-                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                       [matChipInputAddOnBlur]="addOnBlur"
-                       (matChipInputTokenEnd)="addChip($event)" [disabled]="!edition"/>
-              </mat-chip-list>
-            </mat-form-field>
-
-          </div>
-        </form>
-        <!--<pre>{{form.value | json}}</pre>-->
-
+  </div>
 </div>
-<app-fab (toggleEvent)="toggleEdition($event)">
-  <app-fab-toggle [iconOff]="'mode_edit'" [iconOn]="'replay'"></app-fab-toggle>
-  <app-fab-button [icon]="'save'" matTooltip="Save Questionnaire" [matTooltipPosition]="'left'" [color]="'primary'"
-                  (onClick)="saveForm()"></app-fab-button>
-  <app-fab-button [icon]="'delete'" matTooltip="Delete Questionnaire" [matTooltipPosition]="'left'" [color]="'accent'"
-                  (onClick)="deleteForm()"></app-fab-button>
-  <app-fab-button *ngIf="nbSelectedQuestion()" [icon]="'question_answer'"
-                  matTooltip="Add {{nbSelectedQuestion()}} Selected  Question(s)" [matTooltipPosition]="'left'"
-                  [color]="'primary'" (onClick)="add()"></app-fab-button>
-</app-fab>
-
-
-
-
-
