@@ -8,7 +8,7 @@ import {QuestionService} from '@app/shared/qcm-rest-api/services/question.servic
 import {SelectStoreAdapter} from '@app/shared/stores/selection-store';
 import {CrudStore, CriteriaStore} from '@app/shared/stores/store-api';
 import {Observable, of, ReplaySubject, Subject} from 'rxjs';
-import {mergeMap} from 'rxjs/operators';
+import {mergeMap, publishLast, refCount} from 'rxjs/operators';
 
 
 @Injectable()
@@ -61,7 +61,8 @@ export class QuestionStore extends SelectStoreAdapter<Question> implements Crite
   getPageByCriteria(criteria: Criteria[], page?: number, size?: number, sort?: string): Observable<Page> {
 
     console.log(criteria);
-    const obs = this.questionService.getQuestionsByCriteria(criteria, page, size, sort);
+    const obs = this.questionService.getQuestionsByCriteria(criteria, page, size, sort)
+      .pipe(publishLast(), refCount());
     obs.subscribe(
       p => {
         this._page.next(p);

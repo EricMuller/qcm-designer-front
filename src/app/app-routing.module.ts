@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
-import {PageQuestionsByQuestionnaireResolver} from './features/questionnaire/resolvers/page-questions-questionnaire-resolver.service';
 import {HomeComponent} from './features/home/home.component';
-import {QuestionsResolver} from './features/question/resolvers/questions-resolver.service';
-import {QuestionsQuestionnaireResolver} from './features/questionnaire/resolvers/questions-questionnaire-resolver.service';
 import {QuestionResolver} from './features/question/resolvers/question-resolver.service';
+import {QuestionsResolver} from './features/question/resolvers/questions-resolver.service';
+import {PageQuestionsByQuestionnaireResolver} from './features/questionnaire/resolvers/page-questions-questionnaire-resolver.service';
+import {QuestionsQuestionnaireResolver} from './features/questionnaire/resolvers/questions-questionnaire-resolver.service';
 
 const routes: Routes = [
 

@@ -20,7 +20,7 @@ import {MaterialModule} from '@app/shared/material/material.module';
     MaterialModule,
     RouterModule,
     FabModule,
-    CoreModule.forRoot(),
+    CoreModule,
     FlexLayoutModule,
     FormsModule
   ],

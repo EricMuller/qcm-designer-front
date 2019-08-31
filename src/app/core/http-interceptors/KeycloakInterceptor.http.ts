@@ -1,10 +1,10 @@
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import {NotifierService} from '@app/core/notifications/simple-notifier.service';
 import {Observable, of} from 'rxjs';
-import {KeycloakService} from '../auth/keycloak.service';
 import {fromPromise} from 'rxjs/internal-compatibility';
 import {catchError, flatMap} from 'rxjs/operators';
-import {NotifierService} from '@app/core/notifications/simple-notifier.service';
+import {KeycloakService} from '../auth/keycloak.service';
 
 
 @Injectable()
@@ -18,7 +18,7 @@ export class KeyCloakInterceptor implements HttpInterceptor {
     return fromPromise(this.keycloakService.getToken()).pipe(
       catchError(error => of(error)),
       flatMap((accessToken) => {
-        console.log('KeyCloakInterceptor:' + accessToken);
+        console.log('KeyCloakInterceptor:' + req.url );
         if (!accessToken) {
           return next.handle(req);
         }

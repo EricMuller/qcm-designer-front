@@ -24,7 +24,7 @@
 </div>
 
 
-<div *ngIf="!loadingData " class="empty">
+<div [hidden]="loadingData " class="empty">
   <div *ngIf="(elements)?.length ==0 " class="empty">
     <span style="display:flex;justify-content: center;flex-direction: column;align-items: center;height: 100%;">
       <div><img src="./assets/images/norecord.png"/></div>

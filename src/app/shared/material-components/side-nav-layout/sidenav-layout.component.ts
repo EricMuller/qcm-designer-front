@@ -16,7 +16,7 @@ export class SideNavLayoutComponent implements OnInit, OnDestroy {
   @ViewChild('leftsidenav', {static: false})
   public leftSidenav: MatSidenav;
 
-  private _querySubscription: Subscription;
+  private querySubscription: Subscription;
 
   private isSmallScreen = false;
 
@@ -27,7 +27,7 @@ export class SideNavLayoutComponent implements OnInit, OnDestroy {
   public title = '';
 
   @Input()
-  public opened: Boolean = false;
+  public opened = false;
 
   @Input()
   public style = 'width:300px;border-right: 1px solid rgba(0, 0, 0, 0.12)';
@@ -42,7 +42,7 @@ export class SideNavLayoutComponent implements OnInit, OnDestroy {
 
   navigationSideMenu = [
     ...this.navigation,
-    { link: '/import/questionnaires', label: 'menu.import' },
+    {link: '/import/questionnaires', label: 'menu.import'},
   ];
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.Handset])
@@ -84,7 +84,7 @@ export class SideNavLayoutComponent implements OnInit, OnDestroy {
     // this._querySubscription.unsubscribe();
   }
 
-  onLanguageSelect($event):void {
+  onLanguageSelect($event): void {
 
   }
 

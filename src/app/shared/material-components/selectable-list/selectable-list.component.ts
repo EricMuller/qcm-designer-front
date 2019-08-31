@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterContentInit, AfterViewChecked, AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material';
 import {Entity} from '@app/shared/qcm-rest-api/model/entity';
 import {Page} from '@app/shared/qcm-rest-api/services/page';
@@ -17,7 +17,7 @@ enum ViewMode {
   templateUrl: './selectable-list.component.html',
   styleUrls: ['./selectable-list.component.scss'],
 })
-export class SelectableListComponent<T extends Entity> implements OnInit, AfterViewInit {
+export class SelectableListComponent<T extends Entity> implements OnInit, AfterContentInit {
 
   public elements: T[] = [];
   public selected: T[] = [];
@@ -91,10 +91,6 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterV
 
 
     console.log('SelectableListComponent:ngOnInit');
-  }
-
-  ngAfterViewInit(): void {
-    this.refresh(true);
   }
 
   private getContentPage(page: Page, cleanBefore ?: boolean) {
@@ -196,6 +192,10 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterV
 
   onCreateElement(event): void {
     this.onCreate.emit(true);
+  }
+
+  ngAfterContentInit(): void {
+    this.refresh(true);
   }
 
 }

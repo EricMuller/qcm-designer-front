@@ -36,8 +36,7 @@ export function translateCacheServiceFactory(translateService: TranslateService,
     })
   ],
   declarations: [],
-  providers: [NotifierService, KeycloakGuardService, CookieService, KeycloakService,
-    {provide: HTTP_INTERCEPTORS, useClass: KeyCloakInterceptor, multi: true}],
+  providers: [NotifierService, KeycloakGuardService, CookieService, KeycloakService ],
   exports: [TranslateModule]
 
 })

@@ -1,3 +1,11 @@
+
+.icon {
+  width: 60px !important;
+  float: right;
+;
+}
+
+
 md-sidenav,
 md-sidenav.md-locked-open,
 md-sidenav.md-closed.md-locked-open-add-active {
