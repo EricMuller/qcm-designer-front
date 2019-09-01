@@ -2,9 +2,9 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 
 
-import {Criteria} from '@app/shared/qcm-rest-api/model/criteria';
-import {Question} from '@app/shared/qcm-rest-api/model/question.model';
-import {QcmApi} from '@app/shared/qcm-rest-api/qcm-api';
+import {Criteria} from '@app/features/qcm-rest-api/model/criteria';
+import {Question} from '@app/features/qcm-rest-api/model/question.model';
+import {QcmApi} from '@app/features/qcm-rest-api/qcm-api';
 import {Observable} from 'rxjs';
 import {publishLast, refCount} from 'rxjs/operators';
 import {Questionnaire} from '../model/questionnaire.model';

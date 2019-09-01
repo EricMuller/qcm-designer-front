@@ -1,10 +1,10 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Criteria} from '@app/shared/qcm-rest-api/model/criteria';
-import {Tag} from '@app/shared/qcm-rest-api/model/tag.model';
+import {Criteria} from '@app/features/qcm-rest-api/model/criteria';
+import {Tag} from '@app/features/qcm-rest-api/model/tag.model';
 
 import {MatChip} from '@angular/material';
 import {Letter} from '@app/features/tag/tag-select/Letter';
-import {TagStore} from '@app/shared/stores/tag-store.service';
+import {TagStore} from '@app/features/stores/tag-store.service';
 
 
 

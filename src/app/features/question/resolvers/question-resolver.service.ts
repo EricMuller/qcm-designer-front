@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot} from '@angular/router';
-import {Question} from '@app/shared/qcm-rest-api/model/question.model';
-import {QuestionService} from '@app/shared/qcm-rest-api/services/question.service';
+import {Question} from '@app/features/qcm-rest-api/model/question.model';
+import {QuestionService} from '@app/features/qcm-rest-api/services/question.service';
 import {Observable, of} from 'rxjs';
 
 

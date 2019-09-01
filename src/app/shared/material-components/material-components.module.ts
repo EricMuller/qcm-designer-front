@@ -4,7 +4,6 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule} from '@angular/forms';
 
 import {RouterModule} from '@angular/router';
-import {CoreModule} from '@app/core/core.module';
 import {FabButtonComponent} from '@app/shared/material-components/fab/fab-button/fab-button.component';
 import {FabMenuComponent} from '@app/shared/material-components/fab/fab-menu/fab-menu.component';
 import {FabToggleComponent} from '@app/shared/material-components/fab/fab-toggle/fab-toggle.component';
@@ -13,6 +12,7 @@ import {LoginMenuComponent} from '@app/shared/material-components/login-menu/log
 import {SelectableListComponent} from '@app/shared/material-components/selectable-list/selectable-list.component';
 import {SideNavLayoutComponent} from '@app/shared/material-components/side-nav-layout/sidenav-layout.component';
 import {MaterialModule} from '@app/shared/material/material.module';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -20,9 +20,8 @@ import {MaterialModule} from '@app/shared/material/material.module';
     MaterialModule,
     RouterModule,
     FabModule,
-    CoreModule,
     FlexLayoutModule,
-    FormsModule
+    FormsModule, TranslateModule
   ],
   declarations: [SelectableListComponent, SideNavLayoutComponent, LoginMenuComponent]
   , exports: [SelectableListComponent, SideNavLayoutComponent, LoginMenuComponent,

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Criteria} from '@app/shared/qcm-rest-api/model/criteria';
+import {Criteria} from '@app/features/qcm-rest-api/model/criteria';
 
 import {QuestionnaireStore} from './questionnaire-store.service';
 import {TagStore} from './tag-store.service';

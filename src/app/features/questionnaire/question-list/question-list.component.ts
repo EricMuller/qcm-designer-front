@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Question} from '@app/shared/qcm-rest-api/model/question.model';
-import {Questionnaire} from '@app/shared/qcm-rest-api/model/questionnaire.model';
-import {Page} from '@app/shared/qcm-rest-api/services/page';
-import {QuestionService} from '@app/shared/qcm-rest-api/services/question.service';
+import {Question} from '@app/features/qcm-rest-api/model/question.model';
+import {Questionnaire} from '@app/features/qcm-rest-api/model/questionnaire.model';
+import {Page} from '@app/features/qcm-rest-api/services/page';
+import {QuestionService} from '@app/features/qcm-rest-api/services/question.service';
 
 import {NotifierService} from '../../../core/notifications/simple-notifier.service';
 import {Observable, of} from 'rxjs';

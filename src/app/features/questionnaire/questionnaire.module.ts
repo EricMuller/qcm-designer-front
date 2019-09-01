@@ -1,7 +1,6 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {CoreModule} from '@app/core/core.module';
 import {CategoryDialogComponent} from '@app/features/category/category-dialog/category-dialog.component';
 import {CategoryModule} from '@app/features/category/category.module';
 import {ImportModule} from '@app/features/import/import.module';
@@ -11,9 +10,9 @@ import {UserModule} from '@app/features/user/user.module';
 import {AngularModule} from '@app/shared/angular/angular.module';
 import {MaterialComponentsModule} from '@app/shared/material-components/material-components.module';
 import {MaterialModule} from '@app/shared/material/material.module';
-import {QuestionnaireStore} from '@app/shared/stores/questionnaire-store.service';
-import {TagStore} from '@app/shared/stores/tag-store.service';
-import {TranslateService} from '@ngx-translate/core';
+import {QuestionnaireStore} from '@app/features/stores/questionnaire-store.service';
+import {TagStore} from '@app/features/stores/tag-store.service';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {QuestionnaireQuestionListComponent} from './question-list/question-list.component';
 import {QuestionnaireDialogComponent} from './questionnaire-dialog/questionnaire-dialog.component';
 import {QuestionnaireFormComponent} from './questionnaire-form/questionnaire-form.component';
@@ -35,7 +34,7 @@ import {SearchStore} from './services/questionnaire-search-store.service';
     ImportModule,
     MaterialComponentsModule,
     FlexLayoutModule,
-    CoreModule
+    TranslateModule,
   ],
   declarations: [
     QuestionnaireListComponent,

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Question} from '@app/shared/qcm-rest-api/model/question.model';
-import {QuestionStore} from '../../../shared/stores/question-store.service';
+import {Question} from '@app/features/qcm-rest-api/model/question.model';
+import {QuestionStore} from '../../stores/question-store.service';
 
 
 @Component({

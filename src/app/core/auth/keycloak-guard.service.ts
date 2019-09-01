@@ -21,7 +21,6 @@ export class KeycloakGuardService implements CanActivate, CanActivateChild {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-
     return fromPromise(this.keycloakService.getToken()).pipe(
       map((token) => {
           return true;
@@ -46,7 +45,6 @@ export class KeycloakGuardService implements CanActivate, CanActivateChild {
   }
 
   public isLoggedIn(): boolean {
-
     return this.keycloakService.isLoggedIn();
   }
 

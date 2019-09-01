@@ -1,8 +1,8 @@
 import {AfterContentInit, AfterViewChecked, AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material';
-import {Entity} from '@app/shared/qcm-rest-api/model/entity';
-import {Page} from '@app/shared/qcm-rest-api/services/page';
-import {CriteriaStore} from '@app/shared/stores/store-api';
+import {Entity} from '@app/features/qcm-rest-api/model/entity';
+import {Page} from '@app/features/qcm-rest-api/services/page';
+import {CriteriaStore} from '@app/features/stores/store-api';
 import {BehaviorSubject, Observable, of, ReplaySubject, Subject} from 'rxjs';
 import {mergeMap} from 'rxjs/operators';
 import {environment} from '../../../../environments/environment';

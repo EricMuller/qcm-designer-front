@@ -1,6 +1,6 @@
-import {Criteria} from '@app/shared/qcm-rest-api/model/criteria';
-import {Entity} from '@app/shared/qcm-rest-api/model/entity';
-import {Page} from '@app/shared/qcm-rest-api/services/page';
+import {Criteria} from '@app/features/qcm-rest-api/model/criteria';
+import {Entity} from '@app/features/qcm-rest-api/model/entity';
+import {Page} from '@app/features/qcm-rest-api/services/page';
 import {Observable} from 'rxjs';
 
 

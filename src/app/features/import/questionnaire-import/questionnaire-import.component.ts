@@ -1,7 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
 import {NotifierService} from '@app/core/notifications/simple-notifier.service';
-import {QcmApi} from '@app/shared/qcm-rest-api/qcm-api';
+import {QcmApi} from '@app/features/qcm-rest-api/qcm-api';
 
 
 @Component({

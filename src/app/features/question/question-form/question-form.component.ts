@@ -3,12 +3,12 @@ import {FormArray, FormGroup} from '@angular/forms';
 import {MatChipInputEvent} from '@angular/material';
 import {ActivatedRoute,  Router} from '@angular/router';
 import {NotifierService} from '@app/core/notifications/simple-notifier.service';
-import {QuestionStore} from '@app/shared/stores/question-store.service';
+import {QuestionStore} from '@app/features/stores/question-store.service';
 import {EditableFormComponent} from '@app/shared/material-components/editable-form/editableFormComponent';
 import {FabToggleComponent} from '@app/shared/material-components/fab/fab-toggle/fab-toggle.component';
-import {Question} from '@app/shared/qcm-rest-api/model/question.model';
-import {Reponse} from '@app/shared/qcm-rest-api/model/response.model';
-import {Tag} from '@app/shared/qcm-rest-api/model/tag.model';
+import {Question} from '@app/features/qcm-rest-api/model/question.model';
+import {Reponse} from '@app/features/qcm-rest-api/model/response.model';
+import {Tag} from '@app/features/qcm-rest-api/model/tag.model';
 
 import {QuestionFormBuilder} from './question-form-builder';
 

@@ -1,5 +1,5 @@
-import {Entity} from '@app/shared/qcm-rest-api/model/entity';
-import {Page} from '@app/shared/qcm-rest-api/services/page';
+import {Entity} from '@app/features/qcm-rest-api/model/entity';
+import {Page} from '@app/features/qcm-rest-api/services/page';
 import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
 import {ListSelectStore} from './store-api';
 

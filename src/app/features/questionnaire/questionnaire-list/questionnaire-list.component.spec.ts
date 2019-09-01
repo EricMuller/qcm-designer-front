@@ -20,10 +20,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {Observable, of} from 'rxjs';
 import {NotifierService} from '../../../core/notifications/simple-notifier.service';
-import {CategoryService} from 'app/shared/qcm-rest-api/services/category.service';
-import {QuestionService} from '../../../shared/qcm-rest-api/services/question.service';
-import {Questionnaire} from '../../../shared/qcm-rest-api/model/questionnaire.model';
-import {Category} from '../../../shared/qcm-rest-api/model/category.model';
+import {CategoryService} from 'app/features/qcm-rest-api/services/category.service';
+import {QuestionService} from '../../qcm-rest-api/services/question.service';
+import {Questionnaire} from '../../qcm-rest-api/model/questionnaire.model';
+import {Category} from '../../qcm-rest-api/model/category.model';
 
 
 describe('QuestionnaireListComponent', () => {

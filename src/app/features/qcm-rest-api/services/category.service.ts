@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {QcmApi} from '@app/shared/qcm-rest-api/qcm-api';
+import {QcmApi} from '@app/features/qcm-rest-api/qcm-api';
 import {Category} from '../model/category.model';
 
 

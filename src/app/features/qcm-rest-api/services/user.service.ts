@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {QcmApi} from '@app/shared/qcm-rest-api/qcm-api';
+import {QcmApi} from '@app/features/qcm-rest-api/qcm-api';
 
 
 import {Observable, of} from 'rxjs';

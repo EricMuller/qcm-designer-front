@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {UserService} from '@app/shared/qcm-rest-api/services/user.service';
+import {UserService} from '@app/features/qcm-rest-api/services/user.service';
 import {Subscription} from 'rxjs';
 
 

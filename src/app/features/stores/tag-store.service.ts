@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {Criteria} from '@app/shared/qcm-rest-api/model/criteria';
-import {Tag} from '@app/shared/qcm-rest-api/model/tag.model';
-import {Page} from '@app/shared/qcm-rest-api/services/page';
-import {TagService} from '@app/shared/qcm-rest-api/services/tag.service';
-import {SelectStoreAdapter} from '@app/shared/stores/selection-store';
-import {CrudStore, CriteriaStore} from '@app/shared/stores/store-api';
+import {Criteria} from '@app/features/qcm-rest-api/model/criteria';
+import {Tag} from '@app/features/qcm-rest-api/model/tag.model';
+import {Page} from '@app/features/qcm-rest-api/services/page';
+import {TagService} from '@app/features/qcm-rest-api/services/tag.service';
+import {SelectStoreAdapter} from '@app/features/stores/selection-store';
+import {CrudStore, CriteriaStore} from '@app/features/stores/store-api';
 import {Observable, of, ReplaySubject, Subject} from 'rxjs';
 
 

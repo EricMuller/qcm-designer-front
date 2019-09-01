@@ -11,7 +11,7 @@ export class KeycloakService {
 
   static auth: any = {};
 
-  private  user: User;
+  private user: User;
 
   static init(): Promise<any> {
     const keycloakAuth: any = Keycloak({
@@ -23,7 +23,7 @@ export class KeycloakService {
     KeycloakService.auth.loggedIn = false;
     console.debug('KeycloakService.init()');
     return new Promise((resolve, reject) => {
-      keycloakAuth.init({ checkLoginIframe: true })
+      keycloakAuth.init({checkLoginIframe: true})
         .success(() => {
 
           KeycloakService.auth.authz = keycloakAuth;
@@ -106,7 +106,7 @@ export class KeycloakService {
     return new Promise<string>((resolve, reject) => {
       if (KeycloakService.auth.authz.token) {
         KeycloakService.auth.authz
-          .logout({redirectUri : document.baseURI})
+          .logout({redirectUri: document.baseURI})
           .success(() => {
             resolve(KeycloakService.auth.authz.token);
           })

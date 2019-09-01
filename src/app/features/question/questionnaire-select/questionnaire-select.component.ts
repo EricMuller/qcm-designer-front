@@ -1,9 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {MatChip} from '@angular/material';
-import {Criteria} from '@app/shared/qcm-rest-api/model/criteria';
-import {Questionnaire} from '@app/shared/qcm-rest-api/model/questionnaire.model';
+import {Criteria} from '@app/features/qcm-rest-api/model/criteria';
+import {Questionnaire} from '@app/features/qcm-rest-api/model/questionnaire.model';
 import {Letter} from '@app/features/tag/tag-select/Letter';
-import {QuestionnaireStore} from '@app/shared/stores/questionnaire-store.service';
+import {QuestionnaireStore} from '@app/features/stores/questionnaire-store.service';
 
 
 @Component({

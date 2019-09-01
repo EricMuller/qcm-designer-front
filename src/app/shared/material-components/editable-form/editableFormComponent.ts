@@ -3,7 +3,7 @@ import {Input, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {NotifierService} from '@app/core/notifications/simple-notifier.service';
-import {CrudStore} from '@app/shared/stores/store-api';
+import {CrudStore} from '@app/features/stores/store-api';
 
 export abstract class EditableFormComponent<T> implements OnInit {
 

@@ -12,8 +12,8 @@ import {Observable, of} from 'rxjs';
 
 
 import {AppComponent} from '@app/app/app.component';
-import {CategoryService} from '../shared/qcm-rest-api/services/category.service';
-import {UserService} from '../shared/qcm-rest-api/services/user.service';
+import {CategoryService} from '../features/qcm-rest-api/services/category.service';
+import {UserService} from '../features/qcm-rest-api/services/user.service';
 import {User} from '../core/auth/user.model';
 
 

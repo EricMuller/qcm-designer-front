@@ -5,15 +5,15 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {NotifierService} from '@app/core/notifications/simple-notifier.service';
 import {CategoryDialogComponent} from '@app/features/category/category-dialog/category-dialog.component';
 import {QuestionnaireFormBuilder} from '@app/features/questionnaire/questionnaire-form/questionnaire-form-builder';
-import {QuestionStore} from '@app/shared/stores/question-store.service';
-import {QuestionnaireStore} from '@app/shared/stores/questionnaire-store.service';
+import {QuestionStore} from '@app/features/stores/question-store.service';
+import {QuestionnaireStore} from '@app/features/stores/questionnaire-store.service';
 import {EditableFormComponent} from '@app/shared/material-components/editable-form/editableFormComponent';
 import {FabToggleComponent} from '@app/shared/material-components/fab/fab-toggle/fab-toggle.component';
-import {Category} from '@app/shared/qcm-rest-api/model/category.model';
-import {Questionnaire} from '@app/shared/qcm-rest-api/model/questionnaire.model';
-import {Tag} from '@app/shared/qcm-rest-api/model/tag.model';
-import {CategoryService} from '@app/shared/qcm-rest-api/services/category.service';
-import {TagService} from '@app/shared/qcm-rest-api/services/tag.service';
+import {Category} from '@app/features/qcm-rest-api/model/category.model';
+import {Questionnaire} from '@app/features/qcm-rest-api/model/questionnaire.model';
+import {Tag} from '@app/features/qcm-rest-api/model/tag.model';
+import {CategoryService} from '@app/features/qcm-rest-api/services/category.service';
+import {TagService} from '@app/features/qcm-rest-api/services/tag.service';
 
 
 @Component({

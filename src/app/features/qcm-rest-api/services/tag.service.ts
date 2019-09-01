@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {QcmApi} from '@app/shared/qcm-rest-api/qcm-api';
+import {QcmApi} from '@app/features/qcm-rest-api/qcm-api';
 import {Page} from './page';
 import {Observable} from 'rxjs';
 
 import {Tag} from '../model/tag.model';
-import {Criteria} from '@app/shared/qcm-rest-api/model/criteria';
+import {Criteria} from '@app/features/qcm-rest-api/model/criteria';
 import {publishLast, refCount} from 'rxjs/operators';
 
 @Injectable()

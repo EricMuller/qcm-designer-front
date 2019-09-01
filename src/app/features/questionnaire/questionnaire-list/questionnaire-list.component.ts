@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {QuestionnaireStore} from '@app/shared/stores/questionnaire-store.service';
+import {QuestionnaireStore} from '@app/features/stores/questionnaire-store.service';
 
 
 @Component({

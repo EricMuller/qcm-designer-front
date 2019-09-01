@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
-import {QuestionnaireStore} from '@app/shared/stores/questionnaire-store.service';
-import {TagStore} from '@app/shared/stores/tag-store.service';
-import {Criteria} from '@app/shared/qcm-rest-api/model/criteria';
-import {Question} from '@app/shared/qcm-rest-api/model/question.model';
-import {Page} from '@app/shared/qcm-rest-api/services/page';
-import {QuestionService} from '@app/shared/qcm-rest-api/services/question.service';
-import {SelectStoreAdapter} from '@app/shared/stores/selection-store';
-import {CrudStore, CriteriaStore} from '@app/shared/stores/store-api';
+import {QuestionnaireStore} from '@app/features/stores/questionnaire-store.service';
+import {TagStore} from '@app/features/stores/tag-store.service';
+import {Criteria} from '@app/features/qcm-rest-api/model/criteria';
+import {Question} from '@app/features/qcm-rest-api/model/question.model';
+import {Page} from '@app/features/qcm-rest-api/services/page';
+import {QuestionService} from '@app/features/qcm-rest-api/services/question.service';
+import {SelectStoreAdapter} from '@app/features/stores/selection-store';
+import {CrudStore, CriteriaStore} from '@app/features/stores/store-api';
 import {Observable, of, ReplaySubject, Subject} from 'rxjs';
 import {mergeMap, publishLast, refCount} from 'rxjs/operators';
 

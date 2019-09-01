@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {NotifierService} from '@app/core/notifications/simple-notifier.service';
-import {Question} from '@app/shared/qcm-rest-api/model/question.model';
-import {Questionnaire} from '@app/shared/qcm-rest-api/model/questionnaire.model';
-import {QuestionStore} from '@app/shared/stores/question-store.service';
-import {QuestionnaireStore} from '@app/shared/stores/questionnaire-store.service';
-import {SearchStore} from '@app/shared/stores/tag-questionnaire-filter-store-s.service';
+import {Question} from '@app/features/qcm-rest-api/model/question.model';
+import {Questionnaire} from '@app/features/qcm-rest-api/model/questionnaire.model';
+import {QuestionStore} from '@app/features/stores/question-store.service';
+import {QuestionnaireStore} from '@app/features/stores/questionnaire-store.service';
+import {SearchStore} from '@app/features/stores/tag-questionnaire-filter-store-s.service';
 
 @Component({
   selector: 'app-question-list',

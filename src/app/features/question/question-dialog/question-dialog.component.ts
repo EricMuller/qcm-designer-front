@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Question} from '@app/shared/qcm-rest-api/model/question.model';
-import {Questionnaire} from '@app/shared/qcm-rest-api/model/questionnaire.model';
+import {Question} from '@app/features/qcm-rest-api/model/question.model';
+import {Questionnaire} from '@app/features/qcm-rest-api/model/questionnaire.model';
 import {QuestionnaireDialogComponent} from '../../questionnaire/questionnaire-dialog/questionnaire-dialog.component';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 

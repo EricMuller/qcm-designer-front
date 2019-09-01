@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Category} from '@app/shared/qcm-rest-api/model/category.model';
+import {Category} from '@app/features/qcm-rest-api/model/category.model';
 
 
 

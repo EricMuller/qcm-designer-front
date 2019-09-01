@@ -6,7 +6,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {NotifierService} from '../../../core/notifications/simple-notifier.service';
 import {RouterTestingModule} from '@angular/router/testing';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {QuestionService} from 'app/shared/qcm-rest-api/services/question.service';
+import {QuestionService} from 'app/features/qcm-rest-api/services/question.service';
 
 
 describe('QuestionListComponent', () => {

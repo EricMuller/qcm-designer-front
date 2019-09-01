@@ -1,9 +1,9 @@
 
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Injectable} from '@angular/core';
-import {Question} from '@app/shared/qcm-rest-api/model/question.model';
-import {Reponse} from '@app/shared/qcm-rest-api/model/response.model';
-import {Tag} from '@app/shared/qcm-rest-api/model/tag.model';
+import {Question} from '@app/features/qcm-rest-api/model/question.model';
+import {Reponse} from '@app/features/qcm-rest-api/model/response.model';
+import {Tag} from '@app/features/qcm-rest-api/model/tag.model';
 
 
 

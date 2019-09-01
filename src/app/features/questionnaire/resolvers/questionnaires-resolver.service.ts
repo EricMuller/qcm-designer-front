@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
-import {Page} from '@app/shared/qcm-rest-api/services/page';
-import {QuestionnaireService} from '@app/shared/qcm-rest-api/services/questionnaire.service';
+import {Page} from '@app/features/qcm-rest-api/services/page';
+import {QuestionnaireService} from '@app/features/qcm-rest-api/services/questionnaire.service';
 import {Observable} from 'rxjs';
 import {environment} from '../../../../environments/environment';
 

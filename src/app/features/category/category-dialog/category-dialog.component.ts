@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {Category} from '@app/shared/qcm-rest-api/model/category.model';
-import {CategoryService} from '@app/shared/qcm-rest-api/services/category.service';
+import {Category} from '@app/features/qcm-rest-api/model/category.model';
+import {CategoryService} from '@app/features/qcm-rest-api/services/category.service';
 
 
 
