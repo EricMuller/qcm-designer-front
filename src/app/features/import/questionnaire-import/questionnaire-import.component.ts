@@ -1,7 +1,7 @@
 import {HttpClient} from '@angular/common/http';
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {NotifierService} from '@app/core/notifications/simple-notifier.service';
-import {QcmApi} from '@app/features/qcm-rest-api/qcm-api';
+import {QCM_API_ENDPOINT_TOKEN, QcmApiEndPoint} from '@app/features/qcm-rest-api/qcm-api-end-point';
 
 
 @Component({
@@ -12,7 +12,7 @@ import {QcmApi} from '@app/features/qcm-rest-api/qcm-api';
 })
 export class QuestionnaireImportComponent implements OnInit {
 
-  public apiEndPoint = QcmApi.UPLOAD + 'json';
+  public apiEndPoint = this.endPoint.UPLOAD + 'json';
 
   public sample =
     {
@@ -27,11 +27,12 @@ export class QuestionnaireImportComponent implements OnInit {
   public files: any;
 
   constructor(private http: HttpClient,
-              private notifierService: NotifierService) {
+              private notifierService: NotifierService,
+     @Inject(QCM_API_ENDPOINT_TOKEN) private endPoint: QcmApiEndPoint) {
 
   }
   onFileComplete(event) {
-    this.notifierService.notifySuccess('Upload Ok')
+    this.notifierService.notifySuccess('Upload Ok');
   }
 
   ngOnInit() {

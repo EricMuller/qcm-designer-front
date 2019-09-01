@@ -21,7 +21,8 @@ import {TranslateModule} from '@ngx-translate/core';
     RouterModule,
     FabModule,
     FlexLayoutModule,
-    FormsModule, TranslateModule
+    FormsModule,
+    TranslateModule
   ],
   declarations: [SelectableListComponent, SideNavLayoutComponent, LoginMenuComponent]
   , exports: [SelectableListComponent, SideNavLayoutComponent, LoginMenuComponent,
