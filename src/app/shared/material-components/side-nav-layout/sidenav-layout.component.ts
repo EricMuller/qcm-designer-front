@@ -1,9 +1,10 @@
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {AfterContentInit, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material';
+import {NavigationExtras, Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {Observable, of, Subscription} from 'rxjs';
-import {map, share} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-sidenav-layout',
@@ -48,14 +49,14 @@ export class SideNavLayoutComponent implements OnInit, OnDestroy, AfterContentIn
 
   isHandset$: Observable<boolean>;
 
-  constructor(private breakpointObserver: BreakpointObserver, public translate: TranslateService) {
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router,
+              public translate: TranslateService) {
   }
 
   public login(event): void {
   }
 
   ngOnInit(): void {
-
 
 
     console.log('SideNavLayoutComponent.ngOnInit ok');
@@ -98,6 +99,11 @@ export class SideNavLayoutComponent implements OnInit, OnDestroy, AfterContentIn
 
   onLanguageSelect($event): void {
 
+  }
+
+  routeLink(commands: any[], extras?: NavigationExtras) {
+    this.leftSidenav.toggle();
+    this.router.navigate(commands, extras);
   }
 
 }

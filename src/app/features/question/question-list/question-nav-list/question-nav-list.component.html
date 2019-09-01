@@ -10,8 +10,9 @@
         <mat-checkbox *ngIf="isSelected(question)" matListAvatar [checked]="isSelected(question)" ></mat-checkbox>
       </button>
 
-      <h4 matLine class="cursor-pointer" [routerLink]="['/questions/'+ question.id ]"> {{question.id}}
-        - {{question.question}} </h4>
+      <p  class="cursor-pointer"  [routerLink]="['/questions/'+ question.id ]"> {{question.id}}
+              - {{question.question}} </p>
+      <div class="spacer"></div>
       <!--  menu -->
       <span *ngFor="let tag of question.tags" class="label label-info list-item-tag" (click)="swapTag(tag)">{{tag.libelle}}</span>
 
