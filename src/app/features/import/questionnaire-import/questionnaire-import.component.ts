@@ -27,17 +27,16 @@ export class QuestionnaireImportComponent implements OnInit {
   public files: any;
 
   constructor(private http: HttpClient,
-              private notifierService: NotifierService,
-     @Inject(QCM_API_ENDPOINT_TOKEN) private endPoint: QcmApiEndPoint) {
+              private notifierService: NotifierService, @Inject(QCM_API_ENDPOINT_TOKEN) private endPoint: QcmApiEndPoint) {
 
   }
+
   onFileComplete(event) {
     this.notifierService.notifySuccess('Upload Ok');
   }
 
   ngOnInit() {
   }
-
 
 
 }

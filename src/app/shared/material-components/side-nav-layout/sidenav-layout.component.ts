@@ -1,5 +1,5 @@
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material';
 import {TranslateService} from '@ngx-translate/core';
 import {Observable, of, Subscription} from 'rxjs';
@@ -11,7 +11,8 @@ import {map, share} from 'rxjs/operators';
   styleUrls: ['./sidenav-layout.component.scss']
 
 })
-export class SideNavLayoutComponent implements OnInit, OnDestroy {
+export class SideNavLayoutComponent implements OnInit, OnDestroy, AfterContentInit {
+
 
   @ViewChild('leftsidenav', {static: false})
   public leftSidenav: MatSidenav;
@@ -45,11 +46,7 @@ export class SideNavLayoutComponent implements OnInit, OnDestroy {
     {link: '/import/questionnaires', label: 'menu.import'},
   ];
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.Handset])
-    .pipe(
-      map(result => result.matches), share()
-    );
-
+  isHandset$: Observable<boolean>;
 
   constructor(private breakpointObserver: BreakpointObserver, public translate: TranslateService) {
   }
@@ -58,7 +55,22 @@ export class SideNavLayoutComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
+
+
     console.log('SideNavLayoutComponent.ngOnInit ok');
+  }
+
+  ngAfterContentInit(): void {
+    this.isHandset$ = this.breakpointObserver.observe([Breakpoints.Handset])
+      .pipe(
+        map(
+          result => {
+            console.log(result);
+            return result.matches;
+          })
+      );
+    console.log('SideNavLayoutComponent.ngAfterContentInit ok');
   }
 
   checkScreen(): void {

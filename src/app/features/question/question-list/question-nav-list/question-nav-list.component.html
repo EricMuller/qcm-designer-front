@@ -1,7 +1,7 @@
-<mat-nav-list>
+<mat-nav-list class="nav-list">
   <!--(mouseover)='over(question)'-->
 
-    <mat-list-item class="list mat-elevation-z4 list-item" *ngFor="let question of elements as q; index as i"
+    <mat-list-item class="list mat-elevation-z2 list-item" *ngFor="let question of elements as q; index as i"
 
                    attr.entityId="questionId_{{question.id}}" >
 
@@ -13,7 +13,7 @@
       <h4 matLine class="cursor-pointer" [routerLink]="['/questions/'+ question.id ]"> {{question.id}}
         - {{question.question}} </h4>
       <!--  menu -->
-      <span *ngFor="let tag of question.tags" class="label label-info" (click)="swapTag(tag)">{{tag.libelle}}</span>
+      <span *ngFor="let tag of question.tags" class="label label-info list-item-tag" (click)="swapTag(tag)">{{tag.libelle}}</span>
 
       <button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="questionMenu">
         <mat-icon>more_vert</mat-icon>

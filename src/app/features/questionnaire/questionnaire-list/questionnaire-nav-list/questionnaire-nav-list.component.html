@@ -1,22 +1,23 @@
-<mat-nav-list>
+<mat-nav-list class="nav-list">
   <!--(mouseover)='over(questionnaire)'-->
-  <div *ngFor="let questionnaire of elements as q; index as i" style="min-height: 0;" >
-    <mat-list-item class="list mat-elevation-z4 list-item"
-                                  attr.entityId="questionnaireId_{{questionnaire.id}}">
+
+    <mat-list-item class="list mat-elevation-z2 list-item"
+                                  attr.entityId="questionnaireId_{{questionnaire.id}}"
+                   *ngFor="let questionnaire of elements as q; index as i"  >
 
       <button mat-icon-button matListAvatar (click)="setClickedRow(questionnaire)">
         <mat-icon matListIcon *ngIf="!isSelected(questionnaire)">question_answer</mat-icon>
         <mat-checkbox *ngIf="isSelected(questionnaire)" matListAvatar [checked]="isSelected(questionnaire)"></mat-checkbox>
         </button>
-        <div >
 
-        </div>
-
-      <h4 matLine class="cursor-pointer"  style="max-width:600px;overflow: hidden" [routerLink]="['/questionnaires/'+ questionnaire.id ]" >{{questionnaire.title}} </h4>
+      <h4 matLine class="cursor-pointer"  style="min-width: 20px;max-width:600px;overflow: hidden"
+          [routerLink]="['/questionnaires/'+ questionnaire.id ]" matTooltip="{{questionnaire.title}}">
+        {{questionnaire.title}}
+      </h4>
 
       <!--  menu -->
       <span *ngIf="questionnaire.category" class="label label-danger"> {{questionnaire.category?.libelle}}</span>
-      <span *ngFor="let tag of questionnaire.tags" class="label label-info"
+      <span *ngFor="let tag of questionnaire.tags" class="label label-info list-item-tag"
             (click)="swapTag(tag)">{{tag.libelle}}</span>
 
       <button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="questionnaireMenu">
@@ -30,6 +31,6 @@
         </button>
       </mat-menu>
     </mat-list-item>
-  </div>
+
 
 </mat-nav-list>

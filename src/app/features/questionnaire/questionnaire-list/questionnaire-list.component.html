@@ -30,19 +30,19 @@
   </div>
 
   <!-- [hidden]="filter" -->
-  <div fxLayout="row" [hidden]="filter">
-    <div fxFlex>
+  <div fxlayout [hidden]="filter">
+
       <app-selectable-list #list
                            [criteriaStore]="questionnaireStore"
                            [sortBy]="'id'"
                            (onCreate)="create()">
 
-        <div toolbar-view>
+        <div toolbar-view class="overflow-hidden">
             <span *ngIf="list.isSelectedMode()"
-                  style="align-items: center ">{{'qcm.questionnaire.selected.title' | translate }}
+                  style="align-items: center " >{{'qcm.questionnaire.selected.title' | translate }}
               ({{list.selectionSize()}})</span>
           <span *ngIf="!list.isSelectedMode()"
-                style="align-items: center ">{{'qcm.questionnaire.list.title' | translate }}</span>
+                style="align-items: center " >{{'qcm.questionnaire.list.title' | translate }}</span>
         </div>
 
         <div toolbar-view class="spacer"></div>
@@ -53,7 +53,6 @@
 
     </div>
 
-  </div>
 
 </div>
 
