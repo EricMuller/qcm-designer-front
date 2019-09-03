@@ -15,16 +15,14 @@ branches:
     - master
 
 before_script:
-  - npm install -g @angular/cli
+  - npm install -g --silent @angular/cli
 
-install: npm install
-
-script:
-  - ng build --prod
+install:
+  - npm install
 
 deploy:
   provider: heroku
-  skip_cleanup: true
+  skip_cleanup: false
   api_key:
     secure: $HEROKU_API_KEY
   app: qcm-angular-frontend
