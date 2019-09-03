@@ -48,3 +48,8 @@ Qcm Angular Frontend uses a number of open source projects to work properly:
 
 
 Code is under the [MIT Licence ](https://opensource.org/licenses/mit-license.php).
+
+### Reference
+
+* [PWA] - https://blog.angular-university.io/angular-service-worker/
+
