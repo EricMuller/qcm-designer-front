@@ -12,6 +12,8 @@ import {HomeComponent} from './features/home/home.component';
 import {QuestionStore} from './features/stores/question-store.service';
 import {AngularModule} from './shared/angular/angular.module';
 import {MaterialModule} from './shared/material/material.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -27,6 +29,7 @@ import {MaterialModule} from './shared/material/material.module';
     FlexLayoutModule,
     AppRoutingModule,
     MaterialComponentsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [QuestionStore],
   bootstrap: [AppComponent]

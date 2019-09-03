@@ -1,4 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import {SwUpdate} from '@angular/service-worker';
 
 
 @Component({
@@ -9,16 +10,27 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 export class AppComponent implements OnInit, OnDestroy {
 
 
-  constructor() {
+  constructor(private swUpdate: SwUpdate) {
+
+  }
+
+
+  public ngOnDestroy() {
 
   }
 
   public ngOnInit(): void {
 
-  }
+    if (this.swUpdate.isEnabled) {
 
-  public ngOnDestroy() {
+      this.swUpdate.available.subscribe(() => {
 
+        if (confirm('New version available. Load New Version?')) {
+
+          window.location.reload();
+        }
+      });
+    }
   }
 
 }
