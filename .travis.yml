@@ -20,6 +20,9 @@ before_script:
 install:
   - npm install
 
+script:
+  - ng build --prod
+
 deploy:
   provider: heroku
   skip_cleanup: false
