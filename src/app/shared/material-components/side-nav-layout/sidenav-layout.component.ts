@@ -2,6 +2,7 @@ import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {AfterContentInit, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material';
 import {NavigationExtras, Router} from '@angular/router';
+import {KeycloakGuardService} from '@app/core/auth/keycloak-guard.service';
 import {TranslateService} from '@ngx-translate/core';
 import {Observable, of, Subscription} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -50,7 +51,7 @@ export class SideNavLayoutComponent implements OnInit, OnDestroy, AfterContentIn
   isHandset$: Observable<boolean>;
 
   constructor(private breakpointObserver: BreakpointObserver, private router: Router,
-              public translate: TranslateService) {
+              public translate: TranslateService, private keycloakGuardService: KeycloakGuardService) {
   }
 
   public login(event): void {
@@ -105,5 +106,10 @@ export class SideNavLayoutComponent implements OnInit, OnDestroy, AfterContentIn
     this.leftSidenav.toggle();
     this.router.navigate(commands, extras);
   }
+
+  public isLoggedIn(): boolean {
+    return this.keycloakGuardService.isLoggedIn();
+  }
+
 
 }

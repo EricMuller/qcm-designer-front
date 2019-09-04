@@ -33,6 +33,7 @@ export class KeycloakService {
           resolve();
         })
         .error((e) => {
+          alert(e);
           console.error(e);
           reject();
         });

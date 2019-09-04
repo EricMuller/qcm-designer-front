@@ -15,8 +15,8 @@ export class UserMenuItemComponent implements OnInit {
   ngOnInit() {
   }
 
-  public getUser(): User {
-    return  this.userGuardService.getUser();
-  }
+  // public getUser(): User {
+  //   return  this.userGuardService.getUser();
+  // }
 
 }

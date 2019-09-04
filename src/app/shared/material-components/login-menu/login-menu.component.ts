@@ -34,9 +34,9 @@ export class LoginMenuComponent implements OnInit {
     this.router.navigate(['/questionnaires/user']);
   }
 
-  public getUser(): User {
-    return this.keycloakGuardService.getUser();
-  }
+  // public getUser(): User {
+  //   return this.keycloakGuardService.getUser();
+  // }
 
 
 }
