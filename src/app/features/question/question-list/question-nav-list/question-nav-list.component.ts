@@ -23,8 +23,7 @@ export class QuestionNavListComponent implements OnInit {
   ngOnInit() {
   }
 
-  public isSelected(question: Question):
-    boolean {
+  public isSelected(question: Question): boolean {
     return this.questionStore.isSelected(question);
   }
 

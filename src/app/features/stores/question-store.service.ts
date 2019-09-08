@@ -1,23 +1,18 @@
 import {Injectable} from '@angular/core';
-import {QuestionnaireStore} from '@app/features/stores/questionnaire-store.service';
-import {TagStore} from '@app/features/stores/tag-store.service';
 import {Criteria} from '@app/features/qcm-rest-api/model/criteria';
 import {Question} from '@app/features/qcm-rest-api/model/question.model';
 import {Page} from '@app/features/qcm-rest-api/services/page';
 import {QuestionService} from '@app/features/qcm-rest-api/services/question.service';
+import {QuestionnaireStore} from '@app/features/stores/questionnaire-store.service';
 import {SelectStoreAdapter} from '@app/features/stores/selection-store';
-import {CrudStore, CriteriaStore} from '@app/features/stores/store-api';
-import {Observable, of, ReplaySubject, Subject} from 'rxjs';
+import {CriteriaStore, CrudStore} from '@app/features/stores/store-api';
+import {TagStore} from '@app/features/stores/tag-store.service';
+import {Observable} from 'rxjs';
 import {mergeMap, publishLast, refCount} from 'rxjs/operators';
 
 
 @Injectable()
 export class QuestionStore extends SelectStoreAdapter<Question> implements CriteriaStore<Question>, CrudStore<Question> {
-
-
-  private _page: Subject<Page> = new ReplaySubject<Page>(1);
-
-  readonly page$: Observable<Page> = this._page.asObservable();
 
   constructor(private questionService: QuestionService, private tagStore: TagStore, private questionnaireStore: QuestionnaireStore) {
     super();
@@ -27,7 +22,7 @@ export class QuestionStore extends SelectStoreAdapter<Question> implements Crite
     const obs = this.questionService.getQuestions(page, size, sort);
     obs.subscribe(
       p => {
-        this._page.next(p);
+        this.publishPage(p);
       });
     return obs;
   }
@@ -35,18 +30,17 @@ export class QuestionStore extends SelectStoreAdapter<Question> implements Crite
   deleteElement(question: Question): Observable<Question> {
     return this.questionService.deleteQuestionById(question.id).pipe(
       mergeMap((data) => {
-        this.selectElement(question, false);
-        return of(question);
+        return this.deletePageElement(question);
       }));
   }
 
   deleteElements(questions: Question[]) {
-    for (const q of questions) {
-      const id: number = q.id;
+    for (const question of questions) {
+      const id: number = question.id;
       this.questionService.deleteQuestionById(id).subscribe((data) => {
-          this.selectElement(q, false);
+          return this.deletePageElement(question);
         }
-      )
+      );
     }
   }
 
@@ -65,18 +59,18 @@ export class QuestionStore extends SelectStoreAdapter<Question> implements Crite
       .pipe(publishLast(), refCount());
     obs.subscribe(
       p => {
-        this._page.next(p);
+        this.publishPage(p);
       });
     return obs;
   }
 
   criterias(): Criteria[] {
 
-    const criteria: Criteria[] =  this.tagStore.selected.map((tag) => {
+    const criteria: Criteria[] = this.tagStore.selected.map((tag) => {
       return new Criteria(tag.id.toString(), 'tag_id');
     });
 
-    const questionnaires: Criteria[] =  this.questionnaireStore.selected.map((tag) => {
+    const questionnaires: Criteria[] = this.questionnaireStore.selected.map((tag) => {
       return new Criteria(tag.id.toString(), 'questionnaire_id');
     });
 

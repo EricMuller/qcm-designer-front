@@ -47,21 +47,22 @@
                (page)="onPaginateChange($event)"></mat-paginator>
 </div>
 
-<!--FAB -->
-<div *ngIf="!selectionSize()" fxlayout fxlayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
+
+<!--FAB (no selection)-->
+<div *ngIf="!selectionSize()" fxlayout fxlayout="column" fxLayoutAlign="end" fxLayoutGap="10px" class="fab-bottom">
   <button mat-mini-fab (click)="onCreateElement($event)" color="primary"
-          matTooltip="{{'qcm.selectable-list.menu.new' | translate }}">
+          matTooltip="{{'qcm.selectable-list.menu.new' | translate }}" class="fab-bottom">
     <mat-icon>add</mat-icon>
   </button>
 </div>
 
-<!--FAB MULTI -->
-<div *ngIf="selectionSize()" fxlayout fxlayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
+
+<!--FAB MULTI (mode selection) -->
+<div *ngIf="selectionSize()" fxlayout fxlayout="column" fxLayoutAlign="center" fxLayoutGap="10px" class="fab-bottom">
 
   <app-fab-toggle #toggle [iconOff]="'mode_edit'" [iconOn]="'replay'"
                   toolTipOff="{{'qcm.selectable-list.toggle.off' | translate }}"
                   toolTipOn="{{'qcm.selectable-list.toggle.on' | translate }}"
-
                   fxFlex="10%"></app-fab-toggle>
 
   <button mat-mini-fab (click)="onCreateElement($event)" *ngIf="toggle.opened"

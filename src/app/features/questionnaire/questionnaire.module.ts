@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {CategoryDialogComponent} from '@app/features/category/category-dialog/category-dialog.component';
 import {CategoryModule} from '@app/features/category/category.module';
-import {ImportModule} from '@app/features/import/import.module';
+import {UploadModule} from '@app/features/upload/upload.module';
 import {QuestionModule} from '@app/features/question/question.module';
 import {TagModule} from '@app/features/tag/tag.module';
 import {UserModule} from '@app/features/user/user.module';
@@ -31,7 +31,7 @@ import {SearchStore} from './services/questionnaire-search-store.service';
     UserModule,
     CategoryModule,
     TagModule,
-    ImportModule,
+    UploadModule,
     MaterialComponentsModule,
     FlexLayoutModule,
     TranslateModule,

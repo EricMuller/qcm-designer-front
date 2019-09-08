@@ -12,7 +12,7 @@ const routes: Routes = [
     path: 'home', component: HomeComponent,
   },
   {
-    path: 'import', loadChildren: () => import('./features/import/import-routing.module').then(m => m.ImportRoutingModule)
+    path: 'upload', loadChildren: () => import('./features/upload/upload-routing.module').then(m => m.UploadRoutingModule)
   },
   {
     path: 'user', loadChildren: () => import('./features/user/user-routing.module').then(m => m.UserRoutingModule)

@@ -1,4 +1,4 @@
-import {AfterContentInit, AfterViewChecked, AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterContentInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material';
 import {Entity} from '@app/features/qcm-rest-api/model/entity';
 import {Page} from '@app/features/qcm-rest-api/services/page';
@@ -38,13 +38,13 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
   public pulseState = false;
   public selectedRow: number;
 
-  private _modeSelection: Subject<boolean> = new ReplaySubject<boolean>(1);
-  readonly modeSelection$: Observable<boolean> = this._modeSelection.asObservable();
+  private modeSelectionSubject: Subject<boolean> = new ReplaySubject<boolean>(1);
+  readonly modeSelection$: Observable<boolean> = this.modeSelectionSubject.asObservable();
 
   public currentView: ViewMode = ViewMode.List;
 
-  private _loadingData: Subject<boolean> = new BehaviorSubject(false);
-  readonly loadingData$: Observable<boolean> = this._loadingData.asObservable();
+  private loadingDataSubject: Subject<boolean> = new BehaviorSubject(false);
+  readonly loadingData$: Observable<boolean> = this.loadingDataSubject.asObservable();
 
   public loadingData = false;
 
@@ -72,18 +72,18 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
           this.elements.splice(itemIndex, 1);
           if (this.elements.length === 0) {
             this.refresh(true);
-            this._modeSelection.next(false)
+            this.modeSelectionSubject.next(false);
           }
         }
       }
     );
 
     this.criteriaStore.selected$.subscribe((selected) => {
-        this.selected = <T[]>selected;
+        this.selected = selected as T[];
         if (this.selected.length > 0) {
-          this._modeSelection.next(true)
+          this.modeSelectionSubject.next(true);
         } else {
-          this._modeSelection.next(false)
+          this.modeSelectionSubject.next(false);
           this.currentView = ViewMode.List;
         }
       }
@@ -112,17 +112,16 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
     this.totalElements = page.totalElements;
   }
 
-  private retrieveElements(pageIndex: number, pageSize: number, sort: string, cleanBefore ?: boolean): Observable<boolean> {
-    let criterias = []
+  private refreshElements(pageIndex: number, pageSize: number, sort: string, cleanBefore ?: boolean): Observable<boolean> {
 
-   criterias = this.criteriaStore.criterias();
+    const criteria = this.criteriaStore.criterias();
 
     this.loadingData = true;
-    return this.criteriaStore.getPageByCriteria(criterias, pageIndex, pageSize, sort).pipe(
-      mergeMap((page) => {
+    return this.criteriaStore.getPageByCriteria(criteria, pageIndex, pageSize, sort)
+      .pipe( mergeMap((page) => {
           this.getContentPage(page, cleanBefore);
           if (!this.elements.length) {
-            this._modeSelection.next(false)
+            this.modeSelectionSubject.next(false);
           }
           this.loadingData = false;
           return of(true);
@@ -131,7 +130,7 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
   }
 
   onPaginateChange(event: any) {
-    this.retrieveElements(event.pageIndex, this.pageSize, this.sortBy, true).subscribe((b) => {
+    this.refreshElements(event.pageIndex, this.pageSize, this.sortBy, true).subscribe((b) => {
 
       }
     );
@@ -147,7 +146,7 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
 
   refresh(reset: boolean) {
 
-    this.retrieveElements(this.pageIndex, this.pageSize, this.sortBy, reset)
+    this.refreshElements(this.pageIndex, this.pageSize, this.sortBy, reset)
       .subscribe((b) => {
         this.pulseState = !this.pulseState;
         if (reset) {

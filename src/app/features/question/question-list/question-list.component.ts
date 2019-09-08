@@ -30,7 +30,7 @@ export class QuestionListComponent implements OnInit {
     this.questionnaireStore.selected$.subscribe((qs) => this.questionnaires = qs);
     this.questionStore.selected$.subscribe(selected => {
       this.selected = selected;
-    })
+    });
   }
 
   public removeSelectedQuestionnaire(q: Questionnaire) {

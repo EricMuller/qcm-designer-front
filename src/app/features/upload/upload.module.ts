@@ -1,12 +1,14 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
-import {MaterialFileUploadComponent} from '@app/features/import/material-file-upload/material-file-upload.component';
-import {QuestionnaireImportComponent} from '@app/features/import/questionnaire-import/questionnaire-import.component';
+import {MaterialFileUploadComponent} from '@app/features/upload/material-file-upload/material-file-upload.component';
+import {UploadListComponent} from '@app/features/upload/upload-list/upload-list.component';
+import {UploadStore} from '@app/features/stores/upload-store.service';
 import {AngularModule} from '@app/shared/angular/angular.module';
 import {MaterialComponentsModule} from '@app/shared/material-components/material-components.module';
 import {MaterialModule} from '@app/shared/material/material.module';
 import {TranslateModule} from '@ngx-translate/core';
 import {ImportAppComponent} from './import-app/import-app.component';
+import {UploadNavListComponent} from './upload-list/upload-nav-list/upload-nav-list.component';
 
 @NgModule({
   imports: [
@@ -16,7 +18,8 @@ import {ImportAppComponent} from './import-app/import-app.component';
     MaterialComponentsModule,
     TranslateModule,
   ],
-  declarations: [ImportAppComponent, QuestionnaireImportComponent, MaterialFileUploadComponent]
+  declarations: [ImportAppComponent, UploadListComponent, MaterialFileUploadComponent, UploadNavListComponent],
+  providers: [UploadStore]
 })
-export class ImportModule {
+export class UploadModule {
 }

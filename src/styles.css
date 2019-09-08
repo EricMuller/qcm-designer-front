@@ -20,7 +20,11 @@ body {
 /*}*/
 
 .page-center {
-  padding: 0 2px;
+  padding: 0 2px ;
+}
+
+.fab-bottom {
+  height: 64px;
 }
 
 .nav-list .list-item {

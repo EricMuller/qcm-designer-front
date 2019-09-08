@@ -3,8 +3,8 @@ import {Reponse} from './response.model';
 import {Entity} from './entity';
 
 export class Question extends Entity {
-  date_modification?: number;
-  date_creation?: number;
+  dateModification?: number;
+  dateCreation?: number;
   question: string;
   responses: Reponse[];
   tags?: Tag[];

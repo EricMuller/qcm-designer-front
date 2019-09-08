@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { trigger, state, style, animate, transition } from '@angular/animations';
-import { HttpClient,  HttpRequest, HttpEventType, HttpErrorResponse } from '@angular/common/http';
-import { Subscription ,  of } from 'rxjs';
-import { catchError, last, map, tap } from 'rxjs/operators';
+import {animate, state, style, transition, trigger} from '@angular/animations';
+import {HttpClient, HttpErrorResponse, HttpEventType, HttpRequest} from '@angular/common/http';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {of, Subscription} from 'rxjs';
+import {catchError, last, map, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-material-file-upload',
@@ -10,9 +10,9 @@ import { catchError, last, map, tap } from 'rxjs/operators';
   styleUrls: ['./material-file-upload.component.css'],
   animations: [
     trigger('fadeInOut', [
-      state('in', style({ opacity: 100 })),
+      state('in', style({opacity: 100})),
       transition('* => void', [
-        animate(300, style({ opacity: 0 }))
+        animate(300, style({opacity: 0}))
       ])
     ])
   ]
@@ -30,9 +30,12 @@ export class MaterialFileUploadComponent implements OnInit {
   /** Allow you to add handler after its completion. Bubble up response text from remote. */
   @Output() complete = new EventEmitter<string>();
 
+  @Input() hiddenButton = true;
+
   files: Array<FileUploadModel> = [];
 
-  constructor(private _http: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+  }
 
   ngOnInit() {
   }
@@ -42,7 +45,7 @@ export class MaterialFileUploadComponent implements OnInit {
     fileUpload.onchange = () => {
       for (let index = 0; index < fileUpload.files.length; index++) {
         const file = fileUpload.files[index];
-        this.files.push({ data: file, state: 'in', inProgress: false, progress: 0, canRetry: false, canCancel: true });
+        this.files.push({data: file, state: 'in', inProgress: false, progress: 0, canRetry: false, canCancel: true});
       }
       this.uploadFiles();
     };
@@ -72,31 +75,33 @@ export class MaterialFileUploadComponent implements OnInit {
     });
 
     file.inProgress = true;
-    file.sub = this._http.request(req).pipe(
-      map(event => {
-        switch (event.type) {
-          case HttpEventType.UploadProgress:
-            file.progress = Math.round(event.loaded * 100 / event.total);
-            break;
-          case HttpEventType.Response:
-            return event;
+    file.sub = this.httpClient.request(req)
+      .pipe(
+        map(event => {
+          switch (event.type) {
+            case HttpEventType.UploadProgress:
+              file.progress = Math.round(event.loaded * 100 / event.total);
+              break;
+            case HttpEventType.Response:
+              return event;
+          }
+        }),
+        tap(message => {
+        }),
+        last(),
+        catchError((error: HttpErrorResponse) => {
+          file.inProgress = false;
+          file.canRetry = true;
+          return of(`${file.data.name} upload failed.`);
+        })
+      ).subscribe(
+        (event: any) => {
+          if (typeof (event) === 'object') {
+            this.removeFileFromArray(file);
+            this.complete.emit(event.body);
+          }
         }
-      }),
-      tap(message => { }),
-      last(),
-      catchError((error: HttpErrorResponse) => {
-        file.inProgress = false;
-        file.canRetry = true;
-        return of(`${file.data.name} upload failed.`);
-      })
-    ).subscribe(
-      (event: any) => {
-        if (typeof (event) === 'object') {
-          this.removeFileFromArray(file);
-          this.complete.emit(event.body);
-        }
-      }
-    );
+      );
   }
 
   private uploadFiles() {

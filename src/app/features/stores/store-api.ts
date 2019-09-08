@@ -34,16 +34,23 @@ export interface ListSelectStore<T extends Entity> {
 
   unSelectAllElement(): void;
 
+  publishPage(p: Page);
+
+  addPageElement(q: T): Observable<T> ;
+
 }
 
 /**
  *
  */
 export interface CriteriaStore<T> extends ListSelectStore<T>, ListStore<T> {
+
   getPageByCriteria(criteria: Criteria[], page?: number, size?: number, sort?: string): Observable<Page>;
 
   criterias(): Criteria[];
 
   clearCriterias();
+
+
 }
 

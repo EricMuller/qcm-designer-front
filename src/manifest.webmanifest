@@ -1,6 +1,6 @@
 {
-  "name": "qcm-angular-front",
-  "short_name": "qcm-angular-front",
+  "name": "qcm",
+  "short_name": "qcm",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",

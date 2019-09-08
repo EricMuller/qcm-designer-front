@@ -1,31 +1,39 @@
 import {Entity} from '@app/features/qcm-rest-api/model/entity';
 import {Page} from '@app/features/qcm-rest-api/services/page';
-import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
+import {BehaviorSubject, Observable, of, ReplaySubject, Subject} from 'rxjs';
 import {ListSelectStore} from './store-api';
+
 
 export class SelectStoreAdapter<T extends Entity> implements ListSelectStore<T> {
 
-  page$: Observable<Page>;
+  protected page: Page;
 
-  private _selected: BehaviorSubject<any[]> = <BehaviorSubject<T[]>>new BehaviorSubject([]);
+  private pageSubject: Subject<Page> = new ReplaySubject<Page>(1);
 
-  private _deleted = new ReplaySubject<T>();
+  readonly page$: Observable<Page> = this.pageSubject.asObservable();
 
-  private _selected$: Observable<T[]> = <Observable<T[]>>this._selected.asObservable();
+  private selectedSubject: BehaviorSubject<any[]> = new BehaviorSubject([]) as BehaviorSubject<T[]>;
 
-  private _deleted$: Observable<T> = this._deleted.asObservable();
+  private elementsSubject: BehaviorSubject<any[]> = new BehaviorSubject([]) as BehaviorSubject<T[]>;
+
+  private deletedSubject = new ReplaySubject<T>();
+
+  selected$: Observable<T[]> = this.selectedSubject.asObservable() as Observable<T[]>;
+
+  deleted$: Observable<T> = this.deletedSubject.asObservable();
+
+  elements$: Observable<T[]> = this.elementsSubject.asObservable() as Observable<T[]>;
 
   public selected: T[] = [];
 
   constructor() {
   }
 
-  get deleted$(): Observable<T> {
-    return this._deleted$;
-  }
 
-  get selected$(): Observable<T[]> {
-    return this._selected$;
+  publishPage(p: Page) {
+    this.page = p;
+    this.pageSubject.next(this.page);
+    this.elementsSubject.next(this.page.content);
   }
 
   swapElement(q: T) {
@@ -33,25 +41,42 @@ export class SelectStoreAdapter<T extends Entity> implements ListSelectStore<T> 
 
     if (itemIndex === -1) {
       this.selected.push(q);
-      this._selected.next(this.selected);
+      this.selectedSubject.next(this.selected);
     } else {
       this.selected.splice(itemIndex, 1);
-      this._selected.next(this.selected);
+      this.selectedSubject.next(this.selected);
     }
   }
 
-  selectElement(q: T, select: boolean) {
+  deletePageElement(q: T): Observable<T> {
+    this.selectElement(q, false);
+    const itemIndex = this.page.content.findIndex(item => item.id === q.id);
+    if (itemIndex !== -1) {
+      this.page.content.splice(itemIndex, 1);
+      this.pageSubject.next(this.page);
+    }
+    return of(q);
+  }
+
+  addPageElement(q: T): Observable<T> {
+    this.page.content.push(q);
+    this.pageSubject.next(this.page);
+    return of(q);
+  }
+
+  selectElement(q: T, select: boolean): Observable<T> {
     const itemIndex = this.selected.findIndex(item => item.id === q.id);
     if (select && itemIndex === -1) {
       this.selected.push(q);
-      this._selected.next(this.selected);
+      this.selectedSubject.next(this.selected);
     } else {
       if (!select && itemIndex !== -1) {
         this.selected.splice(itemIndex, 1);
-        this._selected.next(this.selected);
-        this._deleted.next(q);
+        this.selectedSubject.next(this.selected);
+        this.deletedSubject.next(q);
       }
     }
+    return of(q);
 
   }
 

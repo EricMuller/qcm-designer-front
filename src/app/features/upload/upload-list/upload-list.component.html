@@ -1,0 +1,50 @@
+<div class="page-center">
+
+
+
+  <div fxlayout [hidden]="filter">
+
+    <app-selectable-list #list [criteriaStore]="uploadStore"
+                         [sortBy]="'id'"
+                         (onCreate)="create()">
+
+
+      <div toolbar-view style="display: flex;">
+         <span *ngIf="!list.isSelectedMode()"
+               style="align-items: center "> {{ "qcm.upload.list.title" | translate}}</span>
+        <span *ngIf="list.isSelectedMode()"
+              style="align-items: center ">{{ "qcm.upload.upload.title" |translate }}</span>
+      </div>
+
+      <div toolbar-view class="spacer"></div>
+
+      <app-upload-nav-list elements-view [elements$]="uploadStore.elements$"></app-upload-nav-list>
+      <app-upload-nav-list selected-view [elements$]="uploadStore.selected$"></app-upload-nav-list>
+
+
+    </app-selectable-list>
+
+  </div>
+
+  <mat-card>
+    <mat-card-header>
+<!--      <mat-toolbar>-->
+<!--        <h1>{{"qcm.upload.title" | translate }}</h1>-->
+<!--      </mat-toolbar>-->
+    </mat-card-header>
+    <mat-card-content>
+      <app-material-file-upload #upload  [accept]="accept"   [target]="apiEndPoint"   (complete)="onFileComplete($event)">
+      </app-material-file-upload>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>ex:</mat-card-header>
+    <mat-card-content>
+      <div>{{sample |json}}</div>
+    </mat-card-content>
+
+  </mat-card>
+</div>
+
+

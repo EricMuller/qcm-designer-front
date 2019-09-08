@@ -65,7 +65,7 @@
       <!--<mat-icon prefix>comment_question</mat-icon>-->
       <!--<mat-hint>Hint</mat-hint>-->
       <mat-hint align="end">{{input.value?.length || 0}}/1024</mat-hint>
-      <mat-error *ngIf="form.get('question').hasError('required')">field required</mat-error>
+      <mat-error *ngIf="form.get('item').hasError('required')">field required</mat-error>
     </mat-form-field>
 
     <ng-template [ngSwitchCase]="'FREE_TEXT'">

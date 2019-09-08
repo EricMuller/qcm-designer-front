@@ -24,9 +24,14 @@
   "qcm.question.list.title.short": "Mes questions",
   "qcm.question.selected.title" : "Liste des Questions selectionnée(s)",
 
+  "qcm.upload.list.title": "Mes Téléchargements",
+  "qcm.upload.list.title.short": "Mes Téléchargements",
+  "qcm.upload.selected.title" : "Telechargements selectionnée(s)",
+
   "menu.questions" : "Mes Questions",
   "menu.questionnaires" : "Mes Questionnaires",
-  "menu.import" : "Import",
+  "menu.import" : "Importations",
+  "menu.upload" : "Mes Téléchargements",
   "menu.about" : "A propos",
   "menu.login": "Connection",
 
@@ -60,5 +65,10 @@
   "qcm.form.toggle.off":"Mode edition",
   "qcm.form.toggle.on":"Annuler edition",
 
-  "qcm.import.title": "Selectionner un fichier json à importer"
+  "qcm.import.title": "Selectionner un fichier json à importer",
+  "qcm.upload.title": "Selectionner un fichier json à télécharger",
+
+
+  "qcm.upload.list.title": "Mes téléchargements",
+  "qcm.upload.selected.title": "Mes Selections"
 }

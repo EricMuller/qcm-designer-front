@@ -45,7 +45,7 @@ export class SideNavLayoutComponent implements OnInit, OnDestroy, AfterContentIn
 
   navigationSideMenu = [
     ...this.navigation,
-    {link: '/import/questionnaires', label: 'menu.import'},
+    {link: '/upload/', label: 'menu.upload'},
   ];
 
   isHandset$: Observable<boolean>;

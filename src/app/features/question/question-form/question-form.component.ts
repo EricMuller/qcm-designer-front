@@ -1,14 +1,14 @@
 import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
 import {MatChipInputEvent} from '@angular/material';
-import {ActivatedRoute,  Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {NotifierService} from '@app/core/notifications/simple-notifier.service';
-import {QuestionStore} from '@app/features/stores/question-store.service';
-import {EditableFormComponent} from '@app/shared/material-components/editable-form/editableFormComponent';
-import {FabToggleComponent} from '@app/shared/material-components/fab/fab-toggle/fab-toggle.component';
 import {Question} from '@app/features/qcm-rest-api/model/question.model';
 import {Reponse} from '@app/features/qcm-rest-api/model/response.model';
 import {Tag} from '@app/features/qcm-rest-api/model/tag.model';
+import {QuestionStore} from '@app/features/stores/question-store.service';
+import {EditableFormComponent} from '@app/shared/material-components/editable-form/editableFormComponent';
+import {FabToggleComponent} from '@app/shared/material-components/fab/fab-toggle/fab-toggle.component';
 
 import {QuestionFormBuilder} from './question-form-builder';
 
@@ -46,11 +46,11 @@ export class QuestionFormComponent extends EditableFormComponent<Question> imple
               protected   notifierService: NotifierService,
               protected   router: Router,
               private formBuilder: QuestionFormBuilder,
-              private route: ActivatedRoute ) {
+              private route: ActivatedRoute) {
     super(store, notifierService, router);
     this.types = this.getQuestionTypesEnum();
     this.status = this.getStatusEnum();
-    this.edition = route.snapshot.params.id <= 0 ;
+    this.edition = route.snapshot.params.id <= 0;
     this.route.data.subscribe(data => {
       this.question = data.question;
     });
@@ -136,7 +136,7 @@ export class QuestionFormComponent extends EditableFormComponent<Question> imple
 
   // private getErrorMessage() {
   //   return this.questionForm.get('question').hasError('required') ? 'You must enter a value' :
-  //     this.questionForm.hasError('question') ? 'Not a valid question' : '';
+  //     this.questionForm.hasError('question') ? 'Not a valid item' : '';
   // }
 
   private getQuestionTypesEnum(): any[] {
