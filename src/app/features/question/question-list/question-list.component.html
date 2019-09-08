@@ -2,10 +2,7 @@
 
   <div class="page-header" fxlayout fxlayout="column" fxLayout.xs="column" fxLayoutAlign="center center">
     <div fxFlex="80%" class="page-search"><input type="Text"></div>
-    <a mat-icon-button *ngIf="!list.isSelectedMode()" (click)="list.refresh(true);"
-       matTooltip="{{'qcm.form.menu.search' | translate}}">
-      <mat-icon>replay</mat-icon>
-    </a>
+
     <button mat-icon-button (click)="filter=!filter;" matTooltip="{{'qcm.form.menu.filter' | translate}}">
 
       <mat-icon *ngIf="list.filterSize()>0" matBadge="{{list.filterSize()}}" matBadgeColor="warn"
@@ -17,7 +14,7 @@
 
   <div fxLayout fxlayout="column" fxLayoutAlign="center center" fxLayout.xs="column" [hidden]="!filter">
      <span>
-      <h1>{{'qcm.question.filtre.title' |translate}}</h1>
+      <h1>{{'qcm.question.filtre.title' |translate }}</h1>
       ({{'qcm.question.filtre.found' | translate:{ 'nb': list.totalElements } }})
     </span>
   </div>
@@ -39,23 +36,18 @@
          <span *ngIf="!list.isSelectedMode()"
                style="align-items: center "> {{ "qcm.question.list.title" | translate}}</span>
         <span *ngIf="list.isSelectedMode()"
-              style="align-items: center ">{{ "qcm.question.selected.title" |translate }}</span>
+              style="align-items: center ">{{ "qcm.question.selected.title" | translate }}</span>
       </div>
 
       <div toolbar-view class="spacer"></div>
 
-      <app-question-nav-list elements-view [elements]="list.elements"></app-question-nav-list>
+      <app-question-nav-list elements-view [elements$]="questionStore.elements$"></app-question-nav-list>
 
-      <app-question-nav-list selected-view [elements]="list.selected"></app-question-nav-list>
+      <app-question-nav-list selected-view [elements$]="questionStore.selected$"></app-question-nav-list>
 
     </app-selectable-list>
 
   </div>
-
-  <!--    <app-fab-button *ngIf="currentQuestionnaire" [icon]="'question_answer'"-->
-  <!--                    matTooltip="Add Selected Question TO {{currentQuestionnaire.title}}" [matTooltipPosition]="'left'"-->
-  <!--                    [color]="'primary'"-->
-  <!--                    (onClick)="add(currentQuestionnaire)"></app-fab-button>-->
 
 </div>
 

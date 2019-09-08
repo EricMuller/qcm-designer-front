@@ -73,6 +73,9 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
           if (this.elements.length === 0) {
             this.refresh(true);
             this.modeSelectionSubject.next(false);
+          } else {
+            this.totalElements--;
+            this.numberOfElements--;
           }
         }
       }
@@ -118,7 +121,7 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
 
     this.loadingData = true;
     return this.criteriaStore.getPageByCriteria(criteria, pageIndex, pageSize, sort)
-      .pipe( mergeMap((page) => {
+      .pipe(mergeMap((page) => {
           this.getContentPage(page, cleanBefore);
           if (!this.elements.length) {
             this.modeSelectionSubject.next(false);

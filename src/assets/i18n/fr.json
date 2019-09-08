@@ -1,6 +1,7 @@
 {
   "qcm.questionnaire.create.title": "Creer un nouveau questionnaire",
   "qcm.questionnaire.edit.title": "Editer le questionnaire",
+  "qcm.questionnaire.view.title": "Visualiser le questionnaire ",
 
   "qcm.questionnaire.filter.title": "Filtrer Mes Questionnaires",
   "qcm.questionnaire.list.title": "Mes Questionnaires",
@@ -36,16 +37,19 @@
   "menu.login": "Connection",
 
   "qcm.selectable-list.menu.selectAll": "Selectionner tous les enregistrements",
-  "qcm.electable-list.menu.viewSelected": "Voir tous les enregistrements selectionnés",
+  "qcm.selectable-list.menu.viewSelected": "Voir tous les enregistrements selectionnés",
   "qcm.selectable-list.menu.new" : "Creer un enregistrement",
   "qcm.selectable-list.menu.deleteAll":"Supprimer les enregistrements selectionnés",
   "qcm.selectable-list.toggle.off":"Mode edition",
   "qcm.selectable-list.toggle.on":"Annuler edition",
   "qcm.selectable-list.empty": "Pas d'engistrements trouvés",
   "qcm.selectable-list.clear-filters": "Effacer les filtres",
+  "qcm.selectable-list.menu.refresh": "Rafraichir",
 
   "qcm.questionnaire.filtre.title": "Filtrer les questionnaires",
   "qcm.questionnaire.filtre.found": "{{nb}} enregistrement(s)",
+
+
   "qcm.question.filtre.title": "Filtrer les questions",
   "qcm.question.filtre.found": "{{nb}} enregistrement(s)",
   "qcm.tag-select.select-letter":"Filtrer par Lettre" ,

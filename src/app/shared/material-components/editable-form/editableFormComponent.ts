@@ -7,8 +7,7 @@ import {CrudStore} from '@app/features/stores/store-api';
 
 export abstract class EditableFormComponent<T> implements OnInit {
 
-  @Input()
-  public edition: Boolean;
+  public edition: boolean;
 
   public addOnBlur = true;
 

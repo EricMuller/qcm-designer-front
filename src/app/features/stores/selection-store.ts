@@ -6,7 +6,7 @@ import {ListSelectStore} from './store-api';
 
 export class SelectStoreAdapter<T extends Entity> implements ListSelectStore<T> {
 
-  protected page: Page;
+  protected page: Page = new Page();
 
   private pageSubject: Subject<Page> = new ReplaySubject<Page>(1);
 

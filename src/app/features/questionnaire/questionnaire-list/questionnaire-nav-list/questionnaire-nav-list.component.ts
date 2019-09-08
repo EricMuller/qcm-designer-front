@@ -1,8 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Questionnaire} from '@app/features/qcm-rest-api/model/questionnaire.model';
 import {QuestionnaireStore} from '@app/features/stores/questionnaire-store.service';
-
-
+import {Observable} from 'rxjs/internal/Observable';
 
 
 @Component({
@@ -13,7 +12,7 @@ import {QuestionnaireStore} from '@app/features/stores/questionnaire-store.servi
 export class QuestionnaireNavListComponent implements OnInit {
 
   @Input()
-  public elements: Questionnaire[];
+  public elements$: Observable<Questionnaire[]>;
 
   constructor(private questionnaireStore: QuestionnaireStore,
               private tagStore: QuestionnaireStore) {
@@ -32,8 +31,7 @@ export class QuestionnaireNavListComponent implements OnInit {
     this.tagStore.swapElement(tag);
   }
 
-  public setClickedRow = function (questionnaire: Questionnaire) {
-    this.questionnaireStore.swapElement(questionnaire);
-  }
-
+  public setClickedRow = function(questionnaire: Questionnaire) {
+      this.questionnaireStore.swapElement(questionnaire);
+   };
 }

@@ -1,13 +1,8 @@
-
-
 <div class="page-center">
 
   <div class="page-header" fxlayout fxlayout="column" fxLayout.xs="column" fxLayoutAlign="center center">
     <div fxFlex="80%" class="page-search"><input type="Text"></div>
-    <a mat-icon-button *ngIf="!list.isSelectedMode()" (click)="list.refresh(true);"
-       matTooltip="{{'qcm.questionnaire.menu.search' | translate}}">
-      <mat-icon>replay</mat-icon>
-    </a>
+
     <button mat-icon-button (click)="filter=!filter;" matTooltip="{{'qcm.questionnaire.menu.filter' | translate}}">
       <mat-icon *ngIf="list.filterSize()>0" matBadge="{{list.filterSize()}}" matBadgeColor="warn"
                 matBadgePosition="above after">filter_list
@@ -17,14 +12,14 @@
   </div>
 
 
-
   <div fxLayout fxlayout="column" fxLayoutAlign="center center" fxLayout.xs="column" [hidden]="!filter">
     <span>
       <h1>{{'qcm.questionnaire.filtre.title' |translate}}</h1>
-      ({{'qcm.questionnaire.filtre.found' | translate:{ 'nb': list.totalElements } }})
+      ({{'qcm.questionnaire.filtre.found' | translate:{'nb': list.totalElements} }})
     </span>
   </div>
-  <div fxLayout  fxLayoutAlign="center center" fxLayout.xs="column" [hidden]="!filter">
+
+  <div fxLayout fxLayoutAlign="center center" fxLayout.xs="column" [hidden]="!filter">
     <div>{{'qcm.tag-select.title' | translate}}:</div>
     <app-tag-select></app-tag-select>
   </div>
@@ -32,26 +27,24 @@
   <!-- [hidden]="filter" -->
   <div fxlayout [hidden]="filter">
 
-      <app-selectable-list #list
-                           [criteriaStore]="questionnaireStore"
-                           [sortBy]="'id'"
-                           (onCreate)="create()">
+    <app-selectable-list #list
+                         [criteriaStore]="questionnaireStore"
+                         [sortBy]="'id'"
+                         (onCreate)="create()">
 
-        <div toolbar-view class="overflow-hidden">
-            <span *ngIf="list.isSelectedMode()"
-                  style="align-items: center " >{{'qcm.questionnaire.selected.title' | translate }}
-              ({{list.selectionSize()}})</span>
-          <span *ngIf="!list.isSelectedMode()"
-                style="align-items: center " >{{'qcm.questionnaire.list.title' | translate }}</span>
-        </div>
+      <div toolbar-view class="overflow-hidden">
+        <span *ngIf="list.isSelectedMode()"  style="align-items: center ">{{'qcm.questionnaire.selected.title' | translate }}</span>
+        <span *ngIf="!list.isSelectedMode()" style="align-items: center ">{{'qcm.questionnaire.list.title' | translate }}</span>
+      </div>
 
-        <div toolbar-view class="spacer"></div>
+      <div toolbar-view class="spacer"></div>
 
-        <app-questionnaire-nav-list elements-view [elements]="list.elements"></app-questionnaire-nav-list>
-        <app-questionnaire-nav-list selected-view [elements]="list.selected"></app-questionnaire-nav-list>
-      </app-selectable-list>
+      <app-questionnaire-nav-list elements-view [elements$]="questionnaireStore.elements$"></app-questionnaire-nav-list>
+      <app-questionnaire-nav-list selected-view [elements$]="questionnaireStore.selected$"></app-questionnaire-nav-list>
 
-    </div>
+    </app-selectable-list>
+
+  </div>
 
 
 </div>

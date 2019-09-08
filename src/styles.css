@@ -20,7 +20,7 @@ body {
 /*}*/
 
 .page-center {
-  padding: 0 2px ;
+  padding: 0 2px 2px;
 }
 
 .fab-bottom {
@@ -34,7 +34,7 @@ body {
 
 @media only screen and (min-width: 600px) {
   .page-center {
-    padding: 0 32px;
+    padding: 0 32px 5px;
   }
 
   .nav-list .list-item {

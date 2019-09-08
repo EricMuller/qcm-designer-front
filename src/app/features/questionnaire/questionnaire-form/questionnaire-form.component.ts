@@ -1,19 +1,18 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {FormArray} from '@angular/forms';
 import {MatChipInputEvent, MatDialog, MatDialogConfig} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NotifierService} from '@app/core/notifications/simple-notifier.service';
 import {CategoryDialogComponent} from '@app/features/category/category-dialog/category-dialog.component';
-import {QuestionnaireFormBuilder} from '@app/features/questionnaire/questionnaire-form/questionnaire-form-builder';
-import {QuestionStore} from '@app/features/stores/question-store.service';
-import {QuestionnaireStore} from '@app/features/stores/questionnaire-store.service';
-import {EditableFormComponent} from '@app/shared/material-components/editable-form/editableFormComponent';
-import {FabToggleComponent} from '@app/shared/material-components/fab/fab-toggle/fab-toggle.component';
 import {Category} from '@app/features/qcm-rest-api/model/category.model';
 import {Questionnaire} from '@app/features/qcm-rest-api/model/questionnaire.model';
 import {Tag} from '@app/features/qcm-rest-api/model/tag.model';
 import {CategoryService} from '@app/features/qcm-rest-api/services/category.service';
 import {TagService} from '@app/features/qcm-rest-api/services/tag.service';
+import {QuestionnaireFormBuilder} from '@app/features/questionnaire/questionnaire-form/questionnaire-form-builder';
+import {QuestionStore} from '@app/features/stores/question-store.service';
+import {QuestionnaireStore} from '@app/features/stores/questionnaire-store.service';
+import {EditableFormComponent} from '@app/shared/material-components/editable-form/editableFormComponent';
 
 
 @Component({
@@ -22,8 +21,6 @@ import {TagService} from '@app/features/qcm-rest-api/services/tag.service';
   styleUrls: ['./questionnaire-form.component.scss'], providers: [QuestionnaireFormBuilder]
 })
 export class QuestionnaireFormComponent extends EditableFormComponent<Questionnaire> implements OnInit, AfterViewInit {
-
-  @ViewChild('toggle', {static: true}) fabToggleComponent: FabToggleComponent;
 
   @Input()
   public questionnaire: Questionnaire;
@@ -40,7 +37,7 @@ export class QuestionnaireFormComponent extends EditableFormComponent<Questionna
     private categoryService: CategoryService, private tagService: TagService,
     private formBuilder: QuestionnaireFormBuilder) {
     super(questionnaireStore, notifierService, router);
-    this.edition = route.snapshot.params.id <= 0 ;
+    this.edition = route.snapshot.params.id <= 0;
     this.route.data.subscribe(data => {
       this.questionnaire = data.questionnaire;
     });
@@ -53,10 +50,11 @@ export class QuestionnaireFormComponent extends EditableFormComponent<Questionna
   ngOnInit(): void {
     this.createForm();
     this.loadCategories();
+    this.toggleEdition(this.edition);
   }
 
   ngAfterViewInit(): void {
-    this.fabToggleComponent.opened = this.edition;
+
   }
 
   private loadCategories() {
@@ -98,7 +96,7 @@ export class QuestionnaireFormComponent extends EditableFormComponent<Questionna
 
   protected onSaveForm(data) {
     this.questionnaire = data;
-    this.fabToggleComponent.opened = false;
+    this.toggleEdition(false);
     this.notifierService.notifySuccess(data.title, 2000);
   }
 

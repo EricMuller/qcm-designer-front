@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
 import {MatChipInputEvent} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -8,10 +8,8 @@ import {Reponse} from '@app/features/qcm-rest-api/model/response.model';
 import {Tag} from '@app/features/qcm-rest-api/model/tag.model';
 import {QuestionStore} from '@app/features/stores/question-store.service';
 import {EditableFormComponent} from '@app/shared/material-components/editable-form/editableFormComponent';
-import {FabToggleComponent} from '@app/shared/material-components/fab/fab-toggle/fab-toggle.component';
 
 import {QuestionFormBuilder} from './question-form-builder';
-
 
 enum Status {
   DRAFT = 'Draft',
@@ -33,7 +31,6 @@ enum QuestionType {
 })
 export class QuestionFormComponent extends EditableFormComponent<Question> implements OnInit, AfterViewInit {
 
-  @ViewChild('toggle', {static: true}) fabToggleComponent: FabToggleComponent;
 
   @Input()
   public question: Question;
@@ -58,10 +55,10 @@ export class QuestionFormComponent extends EditableFormComponent<Question> imple
 
   ngOnInit(): void {
     this.createForm();
+    this.toggleEdition(this.edition);
   }
 
   ngAfterViewInit(): void {
-    this.fabToggleComponent.opened = this.edition;
   }
 
   public addResponse() {
@@ -75,14 +72,12 @@ export class QuestionFormComponent extends EditableFormComponent<Question> imple
 
   protected onDeleteForm(t: Question) {
     this.notifierService.notifySuccess(t.id + ' deleted', 2000);
-    this.fabToggleComponent.opened = false;
-
-    // this.router.navigate(['/questions/list']);
+    this.router.navigate(['/questions/list']);
   }
 
   protected onSaveForm(data) {
+    this.toggleEdition(false);
     this.question = data;
-    this.fabToggleComponent.opened = false;
     this.createForm();
     this.notifierService.notifySuccess(data.title, 2000);
   }

@@ -59,6 +59,7 @@ export class QuestionStore extends SelectStoreAdapter<Question> implements Crite
       .pipe(publishLast(), refCount());
     obs.subscribe(
       p => {
+        console.log('publisha page');
         this.publishPage(p);
       });
     return obs;

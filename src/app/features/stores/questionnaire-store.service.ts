@@ -37,7 +37,6 @@ export class QuestionnaireStore extends SelectStoreAdapter<Questionnaire>
       }));
   }
 
-
   deleteElements(questionnaires: Questionnaire[]) {
     for (const q of questionnaires) {
       const id: number = q.id;

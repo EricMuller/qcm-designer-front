@@ -4,6 +4,7 @@ import {Question} from '@app/features/qcm-rest-api/model/question.model';
 import {Tag} from '@app/features/qcm-rest-api/model/tag.model';
 import {QuestionStore} from '@app/features/stores/question-store.service';
 import {TagStore} from '@app/features/stores/tag-store.service';
+import {Observable} from 'rxjs/internal/Observable';
 
 
 @Component({
@@ -14,7 +15,7 @@ import {TagStore} from '@app/features/stores/tag-store.service';
 export class QuestionNavListComponent implements OnInit {
 
   @Input()
-  public elements: Question[];
+  public elements$: Observable<Question[]>;
 
   constructor(private questionStore: QuestionStore,
               private tagStore: TagStore, private router: Router) {

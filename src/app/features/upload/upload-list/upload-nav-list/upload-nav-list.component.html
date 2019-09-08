@@ -1,20 +1,21 @@
 <mat-nav-list class="nav-list">
 
   <mat-list-item class="list mat-elevation-z2 list-item" *ngFor="let item of elements$ |async  as q; index as i"
-
                  attr.entityId="uploadId_{{item.id}}" >
 
+    <button mat-icon-button matListAvatar (click)="uploadStore.swapElement(item)">
+      <mat-icon matListIcon *ngIf="!uploadStore.isSelected(item)">question_answer</mat-icon>
+      <mat-checkbox *ngIf="uploadStore.isSelected(item)" matListAvatar
+                    [checked]="uploadStore.isSelected(item)"></mat-checkbox>
+    </button>
 
-    <p  class="cursor-pointer"  [routerLink]="['/questions/'+ item.id ]"> {{item.id}} - {{item.fileName}} </p>
+    <p  class="cursor-pointer"> {{item.id}} - {{item.fileName}} </p>
     <div class="spacer"></div>
     {{item.dateCreation | date:'dd/MM/yyyy HH:mm'}}
     <!--  menu -->
 
     <button mat-icon-button matTooltip="Import" (click)="import(item)" color="primary"><mat-icon>cloud_download</mat-icon></button>
     <mat-progress-bar  mode="indeterminate" [hidden]="!item?.loading"  > </mat-progress-bar>
-    <button mat-icon-button matTooltip="Import" (click)="delete(item)" color="accent"><mat-icon>delete</mat-icon></button>
   </mat-list-item>
-
-
 
 </mat-nav-list>

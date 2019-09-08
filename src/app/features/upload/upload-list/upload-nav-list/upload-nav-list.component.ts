@@ -21,7 +21,7 @@ export class UploadNavListComponent implements OnInit {
 
   constructor(private uploadService: UploadService,
               private notifier: NotifierService,
-              private uploadStore: UploadStore) {
+              public uploadStore: UploadStore) {
   }
 
   ngOnInit() {
