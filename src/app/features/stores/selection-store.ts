@@ -1,3 +1,4 @@
+import {Criteria} from '@app/features/qcm-rest-api/model/criteria';
 import {Entity} from '@app/features/qcm-rest-api/model/entity';
 import {Page} from '@app/features/qcm-rest-api/services/page';
 import {BehaviorSubject, Observable, of, ReplaySubject, Subject} from 'rxjs';
@@ -5,6 +6,10 @@ import {ListSelectStore} from './store-api';
 
 
 export class SelectStoreAdapter<T extends Entity> implements ListSelectStore<T> {
+
+  private criteria: Criteria[] = [];
+
+  private criteriaSubject: BehaviorSubject<Criteria[]> = new BehaviorSubject([]) as BehaviorSubject<Criteria[]>;
 
   protected page: Page = new Page();
 
@@ -18,17 +23,48 @@ export class SelectStoreAdapter<T extends Entity> implements ListSelectStore<T> 
 
   private deletedSubject = new ReplaySubject<T>();
 
+  private selectedSizeSubject = new ReplaySubject<number>(0);
+
+  private criteriaSizeSubject = new ReplaySubject<number>(0);
+
+
   selected$: Observable<T[]> = this.selectedSubject.asObservable() as Observable<T[]>;
 
   deleted$: Observable<T> = this.deletedSubject.asObservable();
 
   elements$: Observable<T[]> = this.elementsSubject.asObservable() as Observable<T[]>;
 
-  public selected: T[] = [];
+  selectedSize$: Observable<number> = this.selectedSizeSubject.asObservable() as Observable<number>;
+
+  criteriaSize$: Observable<number> = this.criteriaSizeSubject.asObservable() as Observable<number>;
+
+  selected: T[] = [];
+
+  criteria$: Observable<Criteria[]> = this.criteriaSubject.asObservable() as Observable<Criteria[]>;
 
   constructor() {
   }
 
+  deleteCriteriabyName(name: string) {
+    this.criteria = this.criteria.filter((obj: Criteria) => {
+      return obj.name !== name;
+    });
+    this.criteriaSubject.next(this.criteria);
+    this.criteriaSizeSubject.next(this.criteria.length);
+  }
+
+  addCriteria(criteria: Criteria) {
+    this.criteria.push(criteria);
+    this.criteriaSubject.next(this.criteria);
+    this.criteriaSizeSubject.next(this.criteria.length);
+
+  }
+
+  clearCriteria() {
+    this.criteria = [];
+    this.criteriaSubject.next(this.criteria);
+    this.criteriaSizeSubject.next(this.criteria.length);
+  }
 
   publishPage(p: Page) {
     this.page = p;
@@ -38,18 +74,18 @@ export class SelectStoreAdapter<T extends Entity> implements ListSelectStore<T> 
 
   swapElement(q: T) {
     const itemIndex = this.selected.findIndex(item => item.id === q.id);
-
     if (itemIndex === -1) {
       this.selected.push(q);
-      this.selectedSubject.next(this.selected);
     } else {
       this.selected.splice(itemIndex, 1);
-      this.selectedSubject.next(this.selected);
     }
+    this.selectedSubject.next(this.selected);
+    this.selectedSizeSubject.next(this.selected.length);
   }
 
   deletePageElement(q: T): Observable<T> {
     this.selectElement(q, false);
+    this.deletedSubject.next(q);
     const itemIndex = this.page.content.findIndex(item => item.id === q.id);
     if (itemIndex !== -1) {
       this.page.content.splice(itemIndex, 1);
@@ -64,20 +100,19 @@ export class SelectStoreAdapter<T extends Entity> implements ListSelectStore<T> 
     return of(q);
   }
 
-  selectElement(q: T, select: boolean): Observable<T> {
+  selectElement(q: T, select: boolean) {
     const itemIndex = this.selected.findIndex(item => item.id === q.id);
     if (select && itemIndex === -1) {
       this.selected.push(q);
       this.selectedSubject.next(this.selected);
+      this.selectedSizeSubject.next(this.selected.length);
     } else {
       if (!select && itemIndex !== -1) {
         this.selected.splice(itemIndex, 1);
         this.selectedSubject.next(this.selected);
-        this.deletedSubject.next(q);
+        this.selectedSizeSubject.next(this.selected.length);
       }
     }
-    return of(q);
-
   }
 
   isSelected(q: T): boolean {

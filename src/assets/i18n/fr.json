@@ -42,7 +42,7 @@
   "qcm.selectable-list.menu.deleteAll":"Supprimer les enregistrements selectionnés",
   "qcm.selectable-list.toggle.off":"Mode edition",
   "qcm.selectable-list.toggle.on":"Annuler edition",
-  "qcm.selectable-list.empty": "Pas d'engistrements trouvés",
+  "qcm.selectable-list.empty": "Pas d'enregistrements trouvés",
   "qcm.selectable-list.clear-filters": "Effacer les filtres",
   "qcm.selectable-list.menu.refresh": "Rafraichir",
 

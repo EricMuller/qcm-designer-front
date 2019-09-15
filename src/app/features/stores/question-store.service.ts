@@ -16,9 +16,24 @@ export class QuestionStore extends SelectStoreAdapter<Question> implements Crite
 
   constructor(private questionService: QuestionService, private tagStore: TagStore, private questionnaireStore: QuestionnaireStore) {
     super();
+
+    this.tagStore.selected$.subscribe((tags) => {
+      this.deleteCriteriabyName('tag_id');
+      for (const tag of tags) {
+        this.addCriteria(new Criteria(tag.id.toString(), 'tag_id'));
+      }
+    });
+
+
+    this.questionnaireStore.selected$.subscribe((questionnaires) => {
+      this.deleteCriteriabyName('questionnaire_id');
+      for (const tag of questionnaires) {
+        this.addCriteria(new Criteria(tag.id.toString(), 'questionnaire_id'));
+      }
+    });
   }
 
-  getPage(page?: number, size?: number, sort?: string): Observable<Page> {
+  getPage(page ?: number, size ?: number, sort ?: string): Observable<Page> {
     const obs = this.questionService.getQuestions(page, size, sort);
     obs.subscribe(
       p => {
@@ -45,43 +60,30 @@ export class QuestionStore extends SelectStoreAdapter<Question> implements Crite
   }
 
   saveElement(element: Question): Observable<Question> {
-    if (element.id > 0) {
+    if (element.id > 0
+    ) {
       return this.questionService.putQuestion(element);
     } else {
       return this.questionService.postQuestion(element);
     }
   }
 
-  getPageByCriteria(criteria: Criteria[], page?: number, size?: number, sort?: string): Observable<Page> {
+  getPageByCriteria(criteria: Criteria[], page ?: number, size ?: number, sort ?: string): Observable<Page> {
 
     console.log(criteria);
     const obs = this.questionService.getQuestionsByCriteria(criteria, page, size, sort)
       .pipe(publishLast(), refCount());
     obs.subscribe(
       p => {
-        console.log('publisha page');
         this.publishPage(p);
       });
     return obs;
   }
 
-  criterias(): Criteria[] {
-
-    const criteria: Criteria[] = this.tagStore.selected.map((tag) => {
-      return new Criteria(tag.id.toString(), 'tag_id');
-    });
-
-    const questionnaires: Criteria[] = this.questionnaireStore.selected.map((tag) => {
-      return new Criteria(tag.id.toString(), 'questionnaire_id');
-    });
-
-    Array.prototype.push.apply(criteria, questionnaires);
-
-    return criteria;
-  }
-
-  clearCriterias() {
+  clearCriteria() {
+    // check constructor
     this.tagStore.unSelectAllElement();
     this.questionnaireStore.unSelectAllElement();
   }
+
 }

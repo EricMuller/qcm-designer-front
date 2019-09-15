@@ -1,13 +1,14 @@
 <div class="page-center">
-
   <div class="page-header" fxlayout fxlayout="column" fxLayout.xs="column" fxLayoutAlign="center center">
     <div fxFlex="80%" class="page-search"><input type="Text"></div>
 
+
     <button mat-icon-button (click)="filter=!filter;" matTooltip="{{'qcm.questionnaire.menu.filter' | translate}}">
-      <mat-icon *ngIf="list.filterSize()>0" matBadge="{{list.filterSize()}}" matBadgeColor="warn"
+      <mat-icon *ngIf="(questionnaireStore.criteriaSize$ | async )>0"
+                matBadge="{{questionnaireStore.criteriaSize$ | async}}" matBadgeColor="warn"
                 matBadgePosition="above after">filter_list
       </mat-icon>
-      <mat-icon *ngIf="list.filterSize()==0">filter_list</mat-icon>
+      <mat-icon *ngIf="(questionnaireStore.criteriaSize$ | async )==0">filter_list</mat-icon>
     </button>
   </div>
 
@@ -28,13 +29,15 @@
   <div fxlayout [hidden]="filter">
 
     <app-selectable-list #list
-                         [criteriaStore]="questionnaireStore"
+                         [store]="questionnaireStore"
                          [sortBy]="'id'"
                          (onCreate)="create()">
 
       <div toolbar-view class="overflow-hidden">
-        <span *ngIf="list.isSelectedMode()"  style="align-items: center ">{{'qcm.questionnaire.selected.title' | translate }}</span>
-        <span *ngIf="!list.isSelectedMode()" style="align-items: center ">{{'qcm.questionnaire.list.title' | translate }}</span>
+        <span *ngIf="list.isSelectedMode()"
+              style="align-items: center ">{{'qcm.questionnaire.selected.title' | translate }}</span>
+        <span *ngIf="!list.isSelectedMode()"
+              style="align-items: center ">{{'qcm.questionnaire.list.title' | translate }}</span>
       </div>
 
       <div toolbar-view class="spacer"></div>
@@ -45,7 +48,6 @@
     </app-selectable-list>
 
   </div>
-
 
 </div>
 

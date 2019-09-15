@@ -68,7 +68,6 @@ export class QuestionnaireSelectComponent implements OnInit {
   }
 
   public selectItem(tag: Questionnaire) {
-
     this.questionnaireStore.selectElement(tag, true);
   }
 

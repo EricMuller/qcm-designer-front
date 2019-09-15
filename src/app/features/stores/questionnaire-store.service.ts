@@ -8,7 +8,7 @@ import {SelectStoreAdapter} from '@app/features/stores/selection-store';
 import {CriteriaStore, CrudStore} from '@app/features/stores/store-api';
 import {TagStore} from '@app/features/stores/tag-store.service';
 
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 
 import {mergeMap} from 'rxjs/operators';
 
@@ -19,6 +19,14 @@ export class QuestionnaireStore extends SelectStoreAdapter<Questionnaire>
 
   constructor(private backend: QuestionnaireService, private tagStore: TagStore) {
     super();
+
+    this.tagStore.selected$.subscribe((tags) => {
+      this.deleteCriteriabyName('tag_id');
+      for (const tag of tags) {
+        this.addCriteria(new Criteria(tag.id.toString(), 'tag_id'));
+      }
+    });
+
   }
 
   getPage(page?: number, size?: number, sort?: string): Observable<Page> {
@@ -42,12 +50,11 @@ export class QuestionnaireStore extends SelectStoreAdapter<Questionnaire>
       const id: number = q.id;
       this.backend.deleteQuestionnaireById(id)
         .subscribe((data) => {
-          this.deletePageElement(q);
-        }
-      );
+            this.deletePageElement(q);
+          }
+        );
     }
   }
-
 
   saveElement(element: Questionnaire): Observable<Questionnaire> {
     if (element.id > 0) {
@@ -72,18 +79,9 @@ export class QuestionnaireStore extends SelectStoreAdapter<Questionnaire>
     return obs;
   }
 
-  criterias(): Criteria[] {
 
-    const criteria: Criteria[] = this.tagStore.selected.map((tag) => {
-      return new Criteria(tag.id.toString(), 'tag_id');
-    });
-
-    Array.prototype.push.apply(criteria);
-
-    return criteria;
-  }
-
-  clearCriterias() {
+  clearCriteria() {
+    // check constuctor
     this.tagStore.unSelectAllElement();
   }
 

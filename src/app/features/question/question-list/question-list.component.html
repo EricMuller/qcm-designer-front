@@ -1,21 +1,22 @@
 <div class="page-center">
-
   <div class="page-header" fxlayout fxlayout="column" fxLayout.xs="column" fxLayoutAlign="center center">
     <div fxFlex="80%" class="page-search"><input type="Text"></div>
 
     <button mat-icon-button (click)="filter=!filter;" matTooltip="{{'qcm.form.menu.filter' | translate}}">
 
-      <mat-icon *ngIf="list.filterSize()>0" matBadge="{{list.filterSize()}}" matBadgeColor="warn"
+      <mat-icon *ngIf="(questionStore.criteriaSize$ |async ) > 0"
+                matBadge="{{(questionStore.criteriaSize$ |async )}}"
+                matBadgeColor="warn"
                 matBadgePosition="above after">filter_list
       </mat-icon>
-      <mat-icon *ngIf="list.filterSize()==0">filter_list</mat-icon>
+      <mat-icon *ngIf="(questionStore.criteriaSize$ |async ) ==0">filter_list</mat-icon>
     </button>
   </div>
 
   <div fxLayout fxlayout="column" fxLayoutAlign="center center" fxLayout.xs="column" [hidden]="!filter">
      <span>
       <h1>{{'qcm.question.filtre.title' |translate }}</h1>
-      ({{'qcm.question.filtre.found' | translate:{ 'nb': list.totalElements } }})
+      ({{'qcm.question.filtre.found' | translate:{'nb': list.totalElements} }})
     </span>
   </div>
   <div fxLayout fxLayoutAlign="center center" fxLayout.xs="column" [hidden]="!filter">
@@ -28,7 +29,7 @@
 
   <div fxlayout [hidden]="filter">
 
-    <app-selectable-list #list [criteriaStore]="questionStore"
+    <app-selectable-list #list [store]="questionStore"
                          [sortBy]="'id'"
                          (onCreate)="create()">
 

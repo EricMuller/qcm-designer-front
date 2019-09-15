@@ -1,5 +1,6 @@
 import {AfterContentInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material';
+import {Criteria} from '@app/features/qcm-rest-api/model/criteria';
 import {Entity} from '@app/features/qcm-rest-api/model/entity';
 import {Page} from '@app/features/qcm-rest-api/services/page';
 import {CriteriaStore} from '@app/features/stores/store-api';
@@ -21,7 +22,7 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
 
   public elements: T[] = [];
   public selected: T[] = [];
-  // public criterias: Criteria[];
+  private criteria: Criteria[] = [];
 
   public resultsLength = 0;
   public pageIndex = 0;
@@ -46,9 +47,8 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
   private loadingDataSubject: Subject<boolean> = new BehaviorSubject(false);
   readonly loadingData$: Observable<boolean> = this.loadingDataSubject.asObservable();
 
-  public loadingData = false;
 
-  @Input() criteriaStore: CriteriaStore<T>;
+  @Input() store: CriteriaStore<T>;
   @Input() emptyMessage = 'Create a new one';
 
   @Input() name: string;
@@ -66,7 +66,7 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
 
   ngOnInit(): void {
 
-    this.criteriaStore.deleted$.subscribe((element) => {
+    this.store.deleted$.subscribe((element) => {
         const itemIndex = this.elements.findIndex(item => item.id === element.id);
         if (itemIndex !== -1) {
           this.elements.splice(itemIndex, 1);
@@ -81,7 +81,7 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
       }
     );
 
-    this.criteriaStore.selected$.subscribe((selected) => {
+    this.store.selected$.subscribe((selected) => {
         this.selected = selected as T[];
         if (this.selected.length > 0) {
           this.modeSelectionSubject.next(true);
@@ -92,6 +92,22 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
       }
     );
 
+    this.store.criteria$.subscribe((criteria: Criteria[]) => {
+        console.log('SelectableListComponent:ngOnInit:criteria$');
+        this.criteria = [];
+        this.criteria.push(...criteria);
+      }
+    );
+
+    this.store.criteriaSize$.subscribe((size: number) => {
+        console.log('SelectableListComponent:ngOnInit:criteriaSize$:' + size.toString());
+      }
+    );
+
+    this.store.page$.subscribe((page: Page) => {
+        console.log('SelectableListComponent:ngOnInit:page$:' + page.numberOfElements);
+      }
+    );
 
     console.log('SelectableListComponent:ngOnInit');
   }
@@ -117,26 +133,23 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
 
   private refreshElements(pageIndex: number, pageSize: number, sort: string, cleanBefore ?: boolean): Observable<boolean> {
 
-    const criteria = this.criteriaStore.criterias();
-
-    this.loadingData = true;
-    return this.criteriaStore.getPageByCriteria(criteria, pageIndex, pageSize, sort)
+    this.loadingDataSubject.next(true);
+    return this.store.getPageByCriteria(this.criteria, pageIndex, pageSize, sort)
       .pipe(mergeMap((page) => {
           this.getContentPage(page, cleanBefore);
           if (!this.elements.length) {
             this.modeSelectionSubject.next(false);
           }
-          this.loadingData = false;
+          this.loadingDataSubject.next(false);
           return of(true);
         }
       ));
   }
 
-  onPaginateChange(event: any) {
-    this.refreshElements(event.pageIndex, this.pageSize, this.sortBy, true).subscribe((b) => {
 
-      }
-    );
+  onPaginateChange(event: any) {
+    this.refreshElements(event.pageIndex, this.pageSize, this.sortBy, true);
+    // .subscribe((b) => {  } );
   }
 
   onValidFilter(event) {
@@ -144,7 +157,7 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
   }
 
   public deleteSelectedElements() {
-    this.criteriaStore.deleteElements(this.selected);
+    this.store.deleteElements(this.selected);
   }
 
   refresh(reset: boolean) {
@@ -157,12 +170,11 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
           this.paginator.firstPage();
         }
       });
-
   }
 
   public selectAll() {
     this.elements.forEach((q) => {
-      this.criteriaStore.selectElement(q, true);
+      this.store.selectElement(q, true);
     });
   }
 
@@ -179,16 +191,8 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
   }
 
 
-  selectionSize(): number {
-    return this.criteriaStore.selectedSize();
-  }
-
-  filterSize(): number {
-    return this.criteriaStore && this.criteriaStore.criterias() ? this.criteriaStore.criterias().length : 0;
-  }
-
   public clearCriterias() {
-    this.criteriaStore.clearCriterias();
+    this.store.clearCriteria();
     this.refresh(true);
   }
 

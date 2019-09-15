@@ -4,7 +4,7 @@
 
   <div fxlayout [hidden]="filter">
 
-    <app-selectable-list #list [criteriaStore]="uploadStore"
+    <app-selectable-list #list [store]="uploadStore"
                          [sortBy]="'id'"
                          (onCreate)="create()">
 

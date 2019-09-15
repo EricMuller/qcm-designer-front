@@ -23,7 +23,7 @@ export class KeycloakService {
     KeycloakService.auth.loggedIn = false;
     console.debug('KeycloakService.init()');
     return new Promise((resolve, reject) => {
-      keycloakAuth.init({checkLoginIframe: true})
+      keycloakAuth.init({onLoad: 'login-required'})
         .success(() => {
 
           KeycloakService.auth.authz = keycloakAuth;

@@ -10,18 +10,18 @@ export class SearchStore  {
   constructor(private tagStore: TagStore, private questionnaireStore: QuestionnaireStore) {
   }
 
-  criterias(): Criteria[] {
-
-    const criteria: Criteria[] = this.tagStore.criterias();
-    const questionnaires: Criteria[] = this.questionnaireStore.criterias();
-    Array.prototype.push.apply(criteria, questionnaires);
-
-    return criteria;
-  }
-
-  clearCriterias() {
-    this.tagStore.unSelectAllElement();
-    this.questionnaireStore.unSelectAllElement();
-  }
+  // criterias(): Criteria[] {
+  //
+  //   const criteria: Criteria[] = this.tagStore.criterias();
+  //   const questionnaires: Criteria[] = this.questionnaireStore.criterias();
+  //   Array.prototype.push.apply(criteria, questionnaires);
+  //
+  //   return criteria;
+  // }
+  //
+  // clearCriterias() {
+  //   this.tagStore.unSelectAllElement();
+  //   this.questionnaireStore.unSelectAllElement();
+  // }
 
 }

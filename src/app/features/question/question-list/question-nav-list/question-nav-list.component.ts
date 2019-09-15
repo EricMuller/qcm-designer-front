@@ -32,7 +32,7 @@ export class QuestionNavListComponent implements OnInit {
     this.tagStore.swapElement(tag);
   }
 
-  public setClickedRow = function (question: Question) {
+  public setClickedRow = function(question: Question) {
     this.questionStore.swapElement(question);
   }
 
