@@ -5,7 +5,7 @@ import {Entity} from '@app/features/qcm-rest-api/model/entity';
 import {Page} from '@app/features/qcm-rest-api/services/page';
 import {CriteriaStore} from '@app/features/stores/store-api';
 import {BehaviorSubject, Observable, of, ReplaySubject, Subject} from 'rxjs';
-import {mergeMap} from 'rxjs/operators';
+import {concatMap} from 'rxjs/operators';
 import {environment} from '../../../../environments/environment';
 
 enum ViewMode {
@@ -36,7 +36,7 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
   // delete paginator issue
   public curentPageSize = 0;
 
-  public pulseState = false;
+
   public selectedRow: number;
 
   private modeSelectionSubject: Subject<boolean> = new ReplaySubject<boolean>(1);
@@ -135,7 +135,7 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
 
     this.loadingDataSubject.next(true);
     return this.store.getPageByCriteria(this.criteria, pageIndex, pageSize, sort)
-      .pipe(mergeMap((page) => {
+      .pipe(concatMap((page) => {
           this.getContentPage(page, cleanBefore);
           if (!this.elements.length) {
             this.modeSelectionSubject.next(false);
@@ -148,8 +148,10 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
 
 
   onPaginateChange(event: any) {
-    this.refreshElements(event.pageIndex, this.pageSize, this.sortBy, true);
-    // .subscribe((b) => {  } );
+    this.refreshElements(event.pageIndex, this.pageSize, this.sortBy, true)
+      .subscribe((b) => {
+        this.loadingDataSubject.next(false);
+      });
   }
 
   onValidFilter(event) {
@@ -164,7 +166,6 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
 
     this.refreshElements(this.pageIndex, this.pageSize, this.sortBy, reset)
       .subscribe((b) => {
-        this.pulseState = !this.pulseState;
         if (reset) {
           this.currentView = ViewMode.List;
           this.paginator.firstPage();
