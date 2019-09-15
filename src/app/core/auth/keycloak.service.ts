@@ -3,7 +3,6 @@ import {User} from '@app/core/auth/user.model';
 
 import {environment} from '../../../environments/environment';
 
-
 declare var Keycloak: any;
 
 @Injectable()
@@ -23,13 +22,15 @@ export class KeycloakService {
     KeycloakService.auth.loggedIn = false;
     console.debug('KeycloakService.init()');
     return new Promise((resolve, reject) => {
-      keycloakAuth.init({onLoad: 'login-required'})
+      keycloakAuth.init({onLoad: 'login-required', checkLoginIframe: true})
         .success(() => {
-
+          KeycloakService.auth.loggedIn = true;
           KeycloakService.auth.authz = keycloakAuth;
           KeycloakService.auth.logoutUrl =
-            keycloakAuth.authServerUrl + '/realms/' + environment.KEYCLOAK_REALM +
-            '/protocol/openid-connect/logout?redirect_uri=' + document.baseURI;
+            keycloakAuth.authServerUrl + '/realms/' + environment.KEYCLOAK_REALM
+            + '/protocol/openid-connect/logout?redirect_uri=' + document.baseURI
+            + '&client_id=' + environment.KEYCLOAK_CLIENTID
+            + '&refresh_token=' + KeycloakService.auth.authz.refreshToken;
           resolve();
         })
         .error((e) => {
@@ -103,21 +104,8 @@ export class KeycloakService {
     });
   }
 
-  logout(): Promise<string> {
-    return new Promise<string>((resolve, reject) => {
-      if (KeycloakService.auth.authz.token) {
-        KeycloakService.auth.authz
-          .logout({redirectUri: document.baseURI})
-          .success(() => {
-            resolve(KeycloakService.auth.authz.token);
-          })
-          .error(() => {
-            reject('Failed to logout');
-          });
-      } else {
-        reject('Not logged in');
-      }
-    });
+  logout(): void {
+    window.location.href = KeycloakService.auth.logoutUrl;   // window.location.href = KeycloakService.auth.logoutUrl;
   }
 
   getUser(): User {

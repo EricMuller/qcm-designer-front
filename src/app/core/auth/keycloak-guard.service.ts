@@ -36,7 +36,7 @@ export class KeycloakGuardService implements CanActivate, CanActivateChild {
       }));
   }
 
-  public logout(): Promise<string> {
+  public logout(){
     return this.keycloakService.logout();
   }
 

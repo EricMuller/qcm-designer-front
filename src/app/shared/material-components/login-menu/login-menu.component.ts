@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {KeycloakGuardService} from '@app/core/auth/keycloak-guard.service';
-import {User} from '@app/core/auth/user.model';
 
 
 @Component({
@@ -33,10 +32,6 @@ export class LoginMenuComponent implements OnInit {
   public profile() {
     this.router.navigate(['/questionnaires/user']);
   }
-
-  // public getUser(): User {
-  //   return this.keycloakGuardService.getUser();
-  // }
 
 
 }
