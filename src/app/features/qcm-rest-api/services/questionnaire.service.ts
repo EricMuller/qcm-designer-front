@@ -25,7 +25,7 @@ export class QuestionnaireService {
 
     let params = '';
     if (criteria) {
-      for (let i = 0; i< criteria.length; i++) {
+      for (let i = 0; i < criteria.length; i++) {
         params += '&' + criteria[i].name + '=' + criteria[i].value;
       }
     }

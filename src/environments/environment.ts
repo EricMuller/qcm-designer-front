@@ -12,5 +12,6 @@ export const environment = {
   KEYCLOAK_CLIENTID: 'qcm-web',
   PAGE_SIZE: 100,
   // QCM_REST_API_HOST: 'http://localhost:8080'
-  QCM_REST_API_HOST: 'https://qcm-api.webmarks.net'
+  // QCM_REST_API_HOST: 'https://qcm-api.webmarks.net'
+  QCM_REST_API_HOST: 'https://qcm-rest-api.herokuapp.com'
 };

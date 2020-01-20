@@ -10,6 +10,7 @@
   "qcm.questionnaire.menu.questions.list" : "Voir les questions du questionnaire",
 
   "qcm.questionnaire.form.input.title.placeholder" : "Titre",
+  "qcm.questionnaire.form.input.website.placeholder" : "Web Site",
   "qcm.questionnaire.form.input.description.placeholder" : "Description",
   "qcm.questionnaire.form.input.category.placeholder" : "Catégorie",
   "qcm.questionnaire.form.input.tag.placeholder" : "Etiquette",

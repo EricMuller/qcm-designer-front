@@ -16,6 +16,7 @@ export class QuestionnaireFormBuilder {
       id: new FormControl({value: questionnaire.id, disabled: true}),
       version: new FormControl({value: questionnaire.version, disabled: true}),
       title: new FormControl({value: questionnaire.title, disabled: true}, Validators.required),
+      website: new FormControl({value: questionnaire.website, disabled: true}, Validators.required),
       description: new FormControl({value: questionnaire.description, disabled: true}, Validators.required),
       category: new FormControl({value: questionnaire.category, disabled: true}),
       tags: this.createTagsControl(questionnaire, true)

@@ -1,63 +1,69 @@
-<div class="page-center">
+<div class="page-center" fxLayout='column'>
+
   <mat-toolbar>
-    <a mat-icon-button [routerLink]="['/questionnaires/list']">
-      <mat-icon>arrow_back</mat-icon>
-   </a>
 
+    <mat-toolbar-row>
 
-    <div *ngIf="questionnaire.id && !edition">{{'qcm.questionnaire.view.title' | translate}}{{questionnaire.id}}</div>
-    <div *ngIf="questionnaire.id && edition">{{'qcm.questionnaire.edit.title' | translate}}  {{questionnaire.id}}</div>
-    <div *ngIf="!questionnaire.id">{{'qcm.questionnaire.create.title' | translate}}</div>
+      <a mat-icon-button [routerLink]="['/questionnaires/list']">
+        <mat-icon>arrow_back</mat-icon>
+      </a>
 
-    <div class="spacer"></div>
+      <div *ngIf="questionnaire.id && !edition">{{'qcm.questionnaire.view.title' | translate}}{{questionnaire.id}}</div>
+      <div
+        *ngIf="questionnaire.id && edition">{{'qcm.questionnaire.edit.title' | translate}}  {{questionnaire.id}}</div>
+      <div *ngIf="!questionnaire.id">{{'qcm.questionnaire.create.title' | translate}}</div>
 
+      <div class="spacer"></div>
 
-    <button mat-icon-button (click)="toggleEdition(true)" [hidden]="edition"
-            matTooltip="{{'qcm.form.toggle.on' | translate }}" color="primary">
-      <mat-icon>create</mat-icon>
-    </button>
-
-    <button mat-icon-button (click)="saveForm()" [hidden]="!edition"
-            matTooltip="{{'qcm.form.menu.save' | translate }}" color="primary">
-      <mat-icon>save</mat-icon>
-    </button>
-
-    <button mat-icon-button (click)="deleteForm()" [hidden]="edition"
-            matTooltip="{{'qcm.form.menu.deleteAll' | translate }}" color="accent">
-      <mat-icon>delete</mat-icon>
-    </button>
-
-    <!--<ng-content select="[menu-buttons]"></ng-content>-->
-    <button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="questionnaireMenu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <!-- line menu -->
-    <mat-menu #questionnaireMenu="matMenu" yPosition="below">
-      <!--<ng-content select="[menu-items]"></ng-content>-->
-      <button mat-menu-item (click)="createCategory()">
-        <mat-icon>add</mat-icon>
-        {{'qcm.questionnaire.menu.category.create' |translate}}
+      <button mat-icon-button (click)="toggleEdition(true)" [hidden]="edition"
+              matTooltip="{{'qcm.form.toggle.on' | translate }}" color="primary">
+        <mat-icon>create</mat-icon>
       </button>
-      <button mat-menu-item (click)="viewQuestionsByQuestionnaire()">
-        <mat-icon>list</mat-icon>
-        {{'qcm.questionnaire.menu.questions.list' |translate}}
+
+      <button mat-icon-button (click)="saveForm()" [hidden]="!edition"
+              matTooltip="{{'qcm.form.menu.save' | translate }}" color="primary">
+        <mat-icon>save</mat-icon>
       </button>
-    </mat-menu>
+
+      <button mat-icon-button (click)="deleteForm()" [hidden]="edition"
+              matTooltip="{{'qcm.form.menu.deleteAll' | translate }}" color="accent">
+        <mat-icon>delete</mat-icon>
+      </button>
+
+      <!--<ng-content select="[menu-buttons]"></ng-content>-->
+      <button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="questionnaireMenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <!-- line menu -->
+      <mat-menu #questionnaireMenu="matMenu" yPosition="below">
+        <!--<ng-content select="[menu-items]"></ng-content>-->
+        <button mat-menu-item (click)="createCategory()">
+          <mat-icon>add</mat-icon>
+          {{'qcm.questionnaire.menu.category.create' |translate}}
+        </button>
+        <button mat-menu-item (click)="viewQuestionsByQuestionnaire()">
+          <mat-icon>list</mat-icon>
+          {{'qcm.questionnaire.menu.questions.list' |translate}}
+        </button>
+      </mat-menu>
+    </mat-toolbar-row>
+
   </mat-toolbar>
-  <div class="form" fxLayout='column'>
-    <form class="example-form" [formGroup]="form">
-      <div style="display:flex;flex-direction: column">
+
+  <!--form -->
+  <div class="form" fxLayout="column" fxLayout.gt-sm="row">
+
+    <form class="example-form" [formGroup]="form" fxLayout="column" fxLayout.gt-sm="row" fxFlex="100%">
+
+      <div fxLayout='column' fxFlex="100%" fxFlex.gt-sm="50%">
+
+
+        <!--        <div> &lt;!&ndash; style="display:flex;flex-direction: column" &ndash;&gt; -->
         <mat-form-field class="example-full-width">
           <input formControlName="title" placeholder="{{'qcm.questionnaire.form.input.title.placeholder' |translate}}"
                  matInput>
         </mat-form-field>
 
-        <mat-form-field>
-        <textarea formControlName="description"
-                  placeholder="{{'qcm.questionnaire.form.input.description.placeholder' |translate}}"
-                  matInput></textarea>
-
-        </mat-form-field>
 
         <mat-form-field *ngIf="categories as epics;">
           <mat-select formControlName="category"
@@ -83,10 +89,31 @@
           </mat-chip-list>
         </mat-form-field>
 
+        <mat-form-field class="example-full-width">
+          <input formControlName="website" placeholder="{{'qcm.questionnaire.form.input.website.placeholder' |translate}}"
+                 matInput>
+        </mat-form-field>
+
       </div>
+
+      <!--<pre>{{form.value | json}}</pre>-->
+
+      <!--      </div>-->
+
+      <div fxLayout='column' fxFlex="100%" fxFlex.gt-sm="50%" >
+
+        <mat-form-field style="padding: 10px">
+
+          <textarea id="textbox" formControlName="description" fxFlex="100%"
+                    placeholder="{{'qcm.questionnaire.form.input.description.placeholder' |translate}}"
+                    matInput cols="50" rows="15"></textarea>
+
+        </mat-form-field>
+      </div>
+
+
     </form>
-    <!--<pre>{{form.value | json}}</pre>-->
 
   </div>
-
 </div>
+
