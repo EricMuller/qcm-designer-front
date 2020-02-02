@@ -1,8 +1,9 @@
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {NotifierService} from '@app/core/notifications/simple-notifier.service';
 import {Observable, of} from 'rxjs';
 import {fromPromise} from 'rxjs/internal-compatibility';
+import {throwError} from 'rxjs/internal/observable/throwError';
 import {catchError, flatMap} from 'rxjs/operators';
 import {KeycloakService} from '../auth/keycloak.service';
 
@@ -15,7 +16,8 @@ export class KeyCloakInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    return fromPromise(this.keycloakService.getToken()).pipe(
+    return fromPromise(this.keycloakService.getToken())
+      .pipe(
       catchError(error => of(error)),
       flatMap((accessToken) => {
         console.log('KeyCloakInterceptor:' + req.url );
@@ -28,7 +30,21 @@ export class KeyCloakInterceptor implements HttpInterceptor {
           }
         });
 
-        return next.handle(request);
+        return next.handle(request)
+          .pipe(
+            catchError((error: HttpErrorResponse) => {
+              let errorMessage = '';
+              if (error.error instanceof ErrorEvent) {
+                // client-side error
+                errorMessage = `Error: ${error.error.message}`;
+              } else {
+                // server-side error
+                errorMessage = `Error Code: ${error.status}\nMessage: ${error.error.message}`;
+              }
+              this.notifierService.notifyError(errorMessage, 'OK');
+              return throwError(errorMessage);
+            })
+          );
       }));
   }
 

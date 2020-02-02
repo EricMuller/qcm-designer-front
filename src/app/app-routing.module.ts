@@ -18,6 +18,9 @@ const routes: Routes = [
     path: 'user', loadChildren: () => import('./features/user/user-routing.module').then(m => m.UserRoutingModule)
   },
   {
+    path: 'social', loadChildren: () => import('./features/social/social-routing.module').then(m => m.SocialRoutingModule)
+  },
+  {
     path: 'questions',
     data: {preload: true},
     loadChildren: () => import('./features/question/question-routing.module').then(m => m.QuestionRoutingModule)

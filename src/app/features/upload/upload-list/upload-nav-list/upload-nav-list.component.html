@@ -1,7 +1,7 @@
 <mat-nav-list class="nav-list">
 
-  <mat-list-item class="list mat-elevation-z2 list-item" *ngFor="let item of elements$ |async  as q; index as i"
-                 attr.entityId="uploadId_{{item.id}}" >
+  <mat-list-item class="list mat-elevation-z2 list-item" *ngFor="let item of elements$ |async ; index as i"
+                 attr.entityId="uploadId_{{item.id}}">
 
     <button mat-icon-button matListAvatar (click)="uploadStore.swapElement(item)">
       <mat-icon matListIcon *ngIf="!uploadStore.isSelected(item)">question_answer</mat-icon>
@@ -9,13 +9,52 @@
                     [checked]="uploadStore.isSelected(item)"></mat-checkbox>
     </button>
 
-    <p  class="cursor-pointer"> {{item.id}} - {{item.fileName}} </p>
+    <p class="cursor-pointer"> {{item.id}} - {{item.fileName}} </p>
     <div class="spacer"></div>
     {{item.dateCreation | date:'dd/MM/yyyy HH:mm'}}
-    <!--  menu -->
 
-    <button mat-icon-button matTooltip="Import" (click)="import(item)" color="primary"><mat-icon>cloud_download</mat-icon></button>
-    <mat-progress-bar  mode="indeterminate" [hidden]="!item?.loading"  > </mat-progress-bar>
+    <!--  menu -->
+    <div ngSwitch="{{item?.status}}">
+      <ng-template [ngSwitchCase]="'DONE'">
+        <button mat-icon-button matTooltip="Import done" (click)="import(item)" color="primary">
+          <mat-icon>cloud_done</mat-icon>
+        </button>
+      </ng-template>
+
+      <ng-template [ngSwitchCase]="'RUNNING'">
+        <button mat-icon-button matTooltip="Import running" (click)="import(item)" color="primary">
+          <mat-icon>cloud</mat-icon>
+        </button>
+      </ng-template>
+
+      <div ngSwitch="{{item?.status}}">
+        <ng-template [ngSwitchCase]="''">
+          <button mat-icon-button matTooltip="Import File" (click)="import(item)" color="primary">
+            <mat-icon>cloud_upload</mat-icon>
+          </button>
+        </ng-template>
+      </div>
+
+    </div>
+
+    <button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="uploadMenu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <!-- line menu -->
+    <mat-menu #uploadMenu="matMenu" yPosition="below"  >
+
+      <button class="plMenuCSS"  mat-menu-item matTooltip="{{'qcm.upload.list.menu.download' |translate}}" (click)="download(item)" color="primary">
+        <mat-icon>cloud_download</mat-icon>{{'qcm.upload.list.menu.download' |translate}}
+      </button>
+
+    </mat-menu>
+
+    <!--    <button mat-icon-button matTooltip="Import" (click)="import(item)" color="primary">-->
+    <!--      <mat-icon>cloud_upload</mat-icon>-->
+    <!--    </button>-->
+
+
+    <mat-progress-bar mode="indeterminate" [hidden]="!item?.loading"></mat-progress-bar>
   </mat-list-item>
 
 </mat-nav-list>

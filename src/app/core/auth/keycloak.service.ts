@@ -54,9 +54,9 @@ export class KeycloakService {
             .success(data => {
 
               this.user = new User();
-              this.user.user_name = data.username;
-              this.user.first_name = data.first_name;
-              this.user.last_name = data.last_name;
+              this.user.userName = data.username;
+              this.user.firstName = data.first_name;
+              this.user.lastName = data.last_name;
               this.user.email = data.email;
             });
         }
@@ -68,7 +68,7 @@ export class KeycloakService {
   }
 
   hasAnyRole(roles: string[]): boolean {
-    for (let i = 0; i < roles.length; i++) {
+    for(let i = 0; i < roles.length; i++) {
       if (this.hasRole(roles[i])) {
         return true;
       }

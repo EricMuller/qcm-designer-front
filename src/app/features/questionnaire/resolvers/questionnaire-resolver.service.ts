@@ -16,7 +16,7 @@ export class QuestionnaireResolver implements Resolve<Questionnaire> {
     if (route.params.id > 0) {
       return this.questionnaireService.getQuestionnaireById(route.params.id);
     } else {
-      return of(new Questionnaire())
+      return of(new Questionnaire());
     }
   }
 }

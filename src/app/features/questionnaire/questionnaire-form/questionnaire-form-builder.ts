@@ -1,8 +1,7 @@
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Injectable} from '@angular/core';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Questionnaire} from '@app/features/qcm-rest-api/model/questionnaire.model';
 import {Tag} from '@app/features/qcm-rest-api/model/tag.model';
-
 
 
 @Injectable()
@@ -16,10 +15,11 @@ export class QuestionnaireFormBuilder {
       id: new FormControl({value: questionnaire.id, disabled: true}),
       version: new FormControl({value: questionnaire.version, disabled: true}),
       title: new FormControl({value: questionnaire.title, disabled: true}, Validators.required),
-      website: new FormControl({value: questionnaire.website, disabled: true}, Validators.required),
-      description: new FormControl({value: questionnaire.description, disabled: true}, Validators.required),
+      website: new FormControl({value: questionnaire.website, disabled: true}),
+      description: new FormControl({value: questionnaire.description, disabled: true}),
       category: new FormControl({value: questionnaire.category, disabled: true}),
-      tags: this.createTagsControl(questionnaire, true)
+      tags: this.createTagsControl(questionnaire, true),
+      dateCreation: new FormControl({value: new Date(questionnaire.dateCreation), disabled: true})
     });
   }
 
@@ -36,8 +36,8 @@ export class QuestionnaireFormBuilder {
   public createTagControl(tag: Tag, disabled: boolean): FormGroup {
     return this.fb.group({
       // response: 'test',
-      id: new FormControl({value: tag.id ? tag.id : null, disabled: disabled}),
-      libelle: new FormControl({value: tag.libelle ? tag.libelle : false, disabled: disabled}),
+      id: new FormControl({value: tag.id ? tag.id : null, disabled: true}),
+      libelle: new FormControl({value: tag.libelle ? tag.libelle : false, disabled: true}),
     });
   }
 

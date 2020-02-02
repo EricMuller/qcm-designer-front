@@ -9,8 +9,7 @@
       </a>
 
       <div *ngIf="questionnaire.id && !edition">{{'qcm.questionnaire.view.title' | translate}}{{questionnaire.id}}</div>
-      <div
-        *ngIf="questionnaire.id && edition">{{'qcm.questionnaire.edit.title' | translate}}  {{questionnaire.id}}</div>
+      <div *ngIf="questionnaire.id && edition">{{'qcm.questionnaire.edit.title' | translate}} {{questionnaire.id}}</div>
       <div *ngIf="!questionnaire.id">{{'qcm.questionnaire.create.title' | translate}}</div>
 
       <div class="spacer"></div>
@@ -34,7 +33,7 @@
       <button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="questionnaireMenu">
         <mat-icon>more_vert</mat-icon>
       </button>
-      <!-- line menu -->
+
       <mat-menu #questionnaireMenu="matMenu" yPosition="below">
         <!--<ng-content select="[menu-items]"></ng-content>-->
         <button mat-menu-item (click)="createCategory()">
@@ -51,69 +50,86 @@
   </mat-toolbar>
 
   <!--form -->
-  <div class="form" fxLayout="column" fxLayout.gt-sm="row">
+  <!--  <div class="form" fxLayout="column" fxLayout.gt-sm="row">-->
 
-    <form class="example-form" [formGroup]="form" fxLayout="column" fxLayout.gt-sm="row" fxFlex="100%">
+  <form class="example-form" [formGroup]="form" fxLayout="column" fxLayout.gt-sm="row" fxFlex="100%">
 
-      <div fxLayout='column' fxFlex="100%" fxFlex.gt-sm="50%">
+    <div fxLayout='column' fxFlex="100%" fxFlex.gt-sm="50%">
 
 
-        <!--        <div> &lt;!&ndash; style="display:flex;flex-direction: column" &ndash;&gt; -->
-        <mat-form-field class="example-full-width">
+      <!--        <div> &lt;!&ndash; style="display:flex;flex-direction: column" &ndash;&gt; -->
+      <div fxLayout='row'>
+        <mat-form-field class="example-full-width" fxFlex="100%" fxFlex.gt-xs="90%">
           <input formControlName="title" placeholder="{{'qcm.questionnaire.form.input.title.placeholder' |translate}}"
                  matInput>
         </mat-form-field>
-
-
-        <mat-form-field *ngIf="categories as epics;">
+      </div>
+      <div fxLayout='row'>
+        <mat-form-field *ngIf="categories as epics;" fxFlex="100%" fxFlex.gt-xs="50%">
           <mat-select formControlName="category"
                       placeholder="{{'qcm.questionnaire.form.input.category.placeholder' |translate}}"
                       [compareWith]="compareById">
             <mat-option>--</mat-option>
             <mat-option *ngFor="let epic of epics" [value]="epic">{{epic.libelle}}</mat-option>
+
           </mat-select>
         </mat-form-field>
+        <button *ngIf="!categories?.length" mat-icon-button
+                matTooltip="{{'qcm.questionnaire.menu.category.create' |translate}}"
+                (click)="createCategory()">
+          <mat-icon>fiber_new</mat-icon>
+        </button>
+      </div>
 
-        <mat-form-field class="chip-tags">
+      <div fxLayout='row'>
+        <mat-form-field class="chip-tags" fxFlex="100%" fxFlex.gt-xs="90%">
           <mat-chip-list #chipList>
             <mat-chip *ngFor="let tag of tags.controls; index as i" [selectable]="edition"
                       [removable]="edition" (remove)="removeChip(i)">
               {{tag.get('libelle')?.value}}
               <mat-icon matChipRemove *ngIf="edition">cancel</mat-icon>
             </mat-chip>
-            <input placeholder="{{'qcm.questionnaire.form.input.tag.placeholder' |translate}}"
-                   [matChipInputFor]="chipList"
-                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                   [matChipInputAddOnBlur]="addOnBlur"
-                   (matChipInputTokenEnd)="addChip($event)" [disabled]="!edition"/>
           </mat-chip-list>
+          <input placeholder="{{'qcm.questionnaire.form.input.tag.placeholder' |translate}}"
+                 [matChipInputFor]="chipList"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [matChipInputAddOnBlur]="addOnBlur"
+                 (matChipInputTokenEnd)="addChip($event)" [disabled]="!edition"/>
         </mat-form-field>
-
-        <mat-form-field class="example-full-width">
-          <input formControlName="website" placeholder="{{'qcm.questionnaire.form.input.website.placeholder' |translate}}"
+      </div>
+      <div fxLayout='row'>
+        <mat-form-field fxFlex="100%" fxFlex.gt-xs="90%">
+          <input formControlName="website"
+                 placeholder="{{'qcm.questionnaire.form.input.website.placeholder' |translate}}"
                  matInput>
         </mat-form-field>
-
       </div>
 
-      <!--<pre>{{form.value | json}}</pre>-->
+    </div>
 
-      <!--      </div>-->
-
-      <div fxLayout='column' fxFlex="100%" fxFlex.gt-sm="50%" >
-
-        <mat-form-field style="padding: 10px">
-
-          <textarea id="textbox" formControlName="description" fxFlex="100%"
-                    placeholder="{{'qcm.questionnaire.form.input.description.placeholder' |translate}}"
-                    matInput cols="50" rows="15"></textarea>
-
+    <!--<pre>{{form.value | json}}</pre>-->
+    <div fxLayout='column'>
+      <div fxLayout='row' fxFlex="100%" fxFlex.gt-xs="50%">
+        <mat-form-field *ngIf="questionnaire.id">
+          <input matInput [value]="form.get('dateCreation').value | date: 'dd/MM/yyyy hh:mm:ss' "
+                 placeholder="{{'qcm.questionnaire.form.input.creation.placeholder' |translate}}" readonly>
         </mat-form-field>
       </div>
+    </div>
+
+  </form>
+
+  <!--  </div>-->
+  <!--             [upload]="doUpload"-->
+  <md-editor name="Content"
+             [(ngModel)]="this.description"
+             [height]="'300px'"
+             [mode]="edition ? 'editor' : 'preview'"
+             [options]="options"
+             required
+             maxlength="500">
+  </md-editor>
 
 
-    </form>
-
-  </div>
 </div>
 

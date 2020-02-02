@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NotifierService} from '@app/core/notifications/simple-notifier.service';
-import {Message} from '@app/features/qcm-rest-api/model/Message.model';
 import {Upload} from '@app/features/qcm-rest-api/model/upload.model';
 import {UploadService} from '@app/features/qcm-rest-api/services/upload.service';
 import {UploadStore} from '@app/features/stores/upload-store.service';
@@ -33,16 +32,58 @@ export class UploadNavListComponent implements OnInit {
     upload.loading = true;
 
     this.uploadService.importUploadById(upload.id)
-      .subscribe((message: Message) => {
+      .subscribe((message: Upload) => {
         upload.loading = false;
-        this.notifier.notifyInfo(message.message, 1000);
-      });
+        this.notifier.notifyInfo(message.status, 1000);
+      }
+        , error => {
+          upload.loading = false;
+        });
   }
 
   delete(item: Upload) {
     this.uploadStore.deleteElement(item).subscribe(
       (message: Upload) => {
         this.notifier.notifyInfo(message.fileName + ' deleted', 1000);
+      }
+      , error => {
+        item.loading = false;
       });
   }
+
+  download(item: Upload) {
+    this.uploadStore.getElement(item.id)
+      .subscribe(
+        (message: Upload) => {
+          this.notifier.notifyInfo(message.fileName, 1000);
+          const blob = this.b64toBlob(message.data, message.contentType, 512);
+          const url = window.URL.createObjectURL(blob);
+          window.open(url, '_blank');
+        })
+    ;
+  }
+
+  b64toBlob(b64Data, contentType, sliceSize) {
+    contentType = contentType || '';
+    sliceSize = sliceSize || 512;
+
+    const byteCharacters = atob(b64Data);
+    const byteArrays = [];
+
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+
+      const byteArray = new Uint8Array(byteNumbers);
+
+      byteArrays.push(byteArray);
+    }
+
+    return new Blob(byteArrays, {type: contentType});
+  }
+
 }

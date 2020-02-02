@@ -15,6 +15,7 @@
   "qcm.questionnaire.form.input.description.placeholder" : "Description",
   "qcm.questionnaire.form.input.category.placeholder" : "Catégorie",
   "qcm.questionnaire.form.input.tag.placeholder" : "Etiquette",
+  "qcm.questionnaire.form.input.creation.placeholder":"Crée le",
 
   "qcm.question.filter.title": "Filtrer Mes Questions",
   "qcm.question.create.title": "Creer une nouvelle question",
@@ -28,6 +29,7 @@
   "qcm.upload.list.title": "Mes Téléchargements",
   "qcm.upload.list.title.short": "Mes Téléchargements",
   "qcm.upload.selected.title" : "Telechargements selectionnée(s)",
+  "qcm.upload.list.menu.download": "Télécharger le fichier",
 
   "menu.questions" : "Mes Questions",
   "menu.questionnaires" : "Mes Questionnaires",

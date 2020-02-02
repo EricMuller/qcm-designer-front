@@ -1,7 +1,5 @@
 <div class="page-center">
 
-
-
   <div fxlayout [hidden]="filter">
 
     <app-selectable-list #list [store]="uploadStore"
@@ -23,28 +21,17 @@
 
 
     </app-selectable-list>
-
+    <app-material-file-upload #upload [accept]="accept" [target]="apiEndPoint" (complete)="onFileComplete($event)">
+    </app-material-file-upload>
   </div>
 
-  <mat-card>
-    <mat-card-header>
-<!--      <mat-toolbar>-->
-<!--        <h1>{{"qcm.upload.title" | translate }}</h1>-->
-<!--      </mat-toolbar>-->
-    </mat-card-header>
-    <mat-card-content>
-      <app-material-file-upload #upload  [accept]="accept"   [target]="apiEndPoint"   (complete)="onFileComplete($event)">
-      </app-material-file-upload>
-    </mat-card-content>
-  </mat-card>
+  <!--  <mat-card>-->
+  <!--    <mat-card-header>ex:</mat-card-header>-->
+  <!--    <mat-card-content>-->
+  <!--      <div #content>{{sample |json}}</div>-->
+  <!--    </mat-card-content>-->
 
-  <mat-card>
-    <mat-card-header>ex:</mat-card-header>
-    <mat-card-content>
-      <div>{{sample |json}}</div>
-    </mat-card-content>
-
-  </mat-card>
+  <!--  </mat-card>-->
 </div>
 
 

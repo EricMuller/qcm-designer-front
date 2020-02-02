@@ -1,10 +1,13 @@
-export class User {
-  id: string;
-  user_name: string;
+import {Entity} from '@app/features/qcm-rest-api/model/entity';
+
+export class User extends Entity {
+
   email: string;
-  first_name: string;
-  last_name: string;
-  email_verified:boolean;
+  userName: string;
+  firstName: string;
+  lastName: string;
+  company: string;
+  version: number;
 
 }
 

@@ -31,12 +31,12 @@
 <!--      </div>-->
 <!--    </div>-->
 
-<!--    <mat-nav-list dense>-->
-<!--      <button *ngIf="isloggedIn()" mat-menu-item class="profile-img" (click)="profile()">-->
-<!--        <mat-icon style="font-size: 32px">account_circle</mat-icon>-->
-<!--        Profile-->
-<!--      </button>-->
-<!--    </mat-nav-list>-->
+    <mat-nav-list dense>
+      <button *ngIf="isLoggedIn()" mat-menu-item class="profile-img" (click)="profile()">
+        <mat-icon style="font-size: 32px">account_circle</mat-icon>
+        Profile
+      </button>
+    </mat-nav-list>
 
     <a *ngIf="isLoggedIn()" mat-menu-item (click)="logout()">
       <mat-icon>exit_to_app</mat-icon>

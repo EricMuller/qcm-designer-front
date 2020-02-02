@@ -6,5 +6,5 @@ export const environment = {
   KEYCLOAK_REALM: 'qcm',
   KEYCLOAK_CLIENTID: 'qcm-web',
   PAGE_SIZE: 100,
-  QCM_REST_API_HOST: 'https://qcm-rest-api.herokuapp.com'
+  QCM_REST_API_HOST: 'https://qcm-api.webmarks.net'
 };

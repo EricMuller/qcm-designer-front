@@ -4,7 +4,13 @@ export class Upload extends Entity {
 
   fileName: string;
 
+  loading: boolean;
+
+  status: string;
+
   dateCreation: Date;
 
-  loading: boolean;
+  data: any;
+
+  contentType: string;
 }

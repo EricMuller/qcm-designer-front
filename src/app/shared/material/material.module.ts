@@ -3,18 +3,19 @@ import {CommonModule} from '@angular/common';
 import {
   MatBadgeModule,
   MatButtonToggleModule,
-  MatChipsModule,
+  MatChipsModule, MatDatepickerModule,
   MatDialogModule,
   MatExpansionModule,
   MatFormFieldModule,
-  MatGridListModule,
+  MatGridListModule, MatNativeDateModule,
   MatPaginatorModule,
   MatProgressBarModule,
   MatProgressSpinnerModule, MatRadioModule,
-  MatSliderModule,
+  MatSliderModule, MatSlideToggleModule,
   MatSortModule,
   MatTableModule, MatTabsModule
 } from '@angular/material';
+import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import {MatMenuModule} from '@angular/material/menu';
@@ -61,8 +62,11 @@ import {MatTooltipModule} from '@angular/material';
     MatToolbarModule,
     MatExpansionModule,
     MatProgressBarModule,
-    PortalModule
-
+    PortalModule,
+    MatDatepickerModule,
+    // MatMomentDateModule,
+    MatNativeDateModule,
+    MatSlideToggleModule
   ],
   declarations: []
 })

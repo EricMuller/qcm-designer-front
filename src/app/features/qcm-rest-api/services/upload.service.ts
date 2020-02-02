@@ -44,8 +44,11 @@ export class UploadService {
     return this.http.get<Page>(requestUrl);
   }
 
-  public importUploadById(id: number): Observable<Message> {
-    return this.http.get<Message>(this.endPoint.UPLOAD + id.toString() + '/import');
+  public importUploadById(id: number): Observable<Upload> {
+    return this.http.get<Upload>(this.endPoint.UPLOAD + id.toString() + '/import');
   }
 
+  public getUploadById(id: number): Observable<Upload> {
+    return this.http.get<Upload>(this.endPoint.UPLOAD + id.toString() );
+  }
 }

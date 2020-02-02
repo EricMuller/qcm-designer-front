@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Criteria} from '@app/features/qcm-rest-api/model/criteria';
 import {Question} from '@app/features/qcm-rest-api/model/question.model';
+import {Questionnaire} from '@app/features/qcm-rest-api/model/questionnaire.model';
 import {Page} from '@app/features/qcm-rest-api/services/page';
 import {QuestionService} from '@app/features/qcm-rest-api/services/question.service';
 import {QuestionnaireStore} from '@app/features/stores/questionnaire-store.service';
@@ -12,10 +13,12 @@ import {mergeMap, publishLast, refCount} from 'rxjs/operators';
 
 
 @Injectable()
-export class QuestionStore extends SelectStoreAdapter<Question> implements CriteriaStore<Question>, CrudStore<Question> {
+export class QuestionStore extends SelectStoreAdapter<Question> implements CriteriaStore<Question>, CrudStore<Question, number> {
 
   constructor(private questionService: QuestionService, private tagStore: TagStore, private questionnaireStore: QuestionnaireStore) {
     super();
+
+
 
     this.tagStore.selected$.subscribe((tags) => {
       this.deleteCriteriabyName('tag_id');
@@ -31,6 +34,10 @@ export class QuestionStore extends SelectStoreAdapter<Question> implements Crite
         this.addCriteria(new Criteria(tag.id.toString(), 'questionnaire_id'));
       }
     });
+  }
+
+  getElement(id: number): Observable<Question> {
+    return  this.questionService.getQuestionById(id);
   }
 
   getPage(page ?: number, size ?: number, sort ?: string): Observable<Page> {

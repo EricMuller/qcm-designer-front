@@ -8,14 +8,10 @@ import {QuestionnaireModule} from '@app/features/questionnaire/questionnaire.mod
 import {QuestionnaireResolver} from '@app/features/questionnaire/resolvers/questionnaire-resolver.service';
 import {QuestionnairesResolver} from '@app/features/questionnaire/resolvers/questionnaires-resolver.service';
 import {QuestionsQuestionnaireResolver} from '@app/features/questionnaire/resolvers/questions-questionnaire-resolver.service';
-import {UserDetailComponent} from '@app/features/user/user-detail/user-detail.component';
 
 const routes: Routes = [
   {
     path: 'list', component: QuestionnaireListComponent, canActivate: [KeycloakGuardService],
-  },
-  {
-    path: 'user', component: UserDetailComponent,
   },
   {
     path: ':id/questions', component: QuestionnaireQuestionListComponent, canActivate: [KeycloakGuardService],

@@ -5,13 +5,14 @@
 
 export const environment = {
   application: 'QCM ',
-  production: false,
+  production: true,
   KEYCLOAK: true,
   KEYCLOAK_URL: 'https://keycloak.webmarks.net/auth',
   KEYCLOAK_REALM: 'qcm',
-  KEYCLOAK_CLIENTID: 'qcm-web',
+  KEYCLOAK_CLIENTID: 'qcm-web-dev',
   PAGE_SIZE: 100,
   // QCM_REST_API_HOST: 'http://localhost:8080'
   // QCM_REST_API_HOST: 'https://qcm-api.webmarks.net'
+  // QCM_REST_API_HOST: 'http://163.172.48.36:9090'
   QCM_REST_API_HOST: 'https://qcm-rest-api.herokuapp.com'
 };

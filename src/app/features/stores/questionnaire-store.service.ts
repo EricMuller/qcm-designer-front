@@ -15,7 +15,7 @@ import {mergeMap} from 'rxjs/operators';
 
 @Injectable()
 export class QuestionnaireStore extends SelectStoreAdapter<Questionnaire>
-  implements CriteriaStore<Questionnaire>, CrudStore<Questionnaire> {
+  implements CriteriaStore<Questionnaire>, CrudStore<Questionnaire, number> {
 
   constructor(private backend: QuestionnaireService, private tagStore: TagStore) {
     super();
@@ -27,6 +27,10 @@ export class QuestionnaireStore extends SelectStoreAdapter<Questionnaire>
       }
     });
 
+  }
+
+  getElement(id: number): Observable<Questionnaire> {
+    return  this.backend.getQuestionnaireById(id);
   }
 
   getPage(page?: number, size?: number, sort?: string): Observable<Page> {

@@ -5,14 +5,12 @@ import {QuestionFormComponent} from '@app/features/question/question-form/questi
 import {QuestionListComponent} from '@app/features/question/question-list/question-list.component';
 import {QuestionModule} from '@app/features/question/question.module';
 import {QuestionResolver} from '@app/features/question/resolvers/question-resolver.service';
-import {UserDetailComponent} from '@app/features/user/user-detail/user-detail.component';
 
 const routes: Routes = [
   {
     path: '', redirectTo: 'list', pathMatch: 'full'
   },
   {path: 'list', component: QuestionListComponent, canActivate: [KeycloakGuardService]},
-  {path: 'user', component: UserDetailComponent},
   {
     path: ':id', component: QuestionFormComponent, canActivate: [KeycloakGuardService],
     resolve: {

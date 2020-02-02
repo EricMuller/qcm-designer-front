@@ -1,11 +1,11 @@
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {Input, OnInit} from '@angular/core';
+import {OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {NotifierService} from '@app/core/notifications/simple-notifier.service';
 import {CrudStore} from '@app/features/stores/store-api';
 
-export abstract class EditableFormComponent<T> implements OnInit {
+export abstract class EditableFormComponent<T, K> implements OnInit {
 
   public edition: boolean;
 
@@ -15,14 +15,13 @@ export abstract class EditableFormComponent<T> implements OnInit {
 
   public separatorKeysCodes = [ENTER, COMMA];
 
-  protected constructor(protected store: CrudStore<T>, protected  notifierService: NotifierService, protected router: Router) {
+  protected constructor(protected store: CrudStore<T, K>, protected  notifierService: NotifierService, protected router: Router) {
 
   }
 
   ngOnInit() {
 
   }
-
 
   public validateAllFormFields(formGroup: FormGroup | FormArray) {
     Object.keys(formGroup.controls).forEach(field => {
@@ -49,9 +48,15 @@ export abstract class EditableFormComponent<T> implements OnInit {
 
   }
 
+  protected beforeSaveForm(t: T): T {
+    return t;
+  }
+
   public saveForm() {
+    debugger
     if (this.form.valid) {
-      const q = this.form.value;
+      let q = this.form.value;
+      q = this.beforeSaveForm(q);
       this.store.saveElement(q)
         .subscribe(this.onSaveForm.bind(this)
         );

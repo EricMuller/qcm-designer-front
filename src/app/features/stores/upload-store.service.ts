@@ -14,10 +14,14 @@ import {mergeMap, publishLast, refCount} from 'rxjs/operators';
 
 
 @Injectable()
-export class UploadStore extends SelectStoreAdapter<Upload> implements CriteriaStore<Upload>, CrudStore<Upload> {
+export class UploadStore extends SelectStoreAdapter<Upload> implements CriteriaStore<Upload>, CrudStore<Upload, number> {
 
   constructor(private uploadService: UploadService) {
     super();
+  }
+
+  getElement(id: number): Observable<Upload> {
+    return  this.uploadService.getUploadById(id);
   }
 
   getPage(page?: number, size?: number, sort?: string): Observable<Page> {

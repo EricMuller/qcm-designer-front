@@ -4,11 +4,13 @@ import {Page} from '@app/features/qcm-rest-api/services/page';
 import {Observable} from 'rxjs';
 
 
-export interface CrudStore<T extends Entity> {
+export interface CrudStore<T extends Entity, K> {
 
   deleteElement(element: T): Observable<T>;
 
   saveElement(element: T): Observable<T>;
+
+  getElement(id: K): Observable<T>;
 }
 
 export interface ListStore<T extends Entity> {

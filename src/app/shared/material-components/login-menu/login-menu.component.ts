@@ -30,7 +30,7 @@ export class LoginMenuComponent implements OnInit {
   }
 
   public profile() {
-    this.router.navigate(['/questionnaires/user']);
+    this.router.navigate(['/user/edit']);
   }
 
 

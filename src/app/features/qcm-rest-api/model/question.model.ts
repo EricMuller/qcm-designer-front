@@ -4,7 +4,7 @@ import {Entity} from './entity';
 
 export class Question extends Entity {
   dateModification?: number;
-  dateCreation?: number;
+  dateCreation: Date;
   question: string;
   responses: Reponse[];
   tags?: Tag[];

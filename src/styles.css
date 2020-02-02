@@ -211,6 +211,10 @@ body .push-md {
   white-space: nowrap;
 }
 
+.label-warning {
+  background-color: #FF5733;
+}
+
 .label-danger {
   background-color: #fc4b6c;
 }

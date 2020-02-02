@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/service-worker/config/schema.json",
   "index": "/index.html",
-  "configVersion": 2,
+  "configVersion": 3,
   "assetGroups": [
     {
       "name": "app",
@@ -10,9 +10,12 @@
         "files": [
           "/favicon.ico",
           "/index.html",
+          "/*.ico"
+        ],
+        "versionedFiles": [
           "/*.css",
           "/*.js",
-          "/*.ico"
+          "/*.js"
         ]
       }
     },

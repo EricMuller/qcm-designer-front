@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
-import {FormArray} from '@angular/forms';
+import {FormArray, FormControl} from '@angular/forms';
 import {MatChipInputEvent, MatDialog, MatDialogConfig} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NotifierService} from '@app/core/notifications/simple-notifier.service';
@@ -13,19 +13,38 @@ import {QuestionnaireFormBuilder} from '@app/features/questionnaire/questionnair
 import {QuestionStore} from '@app/features/stores/question-store.service';
 import {QuestionnaireStore} from '@app/features/stores/questionnaire-store.service';
 import {EditableFormComponent} from '@app/shared/material-components/editable-form/editableFormComponent';
-
+import {MdEditorOption} from 'ngx-markdown-editor';
 
 @Component({
   selector: 'app-questionnaire-form',
   templateUrl: './questionnaire-form.component.html',
   styleUrls: ['./questionnaire-form.component.scss'], providers: [QuestionnaireFormBuilder]
 })
-export class QuestionnaireFormComponent extends EditableFormComponent<Questionnaire> implements OnInit, AfterViewInit {
+export class QuestionnaireFormComponent extends EditableFormComponent<Questionnaire, number> implements OnInit, AfterViewInit {
 
   @Input()
   public questionnaire: Questionnaire;
 
   public categories: Category[];
+  public description: string;
+
+  public date: Date;
+
+  public options: MdEditorOption = {
+    showPreviewPanel: true,
+    enablePreviewContentClick: true,
+    resizable: true,
+    customRender: {
+      image: function (href: string, title: string, text: string) {
+        let out = `<img style="max-width: 100%; border: 20px solid red;" src="${href}" alt="${text}"`;
+        if (title) {
+          out += ` title="${title}"`;
+        }
+        out += (<any>this.options).xhtml ? '/>' : '>';
+        return out;
+      }
+    }
+  };
 
   constructor(
     private route: ActivatedRoute,
@@ -40,6 +59,8 @@ export class QuestionnaireFormComponent extends EditableFormComponent<Questionna
     this.edition = route.snapshot.params.id <= 0;
     this.route.data.subscribe(data => {
       this.questionnaire = data.questionnaire;
+      this.description = this.questionnaire.description;
+      this.date = new Date(this.questionnaire.dateCreation);
     });
   }
 
@@ -94,8 +115,15 @@ export class QuestionnaireFormComponent extends EditableFormComponent<Questionna
     tags.push(this.formBuilder.createTagControl(new Tag(libelle), false));
   }
 
+
+  protected beforeSaveForm(q: Questionnaire): Questionnaire {
+    q.description = this.description;
+    return q;
+  }
+
   protected onSaveForm(data) {
     this.questionnaire = data;
+
     this.toggleEdition(false);
     this.notifierService.notifySuccess(data.title, 2000);
   }
