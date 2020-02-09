@@ -1,12 +1,37 @@
-<div class="page-center" fxLayout='column'>
+<div class="page-center" fxLayout='column' fxFlex="100%">
+
+  <!-- start desktop -->
+  <button fxShow.xs="false" mat-mini-fab (click)="deleteForm()" [hidden]="!edition" class="fab-mini-bottom-up2"
+          matTooltip="{{'qcm.form.menu.deleteAll' | translate }}" color="accent">
+    <mat-icon>delete</mat-icon>
+  </button>
+
+  <button fxShow.xs="false" mat-mini-fab [routerLink]="['/questionnaires/list']" class="fab-mini-bottom-up1"
+          matTooltip="{{'qcm.form.menu.cancel' | translate }}" color="primary">
+    <mat-icon>reply</mat-icon>
+  </button>
+
+  <button fxShow.xs="false" mat-fab (click)="toggleEdition(true)" color="primary" class="fab-bottom" [hidden]="edition"
+          matTooltip="{{'qcm.form.toggle.on' | translate }}">
+    <mat-icon>create</mat-icon>
+  </button>
+
+  <button fxShow.xs="false" mat-fab (click)="saveForm()" color="primary" class="fab-bottom" [hidden]="!edition"
+          matTooltip="{{'qcm.form.menu.save' | translate }}">
+    <mat-icon>save</mat-icon>
+  </button>
+  <!-- end desktop -->
 
   <mat-toolbar>
 
     <mat-toolbar-row>
 
-      <a mat-icon-button [routerLink]="['/questionnaires/list']">
-        <mat-icon>arrow_back</mat-icon>
-      </a>
+      <!-- start mobile -->
+      <button fxShow.gt-xs="false" mat-icon-button [routerLink]="['/questionnaires/list']">
+        <mat-icon [hidden]="edition">arrow_back</mat-icon>
+        <mat-icon [hidden]="!edition">close</mat-icon>
+      </button>
+      <!-- end mobile -->
 
       <div *ngIf="questionnaire.id && !edition">{{'qcm.questionnaire.view.title' | translate}}{{questionnaire.id}}</div>
       <div *ngIf="questionnaire.id && edition">{{'qcm.questionnaire.edit.title' | translate}} {{questionnaire.id}}</div>
@@ -14,20 +39,22 @@
 
       <div class="spacer"></div>
 
-      <button mat-icon-button (click)="toggleEdition(true)" [hidden]="edition"
+      <!-- start mobile -->
+      <button fxShow.gt-xs="false" mat-icon-button (click)="toggleEdition(true)" [hidden]="edition"
               matTooltip="{{'qcm.form.toggle.on' | translate }}" color="primary">
         <mat-icon>create</mat-icon>
       </button>
 
-      <button mat-icon-button (click)="saveForm()" [hidden]="!edition"
+      <button fxShow.gt-xs="false" mat-icon-button (click)="saveForm()" [hidden]="!edition"
               matTooltip="{{'qcm.form.menu.save' | translate }}" color="primary">
         <mat-icon>save</mat-icon>
       </button>
 
-      <button mat-icon-button (click)="deleteForm()" [hidden]="edition"
+      <button fxShow.gt-xs="false" mat-icon-button (click)="deleteForm()" [hidden]="edition"
               matTooltip="{{'qcm.form.menu.deleteAll' | translate }}" color="accent">
         <mat-icon>delete</mat-icon>
       </button>
+      <!-- end mobile -->
 
       <!--<ng-content select="[menu-buttons]"></ng-content>-->
       <button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="questionnaireMenu">
@@ -45,25 +72,26 @@
           {{'qcm.questionnaire.menu.questions.list' |translate}}
         </button>
       </mat-menu>
+
     </mat-toolbar-row>
 
   </mat-toolbar>
 
   <!--form -->
-  <!--  <div class="form" fxLayout="column" fxLayout.gt-sm="row">-->
+  <form [formGroup]="form" fxLayout="column" fxLayout.gt-xs="row" fxFlex="100%">
 
-  <form class="example-form" [formGroup]="form" fxLayout="column" fxLayout.gt-sm="row" fxFlex="100%">
-
+    <!--    colonne 1-->
     <div fxLayout='column' fxFlex="100%" fxFlex.gt-sm="50%">
 
-
-      <!--        <div> &lt;!&ndash; style="display:flex;flex-direction: column" &ndash;&gt; -->
+      <!-- title-->
       <div fxLayout='row'>
-        <mat-form-field class="example-full-width" fxFlex="100%" fxFlex.gt-xs="90%">
+        <mat-form-field fxFlex="100%" fxFlex.gt-xs="90%">
           <input formControlName="title" placeholder="{{'qcm.questionnaire.form.input.title.placeholder' |translate}}"
                  matInput>
         </mat-form-field>
       </div>
+
+      <!--  category-->
       <div fxLayout='row'>
         <mat-form-field *ngIf="categories as epics;" fxFlex="100%" fxFlex.gt-xs="50%">
           <mat-select formControlName="category"
@@ -81,6 +109,7 @@
         </button>
       </div>
 
+      <!-- tags -->
       <div fxLayout='row'>
         <mat-form-field class="chip-tags" fxFlex="100%" fxFlex.gt-xs="90%">
           <mat-chip-list #chipList>
@@ -97,6 +126,8 @@
                  (matChipInputTokenEnd)="addChip($event)" [disabled]="!edition"/>
         </mat-form-field>
       </div>
+
+      <!--  website -->
       <div fxLayout='row'>
         <mat-form-field fxFlex="100%" fxFlex.gt-xs="90%">
           <input formControlName="website"
@@ -107,20 +138,26 @@
 
     </div>
 
-    <!--<pre>{{form.value | json}}</pre>-->
-    <div fxLayout='column'>
-      <div fxLayout='row' fxFlex="100%" fxFlex.gt-xs="50%">
-        <mat-form-field *ngIf="questionnaire.id">
-          <input matInput [value]="form.get('dateCreation').value | date: 'dd/MM/yyyy hh:mm:ss' "
-                 placeholder="{{'qcm.questionnaire.form.input.creation.placeholder' |translate}}" readonly>
-        </mat-form-field>
-      </div>
+    <!--    colonne 2 -->
+    <div fxLayout='column' fxFlex="100%" fxFlex.gt-xs="20%">
+      <!--      <div  fxFlex="100%" fxFlex.gt-xs="50%">-->
+      <mat-form-field *ngIf="questionnaire.id">
+        <input matInput [value]="form.get('dateCreation').value | date: 'dd/MM/yyyy hh:mm:ss' "
+               placeholder="{{'qcm.questionnaire.form.input.creation.placeholder' |translate}}" readonly>
+      </mat-form-field>
+
+      <!-- </div> -->
+      <mat-form-field *ngIf="questionnaire.id">
+        <input matInput [value]="form.get('dateModification').value | date: 'dd/MM/yyyy hh:mm:ss' "
+               placeholder="{{'qcm.questionnaire.form.input.modification.placeholder' |translate}}" readonly>
+      </mat-form-field>
+
     </div>
 
   </form>
 
-  <!--  </div>-->
-  <!--             [upload]="doUpload"-->
+  <!--  </div> -->
+  <!--  [upload]="doUpload" -->
   <md-editor name="Content"
              [(ngModel)]="this.description"
              [height]="'300px'"
@@ -129,7 +166,6 @@
              required
              maxlength="500">
   </md-editor>
-
 
 </div>
 

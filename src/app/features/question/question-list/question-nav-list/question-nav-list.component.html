@@ -10,14 +10,15 @@
       <mat-checkbox *ngIf="isSelected(item)" matListAvatar [checked]="isSelected(item)"></mat-checkbox>
     </button>
 
-    <p class="cursor-pointer" [routerLink]="['/questions/'+ item.id ]"> {{item.id}}
+    <p class="cursor-pointer" [routerLink]="['/questions/'+ item.id ]"
+       style="overflow: hidden;white-space:nowrap;" matTooltip="{{item.question}}"> {{item.id}}
       - {{item.question}} </p>
+
     <div class="spacer"></div>
-    <span *ngIf="item.status == 'TO_BE_VALIDATED'" class="label label-danger">{{item.status}}</span>
-    <span *ngIf="item.status == 'DRAFT'" class="label label-warning">{{item.status}}</span>
-    <!--  menu -->
-    <span *ngFor="let tag of item.tags" class="label label-info list-item-tag"
-          (click)="swapTag(tag)">{{tag.libelle}}</span>
+
+    <span fxShow.xs="false" *ngIf="item.status == 'TO_BE_VALIDATED'" class="label label-danger">{{item.status}}</span>
+    <span fxShow.xs="false" *ngIf="item.status == 'DRAFT'" class="label label-warning">{{item.status}}</span>
+    <span fxShow.xs="false" *ngFor="let tag of item.tags" class="label label-info list-item-tag" (click)="swapTag(tag)">{{tag.libelle}}</span>
 
     <button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="questionMenu">
       <mat-icon>more_vert</mat-icon>

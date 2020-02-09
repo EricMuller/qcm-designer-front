@@ -19,7 +19,8 @@ export class QuestionnaireFormBuilder {
       description: new FormControl({value: questionnaire.description, disabled: true}),
       category: new FormControl({value: questionnaire.category, disabled: true}),
       tags: this.createTagsControl(questionnaire, true),
-      dateCreation: new FormControl({value: new Date(questionnaire.dateCreation), disabled: true})
+      dateCreation: new FormControl({value: new Date(questionnaire.dateCreation), disabled: true}),
+      dateModification: new FormControl({value: new Date(questionnaire.dateModification), disabled: true})
     });
   }
 

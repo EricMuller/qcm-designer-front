@@ -34,6 +34,13 @@
   position: absolute;
 }
 
+.fab-bottom {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  z-index: 100;
+}
+
 .mat-fab-bottom-center {
   flex: 1 1 auto;
   vertical-align: center;

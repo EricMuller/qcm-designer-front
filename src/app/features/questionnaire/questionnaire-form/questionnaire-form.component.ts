@@ -123,7 +123,7 @@ export class QuestionnaireFormComponent extends EditableFormComponent<Questionna
 
   protected onSaveForm(data) {
     this.questionnaire = data;
-
+    this.form = this.formBuilder.createForm(this.questionnaire);
     this.toggleEdition(false);
     this.notifierService.notifySuccess(data.title, 2000);
   }

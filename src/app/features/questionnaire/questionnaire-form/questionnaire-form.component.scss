@@ -12,3 +12,24 @@ textarea {
   border:0;
   height: 100%;
 }
+
+.fab-bottom {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  z-index: 100;
+}
+
+.fab-mini-bottom-up1 {
+  position: fixed;
+  bottom: 75px;
+  right: 25px;
+  z-index: 100;
+}
+
+.fab-mini-bottom-up2 {
+  position: fixed;
+  bottom: 120px;
+  right: 25px;
+  z-index: 100;
+}

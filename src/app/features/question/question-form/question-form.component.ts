@@ -29,7 +29,7 @@ enum QuestionType {
   templateUrl: './question-form.component.html',
   styleUrls: ['./question-form.component.scss'], providers: [QuestionFormBuilder]
 })
-export class QuestionFormComponent extends EditableFormComponent<Question,number> implements OnInit, AfterViewInit {
+export class QuestionFormComponent extends EditableFormComponent<Question, number> implements OnInit, AfterViewInit {
 
 
   @Input()

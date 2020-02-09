@@ -17,7 +17,7 @@
 
   "qcm.question.create.title": "Creer une nouvelle question",
   "qcm.question.edit.title": "Edition de la question",
-  "qcm.question.view.title": "Visualisation de la question",
+  "qcm.question.view.title": "Question",
 
   "qcm.question.list.title": "Mes Questions",
   "qcm.question.list.title.short": "Mes questions",
@@ -39,6 +39,7 @@
   "qcm.form.menu.new-response": "Ajouter un enregistremnt",
   "qcm.form.menu.save":"Sauvegarder l' enregistrement",
   "qcm.form.menu.deleteAll": "Supprimer les enregistremenst",
+  "qcm.form.menu.cancel": "Annuler",
   "qcm.form.menu.delete": "Supprimer l' enregistrement",
   "qcm.form.menu.search": "Rechercher",
   "qcm.form.menu.selectAll": "Selectionner tous les enregistrements",
