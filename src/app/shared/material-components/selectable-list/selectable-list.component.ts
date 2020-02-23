@@ -55,9 +55,9 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
 
   @Input() sortBy: string;
 
-  @Output('onClosed') onClosed = new EventEmitter<boolean>();
-  @Output('onCreate') onCreate = new EventEmitter<boolean>();
-  @Output('onClearFilter') onClearFilter = new EventEmitter<boolean>();
+  @Output() closed = new EventEmitter<boolean>();
+  @Output() created = new EventEmitter<boolean>();
+  @Output() clearFilter = new EventEmitter<boolean>();
 
   @ViewChild('paginator', {static: false}) paginator: MatPaginator;
 
@@ -95,7 +95,10 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
     this.store.criteria$.subscribe((criteria: Criteria[]) => {
         console.log('SelectableListComponent:ngOnInit:criteria$');
         this.criteria = [];
-        this.criteria.push(...criteria);
+        if (criteria) {
+          console.log(criteria);
+          this.criteria.push(...criteria);
+        }
       }
     );
 
@@ -155,7 +158,7 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
   }
 
   onValidFilter(event) {
-    this.onClosed.emit(true);
+    this.closed.emit(true);
   }
 
   public deleteSelectedElements() {
@@ -198,7 +201,7 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
   }
 
   onCreateElement(event): void {
-    this.onCreate.emit(true);
+    this.created.emit(true);
   }
 
   ngAfterContentInit(): void {

@@ -66,9 +66,8 @@
       <div><img src="./assets/images/norecord.png"/></div>
       <p>{{'qcm.selectable-list.empty' | translate }}</p>
       <div>
-          <span [hidden]="(store.criteriaSize$ |async ) === 0 ">
-            <button id="clear_criteria-btn-selectable-list" mat-raised-button color="primary"
-                    (click)="clearCriterias()">
+          <span [hidden]="(store.criteriaSize$ | async ) === 0 ">
+            <button id="clear_criteria-btn-selectable-list" mat-raised-button color="primary"  (click)="clearCriterias()">
               {{'qcm.selectable-list.clear-filters' | translate }}</button>
             </span>
         </div>

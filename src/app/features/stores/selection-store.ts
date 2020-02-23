@@ -25,7 +25,7 @@ export class SelectStoreAdapter<T extends Entity> implements ListSelectStore<T> 
 
   private selectedSizeSubject = new ReplaySubject<number>(0);
 
-  private criteriaSizeSubject = new ReplaySubject<number>(0);
+  private criteriaSizeSubject = new BehaviorSubject<number>(0);
 
 
   selected$: Observable<T[]> = this.selectedSubject.asObservable() as Observable<T[]>;

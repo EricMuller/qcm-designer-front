@@ -17,7 +17,7 @@ import {mergeMap} from 'rxjs/operators';
 export class QuestionnaireStore extends SelectStoreAdapter<Questionnaire>
   implements CriteriaStore<Questionnaire>, CrudStore<Questionnaire, number> {
 
-  constructor(private backend: QuestionnaireService, private tagStore: TagStore) {
+  constructor(private questionnaireService: QuestionnaireService, private tagStore: TagStore) {
     super();
 
     this.tagStore.selected$.subscribe((tags) => {
@@ -30,11 +30,11 @@ export class QuestionnaireStore extends SelectStoreAdapter<Questionnaire>
   }
 
   getElement(id: number): Observable<Questionnaire> {
-    return  this.backend.getQuestionnaireById(id);
+    return  this.questionnaireService.getQuestionnaireById(id);
   }
 
   getPage(page?: number, size?: number, sort?: string): Observable<Page> {
-    const obs = this.backend.getQuestionnaires(page, size, sort);
+    const obs = this.questionnaireService.getQuestionnaires(page, size, sort);
     obs.subscribe(
       p => {
         this.publishPage(p);
@@ -43,7 +43,7 @@ export class QuestionnaireStore extends SelectStoreAdapter<Questionnaire>
   }
 
   deleteElement(questionnaire: Questionnaire): Observable<Questionnaire> {
-    return this.backend.deleteQuestionnaireById(questionnaire.id)
+    return this.questionnaireService.deleteQuestionnaireById(questionnaire.id)
       .pipe(mergeMap((data) => {
         return this.deletePageElement(questionnaire);
       }));
@@ -52,7 +52,7 @@ export class QuestionnaireStore extends SelectStoreAdapter<Questionnaire>
   deleteElements(questionnaires: Questionnaire[]) {
     for (const q of questionnaires) {
       const id: number = q.id;
-      this.backend.deleteQuestionnaireById(id)
+      this.questionnaireService.deleteQuestionnaireById(id)
         .subscribe((data) => {
             this.deletePageElement(q);
           }
@@ -62,20 +62,20 @@ export class QuestionnaireStore extends SelectStoreAdapter<Questionnaire>
 
   saveElement(element: Questionnaire): Observable<Questionnaire> {
     if (element.id > 0) {
-      return this.backend.putQuestionnaire(element);
+      return this.questionnaireService.putQuestionnaire(element);
     } else {
-      return this.backend.postQuestionnaire(element);
+      return this.questionnaireService.postQuestionnaire(element);
     }
   }
 
   public addQuestion(q: Questionnaire, question: Question) {
-    return this.backend.putQuestion(q.id, question);
+    return this.questionnaireService.putQuestion(q.id, question);
   }
 
 
   getPageByCriteria(criteria: Criteria[], page?: number, size?: number, sort?: string): Observable<Page> {
     console.log(criteria);
-    const obs = this.backend.getQuestionnairesByCriteria(criteria, page, size, sort);
+    const obs = this.questionnaireService.getQuestionnairesByCriteria(criteria, page, size, sort);
     obs.subscribe(
       p => {
         this.publishPage(p);

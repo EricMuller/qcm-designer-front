@@ -18,8 +18,6 @@ export class QuestionStore extends SelectStoreAdapter<Question> implements Crite
   constructor(private questionService: QuestionService, private tagStore: TagStore, private questionnaireStore: QuestionnaireStore) {
     super();
 
-
-
     this.tagStore.selected$.subscribe((tags) => {
       this.deleteCriteriabyName('tag_id');
       for (const tag of tags) {

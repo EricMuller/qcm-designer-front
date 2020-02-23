@@ -5,6 +5,7 @@ import {QuestionnaireQuestionListComponent} from '@app/features/questionnaire/qu
 import {QuestionnaireFormComponent} from '@app/features/questionnaire/questionnaire-form/questionnaire-form.component';
 import {QuestionnaireListComponent} from '@app/features/questionnaire/questionnaire-list/questionnaire-list.component';
 import {QuestionnaireModule} from '@app/features/questionnaire/questionnaire.module';
+import {QuestionnaireCategoryResolver} from '@app/features/questionnaire/resolvers/category-resolver.service';
 import {QuestionnaireResolver} from '@app/features/questionnaire/resolvers/questionnaire-resolver.service';
 import {QuestionnairesResolver} from '@app/features/questionnaire/resolvers/questionnaires-resolver.service';
 import {QuestionsQuestionnaireResolver} from '@app/features/questionnaire/resolvers/questions-questionnaire-resolver.service';
@@ -23,17 +24,17 @@ const routes: Routes = [
   {
     path: ':id', component: QuestionnaireFormComponent, canActivate: [KeycloakGuardService],
     resolve: {
-      questionnaire: QuestionnaireResolver
+      questionnaire: QuestionnaireResolver,
+      categories: QuestionnaireCategoryResolver
     },
   }
 
 ];
 
 @NgModule({
-  imports: [QuestionnaireModule,
-    RouterModule.forChild(routes)],
+  imports: [QuestionnaireModule, RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [QuestionnairesResolver, QuestionnaireResolver, QuestionsQuestionnaireResolver],
+  providers: [QuestionnairesResolver, QuestionnaireResolver, QuestionsQuestionnaireResolver, QuestionnaireCategoryResolver],
 })
 export class QuestionnaireRoutingModule {
 }

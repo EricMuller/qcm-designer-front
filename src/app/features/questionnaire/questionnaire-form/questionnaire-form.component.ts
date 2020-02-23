@@ -1,9 +1,10 @@
 import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
-import {FormArray, FormControl} from '@angular/forms';
+import {FormArray} from '@angular/forms';
 import {MatChipInputEvent, MatDialog, MatDialogConfig} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NotifierService} from '@app/core/notifications/simple-notifier.service';
 import {CategoryDialogComponent} from '@app/features/category/category-dialog/category-dialog.component';
+import {TypeCategory} from '@app/features/category/type-category.enum';
 import {Category} from '@app/features/qcm-rest-api/model/category.model';
 import {Questionnaire} from '@app/features/qcm-rest-api/model/questionnaire.model';
 import {Tag} from '@app/features/qcm-rest-api/model/tag.model';
@@ -46,22 +47,20 @@ export class QuestionnaireFormComponent extends EditableFormComponent<Questionna
     }
   };
 
-  constructor(
-    private route: ActivatedRoute,
-    protected notifierService: NotifierService,
-    protected router: Router,
-    protected questionnaireStore: QuestionnaireStore,
-    protected questionStore: QuestionStore,
-    private dialog: MatDialog,
-    private categoryService: CategoryService, private tagService: TagService,
-    private formBuilder: QuestionnaireFormBuilder) {
+  constructor(private route: ActivatedRoute, protected notifierService: NotifierService,
+              protected router: Router, protected questionnaireStore: QuestionnaireStore,
+              protected questionStore: QuestionStore, private dialog: MatDialog,
+              private categoryService: CategoryService,
+              private tagService: TagService, private formBuilder: QuestionnaireFormBuilder) {
     super(questionnaireStore, notifierService, router);
     this.edition = route.snapshot.params.id <= 0;
     this.route.data.subscribe(data => {
       this.questionnaire = data.questionnaire;
       this.description = this.questionnaire.description;
       this.date = new Date(this.questionnaire.dateCreation);
+      this.categories = data.categories;
     });
+
   }
 
   protected createForm(): void {
@@ -70,7 +69,6 @@ export class QuestionnaireFormComponent extends EditableFormComponent<Questionna
 
   ngOnInit(): void {
     this.createForm();
-    this.loadCategories();
     this.toggleEdition(this.edition);
   }
 
@@ -79,7 +77,7 @@ export class QuestionnaireFormComponent extends EditableFormComponent<Questionna
   }
 
   private loadCategories() {
-    this.categoryService.getCategories().subscribe((categories => {
+    this.categoryService.getQuestionnairesCategories().subscribe((categories => {
       this.categories = categories;
     }));
   }
@@ -155,7 +153,7 @@ export class QuestionnaireFormComponent extends EditableFormComponent<Questionna
 
   public openCategoryDialog() {
     const config = new MatDialogConfig();
-    config.data = {category: new Category()}
+    config.data = {category: new Category(), type: TypeCategory.QUESTIONNAIRE}
     config.panelClass = 'my-full-screen-dialog';
     const dialogRef = this.dialog.open(CategoryDialogComponent, config);
     dialogRef.afterClosed().subscribe(q => {
@@ -171,5 +169,6 @@ export class QuestionnaireFormComponent extends EditableFormComponent<Questionna
       }
     });
   }
+
 
 }

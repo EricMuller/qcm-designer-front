@@ -20,10 +20,10 @@ export class QuestionFormBuilder {
       version: new FormControl({value: question.version, disabled: true}),
       type: new FormControl({value: question.type, disabled: true}, Validators.required),
       status: new FormControl({value: question.status, disabled: true}, Validators.required),
+      category: new FormControl({value: question.category, disabled: true}),
       question: new FormControl({value: question.question, disabled: true}, Validators.required),
       responses: this.createResponsesControl(question, true),
       options: new FormControl({value: this.getOptions(question), disabled: true}),
-
       tags: this.createTagsControl(question, true)
     });
   }
@@ -43,10 +43,10 @@ export class QuestionFormBuilder {
   public createResponseControl(response: Reponse, disabled: boolean) {
     return this.fb.group({
       // response: 'test',
-      id: new FormControl({value: response.id ? response.id : 0, disabled: disabled}),
+      id: new FormControl({value: response.id ? response.id : 0, disabled}),
       version: new FormControl({value: response.version, disabled: true}),
-      good: new FormControl({value: response.good ? response.good : false, disabled: disabled}),
-      response: new FormControl({value: response.response, disabled: disabled}, Validators.required),
+      good: new FormControl({value: response.good ? response.good : false, disabled}),
+      response: new FormControl({value: response.response, disabled}, Validators.required),
     });
   }
 
@@ -75,8 +75,8 @@ export class QuestionFormBuilder {
   public createTagControl(tag: Tag, disabled: boolean): FormGroup {
     return this.fb.group({
       // response: 'test',
-      id: new FormControl({value: tag.id ? tag.id : null, disabled: disabled}),
-      libelle: new FormControl({value: tag.libelle ? tag.libelle : false, disabled: disabled}),
+      id: new FormControl({value: tag.id ? tag.id : null, disabled}),
+      libelle: new FormControl({value: tag.libelle ? tag.libelle : false, disabled}),
     });
   }
 

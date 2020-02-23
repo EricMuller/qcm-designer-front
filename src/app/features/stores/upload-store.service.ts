@@ -70,10 +70,10 @@ export class UploadStore extends SelectStoreAdapter<Upload> implements CriteriaS
     return obs;
   }
 
-  criterias(): Criteria[] {
-
-    return [];
-  }
+  // criterias(): Criteria[] {
+  //
+  //   return [];
+  // }
 
   clearCriterias() {
 

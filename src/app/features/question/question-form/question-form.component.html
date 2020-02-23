@@ -1,6 +1,11 @@
 <div class="page-center" fxLayout='column'>
 
   <!-- start desktop -->
+  <button fxShow.xs="false" mat-mini-fab (click)="createCategory()" [hidden]="!edition" class="fab-mini-bottom-up3"
+          matTooltip="{{'qcm.question.category.create' | translate }}" color="primary">
+    <mat-icon>category</mat-icon>
+  </button>
+
   <button fxShow.xs="false" mat-mini-fab (click)="deleteForm()" [hidden]="!edition" class="fab-mini-bottom-up2"
           matTooltip="{{'qcm.form.menu.deleteAll' | translate }}" color="accent">
     <mat-icon>delete</mat-icon>
@@ -41,6 +46,12 @@
       <div class="spacer"></div>
 
       <!-- start mobile -->
+
+      <button fxShow.gt-xs="false" mat-icon-button (click)="createCategory()" [hidden]="!edition"
+              matTooltip="{{'qcm.question.category.create' | translate }}" color="primary">
+        <mat-icon>category</mat-icon>
+      </button>
+
       <button fxShow.gt-xs="false" mat-icon-button (click)="toggleEdition(true)" [hidden]="edition"
               matTooltip="{{'qcm.form.toggle.on' | translate }}" color="primary">
         <mat-icon>create</mat-icon>
@@ -57,43 +68,66 @@
       </button>
       <!-- start mobile -->
 
-<!--      <ng-content select="[menu-buttons]"></ng-content>-->
-<!--      <button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="questionMenu">-->
-<!--        <mat-icon>more_vert</mat-icon>-->
-<!--      </button>-->
+      <!--      <ng-content select="[menu-buttons]"></ng-content>-->
+      <!--      <button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="questionMenu">-->
+      <!--        <mat-icon>more_vert</mat-icon>-->
+      <!--      </button>-->
 
-<!--      &lt;!&ndash; line menu &ndash;&gt;-->
-<!--      <mat-menu #questionMenu="matMenu" yPosition="below">-->
-<!--        <ng-content select="[menu-items]"></ng-content>-->
-<!--        <button mat-menu-item>-->
-<!--          <mat-icon>delete</mat-icon>-->
-<!--          {{'qcm.form.menu.delete' | translate }}-->
-<!--        </button>-->
-<!--      </mat-menu>-->
+      <!--      &lt;!&ndash; line menu &ndash;&gt;-->
+      <!--      <mat-menu #questionMenu="matMenu" yPosition="below">-->
+      <!--        <ng-content select="[menu-items]"></ng-content>-->
+      <!--        <button mat-menu-item>-->
+      <!--          <mat-icon>delete</mat-icon>-->
+      <!--          {{'qcm.form.menu.delete' | translate }}-->
+      <!--        </button>-->
+      <!--      </mat-menu>-->
     </mat-toolbar-row>
+
   </mat-toolbar>
 
   <!-- form -->
 
-    <form class="form" [formGroup]="form" fxLayout="column" fxLayout.gt-sm="row" fxFlex="100%" >
+  <form class="form" [formGroup]="form" fxLayout="column" fxLayout.gt-sm="row" fxFlex="100%">
 
     <div fxLayout='column' fxFlex="100%" fxFlex.gt-sm="20%">
-      <mat-form-field >
+      <!-- Type question-->
+      <mat-form-field>
         <mat-select formControlName="type" placeholder="Type">
-          <mat-option *ngFor="let type of types" [value]="type.id">{{ type.name }}</mat-option>
+          <mat-option *ngFor="let type of types"
+                      [value]="type.id">{{ 'qcm.question.form.input.type.id.' + type.id | translate}}</mat-option>
           <mat-error *ngIf="form.get('type').hasError('required')">field required</mat-error>
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field >
+      <!-- Status question-->
+      <mat-form-field>
         <mat-select formControlName="status" placeholder="Status">
-          <mat-option *ngFor="let s of status" [value]="s.id">{{ s.name }}</mat-option>
+          <mat-option *ngFor="let s of status"
+                      [value]="s.id">{{ 'qcm.question.form.input.status.id.' + s.id | translate}}</mat-option>
           <mat-error *ngIf="form.get('status').hasError('required')">field required</mat-error>
         </mat-select>
       </mat-form-field>
 
+      <!-- Categories question-->
+      <div fxLayout='row'>
+        <mat-form-field *ngIf="categories as categs;" fxFlex="100%" fxFlex.gt-xs="50%">
+          <mat-select formControlName="category"
+                      placeholder="{{'qcm.questionnaire.form.input.category.placeholder' |translate}}"
+                      [compareWith]="compareById">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let category of categs" [value]="category">{{category.libelle}}</mat-option>
+
+          </mat-select>
+        </mat-form-field>
+        <button *ngIf="!categories?.length" mat-icon-button
+                matTooltip="{{'qcm.question.menu.category.create' |translate}}"
+                (click)="createCategory()">
+          <mat-icon>fiber_new</mat-icon>
+        </button>
+      </div>
+
       <!-- tags todo: component -->
-      <mat-form-field >
+      <mat-form-field>
         <mat-chip-list #chipList>
           <mat-chip *ngFor="let tag of tags.controls; index as i"
                     [selectable]="edition"
@@ -108,14 +142,13 @@
                  (matChipInputTokenEnd)="addChip($event)" [disabled]="!edition"/>
         </mat-chip-list>
       </mat-form-field>
-
-
     </div>
 
-      <div fxLayout='column' fxFlex="100%" fxFlex.gt-sm="80%" style="padding: 10px">
+
+    <div fxLayout='column' fxFlex="100%" fxFlex.gt-sm="80%" style="padding: 10px">
 
       <!-- question -->
-      <mat-form-field >
+      <mat-form-field>
         <textarea formControlName="question" #input matInput placeholder="Question" maxlength="1024"></textarea>
         <!--<mat-icon prefix>comment_question</mat-icon>-->
         <!--<mat-hint>Hint</mat-hint>-->
@@ -128,13 +161,12 @@
 
         <ng-template [ngSwitchCase]="'FREE_TEXT'">
           <div formArrayName="responses" fxFlex>
+
             <div *ngFor="let responseCtrl of  responses.controls; let i=index" [formGroupName]="i"
                  class="responses-container">
               <mat-form-field fxFlex>
-
-                <textarea formControlName="response" matInput placeholder="response" class="text-input"  rows="15"></textarea>
-
-
+                <textarea formControlName="response" matInput placeholder="response" class="text-input"
+                          rows="15"></textarea>
                 <mat-error *ngIf="responseCtrl.get('response').hasError('required')">field required</mat-error>
               </mat-form-field>
               <div style="align-self: flex-start">
@@ -143,54 +175,89 @@
                 </button>
               </div>
             </div>
+
           </div>
+
         </ng-template>
 
+        <!-- reponse  multiple-->
         <ng-template [ngSwitchCase]="'MULTIPLE_ANSWER'">
-          <div formArrayName="responses">
-            <div *ngFor="let responseCtrl of responses.controls; index as i " [formGroupName]="i"
-                 class="responses-container">
-              <mat-checkbox formControlName="good" [checked]="responseCtrl['good']"
-                            style="flex-grow: 1;align-self: center"></mat-checkbox>
 
+          <div formArrayName="responses" id="responses" fxLayout='column' fxFlex="100%">
 
-              <div *ngIf="!edition" flex>{{responseCtrl.get('response').value}}</div>
+            <div *ngFor="let responseCtrl of responses.controls; index as i " [formGroupName]="i" fxFlex="100%">
 
-              <mat-form-field *ngIf="edition" style="flex: 10 0 50px">
-                <textarea formControlName="response" matInput placeholder="response" class="text-input"></textarea>
-                <mat-error *ngIf="responseCtrl.get('response').hasError('required')">field required</mat-error>
-              </mat-form-field>
-              <div style="align-self: flex-start">
-                <button mat-icon-button color="accent" (click)="removeResponse(i);" *ngIf="edition">
-                  <mat-icon>delete</mat-icon>
-                </button>
+              <div id="checkId_{{i}}" fxLayout='row' fxFlex="5%" fxLayoutAlign="start center">
+                <mat-checkbox formControlName="good" [checked]="responseCtrl['good']" [labelPosition]="'before'">
+                  <mat-label>{{i + 1}}.</mat-label>
+                </mat-checkbox>
               </div>
+
+              <div fxLayout='row' fxFlex="100%" fxLayoutAlign="start start">
+
+                <div id="responseId_{{i}}" *ngIf="!edition" fxFlex="100%" fxLayoutAlign="start center">
+                  <mat-label>{{responseCtrl.get('response').value}}</mat-label>
+                </div>
+
+                <mat-form-field *ngIf="edition" fxFlex="100%">
+                  <textarea id="TextAreaId_{{i}}" formControlName="response" matInput class="text-input"></textarea>
+                  <mat-error *ngIf="responseCtrl.get('response').hasError('required')">field required</mat-error>
+                </mat-form-field>
+
+                <div fxFlex>
+                  <button mat-icon-button color="accent" (click)="removeResponse(i);" *ngIf="edition">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+
+              </div>
+
             </div>
           </div>
 
         </ng-template>
+
+        <!-- choix multiple-->
 
         <ng-template [ngSwitchCase]="'MULTIPLE_CHOICE'">
-          <div>
-            <mat-radio-group formControlName="options" id="group" class="radio-group full-width"
+
+          <div fxFlex="100%">
+
+            <mat-radio-group formControlName="options" id="group" class="radio-group"
                              formArrayName="responses" (change)="onSelectResponse($event)">
+
               <div *ngFor="let responseCtrl of responses.controls; index as i " [formGroupName]="i"
-                   class="responses-container">
+                   class="responses-container" fxFlex="100%" fxLayoutAlign="start start">
                 <!--<pre> {{r.value |json }}</pre>-->
-                <mat-radio-button class="radio-button full-width" [value]="i" [checked]="responseCtrl['good']"
-                                  [disabled]="!edition">
-                  <textarea formControlName="response" matInput placeholder="response" class="text-input "></textarea>
-                  <mat-error *ngIf="responseCtrl.get('response').hasError('required')">field required</mat-error>
-                </mat-radio-button>
-                <button mat-icon-button color="accent" (click)="removeResponse(i);" *ngIf="edition">
+
+                <button mat-icon-button color="accent" (click)="removeResponse(i);" *ngIf="edition" >
                   <mat-icon>delete</mat-icon>
                 </button>
+
+                <mat-radio-button class="radio-button" [value]="i" [checked]="responseCtrl['good']"
+                                  [disabled]="!edition" [labelPosition]="'before'">
+                  <mat-label>{{i + 1}}.</mat-label>
+                  <mat-error *ngIf="responseCtrl.get('response').hasError('required')">field required</mat-error>
+                </mat-radio-button>
+
+                <textarea formControlName="response" matInput placeholder="response" class="text-input"
+                          fxFlex="100%" ></textarea>
+
+
               </div>
             </mat-radio-group>
+
           </div>
+
         </ng-template>
 
-        <ng-template [ngSwitchCase]="'TRUE_FALSE'">false</ng-template>
+        <!-- vrai /faux-->
+
+        <ng-template [ngSwitchCase]="'TRUE_FALSE'">
+          false
+
+
+        </ng-template>
 
         <ng-template *ngSwitchDefault>Please select a type above.</ng-template>
 
@@ -200,14 +267,23 @@
 
   </form>
 
-  <!--<pre>{{form.value | json}}</pre>-->
+  <!--  bouton Ajout question -->
 
   <div fxlayout fxlayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
     <div [ngSwitch]="form?.controls['type']?.value" style="display:flex;flex-direction: column">
+
+      <ng-template [ngSwitchCase]="'FREE_TEXT'">
+        <button *ngIf="responses.length == 0 " mat-raised-button (click)="addResponse()" [hidden]="!edition"
+                matTooltip="{{'qcm.form.menu.new-response' | translate }}" color="primary">
+          <mat-icon>add</mat-icon>
+        </button>
+      </ng-template>
+
       <ng-template [ngSwitchCase]="'MULTIPLE_CHOICE'">
         <button mat-raised-button (click)="addResponse()" [hidden]="!edition"
                 matTooltip="{{'qcm.form.menu.new-response' | translate }}" color="primary">
           <mat-icon>add</mat-icon>
+          {{'qcm.form.menu.new-response' | translate }}
         </button>
       </ng-template>
 
@@ -217,6 +293,8 @@
           <mat-icon>add</mat-icon>
         </button>
       </ng-template>
+
+
     </div>
 
   </div>

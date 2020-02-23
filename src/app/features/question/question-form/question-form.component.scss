@@ -14,6 +14,9 @@
   border-bottom-style: none;
 }
 
+.mat-radio-label-content{
+  width: 90%;
+}
 
 .radio-group {
   display: inline-flex;
@@ -86,6 +89,15 @@
   transform: translate3d(0, 0, 0);
   position: absolute;
   bottom: 120px;
+  right: 25px;
+  z-index: 1000;
+}
+
+.fab-mini-bottom-up3 {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  position: absolute;
+  bottom: 165px;
   right: 25px;
   z-index: 1000;
 }

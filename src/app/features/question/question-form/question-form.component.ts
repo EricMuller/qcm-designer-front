@@ -1,11 +1,15 @@
 import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
-import {MatChipInputEvent} from '@angular/material';
+import {MatChipInputEvent, MatDialog, MatDialogConfig} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NotifierService} from '@app/core/notifications/simple-notifier.service';
+import {CategoryDialogComponent} from '@app/features/category/category-dialog/category-dialog.component';
+import {TypeCategory} from '@app/features/category/type-category.enum';
+import {Category} from '@app/features/qcm-rest-api/model/category.model';
 import {Question} from '@app/features/qcm-rest-api/model/question.model';
 import {Reponse} from '@app/features/qcm-rest-api/model/response.model';
 import {Tag} from '@app/features/qcm-rest-api/model/tag.model';
+import {CategoryService} from '@app/features/qcm-rest-api/services/category.service';
 import {QuestionStore} from '@app/features/stores/question-store.service';
 import {EditableFormComponent} from '@app/shared/material-components/editable-form/editableFormComponent';
 
@@ -34,6 +38,7 @@ export class QuestionFormComponent extends EditableFormComponent<Question, numbe
 
   @Input()
   public question: Question;
+  public categories: Category[];
 
   public types = [];
   public status = [];
@@ -43,13 +48,16 @@ export class QuestionFormComponent extends EditableFormComponent<Question, numbe
               protected   notifierService: NotifierService,
               protected   router: Router,
               private formBuilder: QuestionFormBuilder,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private categoryService: CategoryService,
+              private dialog: MatDialog) {
     super(store, notifierService, router);
     this.types = this.getQuestionTypesEnum();
     this.status = this.getStatusEnum();
     this.edition = route.snapshot.params.id <= 0;
     this.route.data.subscribe(data => {
       this.question = data.question;
+      this.categories = data.categories;
     });
   }
 
@@ -59,6 +67,13 @@ export class QuestionFormComponent extends EditableFormComponent<Question, numbe
   }
 
   ngAfterViewInit(): void {
+  }
+
+  private loadCategories() {
+    this.categoryService.getQuestionsCategories()
+      .subscribe((categories => {
+        this.categories = categories;
+      }));
   }
 
   public addResponse() {
@@ -154,4 +169,32 @@ export class QuestionFormComponent extends EditableFormComponent<Question, numbe
     });
     return status;
   }
+
+  public createCategory() {
+    this.openCategoryDialog();
+  }
+
+  public openCategoryDialog() {
+    const config = new MatDialogConfig();
+    config.data = {category: new Category(), type: TypeCategory.QUESTION}
+    config.panelClass = 'my-full-screen-dialog';
+    const dialogRef = this.dialog.open(CategoryDialogComponent, config);
+    dialogRef.afterClosed().subscribe(q => {
+      if (q) {
+        this.loadCategories();
+        // const itemIndex = this._questionnaires.findIndex(item => item.id === q.id);
+        // if (itemIndex === -1) {
+        //   this._questionnaires.push(q);
+        // } else {
+        //   this._questionnaires[itemIndex] = q;
+        // }
+        // this.scrollIntoView('questionnaireId_' + q.id.toString());
+      }
+    });
+  }
+
+  public compareById(f1: any, f2: any) {
+    return f1 && f2 && f1.id === f2.id;
+  }
+
 }

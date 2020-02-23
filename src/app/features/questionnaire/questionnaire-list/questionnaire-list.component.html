@@ -70,7 +70,7 @@
     <app-selectable-list #list
                          [store]="questionnaireStore"
                          [sortBy]="'id'"
-                         (onCreate)="create()">
+                         (created)="create()">
 
       <div toolbar-view class="overflow-hidden">
         <span *ngIf="list.isSelectedMode()"

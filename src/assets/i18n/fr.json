@@ -13,6 +13,7 @@
   "qcm.questionnaire.menu.questions.list" : "Voir les questions du questionnaire",
 
   "qcm.questionnaire.form.input.title.placeholder" : "Titre",
+  "qcm.questionnaire.form.input.website.placeholder":  "Site Web",
   "qcm.questionnaire.form.input.description.placeholder" : "Description",
   "qcm.questionnaire.form.input.category.placeholder" : "Catégorie",
   "qcm.questionnaire.form.input.tag.placeholder" : "Etiquette",
@@ -23,6 +24,19 @@
   "qcm.question.create.title": "Creer une nouvelle question",
   "qcm.question.edit.title": "Edition de la question",
   "qcm.question.view.title": "Question",
+
+  "qcm.question.form.input.type.id.FREE_TEXT" : "Texte Libre" ,
+  "qcm.question.form.input.type.id.MULTIPLE_ANSWER" :"Réponse Multiple" ,
+  "qcm.question.form.input.type.id.MULTIPLE_CHOICE": "Choix Multiple",
+  "qcm.question.form.input.type.id.TRUE_FALSE": "Vrai/Faux",
+
+  "qcm.question.form.input.status.id.DRAFT" : "Brouillon" ,
+  "qcm.question.form.input.status.id.TO_BE_VALIDATED" :"A Valider" ,
+  "qcm.question.form.input.status.id.REJECTED": "Rejeté",
+  "qcm.question.form.input.status.id.VALIDATED": "Validé",
+
+  "qcm.question.menu.category.create" : "Creer une nouvelle categorie",
+  "qcm.question.form.input.category.placeholder" : "Catégorie",
 
   "qcm.question.list.title": "Mes Questions",
   "qcm.question.list.title.short": "Mes questions",
@@ -63,10 +77,10 @@
   "qcm.questionnaire-select.title": "Mes Questionnaires",
 
   "qcm.form.menu.new": "Creer un enregistremnt",
-  "qcm.form.menu.new-response": "Ajouter un enregistremnt",
-  "qcm.form.menu.save":"Sauvegarder l' enregistrement",
-  "qcm.form.menu.deleteAll": "Supprimer les enregistremenst",
-  "qcm.form.menu.delete": "Supprimer l' enregistrement",
+  "qcm.form.menu.new-response": "Ajouter une réponse",
+  "qcm.form.menu.save":"Sauvegarder l'enregistrement",
+  "qcm.form.menu.deleteAll": "Supprimer les enregistrements",
+  "qcm.form.menu.delete": "Supprimer l'enregistrement",
   "qcm.form.menu.search": "Rechercher",
   "qcm.form.menu.selectAll": "Selectionner tous les enregistrements",
   "qcm.form.menu.filter": "Filtrer les enregistrements",

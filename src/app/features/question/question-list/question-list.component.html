@@ -15,7 +15,8 @@
 
   <!--  start desktop fab -->
 
-  <button fxShow.xs="false" id="replay-btn-selectable-list"  mat-mini-fab (click)="list.refresh(true);"  class="fab-bottom-up2"
+  <button fxShow.xs="false" id="replay-btn-selectable-list" mat-mini-fab (click)="list.refresh(true);"
+          class="fab-bottom-up2"
           matTooltip="{{'qcm.selectable-list.menu.refresh' | translate}}">
     <mat-icon>replay</mat-icon>
   </button>
@@ -32,19 +33,21 @@
     <mat-icon *ngIf="(questionStore.criteriaSize$ | async )==0">filter_list</mat-icon>
   </button>
 
+  <!--  create new-->
   <button id="add-btn-selectable-list" mat-fab (click)="list.onCreateElement($event)" color="primary" class="fab-bottom"
           matTooltip="{{'qcm.selectable-list.menu.new' | translate }}" [hidden]="filter">
     <mat-icon>add</mat-icon>
   </button>
-
-  <button id="list-btn-selectable-list" mat-fab (click)="list.refresh(true);filter=!filter;" color="primary" class="fab-bottom"
+  <!-- show list-->
+  <button id="list-btn-selectable-list" mat-fab (click)="list.refresh(true);filter=!filter;" color="primary"
+          class="fab-bottom"
           matTooltip="{{'qcm.selectable-list.menu.new' | translate }}" [hidden]="!filter">
     <mat-icon>list</mat-icon>
   </button>
 
   <!-- end desktop fab -->
 
-<!--  filter -->
+  <!--  filter -->
   <div fxLayout fxlayout="column" fxLayoutAlign="center center" fxLayout.xs="column" [hidden]="!filter">
      <span>
       <h1>{{'qcm.question.filtre.title' |translate }}</h1>
@@ -63,7 +66,7 @@
 
     <app-selectable-list #list [store]="questionStore"
                          [sortBy]="'id'"
-                         (onCreate)="create()">
+                         (created)="create()">
 
       <div toolbar-view style="display: flex;">
          <span *ngIf="!list.isSelectedMode()"
@@ -82,7 +85,7 @@
                   matBadgeColor="warn"
                   matBadgePosition="above after">filter_list
         </mat-icon>
-         <mat-icon *ngIf="(questionStore.criteriaSize$ |async ) ==0">filter_list</mat-icon>
+        <mat-icon *ngIf="(questionStore.criteriaSize$ |async ) ==0">filter_list</mat-icon>
       </button>
       <!-- end mobile-->
 

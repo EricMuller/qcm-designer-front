@@ -4,6 +4,7 @@ import {KeycloakGuardService} from '@app/core/auth/keycloak-guard.service';
 import {QuestionFormComponent} from '@app/features/question/question-form/question-form.component';
 import {QuestionListComponent} from '@app/features/question/question-list/question-list.component';
 import {QuestionModule} from '@app/features/question/question.module';
+import {QuestionCategoryResolver} from '@app/features/question/resolvers/category-resolver.service';
 import {QuestionResolver} from '@app/features/question/resolvers/question-resolver.service';
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
   {
     path: ':id', component: QuestionFormComponent, canActivate: [KeycloakGuardService],
     resolve: {
-      question: QuestionResolver
+      question: QuestionResolver,
+      categories: QuestionCategoryResolver
     }
   }
 ];
@@ -22,7 +24,7 @@ const routes: Routes = [
 @NgModule({
   imports: [QuestionModule, RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [QuestionResolver]
+  providers: [QuestionResolver, QuestionCategoryResolver]
 })
 export class QuestionRoutingModule {
 
