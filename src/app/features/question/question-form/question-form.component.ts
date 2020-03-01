@@ -10,6 +10,7 @@ import {Question} from '@app/features/qcm-rest-api/model/question.model';
 import {Reponse} from '@app/features/qcm-rest-api/model/response.model';
 import {Tag} from '@app/features/qcm-rest-api/model/tag.model';
 import {CategoryService} from '@app/features/qcm-rest-api/services/category.service';
+import {CategoryType} from '@app/features/qcm-rest-api/services/type.enum';
 import {QuestionStore} from '@app/features/stores/question-store.service';
 import {EditableFormComponent} from '@app/shared/material-components/editable-form/editableFormComponent';
 
@@ -70,7 +71,7 @@ export class QuestionFormComponent extends EditableFormComponent<Question, numbe
   }
 
   private loadCategories() {
-    this.categoryService.getQuestionsCategories()
+    this.categoryService.getCategories(CategoryType.QUESTION)
       .subscribe((categories => {
         this.categories = categories;
       }));
@@ -176,7 +177,7 @@ export class QuestionFormComponent extends EditableFormComponent<Question, numbe
 
   public openCategoryDialog() {
     const config = new MatDialogConfig();
-    config.data = {category: new Category(), type: TypeCategory.QUESTION}
+    config.data = {category: new Category(CategoryType[CategoryType.QUESTION]) }
     config.panelClass = 'my-full-screen-dialog';
     const dialogRef = this.dialog.open(CategoryDialogComponent, config);
     dialogRef.afterClosed().subscribe(q => {
