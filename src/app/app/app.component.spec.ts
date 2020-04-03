@@ -56,7 +56,7 @@ describe('AppComponent', () => {
 class MockUserService {
   public getCurrentUser(): Observable<User> {
     const user: User = new User();
-    user.user_name = 'eric';
+    user.userName = 'eric';
     return of(user);
   }
 };
