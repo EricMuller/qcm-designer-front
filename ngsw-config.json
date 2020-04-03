@@ -10,11 +10,8 @@
         "files": [
           "/favicon.ico",
           "/index.html",
-          "/*.ico"
-        ],
-        "versionedFiles": [
+          "/*.ico",
           "/*.css",
-          "/*.js",
           "/*.js"
         ]
       }
