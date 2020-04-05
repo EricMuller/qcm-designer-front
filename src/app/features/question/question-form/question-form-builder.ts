@@ -24,7 +24,9 @@ export class QuestionFormBuilder {
       question: new FormControl({value: question.question, disabled: true}, Validators.required),
       responses: this.createResponsesControl(question, true),
       options: new FormControl({value: this.getOptions(question), disabled: true}),
-      tags: this.createTagsControl(question, true)
+      tags: this.createTagsControl(question, true),
+      dateCreation: new FormControl({value: new Date(question.dateCreation), disabled: true}),
+      dateModification: new FormControl({value: new Date(question.dateModification), disabled: true})
     });
   }
 

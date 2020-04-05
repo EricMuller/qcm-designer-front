@@ -87,65 +87,90 @@
 
   <!-- form -->
 
-  <form class="form" [formGroup]="form" fxLayout="column" fxLayout.gt-sm="row" fxFlex="100%">
+  <form class="form" [formGroup]="form" fxLayout="column" fxFlex="100%">
 
-    <div fxLayout='column' fxFlex="100%" fxFlex.gt-sm="20%">
-      <!-- Type question-->
-      <mat-form-field>
-        <mat-select formControlName="type" placeholder="Type">
-          <mat-option *ngFor="let type of types"
-                      [value]="type.id">{{ 'qcm.question.form.input.type.id.' + type.id | translate}}</mat-option>
-          <mat-error *ngIf="form.get('type').hasError('required')">field required</mat-error>
-        </mat-select>
-      </mat-form-field>
+    <div id="row1" fxLayout='column' fxLayout.gt-sm="row" fxFlex="100%" fxFlex.gt-sm="100%">
 
-      <!-- Status question-->
-      <mat-form-field>
-        <mat-select formControlName="status" placeholder="Status">
-          <mat-option *ngFor="let s of status"
-                      [value]="s.id">{{ 'qcm.question.form.input.status.id.' + s.id | translate}}</mat-option>
-          <mat-error *ngIf="form.get('status').hasError('required')">field required</mat-error>
-        </mat-select>
-      </mat-form-field>
-
-      <!-- Categories question-->
-      <div fxLayout='row'>
-        <mat-form-field *ngIf="categories as categs;" fxFlex="100%" fxFlex.gt-xs="50%">
-          <mat-select formControlName="category"
-                      placeholder="{{'qcm.questionnaire.form.input.category.placeholder' |translate}}"
-                      [compareWith]="compareById">
-            <mat-option>--</mat-option>
-            <mat-option *ngFor="let category of categs" [value]="category">{{category.libelle}}</mat-option>
-
+      <div  id="col1"  fxLayout='column' fxFlex="100%" fxFlex.gt-sm="50%" >
+        <!-- Type question-->
+        <div fxLayout='row'>
+        <mat-form-field fxFlex="100%" fxFlex.gt-xs="40%">
+          <mat-select formControlName="type" placeholder="Type">
+            <mat-option *ngFor="let type of types"
+                        [value]="type.id">{{ 'qcm.question.form.input.type.id.' + type.id | translate}}</mat-option>
+            <mat-error *ngIf="form.get('type').hasError('required')">field required</mat-error>
           </mat-select>
         </mat-form-field>
-        <button *ngIf="!categories?.length" mat-icon-button
-                matTooltip="{{'qcm.question.menu.category.create' |translate}}"
-                (click)="createCategory()">
-          <mat-icon>fiber_new</mat-icon>
-        </button>
+        </div>
+
+        <!-- Status question-->
+        <div fxLayout='row' >
+        <mat-form-field fxFlex="100%" fxFlex.gt-xs="40%" >
+          <mat-select formControlName="status" placeholder="Status">
+            <mat-option *ngFor="let s of status"
+                        [value]="s.id">{{ 'qcm.question.form.input.status.id.' + s.id | translate}}</mat-option>
+            <mat-error *ngIf="form.get('status').hasError('required')">field required</mat-error>
+          </mat-select>
+        </mat-form-field>
+        </div>
+
+        <!-- Categories question-->
+        <div fxLayout='row' >
+          <mat-form-field *ngIf="categories as categs;" fxFlex="100%" fxFlex.gt-xs="40%" >
+            <mat-select formControlName="category"
+                        placeholder="{{'qcm.questionnaire.form.input.category.placeholder' |translate}}"
+                        [compareWith]="compareById">
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let category of categs" [value]="category">{{category.libelle}}</mat-option>
+
+            </mat-select>
+          </mat-form-field>
+          <button *ngIf="!categories?.length" mat-icon-button
+                  matTooltip="{{'qcm.question.menu.category.create' |translate}}"
+                  (click)="createCategory()">
+            <mat-icon>fiber_new</mat-icon>
+          </button>
+        </div>
+
+        <!-- tags todo: component -->
+        <mat-form-field>
+          <mat-chip-list #chipList>
+            <mat-chip *ngFor="let tag of tags.controls; index as i"
+                      [selectable]="edition"
+                      [removable]="edition" (removed)="removeChip(i)">
+              {{tag.get('libelle')?.value}}
+              <mat-icon matChipRemove *ngIf="edition">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="New Tag..."
+                   [matChipInputFor]="chipList"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   [matChipInputAddOnBlur]="addOnBlur"
+                   (matChipInputTokenEnd)="addChip($event)" [disabled]="!edition"/>
+          </mat-chip-list>
+        </mat-form-field>
       </div>
 
-      <!-- tags todo: component -->
-      <mat-form-field>
-        <mat-chip-list #chipList>
-          <mat-chip *ngFor="let tag of tags.controls; index as i"
-                    [selectable]="edition"
-                    [removable]="edition" (removed)="removeChip(i)">
-            {{tag.get('libelle')?.value}}
-            <mat-icon matChipRemove *ngIf="edition">cancel</mat-icon>
-          </mat-chip>
-          <input placeholder="New Tag..."
-                 [matChipInputFor]="chipList"
-                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                 [matChipInputAddOnBlur]="addOnBlur"
-                 (matChipInputTokenEnd)="addChip($event)" [disabled]="!edition"/>
-        </mat-chip-list>
-      </mat-form-field>
+      <div id="col2"  fxFlex="100%" fxFlex.gt-xs="5%"></div>
+
+      <!-- colonne 2 -->
+      <div id="col3" fxLayout='column' fxFlex="100%" fxFlex.gt-xs="20%" >
+        <!--      <div  fxFlex="100%" fxFlex.gt-xs="50%">-->
+        <mat-form-field *ngIf="question.id" >
+          <input matInput [value]="form.get('dateCreation').value | date: 'dd/MM/yyyy hh:mm:ss' "
+                 placeholder="{{'qcm.question.form.input.creation.placeholder' |translate}}" readonly>
+        </mat-form-field>
+
+        <!-- </div> -->
+        <mat-form-field *ngIf="question.id">
+          <input matInput [value]="form.get('dateModification').value | date: 'dd/MM/yyyy hh:mm:ss' "
+                 placeholder="{{'qcm.question.form.input.modification.placeholder' |translate}}" readonly>
+        </mat-form-field>
+
+      </div >
+
     </div>
 
-
-    <div fxLayout='column' fxFlex="100%" fxFlex.gt-sm="80%" style="padding: 10px">
+    <div id="row2" fxLayout='column' fxFlex="100%" fxFlex.gt-sm="50%" style="padding: 10px">
 
       <!-- question -->
       <mat-form-field>
@@ -230,7 +255,7 @@
                    class="responses-container" fxFlex="100%" fxLayoutAlign="start start">
                 <!--<pre> {{r.value |json }}</pre>-->
 
-                <button mat-icon-button color="accent" (click)="removeResponse(i);" *ngIf="edition" >
+                <button mat-icon-button color="accent" (click)="removeResponse(i);" *ngIf="edition">
                   <mat-icon>delete</mat-icon>
                 </button>
 
@@ -241,7 +266,7 @@
                 </mat-radio-button>
 
                 <textarea formControlName="response" matInput placeholder="response" class="text-input"
-                          fxFlex="100%" ></textarea>
+                          fxFlex="100%"></textarea>
 
 
               </div>

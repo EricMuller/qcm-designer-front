@@ -20,6 +20,9 @@
   "qcm.questionnaire.form.input.creation.placeholder":"Crée le",
   "qcm.questionnaire.form.input.modification.placeholder":"Modifié le",
 
+  "qcm.question.form.input.creation.placeholder" : "Date création",
+  "qcm.question.form.input.modification.placeholder" : "Date Modification",
+
   "qcm.question.filter.title": "Filtrer Mes Questions",
   "qcm.question.create.title": "Creer une nouvelle question",
   "qcm.question.edit.title": "Edition de la question",

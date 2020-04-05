@@ -69,7 +69,7 @@
 .fab-bottom {
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
-  position: absolute;
+  position: fixed;
   bottom: 15px;
   right: 15px;
   z-index: 1000;
@@ -78,7 +78,7 @@
 .fab-mini-bottom-up1 {
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
-  position: absolute;
+  position: fixed;
   bottom: 75px;
   right: 25px;
   z-index: 1000;
@@ -87,7 +87,7 @@
 .fab-mini-bottom-up2 {
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
-  position: absolute;
+  position: fixed;
   bottom: 120px;
   right: 25px;
   z-index: 1000;
@@ -96,7 +96,7 @@
 .fab-mini-bottom-up3 {
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
-  position: absolute;
+  position: fixed;
   bottom: 165px;
   right: 25px;
   z-index: 1000;
