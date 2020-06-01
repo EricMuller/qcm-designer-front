@@ -19,14 +19,7 @@ export function translateCacheServiceFactory(translateService: TranslateService,
 
 @NgModule({
   imports: [HttpClientModule, MatSnackBarModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (createTranslateLoader),
-        deps: [HttpClient]
-      }
-    }),
-    TranslateCacheModule.forRoot({
+     TranslateCacheModule.forRoot({
       cacheService: {
         provide: TranslateCacheService,
         useFactory: translateCacheServiceFactory,
@@ -36,7 +29,7 @@ export function translateCacheServiceFactory(translateService: TranslateService,
   ],
   declarations: [],
   providers: [NotifierService, KeycloakGuardService, CookieService, KeycloakService],
-  exports: [TranslateModule]
+  // exports: [TranslateModule]
 
 })
 export class CoreModule {

@@ -31,6 +31,12 @@
         <mat-icon>details</mat-icon>
         Details
       </button>
+      <button class="plMenuCSS"  mat-menu-item matTooltip="{{'qcm.upload.list.menu.export.word' |translate}}" (click)="download(questionnaire,'docx')" color="primary">
+        <mat-icon>cloud_download</mat-icon>{{'qcm.upload.list.menu.export.word' |translate}}
+      </button>
+      <button class="plMenuCSS"  mat-menu-item matTooltip="{{'qcm.upload.list.menu.export.pdf' |translate}}" (click)="download(questionnaire,'pdf')" color="primary">
+        <mat-icon>cloud_download</mat-icon>{{'qcm.upload.list.menu.export.pdf' |translate}}
+      </button>
     </mat-menu>
 
   </mat-list-item>

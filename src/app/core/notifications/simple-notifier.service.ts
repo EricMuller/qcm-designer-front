@@ -25,6 +25,7 @@ export class NotifierService {
     config.duration = duration ? duration : 0;
 
     return this.matSnackBar.open(message, action, config);
+
   }
 
 

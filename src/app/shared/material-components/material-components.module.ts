@@ -22,7 +22,7 @@ import {TranslateModule} from '@ngx-translate/core';
     FabModule,
     FlexLayoutModule,
     FormsModule,
-    TranslateModule
+    TranslateModule.forChild()
   ],
   declarations: [SelectableListComponent, SideNavLayoutComponent, LoginMenuComponent]
   , exports: [SelectableListComponent, SideNavLayoutComponent, LoginMenuComponent,

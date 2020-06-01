@@ -49,6 +49,8 @@
   "qcm.upload.list.title.short": "Mes Téléchargements",
   "qcm.upload.selected.title" : "Telechargements selectionnée(s)",
   "qcm.upload.list.menu.download": "Télécharger le fichier",
+  "qcm.upload.list.menu.export.word": "Télécharger au format word",
+  "qcm.upload.list.menu.export.pdf": "Télécharger au format pdf",
 
   "menu.questions" : "Mes Questions",
   "menu.questionnaires" : "Mes Questionnaires",

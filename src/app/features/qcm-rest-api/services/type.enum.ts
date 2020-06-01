@@ -1,3 +1,3 @@
 export enum CategoryType {
-  QUESTION, QUESTIONNAIRE
+  QUESTION, QUESTIONNAIRE, UPLOAD
 }

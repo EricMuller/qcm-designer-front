@@ -9,7 +9,9 @@
                     [checked]="uploadStore.isSelected(item)"></mat-checkbox>
     </button>
 
-    <p class="cursor-pointer"> {{item.id}} - {{item.fileName}} </p>
+    <p class="cursor-pointer" [routerLink]="['/upload/'+ item.id ]" > {{item.id}} - {{item.fileName}} </p>
+
+
     <div class="spacer"></div>
     {{item.dateCreation | date:'dd/MM/yyyy HH:mm'}}
 

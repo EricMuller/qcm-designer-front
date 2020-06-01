@@ -62,15 +62,15 @@ class MockQuestionnaireService {
     questionnaire.id = 1;
     return of([questionnaire]);
   }
-};
+}
 
 
 class MockCategoryService {
   public getCategories(): Observable<Category[]> {
 
-    const category = new Category();
+    const category = new Category('rr');
     category.id = '1';
     return of([category]);
 
   }
-};
+}

@@ -1,0 +1,156 @@
+<div class="page-center" fxLayout='column'>
+
+  <!-- start desktop -->
+  <button fxShow.xs="false" mat-mini-fab (click)="createCategory()" [hidden]="!edition" class="fab-mini-bottom-up3"
+          matTooltip="{{'qcm.question.category.create' | translate }}" color="primary">
+    <mat-icon>category</mat-icon>
+  </button>
+
+  <button fxShow.xs="false" mat-mini-fab (click)="deleteForm()" [hidden]="!edition" class="fab-mini-bottom-up2"
+          matTooltip="{{'qcm.form.menu.deleteAll' | translate }}" color="accent">
+    <mat-icon>delete</mat-icon>
+  </button>
+
+  <button fxShow.xs="false" mat-mini-fab [routerLink]="['/upload/']" class="fab-mini-bottom-up1"
+          matTooltip="{{'qcm.form.menu.cancel' | translate }}" color="primary">
+    <mat-icon>reply</mat-icon>
+  </button>
+
+  <button fxShow.xs="false" mat-fab (click)="toggleEdition(true)" color="primary" class="fab-bottom" [hidden]="edition"
+          matTooltip="{{'qcm.form.toggle.on' | translate }}">
+    <mat-icon>create</mat-icon>
+  </button>
+
+  <button fxShow.xs="false" mat-fab (click)="saveForm()" color="primary" class="fab-bottom" [hidden]="!edition"
+          matTooltip="{{'qcm.form.menu.save' | translate }}">
+    <mat-icon>save</mat-icon>
+  </button>
+  <!-- end desktop -->
+
+
+  <mat-toolbar class="toolbar-form">
+
+    <mat-toolbar-row>
+
+      <!-- start mobile -->
+      <button fxShow.gt-xs="false" mat-icon-button [routerLink]="['/upload/list']">
+        <mat-icon [hidden]="edition">arrow_back</mat-icon>
+        <mat-icon [hidden]="!edition">close</mat-icon>
+      </button>
+      <!-- end mobile -->
+
+      <div *ngIf="upload.id && !edition">{{'qcm.question.view.title' | translate }}{{upload.id}}</div>
+      <div *ngIf="upload.id && edition">{{'qcm.question.edit.title' | translate }}  {{upload.id}}</div>
+      <div *ngIf="!upload.id">{{'qcm.question.create.title' | translate }}</div>
+
+      <div class="spacer"></div>
+
+      <!-- start mobile -->
+
+      <button fxShow.gt-xs="false" mat-icon-button (click)="createCategory()" [hidden]="!edition"
+              matTooltip="{{'qcm.question.category.create' | translate }}" color="primary">
+        <mat-icon>category</mat-icon>
+      </button>
+
+      <button fxShow.gt-xs="false" mat-icon-button (click)="toggleEdition(true)" [hidden]="edition"
+              matTooltip="{{'qcm.form.toggle.on' | translate }}" color="primary">
+        <mat-icon>create</mat-icon>
+      </button>
+
+      <button fxShow.gt-xs="false" mat-icon-button (click)="saveForm()" [hidden]="!edition"
+              matTooltip="{{'qcm.form.menu.save' | translate }}" color="primary">
+        <mat-icon>save</mat-icon>
+      </button>
+
+      <button fxShow.gt-xs="false" mat-icon-button (click)="deleteForm()" [hidden]="edition"
+              matTooltip="{{'qcm.form.menu.deleteAll' | translate }}" color="accent">
+        <mat-icon>delete</mat-icon>
+      </button>
+     <!-- start mobile -->
+
+    </mat-toolbar-row>
+
+  </mat-toolbar>
+
+  <!-- form -->
+
+  <form class="form" [formGroup]="form" fxLayout="column" fxFlex="100%">
+
+    <div id="row1" fxLayout='column' fxLayout.gt-sm="row" fxFlex="100%" fxFlex.gt-sm="100%">
+
+      <div  id="col1"  fxLayout='column' fxFlex="100%" fxFlex.gt-sm="50%" >
+
+
+        <!-- Status question-->
+<!--        <div fxLayout='row' >-->
+<!--          <mat-form-field fxFlex="100%" fxFlex.gt-xs="40%" >-->
+<!--            <mat-select formControlName="status" placeholder="Status">-->
+<!--              <mat-option *ngFor="let s of status"-->
+<!--                          [value]="s.id">{{ 'qcm.question.form.input.status.id.' + s.id | translate}}</mat-option>-->
+<!--              <mat-error *ngIf="form.get('status').hasError('required')">field required</mat-error>-->
+<!--            </mat-select>-->
+<!--          </mat-form-field>-->
+<!--        </div>-->
+
+        <!-- Categories -->
+<!--        <div fxLayout='row' >-->
+<!--          <mat-form-field *ngIf="categories as categs;" fxFlex="100%" fxFlex.gt-xs="40%" >-->
+<!--            <mat-select formControlName="category"-->
+<!--                        placeholder="{{'qcm.questionnaire.form.input.category.placeholder' |translate}}"-->
+<!--                        [compareWith]="compareById">-->
+<!--              <mat-option>&#45;&#45;</mat-option>-->
+<!--              <mat-option *ngFor="let category of categs" [value]="category">{{category.libelle}}</mat-option>-->
+
+<!--            </mat-select>-->
+<!--          </mat-form-field>-->
+<!--          <button *ngIf="!categories?.length" mat-icon-button-->
+<!--                  matTooltip="{{'qcm.question.menu.category.create' |translate}}"-->
+<!--                  (click)="createCategory()">-->
+<!--            <mat-icon>fiber_new</mat-icon>-->
+<!--          </button>-->
+<!--        </div>-->
+
+      </div>
+
+      <div id="col2"  fxFlex="100%" fxFlex.gt-xs="5%"></div>
+
+      <!-- colonne 2 -->
+<!--      <div id="col3" fxLayout='column' fxFlex="100%" fxFlex.gt-xs="20%" >-->
+<!--        &lt;!&ndash;      <div  fxFlex="100%" fxFlex.gt-xs="50%">&ndash;&gt;-->
+<!--        <mat-form-field *ngIf="upload.id" >-->
+<!--          <input matInput [value]="form.get('dateCreation').value | date: 'dd/MM/yyyy hh:mm:ss' "-->
+<!--                 placeholder="{{'qcm.question.form.input.creation.placeholder' |translate}}" readonly>-->
+<!--        </mat-form-field>-->
+
+<!--        &lt;!&ndash; </div> &ndash;&gt;-->
+<!--        <mat-form-field *ngIf="upload.id">-->
+<!--          <input matInput [value]="form.get('dateModification').value | date: 'dd/MM/yyyy hh:mm:ss' "-->
+<!--                 placeholder="{{'qcm.question.form.input.modification.placeholder' |translate}}" readonly>-->
+<!--        </mat-form-field>-->
+
+<!--      </div >-->
+
+    </div>
+
+<!--    <div id="row2" fxLayout='column' fxFlex="100%" fxFlex.gt-sm="50%" style="padding: 10px">-->
+
+<!--      &lt;!&ndash; question &ndash;&gt;-->
+<!--      <mat-form-field>-->
+<!--        <textarea formControlName="question" #input matInput placeholder="Question" maxlength="1024"></textarea>-->
+<!--        &lt;!&ndash;<mat-icon prefix>comment_question</mat-icon>&ndash;&gt;-->
+<!--        &lt;!&ndash;<mat-hint>Hint</mat-hint>&ndash;&gt;-->
+<!--        <mat-hint align="end">{{input.value?.length || 0}}/1024</mat-hint>-->
+<!--        <mat-error *ngIf="form.get('question').hasError('required')">field required</mat-error>-->
+<!--      </mat-form-field>-->
+
+<!--      &lt;!&ndash; reponse &ndash;&gt;-->
+
+<!--    </div>-->
+
+  </form>
+
+  <!--  bouton Ajout question -->
+
+
+
+</div>

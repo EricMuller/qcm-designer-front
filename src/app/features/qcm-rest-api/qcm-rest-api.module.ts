@@ -3,6 +3,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ModuleWithProviders, NgModule} from '@angular/core';
 import {KeyCloakInterceptor} from '@app/core/http-interceptors/KeycloakInterceptor.http';
 import {QCM_API_ENDPOINT_TOKEN} from '@app/features/qcm-rest-api/qcm-api-end-point';
+import {ExportService} from '@app/features/qcm-rest-api/services/export.service';
 import {UploadService} from '@app/features/qcm-rest-api/services/upload.service';
 
 import {environment} from '../../../environments/environment';
@@ -20,7 +21,8 @@ export const QCM_API_ENDPOINT = {
   QUESTIONNAIRES: environment.QCM_REST_API_HOST + '/qcm/api/v1/questionnaires/',
   QUESTIONS: environment.QCM_REST_API_HOST + '/qcm/api/v1/questions/',
   UPLOAD: environment.QCM_REST_API_HOST + '/qcm/api/v1/upload/',
-}
+  EXPORT: environment.QCM_REST_API_HOST + '/public/qcm/api/v1/exports/',
+};
 
 @NgModule({
   imports: [
@@ -37,7 +39,7 @@ export class QcmRestApiModule {
     return {
       ngModule: QcmRestApiModule,
       providers: [QuestionService, QuestionnaireService, UserService, TagService, CategoryService,
-        TagService, UploadService]
+        TagService, UploadService, ExportService]
     };
   }
 }

@@ -1,3 +1,4 @@
+import {Category} from '@app/features/qcm-rest-api/model/category.model';
 import {Entity} from './entity';
 
 export class Upload extends Entity {
@@ -13,4 +14,13 @@ export class Upload extends Entity {
   data: any;
 
   contentType: string;
+
+  dateModification?: number;
+
+  category?: Category;
+
+  version?: number;
+
+
+
 }

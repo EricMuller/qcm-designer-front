@@ -8,6 +8,7 @@ export interface QcmApiEndPoint {
   QUESTIONNAIRES: string;
   QUESTIONS: string;
   UPLOAD: string;
+  EXPORT: string;
 }
 
 

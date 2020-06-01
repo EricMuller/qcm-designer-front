@@ -35,7 +35,7 @@ import {SearchStore} from './services/questionnaire-search-store.service';
     UploadModule,
     MaterialComponentsModule,
     FlexLayoutModule,
-    TranslateModule,
+    TranslateModule.forChild(),
     LMarkdownEditorModule
 
   ],

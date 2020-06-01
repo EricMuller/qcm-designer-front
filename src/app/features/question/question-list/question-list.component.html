@@ -1,4 +1,5 @@
 <div class="page-center">
+
   <!--  <div class="page-header" fxlayout fxlayout="column" fxLayout.xs="column" fxLayoutAlign="center center">-->
   <!--    <div fxFlex="80%" class="page-search"><input type="Text"></div>-->
 
@@ -12,7 +13,6 @@
   <!--      <mat-icon *ngIf="(questionStore.criteriaSize$ |async ) ==0">filter_list</mat-icon>-->
   <!--    </button>-->
   <!--  </div>-->
-
   <!--  start desktop fab -->
 
   <button fxShow.xs="false" id="replay-btn-selectable-list" mat-mini-fab (click)="list.refresh(true);"
@@ -30,7 +30,7 @@
               matBadgePosition="above after">filter_list
     </mat-icon>
     <span></span>
-    <mat-icon *ngIf="(questionStore.criteriaSize$ | async )==0">filter_list</mat-icon>
+    <mat-icon *ngIf="(questionStore.criteriaSize$ | async)==0">filter_list</mat-icon>
   </button>
 
   <!--  create new-->

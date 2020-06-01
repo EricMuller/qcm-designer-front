@@ -26,8 +26,8 @@ import {QuestionNavListComponent} from './question-list/question-nav-list/questi
     TagModule,
     MaterialComponentsModule,
     FlexLayoutModule,
-    TranslateModule,
     CategoryModule,
+    TranslateModule.forChild()
   ],
   declarations: [QuestionListComponent, QuestionDialogComponent,
     QuestionNavListComponent, QuestionFormComponent, QuestionnaireSelectComponent],

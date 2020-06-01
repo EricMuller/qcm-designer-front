@@ -4,7 +4,6 @@ import {MatChipInputEvent, MatDialog, MatDialogConfig} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NotifierService} from '@app/core/notifications/simple-notifier.service';
 import {CategoryDialogComponent} from '@app/features/category/category-dialog/category-dialog.component';
-import {TypeCategory} from '@app/features/category/type-category.enum';
 import {Category} from '@app/features/qcm-rest-api/model/category.model';
 import {Question} from '@app/features/qcm-rest-api/model/question.model';
 import {Reponse} from '@app/features/qcm-rest-api/model/response.model';
@@ -177,7 +176,7 @@ export class QuestionFormComponent extends EditableFormComponent<Question, numbe
 
   public openCategoryDialog() {
     const config = new MatDialogConfig();
-    config.data = {category: new Category(CategoryType[CategoryType.QUESTION]) }
+    config.data = {category: new Category(CategoryType[CategoryType.QUESTION])}
     config.panelClass = 'my-full-screen-dialog';
     const dialogRef = this.dialog.open(CategoryDialogComponent, config);
     dialogRef.afterClosed().subscribe(q => {
