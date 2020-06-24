@@ -15,19 +15,19 @@ import {EditableFormComponent} from '@app/shared/material-components/editable-fo
 })
 export class UserEditComponent extends EditableFormComponent<User, number> implements OnInit {
 
-  systems: Object[] = [{
+  systems: any[] = [{
     name: 'Card View',
     on: false,
   }];
 
   private user: User;
 
-  constructor(protected store: UserStore,
+  constructor(protected crudStore: UserStore,
               protected notifierService: NotifierService,
               private route: ActivatedRoute,
               private userFormBuilder: UserFormBuilder,
               protected router: Router) {
-    super(store, notifierService, router);
+    super(crudStore, notifierService, router);
     this.route.data.subscribe(data => {
       this.user = data.user;
       this.createForm();

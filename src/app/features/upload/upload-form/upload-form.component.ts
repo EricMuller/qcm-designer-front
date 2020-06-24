@@ -7,7 +7,6 @@ import {Category} from '@app/features/qcm-rest-api/model/category.model';
 import {Upload} from '@app/features/qcm-rest-api/model/upload.model';
 import {CategoryService} from '@app/features/qcm-rest-api/services/category.service';
 import {CategoryType} from '@app/features/qcm-rest-api/services/type.enum';
-import {QuestionFormBuilder} from '@app/features/question/question-form/question-form-builder';
 import {UploadStore} from '@app/features/stores/upload-store.service';
 import {UploadFormBuilder} from '@app/features/upload/upload-form/upload-form-builder';
 import {EditableFormComponent} from '@app/shared/material-components/editable-form/editableFormComponent';
@@ -25,23 +24,23 @@ enum ImportStatus {
   styleUrls: ['./upload-form.component.scss']
   , providers: [UploadFormBuilder]
 })
-export class UploadFormComponent extends EditableFormComponent<Upload, number> implements OnInit {
+export class UploadFormComponent extends EditableFormComponent<Upload, string> implements OnInit {
 
   public upload: Upload;
   public categories: Category[];
   public status = [];
 
-  constructor(protected   store: UploadStore,
+  constructor(protected   crudStore: UploadStore,
               protected   notifierService: NotifierService,
               protected   router: Router,
               private categoryService: CategoryService, private dialog: MatDialog,
               private route: ActivatedRoute,
               private formBuilder: UploadFormBuilder
   ) {
-    super(store, notifierService, router);
+    super(crudStore, notifierService, router);
 
     this.status = this.getImportStatusEnum();
-    this.edition = route.snapshot.params.id <= 0;
+    this.edition = route.snapshot.params.uuid;
     this.route.data.subscribe(data => {
       this.upload = data.upload;
       this.categories = data.categories;
@@ -80,7 +79,8 @@ export class UploadFormComponent extends EditableFormComponent<Upload, number> i
 
   // ------
   private loadCategories() {
-    this.categoryService.getCategories(CategoryType.UPLOAD)
+    this.categoryService
+      .getCategories(CategoryType.UPLOAD)
       .subscribe((categories => {
         this.categories = categories;
       }));

@@ -10,7 +10,7 @@ import {Observable, of } from 'rxjs';
 
 
 @Injectable()
-export class TagStore extends SelectStoreAdapter<Tag> implements CriteriaStore<Tag>, CrudStore<Tag, number> {
+export class TagListStore extends SelectStoreAdapter<Tag> implements CriteriaStore<Tag>, CrudStore<Tag, number> {
 
   constructor(private backend: TagService) {
 
@@ -18,9 +18,9 @@ export class TagStore extends SelectStoreAdapter<Tag> implements CriteriaStore<T
     console.log('TagStore:constructor');
 
     this.selected$.subscribe((tags) => {
-      this.deleteCriteriabyName('tag_id');
+      this.deleteCriteriabyName('tag_uuid');
       for (const tag of tags) {
-        this.addCriteria(new Criteria(tag.id.toString(), 'tag_id'));
+        this.addCriteria(new Criteria(tag.uuid.toString(), 'tag_uuid'));
       }
     });
 

@@ -2,8 +2,12 @@ import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {AfterContentInit, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material';
 import {NavigationExtras, Router} from '@angular/router';
-import {KeycloakGuardService} from '@app/core/auth/keycloak-guard.service';
+import {AppState} from '@app/app/state/app-state.service';
+import {NavigationModel} from '@app/app/state/navigation-model';
+import {QuestionnaireModel} from '@app/app/state/questionnaire-model';
+import {KeycloakGuard} from '@app/core/auth/keycloak.guard';
 import {TranslateService} from '@ngx-translate/core';
+import {Select, Store} from '@ngxs/store';
 import {Observable, of, Subscription} from 'rxjs';
 import {map} from 'rxjs/operators';
 
@@ -37,21 +41,26 @@ export class SideNavLayoutComponent implements OnInit, OnDestroy, AfterContentIn
 
   language$: Observable<string>;
 
-  navigation = [
-    {link: '/home', label: 'menu.about'},
-    {link: '/questionnaires/list', label: 'menu.questionnaires'},
-    {link: '/questions/list', label: 'menu.questions'},
-  ];
+  @Select(AppState.navigation) public navigation$: Observable<NavigationModel[]>;
 
-  navigationSideMenu = [
-    ...this.navigation,
-    {link: '/upload/', label: 'menu.upload'},
-  ];
+  @Select(AppState.breadcrumb) public breadcrumb$: Observable<NavigationModel[]>;
+
+  // navigation = [
+  //   {link: '/home', label: 'menu.about'},
+  //   {link: '/questionnaires/list', label: 'menu.questionnaires'},
+  //   {link: '/questions/list', label: 'menu.questions'},
+  // ];
+  //
+  // navigationSideMenu = [
+  //   ...this.navigation,
+  //   {link: '/upload/', label: 'menu.upload'},
+  // ];
 
   isHandset$: Observable<boolean>;
 
   constructor(private breakpointObserver: BreakpointObserver, private router: Router,
-              public translate: TranslateService, private keycloakGuardService: KeycloakGuardService) {
+              public translate: TranslateService, private keycloakGuardService: KeycloakGuard,
+              private store: Store) {
   }
 
   public login(event): void {

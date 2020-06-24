@@ -73,7 +73,7 @@ export class SelectStoreAdapter<T extends Entity> implements ListSelectStore<T> 
   }
 
   swapElement(q: T) {
-    const itemIndex = this.selected.findIndex(item => item.id === q.id);
+    const itemIndex = this.selected.findIndex(item => item.uuid === q.uuid);
     if (itemIndex === -1) {
       this.selected.push(q);
     } else {
@@ -86,7 +86,7 @@ export class SelectStoreAdapter<T extends Entity> implements ListSelectStore<T> 
   deletePageElement(q: T): Observable<T> {
     this.selectElement(q, false);
     this.deletedSubject.next(q);
-    const itemIndex = this.page.content.findIndex(item => item.id === q.id);
+    const itemIndex = this.page.content.findIndex(item => item.uuid === q.uuid);
     if (itemIndex !== -1) {
       this.page.content.splice(itemIndex, 1);
       this.pageSubject.next(this.page);
@@ -101,7 +101,7 @@ export class SelectStoreAdapter<T extends Entity> implements ListSelectStore<T> 
   }
 
   selectElement(q: T, select: boolean) {
-    const itemIndex = this.selected.findIndex(item => item.id === q.id);
+    const itemIndex = this.selected.findIndex(item => item.uuid === q.uuid);
     if (select && itemIndex === -1) {
       this.selected.push(q);
       this.selectedSubject.next(this.selected);
@@ -116,7 +116,7 @@ export class SelectStoreAdapter<T extends Entity> implements ListSelectStore<T> 
   }
 
   isSelected(q: T): boolean {
-    return q ? this.selected.findIndex(item => item.id === q.id) !== -1 : false;
+    return q ? this.selected.findIndex(item => item.uuid === q.uuid) !== -1 : false;
   }
 
   selectedSize(): number {

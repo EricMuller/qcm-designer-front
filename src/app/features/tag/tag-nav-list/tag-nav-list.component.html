@@ -4,7 +4,7 @@
   <div *ngFor="let tag of elements as q; index as i">
     <mat-list-item class="list" style="overflow: hidden"
 
-                   attr.entityId="tagId_{{tag.id}}">
+                   attr.entityId="tagId_{{tag.uuid}}">
 
       <button mat-icon-button matListAvatar (click)="setClickedRow(tag)">
         <mat-icon matListIcon *ngIf="!isSelected(tag)">question_answer</mat-icon>

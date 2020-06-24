@@ -13,6 +13,6 @@ export class PageQuestionsByQuestionnaireResolver {
   }
 
   resolve(route: ActivatedRouteSnapshot): Observable<Page> | Promise<Page> | Page {
-    return this.questionService.getPageQuestionsByQuestionnaireId(route.params.id);
+    return this.questionService.getPageQuestionsByQuestionnaireUuid(route.params.uuid);
   }
 }

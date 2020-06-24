@@ -10,7 +10,12 @@
     </mat-toolbar>
 
     <mat-nav-list>
-      <a mat-list-item *ngFor="let menu of navigationSideMenu" [routerLinkActive]="['active']"
+      <a mat-list-item *ngFor="let menu of navigation$ | async" [routerLinkActive]="['active']"
+         routerLink="{{menu.link}}" (click)="routeLink(menu.link)">{{menu.label | translate }}</a>
+    </mat-nav-list>
+
+    <mat-nav-list>
+      <a mat-list-item *ngFor="let menu of breadcrumb$ | async" [routerLinkActive]="['active']"
          routerLink="{{menu.link}}" (click)="routeLink(menu.link)">{{menu.label | translate }}</a>
     </mat-nav-list>
 
@@ -19,7 +24,7 @@
   <mat-sidenav-content class="sidenav-content">
 
     <!-- TOP TOOL BAR MENU-->
-    <mat-toolbar class="toolbar" color="primary">
+    <mat-toolbar class="toolbar" color="primary" id="sidenav-layout-toolbar">
 
       <div *ngIf="(isHandset$ | async)">
         <button mat-icon-button class="td-menu-button" (click)="leftsidenav.toggle()" matTooltip="Main menu">
@@ -33,9 +38,9 @@
 
       <div class="spacer"></div>
 
-      <div *ngIf="isLoggedIn()">
+      <div *ngIf="isLoggedIn()" id="sidenav-layout-side-menu">
         <div *ngIf="!(isHandset$ | async)">
-          <button mat-button class="nav-button" *ngFor="let menu of navigationSideMenu" [routerLinkActive]="['active']"
+          <button mat-button class="nav-button" *ngFor="let menu of navigation$ | async" [routerLinkActive]="['active']"
                   routerLink="{{menu.link}}">{{menu.label | translate }}
           </button>
         </div>
@@ -52,6 +57,16 @@
       </mat-select>
       </span>
 
+    </mat-toolbar>
+
+    <mat-toolbar *ngIf="isLoggedIn()" class="toolbar" id="sidenav-layout-toolbar2">
+      <div id="sidenav-layout-side-menu2">
+        <div *ngIf="!(isHandset$ | async)">
+          <button mat-button class="nav-button" *ngFor="let menu of breadcrumb$ | async" [routerLinkActive]="['active']"
+                  routerLink="{{menu.link}}">{{menu.label | translate }}
+          </button>
+        </div>
+      </div>
     </mat-toolbar>
 
     <div class="page-content">

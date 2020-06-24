@@ -11,7 +11,7 @@ export class UploadFormBuilder {
 
   public createForm(upload: Upload): FormGroup {
     return this.fb.group({
-      id: new FormControl({value: upload.id, disabled: true}),
+      id: new FormControl({value: upload.uuid, disabled: true}),
       version: new FormControl({value: upload.version, disabled: true}),
 
       status: new FormControl({value: upload.status, disabled: true}, Validators.required),

@@ -47,7 +47,7 @@ export class UploadListComponent implements OnInit {
     // this.list.refresh(true);
     // this.uploadStore.
     console.log(event);
-    if (event.id > 0) {
+    if (event.uuid) {
       this.uploadStore.addPageElement(event);
       this.notifierService.notifySuccess('Upload Ok');
     } else {

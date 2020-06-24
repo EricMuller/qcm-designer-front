@@ -2,7 +2,7 @@ import {CategoryType} from '@app/features/qcm-rest-api/services/type.enum';
 
 export class Category {
 
-  id: string;
+  uuid: string;
   libelle: string;
   type: string;
 

@@ -1,11 +1,12 @@
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {ModuleWithProviders, NgModule, Optional, SkipSelf} from '@angular/core';
 import {MatSnackBarModule} from '@angular/material';
-import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {AppGuard} from '@app/shared/auth/app-guard.service';
+import {TranslateService} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {CookieService} from 'ngx-cookie-service';
 import {TranslateCacheModule, TranslateCacheService, TranslateCacheSettings} from 'ngx-translate-cache';
-import {KeycloakGuardService} from './auth/keycloak-guard.service';
+import {KeycloakGuard} from './auth/keycloak.guard';
 import {KeycloakService} from './auth/keycloak.service';
 import {NotifierService} from './notifications/simple-notifier.service';
 
@@ -19,7 +20,7 @@ export function translateCacheServiceFactory(translateService: TranslateService,
 
 @NgModule({
   imports: [HttpClientModule, MatSnackBarModule,
-     TranslateCacheModule.forRoot({
+    TranslateCacheModule.forRoot({
       cacheService: {
         provide: TranslateCacheService,
         useFactory: translateCacheServiceFactory,
@@ -28,7 +29,7 @@ export function translateCacheServiceFactory(translateService: TranslateService,
     })
   ],
   declarations: [],
-  providers: [NotifierService, KeycloakGuardService, CookieService, KeycloakService],
+  providers: [NotifierService, KeycloakGuard, CookieService, KeycloakService],
   // exports: [TranslateModule]
 
 })
@@ -36,7 +37,7 @@ export class CoreModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: CoreModule,
-      providers: [NotifierService, KeycloakGuardService, CookieService, KeycloakService]
+      providers: [NotifierService, KeycloakGuard, CookieService, KeycloakService]
     };
   }
 

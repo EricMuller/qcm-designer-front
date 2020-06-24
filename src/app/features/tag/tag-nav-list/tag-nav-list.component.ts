@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Tag} from '@app/features/qcm-rest-api/model/tag.model';
-import {TagStore} from '@app/features/stores/tag-store.service';
+import {TagListStore} from '@app/features/stores/tag-list-store.service';
 
 
 
@@ -15,7 +15,7 @@ export class TagNavListComponent implements OnInit {
   public elements: Tag[];
 
 
-  constructor(private tagStore: TagStore) {
+  constructor(private tagListStore: TagListStore) {
   }
 
   ngOnInit() {
@@ -23,7 +23,7 @@ export class TagNavListComponent implements OnInit {
 
   public isSelected(tag: Tag):
     boolean {
-    return this.tagStore.isSelected(tag);
+    return this.tagListStore.isSelected(tag);
   }
 
   public setClickedRow = function (tag: Tag) {

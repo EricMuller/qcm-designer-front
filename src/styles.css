@@ -234,6 +234,15 @@ body .push-md {
 
 }
 
+.label_off {
+  padding: 3px 10px;
+  line-height: 13px;
+  font-weight: 400;
+  border-radius: 4px;
+  font-size: 75%;
+  margin-left: 2px;
+  color: #b6b6b6;
+}
 
 /* Home page styling */
 

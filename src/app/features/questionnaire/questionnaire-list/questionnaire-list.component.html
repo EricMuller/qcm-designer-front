@@ -46,12 +46,12 @@
           color="primary"
           matTooltip="{{'qcm.questionnaire.menu.filter' | translate}}">
 
-    <mat-icon *ngIf="(questionnaireStore.criteriaSize$ | async )>0"
-              matBadge="{{questionnaireStore.criteriaSize$ | async}}" matBadgeColor="warn"
+    <mat-icon *ngIf="(questionnaireListStore.criteriaSize$ | async )>0"
+              matBadge="{{questionnaireListStore.criteriaSize$ | async}}" matBadgeColor="warn"
               matBadgePosition="above after">filter_list
     </mat-icon>
     <span></span>
-    <mat-icon *ngIf="(questionnaireStore.criteriaSize$ | async )==0">filter_list</mat-icon>
+    <mat-icon *ngIf="(questionnaireListStore.criteriaSize$ | async )==0">filter_list</mat-icon>
   </button>
 
   <button id="add-btn-selectable-list" mat-fab (click)="list.onCreateElement($event)" color="primary" class="fab-bottom"
@@ -68,7 +68,7 @@
   <div fxlayout [hidden]="filter">
 
     <app-selectable-list #list
-                         [store]="questionnaireStore"
+                         [store]="questionnaireListStore"
                          [sortBy]="'id'"
                          (created)="create()">
 
@@ -86,17 +86,17 @@
       <!--  start mobile-->
       <button fxShow.gt-xs="false" mat-icon-button (click)="filter=!filter;"
               matTooltip="{{'qcm.form.menu.filter' | translate}}">
-        <mat-icon *ngIf="(questionnaireStore.criteriaSize$ |async ) > 0"
-                  matBadge="{{(questionnaireStore.criteriaSize$ |async )}}"
+        <mat-icon *ngIf="(questionnaireListStore.criteriaSize$ |async ) > 0"
+                  matBadge="{{(questionnaireListStore.criteriaSize$ |async )}}"
                   matBadgeColor="warn"
                   matBadgePosition="above after">filter_list
         </mat-icon>
-        <mat-icon *ngIf="(questionnaireStore.criteriaSize$ |async ) ==0">filter_list</mat-icon>
+        <mat-icon *ngIf="(questionnaireListStore.criteriaSize$ |async ) ==0">filter_list</mat-icon>
       </button>
       <!--  end mobile-->
 
-      <app-questionnaire-nav-list elements-view [elements$]="questionnaireStore.elements$"></app-questionnaire-nav-list>
-      <app-questionnaire-nav-list selected-view [elements$]="questionnaireStore.selected$"></app-questionnaire-nav-list>
+      <app-questionnaire-nav-list elements-view [elements$]="questionnaireListStore.elements$"></app-questionnaire-nav-list>
+      <app-questionnaire-nav-list selected-view [elements$]="questionnaireListStore.selected$"></app-questionnaire-nav-list>
 
     </app-selectable-list>
 

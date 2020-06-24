@@ -17,7 +17,7 @@
 <mat-card class="mat-elevation-z0">
   <mat-chip-list   [selectable]="selectable" >
     <mat-chip *ngFor="let tag of  questionnaires" (click)="selectItem(tag)"
-              [removable]="removable" [selectable] ="selectable" [value]="tag.id" >
+              [removable]="removable" [selectable] ="selectable" [value]="tag.uuid" >
       {{tag.title}}
     </mat-chip>
     <!--<mat-chip *ngIf="nextLink" class='tag-cloud' (click)="next()">...</mat-chip>-->

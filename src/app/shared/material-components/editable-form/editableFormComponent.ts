@@ -16,7 +16,7 @@ export abstract class EditableFormComponent<T, K> implements OnInit {
 
   public separatorKeysCodes = [ENTER, COMMA];
 
-  protected constructor(protected store: CrudStore<T, K>, protected  notifierService: NotifierService, protected router: Router) {
+  protected constructor(protected crudStore: CrudStore<T, K>, protected  notifierService: NotifierService, protected router: Router) {
 
   }
 
@@ -41,6 +41,7 @@ export abstract class EditableFormComponent<T, K> implements OnInit {
 
     if (event) {
       this.form.enable();
+      // this.enableForm();
       this.notifierService.notifyInfo('Mode edition', 1000);
     } else {
       this.form.disable();
@@ -49,16 +50,22 @@ export abstract class EditableFormComponent<T, K> implements OnInit {
 
   }
 
+  protected enableForm() {
+    for (const control in this.form.controls) {
+      this.form.controls[control].enable();
+    }
+  }
+
   protected beforeSaveForm(t: T): T {
     return t;
   }
 
   public saveForm() {
-    // debugger
+
     if (this.form.valid) {
       let q = this.form.value;
       q = this.beforeSaveForm(q);
-      this.store.saveElement(q)
+      this.crudStore.saveElement(q)
         .subscribe(this.onSaveForm.bind(this)
         );
     } else {
@@ -67,7 +74,7 @@ export abstract class EditableFormComponent<T, K> implements OnInit {
   }
 
   public deleteForm() {
-    this.store.deleteElement(this.form.value)
+    this.crudStore.deleteElement(this.form.value)
       .subscribe(this.onDeleteForm.bind(this));
   }
 
@@ -76,7 +83,6 @@ export abstract class EditableFormComponent<T, K> implements OnInit {
   protected abstract onSaveForm(t: T) ;
 
   protected abstract onDeleteForm(t: T) ;
-
 
   // onChanges(): void {
   //   this.questionForm.valueChanges.subscribe(val => {

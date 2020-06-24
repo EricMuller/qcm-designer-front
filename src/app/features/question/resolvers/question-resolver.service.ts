@@ -12,12 +12,10 @@ export class QuestionResolver {
   }
 
   resolve(route: ActivatedRouteSnapshot): Observable<Question> | Promise<Question> | Question {
-    if (route.params.id > 0) {
-      return this.questionService.getQuestionById(route.params.id);
+    if (route.params.uuid && route.params.uuid !== '0') {
+      return this.questionService.getQuestionByUuid(route.params.uuid);
     } else {
-      const question = new Question();
-      question.id = 0;
-      return of(question);
+      return of(new Question());
     }
   }
 }

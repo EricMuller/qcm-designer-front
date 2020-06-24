@@ -20,7 +20,7 @@
   <mat-card class="mat-elevation-z0">
     <mat-chip-list [selectable]="selectable">
       <mat-chip *ngFor="let tag of  tags" (click)="selectItem(tag)" [removable]="removable" [selectable]="selectable"
-                [value]="tag.id">{{tag.libelle}}
+                [value]="tag.uuid">{{tag.libelle}}
 
       </mat-chip>
       <!--<mat-chip *ngIf="nextLink" class='tag-cloud' (click)="next()">...</mat-chip>-->

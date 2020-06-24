@@ -12,12 +12,10 @@ export class UploadResolver {
   }
 
   resolve(route: ActivatedRouteSnapshot): Observable<Upload> | Promise<Upload> | Upload {
-    if (route.params.id > 0) {
-      return this.uploadService.getUploadById(route.params.id);
+    if (route.params.uuid && route.params.uuid !== '0') {
+      return this.uploadService.getUploadByUuid(route.params.uuid);
     } else {
-      const upload = new Upload();
-      upload.id = 0;
-      return of(upload);
+      return of(new Upload());
     }
   }
 

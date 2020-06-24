@@ -14,4 +14,5 @@ export class Questionnaire extends Entity {
   tags?: Tag[] = [];
   dateCreation: Date;
   dateModification: Date;
+  published?: boolean;
 }

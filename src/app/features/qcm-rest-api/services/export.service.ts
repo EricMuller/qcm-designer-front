@@ -12,8 +12,8 @@ export class ExportService {
   constructor(private http: HttpClient, @Inject(QCM_API_ENDPOINT_TOKEN) private endPoint: QcmApiEndPoint) {
   }
 
-  public getExportById(id: number, type: string) {
-    return this.http.get<any>(this.endPoint.EXPORT + id.toString() + '/' + type, {responseType: 'blob' as 'json'});
+  public getExportById(uuid: string, type: string) {
+    return this.http.get<any>(this.endPoint.EXPORT + uuid + '/' + type, {responseType: 'blob' as 'json'});
   }
 
 }

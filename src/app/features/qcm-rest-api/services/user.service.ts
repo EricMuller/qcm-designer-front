@@ -1,5 +1,6 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Inject, Injectable} from '@angular/core';
+import {IUserService} from '@app/core/auth/i-user-service';
 import {User} from '@app/core/auth/user.model';
 import {QCM_API_ENDPOINT_TOKEN, QcmApiEndPoint} from '@app/features/qcm-rest-api/qcm-api-end-point';
 
@@ -11,44 +12,29 @@ import {map} from 'rxjs/operators';
 
 
 @Injectable()
-export class UserService {
+export class UserService  {
 
-  const
-  httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json'})
-  };
+  private httpOptions: any = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
 
   private user: User;
 
-  constructor(private http: HttpClient, @Inject(QCM_API_ENDPOINT_TOKEN) private endPoint: QcmApiEndPoint,
-              private coockieService: CookieService) {
+  constructor(private http: HttpClient, @Inject(QCM_API_ENDPOINT_TOKEN) private endPoint: QcmApiEndPoint) {
   }
 
-  public getCurrentUser(): Observable<User> {
-    if (this.user == null) {
 
-      return this.http.get(`${this.endPoint.USERS}me`).pipe(
+
+  public getUser(): Observable<User> {
+    return this.http
+      .get(`${this.endPoint.USERS}me`)
+      .pipe(
         map(
           (user: User) => {
             this.user = user;
             return user;
           }));
-    } else {
-      return of(this.user);
-    }
-
   }
 
-  public getUser(): Observable<User> {
-    return this.http.get(`${this.endPoint.USERS}me`).pipe(
-      map(
-        (user: User) => {
-          this.user = user;
-          return user;
-        }));
-  }
-
-  public postUser(q: User) {
+  public postUser(q: User): Observable<User> {
     return this.http.post<User>(this.endPoint.USERS, q);
   }
 

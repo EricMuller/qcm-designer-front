@@ -97,7 +97,7 @@ export class QuestionnaireQuestionListComponent implements OnInit {
     const dialogRef = this.dialog.open(QuestionDialogComponent, config);
     dialogRef.afterClosed().subscribe(q => {
       if (q) {
-        const itemIndex = this._questions.findIndex(item => item.id === q.id);
+        const itemIndex = this._questions.findIndex(item => item.uuid === q.id);
         if (itemIndex === -1) {
           this._questions.push(q);
         } else {

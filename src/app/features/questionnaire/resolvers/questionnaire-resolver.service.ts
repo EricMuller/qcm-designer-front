@@ -5,7 +5,6 @@ import {QuestionnaireService} from '@app/features/qcm-rest-api/services/question
 import {Observable, of} from 'rxjs';
 
 
-
 @Injectable()
 export class QuestionnaireResolver implements Resolve<Questionnaire> {
 
@@ -13,8 +12,8 @@ export class QuestionnaireResolver implements Resolve<Questionnaire> {
   }
 
   resolve(route: ActivatedRouteSnapshot): Observable<Questionnaire> | Promise<Questionnaire> | Questionnaire {
-    if (route.params.id > 0) {
-      return this.questionnaireService.getQuestionnaireById(route.params.id);
+    if (route.params.uuid && route.params.uuid !== '0') {
+      return this.questionnaireService.getQuestionnaireByUuid(route.params.uuid);
     } else {
       return of(new Questionnaire());
     }

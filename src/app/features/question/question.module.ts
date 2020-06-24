@@ -3,10 +3,11 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {CategoryDialogComponent} from '@app/features/category/category-dialog/category-dialog.component';
 import {CategoryModule} from '@app/features/category/category.module';
 import {QuestionnaireSelectComponent} from '@app/features/question/questionnaire-select/questionnaire-select.component';
-import {QuestionStore} from '@app/features/stores/question-store.service';
-import {QuestionnaireStore} from '@app/features/stores/questionnaire-store.service';
+import {QuestionListStore} from '@app/features/stores/question-list-store.service';
+
+import {QuestionnaireListStore} from '@app/features/stores/questionnaire-list-store.service';
 import {SearchStore} from '@app/features/stores/tag-questionnaire-filter-store-s.service';
-import {TagStore} from '@app/features/stores/tag-store.service';
+import {TagListStore} from '@app/features/stores/tag-list-store.service';
 import {TagModule} from '@app/features/tag/tag.module';
 import {UserModule} from '@app/features/user/user.module';
 import {AngularModule} from '@app/shared/angular/angular.module';
@@ -27,13 +28,13 @@ import {QuestionNavListComponent} from './question-list/question-nav-list/questi
     MaterialComponentsModule,
     FlexLayoutModule,
     CategoryModule,
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
   ],
   declarations: [QuestionListComponent, QuestionDialogComponent,
     QuestionNavListComponent, QuestionFormComponent, QuestionnaireSelectComponent],
   entryComponents: [QuestionDialogComponent, CategoryDialogComponent],
   exports: [QuestionListComponent],
-  providers: [SearchStore, QuestionnaireStore, TagStore, QuestionStore]
+  providers: [SearchStore, QuestionnaireListStore, TagListStore, QuestionListStore]
 })
 export class QuestionModule {
 

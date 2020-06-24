@@ -18,7 +18,9 @@ export class QuestionnaireService {
 
   public getQuestionnaires(page?: number, size?: number, sort?: string): Observable<Page> {
     const requestUrl = `${this.endPoint.QUESTIONNAIRES}?size=${size}&page=${page}&sort=${sort}`;
-    return this.http.get<Page>(requestUrl).pipe(publishLast(), refCount());
+    return this.http
+      .get<Page>(requestUrl)
+      .pipe(publishLast(), refCount());
   }
 
   public getQuestionnairesByCriteria(criteria: Criteria[], page?: number, size?: number, sort?: string): Observable<Page> {
@@ -30,15 +32,17 @@ export class QuestionnaireService {
       }
     }
     const requestUrl = `${this.endPoint.QUESTIONNAIRES}?size=${size}&page=${page}&sort=${sort}` + params;
-    return this.http.get<Page>(requestUrl).pipe(publishLast(), refCount());
+    return this.http
+      .get<Page>(requestUrl)
+      .pipe(publishLast(), refCount());
   }
 
-  public deleteQuestionnaireById(id: number) {
-    return this.http.delete<Questionnaire>(this.endPoint.QUESTIONNAIRES + id.toString());
+  public deleteQuestionnaireByUuid(uuid: string) {
+    return this.http.delete<Questionnaire>(this.endPoint.QUESTIONNAIRES + uuid);
   }
 
-  public getQuestionnaireById(id: number) {
-    return this.http.get<Questionnaire>(this.endPoint.QUESTIONNAIRES + id.toString());
+  public getQuestionnaireByUuid(uuid: string) {
+    return this.http.get<Questionnaire>(this.endPoint.QUESTIONNAIRES + uuid);
   }
 
   public postQuestionnaire(q: Questionnaire) {
@@ -49,13 +53,14 @@ export class QuestionnaireService {
     return this.http.put<Questionnaire>(this.endPoint.QUESTIONNAIRES, q);
   }
 
-  public getPageQuestionsProjectionByQuestionnaireId(questionnaireId: number): Observable<Questionnaire[]> {
-    return this.http.get<Questionnaire[]>(this.endPoint.QUESTIONNAIRES + questionnaireId.toString() + '/questions')
+  public getPageQuestionsProjectionByQuestionnaireUuid(questionnaireUuid: string): Observable<Questionnaire[]> {
+    return this.http
+      .get<Questionnaire[]>(this.endPoint.QUESTIONNAIRES + questionnaireUuid + '/questions')
       .pipe(publishLast(), refCount());
   }
 
-  public putQuestion(id: number, question: Question) {
-    return this.http.put<Questionnaire>(this.endPoint.QUESTIONNAIRES + id.toString() + '/questions', question);
+  public putQuestion(uuid: string, question: Question) {
+    return this.http.put<Questionnaire>(this.endPoint.QUESTIONNAIRES + uuid + '/questions', question);
   }
 
 }

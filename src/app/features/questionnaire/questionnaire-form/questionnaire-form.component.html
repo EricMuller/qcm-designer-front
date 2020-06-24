@@ -33,9 +33,9 @@
       </button>
       <!-- end mobile -->
 
-      <div *ngIf="questionnaire.id && !edition">{{'qcm.questionnaire.view.title' | translate}}{{questionnaire.id}}</div>
-      <div *ngIf="questionnaire.id && edition">{{'qcm.questionnaire.edit.title' | translate}} {{questionnaire.id}}</div>
-      <div *ngIf="!questionnaire.id">{{'qcm.questionnaire.create.title' | translate}}</div>
+      <div *ngIf="questionnaire.uuid  && !edition">{{'qcm.questionnaire.view.title' | translate}}{{questionnaire.title}}</div>
+      <div *ngIf="questionnaire.uuid && edition">{{'qcm.questionnaire.edit.title' | translate}} {{questionnaire.title}}</div>
+      <div *ngIf="!questionnaire.uuid">{{'qcm.questionnaire.create.title' | translate}}</div>
 
       <div class="spacer"></div>
 
@@ -93,12 +93,12 @@
 
       <!--  category-->
       <div fxLayout='row'>
-        <mat-form-field *ngIf="categories as epics;" fxFlex="100%" fxFlex.gt-xs="50%">
+        <mat-form-field *ngIf="categories as categs;" fxFlex="100%" fxFlex.gt-xs="50%">
           <mat-select formControlName="category"
                       placeholder="{{'qcm.questionnaire.form.input.category.placeholder' |translate}}"
-                      [compareWith]="compareById">
+                      [compareWith]="compareByUuid">
             <mat-option>--</mat-option>
-            <mat-option *ngFor="let epic of epics" [value]="epic">{{epic.libelle}}</mat-option>
+            <mat-option *ngFor="let categorie of categs" [value]="categorie">{{categorie.libelle}}</mat-option>
 
           </mat-select>
         </mat-form-field>
@@ -114,7 +114,7 @@
         <mat-form-field class="chip-tags" fxFlex="100%" fxFlex.gt-xs="90%">
           <mat-chip-list #chipList>
             <mat-chip *ngFor="let tag of tags.controls; index as i" [selectable]="edition"
-                      [removable]="edition" (remove)="removeChip(i)">
+                      [removable]="edition"  (removed)="removeChip(i)">
               {{tag.get('libelle')?.value}}
               <mat-icon matChipRemove *ngIf="edition">cancel</mat-icon>
             </mat-chip>
@@ -141,16 +141,22 @@
     <!--    colonne 2 -->
     <div fxLayout='column' fxFlex="100%" fxFlex.gt-xs="20%">
       <!--      <div  fxFlex="100%" fxFlex.gt-xs="50%">-->
-      <mat-form-field *ngIf="questionnaire.id">
+      <mat-form-field *ngIf="questionnaire.uuid">
         <input matInput [value]="form.get('dateCreation').value | date: 'dd/MM/yyyy hh:mm:ss' "
                placeholder="{{'qcm.questionnaire.form.input.creation.placeholder' |translate}}" readonly>
       </mat-form-field>
 
       <!-- </div> -->
-      <mat-form-field *ngIf="questionnaire.id">
+      <mat-form-field *ngIf="questionnaire.uuid">
         <input matInput [value]="form.get('dateModification').value | date: 'dd/MM/yyyy hh:mm:ss' "
                placeholder="{{'qcm.questionnaire.form.input.modification.placeholder' |translate}}" readonly>
       </mat-form-field>
+
+
+        <mat-checkbox  formControlName="published"  matInput *ngIf="questionnaire.uuid">
+                {{'qcm.questionnaire.form.input.published.placeholder' |translate}}
+        </mat-checkbox>
+
 
     </div>
 

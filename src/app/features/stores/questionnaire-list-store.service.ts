@@ -6,7 +6,7 @@ import {Page} from '@app/features/qcm-rest-api/services/page';
 import {QuestionnaireService} from '@app/features/qcm-rest-api/services/questionnaire.service';
 import {SelectStoreAdapter} from '@app/features/stores/selection-store';
 import {CriteriaStore, CrudStore} from '@app/features/stores/store-api';
-import {TagStore} from '@app/features/stores/tag-store.service';
+import {TagListStore} from '@app/features/stores/tag-list-store.service';
 
 import {Observable} from 'rxjs';
 
@@ -14,23 +14,23 @@ import {mergeMap} from 'rxjs/operators';
 
 
 @Injectable()
-export class QuestionnaireStore extends SelectStoreAdapter<Questionnaire>
-  implements CriteriaStore<Questionnaire>, CrudStore<Questionnaire, number> {
+export class QuestionnaireListStore extends SelectStoreAdapter<Questionnaire>
+  implements CriteriaStore<Questionnaire>, CrudStore<Questionnaire, string> {
 
-  constructor(private questionnaireService: QuestionnaireService, private tagStore: TagStore) {
+  constructor(private questionnaireService: QuestionnaireService, private tagListStore: TagListStore) {
     super();
 
-    this.tagStore.selected$.subscribe((tags) => {
-      this.deleteCriteriabyName('tag_id');
+    this.tagListStore.selected$.subscribe((tags) => {
+      this.deleteCriteriabyName('tag_uuid');
       for (const tag of tags) {
-        this.addCriteria(new Criteria(tag.id.toString(), 'tag_id'));
+        this.addCriteria(new Criteria(tag.uuid.toString(), 'tag_uuid'));
       }
     });
 
   }
 
-  getElement(id: number): Observable<Questionnaire> {
-    return  this.questionnaireService.getQuestionnaireById(id);
+  getElement(uuid: string): Observable<Questionnaire> {
+    return this.questionnaireService.getQuestionnaireByUuid(uuid);
   }
 
   getPage(page?: number, size?: number, sort?: string): Observable<Page> {
@@ -43,7 +43,8 @@ export class QuestionnaireStore extends SelectStoreAdapter<Questionnaire>
   }
 
   deleteElement(questionnaire: Questionnaire): Observable<Questionnaire> {
-    return this.questionnaireService.deleteQuestionnaireById(questionnaire.id)
+    return this.questionnaireService
+      .deleteQuestionnaireByUuid(questionnaire.uuid)
       .pipe(mergeMap((data) => {
         return this.deletePageElement(questionnaire);
       }));
@@ -51,8 +52,8 @@ export class QuestionnaireStore extends SelectStoreAdapter<Questionnaire>
 
   deleteElements(questionnaires: Questionnaire[]) {
     for (const q of questionnaires) {
-      const id: number = q.id;
-      this.questionnaireService.deleteQuestionnaireById(id)
+      this.questionnaireService
+        .deleteQuestionnaireByUuid(q.uuid)
         .subscribe((data) => {
             this.deletePageElement(q);
           }
@@ -61,7 +62,8 @@ export class QuestionnaireStore extends SelectStoreAdapter<Questionnaire>
   }
 
   saveElement(element: Questionnaire): Observable<Questionnaire> {
-    if (element.id > 0) {
+
+    if (element.uuid) {
       return this.questionnaireService.putQuestionnaire(element);
     } else {
       return this.questionnaireService.postQuestionnaire(element);
@@ -69,7 +71,7 @@ export class QuestionnaireStore extends SelectStoreAdapter<Questionnaire>
   }
 
   public addQuestion(q: Questionnaire, question: Question) {
-    return this.questionnaireService.putQuestion(q.id, question);
+    return this.questionnaireService.putQuestion(q.uuid, question);
   }
 
 
@@ -86,7 +88,7 @@ export class QuestionnaireStore extends SelectStoreAdapter<Questionnaire>
 
   clearCriteria() {
     // check constuctor
-    this.tagStore.unSelectAllElement();
+    this.tagListStore.unSelectAllElement();
   }
 
 }

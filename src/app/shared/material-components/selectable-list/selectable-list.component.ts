@@ -67,7 +67,7 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
   ngOnInit(): void {
 
     this.store.deleted$.subscribe((element) => {
-        const itemIndex = this.elements.findIndex(item => item.id === element.id);
+        const itemIndex = this.elements.findIndex(item => item.uuid === element.uuid);
         if (itemIndex !== -1) {
           this.elements.splice(itemIndex, 1);
           if (this.elements.length === 0) {

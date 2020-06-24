@@ -3,8 +3,7 @@ import {Inject, Injectable} from '@angular/core';
 import {Criteria} from '@app/features/qcm-rest-api/model/criteria';
 import {QCM_API_ENDPOINT_TOKEN, QcmApiEndPoint} from '@app/features/qcm-rest-api/qcm-api-end-point';
 import {Observable} from 'rxjs';
-import {Question} from '../model/question.model'
-import {Questionnaire} from '../model/questionnaire.model';
+import {Question} from '../model/question.model';
 import {Page} from './page';
 
 
@@ -14,13 +13,11 @@ export class QuestionService {
   constructor(private http: HttpClient, @Inject(QCM_API_ENDPOINT_TOKEN) private endPoint: QcmApiEndPoint) {
   }
 
-  public getQuestionById(questionId: number): Observable<Question> {
-    return this.http.get<Question>(this.endPoint.QUESTIONS + questionId.toString());
+  public getQuestionByUuid(questionUuid: string): Observable<Question> {
+    return this.http.get<Question>(this.endPoint.QUESTIONS + questionUuid);
   }
 
-  public getQuestionsByQuestionnaireId(questionnaireId: number): Observable<Question[]> {
-    return this.http.get<Question[]>(this.endPoint.QUESTIONS + '?questionnaireId=' + questionnaireId.toString());
-  }
+
 
   public getQuestionsByCriteria(criteria: Criteria[], page?: number, size?: number, sort?: string): Observable<Page> {
     console.log(criteria);
@@ -34,8 +31,8 @@ export class QuestionService {
     return this.http.get<Page>(requestUrl);
   }
 
-  public deleteQuestionById(id: number) {
-    return this.http.delete<Questionnaire>(this.endPoint.QUESTIONS + id.toString());
+  public deleteQuestionByUuid(uuid: string) {
+    return this.http.delete<Question>(this.endPoint.QUESTIONS + uuid);
   }
 
   public getQuestions(page?: number, size?: number, sort?: string): Observable<Page> {
@@ -43,8 +40,13 @@ export class QuestionService {
     return this.http.get<Page>(requestUrl);
   }
 
-  public getPageQuestionsByQuestionnaireId(questionnaireId: number): Observable<Page> {
-    return this.http.get<Page>(this.endPoint.QUESTIONS + '?questionnaireId=' + questionnaireId.toString());
+  // public getQuestionsByQuestionnaireUuid(questionnaireUuid: string): Observable<Question[]> {
+  //   return this.http.get<Question[]>(this.endPoint.QUESTIONS + '?questionnaireId=' + questionnaireUuid);
+  // }
+
+  public getPageQuestionsByQuestionnaireUuid(questionnaireUuid: string): Observable<Page> {
+    alert('getPageQuestionsByQuestionnaireUuid');
+    return this.http.get<Page>(this.endPoint.QUESTIONS + '?questionnaireId=' + questionnaireUuid);
   }
 
   public postQuestion(q: Question) {
@@ -54,6 +56,5 @@ export class QuestionService {
   public putQuestion(q: Question) {
     return this.http.put<Question>(this.endPoint.QUESTIONS, q);
   }
-
 
 }

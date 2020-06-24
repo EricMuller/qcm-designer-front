@@ -2,7 +2,7 @@ import {Component, Inject, Input, OnInit} from '@angular/core';
 import {Questionnaire} from '@app/features/qcm-rest-api/model/questionnaire.model';
 import {QCM_API_ENDPOINT_TOKEN, QcmApiEndPoint} from '@app/features/qcm-rest-api/qcm-api-end-point';
 import {ExportService} from '@app/features/qcm-rest-api/services/export.service';
-import {QuestionnaireStore} from '@app/features/stores/questionnaire-store.service';
+import {QuestionnaireListStore} from '@app/features/stores/questionnaire-list-store.service';
 import {Observable} from 'rxjs/internal/Observable';
 
 
@@ -16,8 +16,8 @@ export class QuestionnaireNavListComponent implements OnInit {
   @Input()
   public elements$: Observable<Questionnaire[]>;
 
-  constructor(private questionnaireStore: QuestionnaireStore,
-              private tagStore: QuestionnaireStore, @Inject(QCM_API_ENDPOINT_TOKEN) private endPoint: QcmApiEndPoint,
+  constructor(private questionnaireListStore: QuestionnaireListStore,
+              private tagStore: QuestionnaireListStore, @Inject(QCM_API_ENDPOINT_TOKEN) private endPoint: QcmApiEndPoint,
               private exportService: ExportService) {
   }
 
@@ -26,7 +26,7 @@ export class QuestionnaireNavListComponent implements OnInit {
 
   public isSelected(questionnaire: Questionnaire):
     boolean {
-    return this.questionnaireStore.isSelected(questionnaire);
+    return this.questionnaireListStore.isSelected(questionnaire);
   }
 
   public swapTag(tag: Questionnaire) {
@@ -34,17 +34,21 @@ export class QuestionnaireNavListComponent implements OnInit {
     this.tagStore.swapElement(tag);
   }
 
-  public setClickedRow = function (questionnaire: Questionnaire) {
-    this.questionnaireStore.swapElement(questionnaire);
+  public setClickedRow = function(questionnaire: Questionnaire) {
+    this.questionnaireListStore.swapElement(questionnaire);
   };
 
   download(questionnaire: Questionnaire, type: string) {
 
-    this.exportService.getExportById(questionnaire.id, type)
+    this.exportService.getExportById(questionnaire.uuid, type)
       .subscribe(data => {
+        if (type === 'json') {
+          type = 'txt';
+        }
         this.downLoadFile(data, questionnaire.title + '.' + type);
       });
   }
+
 
   /*
   'application/json' , 'application/msword' , 'application/octet-stream'

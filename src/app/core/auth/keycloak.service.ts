@@ -45,14 +45,11 @@ export class KeycloakService {
   }
 
   public login(): void {
-
     KeycloakService.auth.authz.login()
       .success(
         () => {
-
           KeycloakService.auth.authz.loadUserProfile()
             .success(data => {
-
               this.user = new User();
               this.user.userName = data.username;
               this.user.firstName = data.first_name;
@@ -85,7 +82,7 @@ export class KeycloakService {
     return KeycloakService.auth.authz.hasResourceRole('manage-users', 'realm-management');
   }
 
-  getToken(): Promise<string> {
+  async getToken(): Promise<string> {
     return new Promise<string>((resolve, reject) => {
 
       if (KeycloakService.auth.authz && KeycloakService.auth.authz.token) {

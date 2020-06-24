@@ -2,6 +2,10 @@ import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
 import {MatChipInputEvent, MatDialog, MatDialogConfig} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
+import {SetCurrentQuestionAction} from '@app/app/state/set-current-question-action';
+import {SetCurrentQuestionnaireAction} from '@app/app/state/set-current-questionnaire-action';
+import {QuestionnaireModel} from '@app/app/state/questionnaire-model';
+import {AppState} from '@app/app/state/app-state.service';
 import {NotifierService} from '@app/core/notifications/simple-notifier.service';
 import {CategoryDialogComponent} from '@app/features/category/category-dialog/category-dialog.component';
 import {Category} from '@app/features/qcm-rest-api/model/category.model';
@@ -10,8 +14,11 @@ import {Reponse} from '@app/features/qcm-rest-api/model/response.model';
 import {Tag} from '@app/features/qcm-rest-api/model/tag.model';
 import {CategoryService} from '@app/features/qcm-rest-api/services/category.service';
 import {CategoryType} from '@app/features/qcm-rest-api/services/type.enum';
-import {QuestionStore} from '@app/features/stores/question-store.service';
+import {QuestionListStore} from '@app/features/stores/question-list-store.service';
+
 import {EditableFormComponent} from '@app/shared/material-components/editable-form/editableFormComponent';
+import {Select, Store} from '@ngxs/store';
+import {Observable} from 'rxjs/internal/Observable';
 
 import {QuestionFormBuilder} from './question-form-builder';
 
@@ -33,7 +40,7 @@ enum QuestionType {
   templateUrl: './question-form.component.html',
   styleUrls: ['./question-form.component.scss'], providers: [QuestionFormBuilder]
 })
-export class QuestionFormComponent extends EditableFormComponent<Question, number> implements OnInit, AfterViewInit {
+export class QuestionFormComponent extends EditableFormComponent<Question, string> implements OnInit, AfterViewInit {
 
 
   @Input()
@@ -44,21 +51,26 @@ export class QuestionFormComponent extends EditableFormComponent<Question, numbe
   public status = [];
   public good: boolean;
 
-  constructor(protected   store: QuestionStore,
+  @Select(AppState.currentQuestionnaire) public currentQuestionnaire$: Observable<QuestionnaireModel>;
+
+  constructor(protected   crudStore: QuestionListStore,
               protected   notifierService: NotifierService,
               protected   router: Router,
               private formBuilder: QuestionFormBuilder,
               private route: ActivatedRoute,
               private categoryService: CategoryService,
-              private dialog: MatDialog) {
-    super(store, notifierService, router);
+              private dialog: MatDialog, private store: Store) {
+    super(crudStore, notifierService, router);
     this.types = this.getQuestionTypesEnum();
     this.status = this.getStatusEnum();
-    this.edition = route.snapshot.params.id <= 0;
+    this.edition = route.snapshot.params.uuid <= 0;
     this.route.data.subscribe(data => {
       this.question = data.question;
       this.categories = data.categories;
+      this.store.dispatch(new SetCurrentQuestionAction({uuid: this.question.uuid, title: this.question.type}));
     });
+   //  this.currentQuestionnaire$ = this.store.select(state => state.currentQuestionnaire);
+
   }
 
   ngOnInit(): void {
@@ -86,7 +98,7 @@ export class QuestionFormComponent extends EditableFormComponent<Question, numbe
   }
 
   protected onDeleteForm(t: Question) {
-    this.notifierService.notifySuccess(t.id + ' deleted', 2000);
+    this.notifierService.notifySuccess(t.uuid + ' deleted', 2000);
     this.router.navigate(['/questions/list']);
   }
 
@@ -195,6 +207,10 @@ export class QuestionFormComponent extends EditableFormComponent<Question, numbe
 
   public compareById(f1: any, f2: any) {
     return f1 && f2 && f1.id === f2.id;
+  }
+
+  public compareByUuid(f1: any, f2: any) {
+    return f1 && f2 && f1.uuid === f2.uuid;
   }
 
 }

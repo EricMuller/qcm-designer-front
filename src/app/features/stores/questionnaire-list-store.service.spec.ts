@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { QuestionnaireStore } from './questionnaire-store.service';
+import { QuestionnaireListStore } from './questionnaire-store.service';
 
 describe('QuestionnaireStoreService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [QuestionnaireStore]
+      providers: [QuestionnaireListStore]
     });
   });
 
-  it('should be created', inject([QuestionnaireStore], (service: QuestionnaireStore) => {
+  it('should be created', inject([QuestionnaireListStore], (service: QuestionnaireListStore) => {
     expect(service).toBeTruthy();
   }));
 });

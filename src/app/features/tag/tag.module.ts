@@ -11,7 +11,7 @@ import {TagSelectComponent} from './tag-select/tag-select.component';
 
 @NgModule({
   imports: [
-    CommonModule, AngularModule, MaterialModule, FlexLayoutModule, TranslateModule
+    CommonModule, AngularModule, MaterialModule, FlexLayoutModule, TranslateModule.forChild()
   ],
   declarations: [TagNavListComponent, TagSelectComponent],
   exports: [TagNavListComponent, TagSelectComponent]

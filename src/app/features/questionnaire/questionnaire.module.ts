@@ -4,8 +4,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {CategoryDialogComponent} from '@app/features/category/category-dialog/category-dialog.component';
 import {CategoryModule} from '@app/features/category/category.module';
 import {QuestionModule} from '@app/features/question/question.module';
-import {QuestionnaireStore} from '@app/features/stores/questionnaire-store.service';
-import {TagStore} from '@app/features/stores/tag-store.service';
+import {QuestionnaireListStore} from '@app/features/stores/questionnaire-list-store.service';
+import {TagListStore} from '@app/features/stores/tag-list-store.service';
 import {TagModule} from '@app/features/tag/tag.module';
 import {UploadModule} from '@app/features/upload/upload.module';
 import {UserModule} from '@app/features/user/user.module';
@@ -36,8 +36,7 @@ import {SearchStore} from './services/questionnaire-search-store.service';
     MaterialComponentsModule,
     FlexLayoutModule,
     TranslateModule.forChild(),
-    LMarkdownEditorModule
-
+    LMarkdownEditorModule,
   ],
   declarations: [
     QuestionnaireListComponent,
@@ -48,7 +47,7 @@ import {SearchStore} from './services/questionnaire-search-store.service';
     QuestionnaireQuestionsComponent,
   ],
   entryComponents: [QuestionnaireDialogComponent, CategoryDialogComponent],
-  providers: [SearchStore, QuestionnaireStore, TagStore
+  providers: [SearchStore, QuestionnaireListStore, TagListStore
     // {
     //   provide: DateAdapter,
     //   useClass: MomentDateAdapter,

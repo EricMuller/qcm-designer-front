@@ -1,5 +1,5 @@
 
 export class Entity {
-  id?: number;
+  uuid?: string;
 
 }

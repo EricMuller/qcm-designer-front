@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {KeycloakGuardService} from '@app/core/auth/keycloak-guard.service';
+import {KeycloakGuard} from '@app/core/auth/keycloak.guard';
 import {SocialUserResolver} from '@app/features/social/resolvers/user-resolver.service';
 import {SocialComponent} from '@app/features/social/social.component';
 import {SocialModule} from '@app/features/social/social.module';
@@ -9,7 +9,7 @@ import {SocialModule} from '@app/features/social/social.module';
 export const routes: Routes = [
   {
     path: 'profile',
-    component: SocialComponent, canActivate: [KeycloakGuardService],
+    component: SocialComponent, canActivate: [KeycloakGuard],
     resolve: {
       user: SocialUserResolver,
     }

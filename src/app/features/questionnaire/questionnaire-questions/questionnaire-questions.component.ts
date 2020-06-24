@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Question} from '@app/features/qcm-rest-api/model/question.model';
-import {QuestionStore} from '../../stores/question-store.service';
+import {QuestionListStore} from '@app/features/stores/question-list-store.service';
+
 
 
 @Component({
@@ -13,7 +14,7 @@ export class QuestionnaireQuestionsComponent implements OnInit {
   @Input()
   public questions: Question[];
   public selected: Question[];
-  constructor( protected questionStore: QuestionStore) {
+  constructor( protected questionStore: QuestionListStore) {
     this.questionStore.selected$.subscribe((questions) => {
       this.selected = questions;
     });

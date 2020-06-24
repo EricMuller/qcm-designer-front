@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {QuestionnaireStore} from '@app/features/stores/questionnaire-store.service';
+import {QuestionnaireListStore} from '@app/features/stores/questionnaire-list-store.service';
 
 
 @Component({
@@ -12,7 +12,7 @@ export class QuestionnaireListComponent implements OnInit {
 
   public filter = false;
 
-  constructor(public questionnaireStore: QuestionnaireStore,  private router: Router) {
+  constructor(public questionnaireListStore: QuestionnaireListStore, private router: Router) {
   }
 
   ngOnInit() {

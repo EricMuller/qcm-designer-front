@@ -10,3 +10,6 @@ $dark-blue-theme: mat-dark-theme(
     $dark-blue-theme-accent,
     $dark-blue-theme-warn
 );
+
+
+$background-color: mat-color($mat-grey, 700, 0.9);

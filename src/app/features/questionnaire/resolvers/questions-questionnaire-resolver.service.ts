@@ -12,7 +12,7 @@ export class QuestionsQuestionnaireResolver {
   }
 
   resolve(route: ActivatedRouteSnapshot): Observable<Questionnaire[]> | Promise<Questionnaire[]> | Questionnaire[] {
-    return this.questionnaireService.getPageQuestionsProjectionByQuestionnaireId(route.params.id);
+    return this.questionnaireService.getPageQuestionsProjectionByQuestionnaireUuid(route.params.uuid);
   }
 
 }

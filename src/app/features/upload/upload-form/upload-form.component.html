@@ -39,9 +39,9 @@
       </button>
       <!-- end mobile -->
 
-      <div *ngIf="upload.id && !edition">{{'qcm.question.view.title' | translate }}{{upload.id}}</div>
-      <div *ngIf="upload.id && edition">{{'qcm.question.edit.title' | translate }}  {{upload.id}}</div>
-      <div *ngIf="!upload.id">{{'qcm.question.create.title' | translate }}</div>
+      <div *ngIf="upload.uuid && !edition">{{'qcm.question.view.title' | translate }}{{upload.uuid}}</div>
+      <div *ngIf="upload.uuid && edition">{{'qcm.question.edit.title' | translate }}  {{upload.uuid}}</div>
+      <div *ngIf="!upload.uuid">{{'qcm.question.create.title' | translate }}</div>
 
       <div class="spacer"></div>
 

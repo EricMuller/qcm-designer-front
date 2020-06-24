@@ -9,7 +9,7 @@ import {NotifierService} from '../notifications/simple-notifier.service';
 import {KeycloakService} from './keycloak.service';
 
 @Injectable()
-export class KeycloakGuardService implements CanActivate, CanActivateChild {
+export class KeycloakGuard implements CanActivate, CanActivateChild {
 
   constructor(private router: Router,
               private notifierService: NotifierService,
@@ -21,22 +21,23 @@ export class KeycloakGuardService implements CanActivate, CanActivateChild {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    return fromPromise(this.keycloakService.getToken()).pipe(
-      map((token) => {
-          return true;
-        }
-      ), catchError(error => {
-        return this.notifierService
-          .notifyError(error, '', 2000)
-          .onAction()
-          .pipe(flatMap(() => {
-            this.login();
-            return of(true);
-          }));
-      }));
+    return fromPromise(this.keycloakService.getToken())
+      .pipe(
+        map((token) => {
+            return true;
+          }
+        ), catchError(error => {
+          return this.notifierService
+            .notifyError(error, '', 2000)
+            .onAction()
+            .pipe(flatMap(() => {
+              this.login();
+              return of(true);
+            }));
+        }));
   }
 
-  public logout(){
+  public logout() {
     return this.keycloakService.logout();
   }
 

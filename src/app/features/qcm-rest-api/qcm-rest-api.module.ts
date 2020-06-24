@@ -16,12 +16,12 @@ import {UserService} from './services/user.service';
 
 export const QCM_API_ENDPOINT = {
   CATEGORY: environment.QCM_REST_API_HOST + '/qcm/api/v1/categories/',
-  TAGS: environment.QCM_REST_API_HOST + '/qcm/api/v1/tags/',
-  USERS: environment.QCM_REST_API_HOST + '/users/api/v1/users/',
+  EXPORT: environment.QCM_REST_API_HOST + '/qcm/api/v1/exports/',
   QUESTIONNAIRES: environment.QCM_REST_API_HOST + '/qcm/api/v1/questionnaires/',
   QUESTIONS: environment.QCM_REST_API_HOST + '/qcm/api/v1/questions/',
+  TAGS: environment.QCM_REST_API_HOST + '/qcm/api/v1/tags/',
   UPLOAD: environment.QCM_REST_API_HOST + '/qcm/api/v1/upload/',
-  EXPORT: environment.QCM_REST_API_HOST + '/public/qcm/api/v1/exports/',
+  USERS: environment.QCM_REST_API_HOST + '/qcm/api/v1/users/',
 };
 
 @NgModule({

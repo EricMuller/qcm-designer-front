@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {KeycloakGuardService} from '@app/core/auth/keycloak-guard.service';
+import {AppGuard} from '@app/shared/auth/app-guard.service';
 import {QuestionnaireQuestionListComponent} from '@app/features/questionnaire/question-list/question-list.component';
 import {QuestionnaireFormComponent} from '@app/features/questionnaire/questionnaire-form/questionnaire-form.component';
 import {QuestionnaireListComponent} from '@app/features/questionnaire/questionnaire-list/questionnaire-list.component';
@@ -12,17 +12,17 @@ import {QuestionsQuestionnaireResolver} from '@app/features/questionnaire/resolv
 
 const routes: Routes = [
   {
-    path: 'list', component: QuestionnaireListComponent, canActivate: [KeycloakGuardService],
+    path: 'list', component: QuestionnaireListComponent, canActivate: [AppGuard],
   },
   {
-    path: ':id/questions', component: QuestionnaireQuestionListComponent, canActivate: [KeycloakGuardService],
+    path: ':uuid/questions', component: QuestionnaireQuestionListComponent, canActivate: [AppGuard],
     resolve: {
       questionnaire: QuestionnaireResolver,
       questions: QuestionsQuestionnaireResolver
     }
   },
   {
-    path: ':id', component: QuestionnaireFormComponent, canActivate: [KeycloakGuardService],
+    path: ':uuid', component: QuestionnaireFormComponent, canActivate: [AppGuard],
     resolve: {
       questionnaire: QuestionnaireResolver,
       categories: QuestionnaireCategoryResolver

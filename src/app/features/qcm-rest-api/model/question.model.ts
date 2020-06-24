@@ -13,4 +13,5 @@ export class Question extends Entity {
   category?: Category;
   status: string;
   version?: number;
+
 }

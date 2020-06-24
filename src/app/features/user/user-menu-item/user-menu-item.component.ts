@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {KeycloakGuardService} from '@app/core/auth/keycloak-guard.service';
+import {KeycloakGuard} from '@app/core/auth/keycloak.guard';
 import {User} from '@app/core/auth/user.model';
 
 
@@ -10,7 +10,7 @@ import {User} from '@app/core/auth/user.model';
 })
 export class UserMenuItemComponent implements OnInit {
 
-  constructor(private userGuardService: KeycloakGuardService) { }
+  constructor(private userGuardService: KeycloakGuard) { }
 
   ngOnInit() {
   }

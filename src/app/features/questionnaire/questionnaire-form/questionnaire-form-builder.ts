@@ -9,15 +9,15 @@ export class QuestionnaireFormBuilder {
   constructor(private fb: FormBuilder) {
   }
 
-
   public createForm(questionnaire: Questionnaire): FormGroup {
     return new FormGroup({
-      id: new FormControl({value: questionnaire.id, disabled: true}),
+      uuid: new FormControl({value: questionnaire.uuid, disabled: true}),
       version: new FormControl({value: questionnaire.version, disabled: true}),
       title: new FormControl({value: questionnaire.title, disabled: true}, Validators.required),
       website: new FormControl({value: questionnaire.website, disabled: true}),
       description: new FormControl({value: questionnaire.description, disabled: true}),
       category: new FormControl({value: questionnaire.category, disabled: true}),
+      published: new FormControl({value: questionnaire.published, disabled: true}),
       tags: this.createTagsControl(questionnaire, true),
       dateCreation: new FormControl({value: new Date(questionnaire.dateCreation), disabled: true}),
       dateModification: new FormControl({value: new Date(questionnaire.dateModification), disabled: true})
@@ -34,11 +34,11 @@ export class QuestionnaireFormBuilder {
     return responseFormArray;
   }
 
-  public createTagControl(tag: Tag, disabled: boolean): FormGroup {
+  public createTagControl(tag: Tag, aDisabled: boolean): FormGroup {
     return this.fb.group({
       // response: 'test',
-      id: new FormControl({value: tag.id ? tag.id : null, disabled: true}),
-      libelle: new FormControl({value: tag.libelle ? tag.libelle : false, disabled: true}),
+      uuid: new FormControl({value: tag.uuid ? tag.uuid : null, disabled: aDisabled}),
+      libelle: new FormControl({value: tag.libelle ? tag.libelle : false, disabled: aDisabled}),
     });
   }
 

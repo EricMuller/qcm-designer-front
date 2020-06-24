@@ -28,8 +28,8 @@ export class UploadService {
     return this.http.get<Page>(requestUrl);
   }
 
-  public deleteUploadById(id: number) {
-    return this.http.delete<Upload>(this.endPoint.UPLOAD + id.toString());
+  public deleteUploadByUuid(uuid: string) {
+    return this.http.delete<Upload>(this.endPoint.UPLOAD + uuid);
   }
 
   public getUploadByCriteria(criteria: Criteria[], page?: number, size?: number, sort?: string): Observable<Page> {
@@ -44,11 +44,11 @@ export class UploadService {
     return this.http.get<Page>(requestUrl);
   }
 
-  public importUploadById(id: number): Observable<Upload> {
-    return this.http.get<Upload>(this.endPoint.UPLOAD + id.toString() + '/import');
+  public importUploadByUuid(uuid: string): Observable<Upload> {
+    return this.http.get<Upload>(this.endPoint.UPLOAD + uuid + '/import');
   }
 
-  public getUploadById(id: number): Observable<Upload> {
-    return this.http.get<Upload>(this.endPoint.UPLOAD + id.toString() );
+  public getUploadByUuid(uuid: string): Observable<Upload> {
+    return this.http.get<Upload>(this.endPoint.UPLOAD + uuid);
   }
 }

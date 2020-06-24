@@ -25,12 +25,12 @@
           color="primary"
           matTooltip="{{'qcm.questionnaire.menu.filter' | translate}}">
 
-    <mat-icon *ngIf="(questionStore.criteriaSize$ | async )>0"
-              matBadge="{{questionStore.criteriaSize$ | async}}" matBadgeColor="warn"
+    <mat-icon *ngIf="(questionListStore.criteriaSize$ | async )>0"
+              matBadge="{{questionListStore.criteriaSize$ | async}}" matBadgeColor="warn"
               matBadgePosition="above after">filter_list
     </mat-icon>
     <span></span>
-    <mat-icon *ngIf="(questionStore.criteriaSize$ | async)==0">filter_list</mat-icon>
+    <mat-icon *ngIf="(questionListStore.criteriaSize$ | async)==0">filter_list</mat-icon>
   </button>
 
   <!--  create new-->
@@ -47,24 +47,26 @@
 
   <!-- end desktop fab -->
 
-  <!--  filter -->
+  <!--  show  filtre -->
   <div fxLayout fxlayout="column" fxLayoutAlign="center center" fxLayout.xs="column" [hidden]="!filter">
      <span>
       <h1>{{'qcm.question.filtre.title' |translate }}</h1>
       ({{'qcm.question.filtre.found' | translate:{'nb': list.totalElements} }})
     </span>
   </div>
+
   <div fxLayout fxLayoutAlign="center center" fxLayout.xs="column" [hidden]="!filter">
     <div>{{'qcm.tag-select.title' | translate}}:</div>
     <app-tag-select></app-tag-select>
     <div>{{'qcm.questionnaire-select.title' | translate}}:</div>
     <app-questionnaire-select></app-questionnaire-select>
   </div>
+  <!--  end show filtre -->
 
 
   <div fxlayout [hidden]="filter">
 
-    <app-selectable-list #list [store]="questionStore"
+    <app-selectable-list #list [store]="questionListStore"
                          [sortBy]="'id'"
                          (created)="create()">
 
@@ -80,18 +82,18 @@
       <!--  start mobile-->
       <button fxShow.gt-xs="false" mat-icon-button (click)="filter=!filter;"
               matTooltip="{{'qcm.form.menu.filter' | translate}}">
-        <mat-icon *ngIf="(questionStore.criteriaSize$ |async ) > 0"
-                  matBadge="{{(questionStore.criteriaSize$ |async )}}"
+        <mat-icon *ngIf="(questionListStore.criteriaSize$ |async ) > 0"
+                  matBadge="{{(questionListStore.criteriaSize$ |async )}}"
                   matBadgeColor="warn"
                   matBadgePosition="above after">filter_list
         </mat-icon>
-        <mat-icon *ngIf="(questionStore.criteriaSize$ |async ) ==0">filter_list</mat-icon>
+        <mat-icon *ngIf="(questionListStore.criteriaSize$ |async ) ==0">filter_list</mat-icon>
       </button>
       <!-- end mobile-->
 
-      <app-question-nav-list elements-view [elements$]="questionStore.elements$"></app-question-nav-list>
+      <app-question-nav-list elements-view [elements$]="questionListStore.elements$"></app-question-nav-list>
 
-      <app-question-nav-list selected-view [elements$]="questionStore.selected$"></app-question-nav-list>
+      <app-question-nav-list selected-view [elements$]="questionListStore.selected$"></app-question-nav-list>
 
     </app-selectable-list>
 

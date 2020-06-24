@@ -59,7 +59,7 @@ describe('QuestionnaireListComponent', () => {
 class MockQuestionnaireService {
   public getQuestionnaires(): Observable<Questionnaire[]> {
     const questionnaire = new Questionnaire();
-    questionnaire.id = 1;
+    questionnaire.uuid = '1';
     return of([questionnaire]);
   }
 }
@@ -69,7 +69,7 @@ class MockCategoryService {
   public getCategories(): Observable<Category[]> {
 
     const category = new Category('rr');
-    category.id = '1';
+    category.uuid = '1';
     return of([category]);
 
   }

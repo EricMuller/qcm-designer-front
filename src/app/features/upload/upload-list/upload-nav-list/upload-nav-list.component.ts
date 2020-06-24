@@ -31,7 +31,7 @@ export class UploadNavListComponent implements OnInit {
   import(upload: Upload) {
     upload.loading = true;
 
-    this.uploadService.importUploadById(upload.id)
+    this.uploadService.importUploadByUuid(upload.uuid)
       .subscribe((message: Upload) => {
         upload.loading = false;
         this.notifier.notifyInfo(message.status, 1000);
@@ -52,7 +52,7 @@ export class UploadNavListComponent implements OnInit {
   }
 
   download(item: Upload) {
-    this.uploadStore.getElement(item.id)
+    this.uploadStore.getElement(item.uuid)
       .subscribe(
         (message: Upload) => {
           this.notifier.notifyInfo(message.fileName, 1000);

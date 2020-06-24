@@ -4,9 +4,7 @@ import {Tag} from '@app/features/qcm-rest-api/model/tag.model';
 
 import {MatChip} from '@angular/material';
 import {Letter} from '@app/features/tag/tag-select/Letter';
-import {TagStore} from '@app/features/stores/tag-store.service';
-
-
+import {TagListStore} from '@app/features/stores/tag-list-store.service';
 
 @Component({
   selector: 'app-tag-select',
@@ -27,22 +25,21 @@ export class TagSelectComponent implements OnInit {
   @Output('onSelected')
   private onSelected = new EventEmitter<Tag[]>();
 
+  constructor(private tagListStore: TagListStore) {
 
-  constructor(private tagStore: TagStore) {
-
-    this.tagStore.selected$.subscribe((selected) => {
+    this.tagListStore.selected$.subscribe((selected) => {
       this.selected = selected;
       this.onSelected.emit(selected);
     });
 
-    this.tagStore.page$.subscribe((page) => {
+    this.tagListStore.page$.subscribe((page) => {
       this.tags = page.content;
       if (this.letters.length === 0) {
         this.buildLetters();
       }
     });
 
-    this.tagStore.getPage(0, 100, 'libelle');
+    this.tagListStore.getPage(0, 100, 'libelle');
   }
 
   ngOnInit() {
@@ -62,21 +59,21 @@ export class TagSelectComponent implements OnInit {
   }
 
   public isSelectItem(tag: Tag): boolean {
-    return this.tagStore.isSelected(tag);
+    return this.tagListStore.isSelected(tag);
   }
 
   public unSelectItem(tag: Tag) {
-    this.tagStore.selectElement(tag, false);
+    this.tagListStore.selectElement(tag, false);
   }
 
   public selectItem(tag: Tag) {
-    this.tagStore.selectElement(tag, true);
+    this.tagListStore.selectElement(tag, true);
   }
 
   public selectLetter(letter) {
     const criteria: Criteria[] = [new Criteria(letter, 'firstLetter')];
 
-    this.tagStore.getPageByCriteria(criteria, 0, 100, 'libelle');
+    this.tagListStore.getPageByCriteria(criteria, 0, 100, 'libelle');
   }
 
 }

@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Criteria} from '@app/features/qcm-rest-api/model/criteria';
 
-import {QuestionnaireStore} from './questionnaire-store.service';
-import {TagStore} from './tag-store.service';
+import {QuestionnaireListStore} from './questionnaire-list-store.service';
+import {TagListStore} from './tag-list-store.service';
 
 @Injectable()
 export class SearchStore  {
 
-  constructor(private tagStore: TagStore, private questionnaireStore: QuestionnaireStore) {
+  constructor(private tagListStore: TagListStore, private questionnaireListStore: QuestionnaireListStore) {
   }
 
   // criterias(): Criteria[] {

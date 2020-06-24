@@ -14,7 +14,7 @@
 
 <mat-nav-list>
   <mat-list-item *ngFor="let question of questions  | async">
-    <div style="margin-right: 0px" attr.entityId="questionId_{{question.id}}">
+    <div style="margin-right: 0px" attr.entityId="questionId_{{question.uuid}}">
       <div>
         <a mat-icon-button style="max-width: 600px;overflow: hidden" matTooltip="Edit"
            (click)="openQuestionDialog(question)">
@@ -22,7 +22,7 @@
         </a>
       </div>
     </div>
-    <span>{{question.id}} - {{question.question}}</span>
+    <span>{{question.uuid}} - {{question.question}}</span>
   </mat-list-item>
 </mat-nav-list>
 

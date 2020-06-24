@@ -2,9 +2,11 @@ import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {FormArray} from '@angular/forms';
 import {MatChipInputEvent, MatDialog, MatDialogConfig} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
+import {SetCurrentQuestionnaireAction} from '@app/app/state/set-current-questionnaire-action';
+import {QuestionnaireModel} from '@app/app/state/questionnaire-model';
+import {AppState, AppStateModel} from '@app/app/state/app-state.service';
 import {NotifierService} from '@app/core/notifications/simple-notifier.service';
 import {CategoryDialogComponent} from '@app/features/category/category-dialog/category-dialog.component';
-import {TypeCategory} from '@app/features/category/type-category.enum';
 import {Category} from '@app/features/qcm-rest-api/model/category.model';
 import {Questionnaire} from '@app/features/qcm-rest-api/model/questionnaire.model';
 import {Tag} from '@app/features/qcm-rest-api/model/tag.model';
@@ -12,17 +14,20 @@ import {CategoryService} from '@app/features/qcm-rest-api/services/category.serv
 import {TagService} from '@app/features/qcm-rest-api/services/tag.service';
 import {CategoryType} from '@app/features/qcm-rest-api/services/type.enum';
 import {QuestionnaireFormBuilder} from '@app/features/questionnaire/questionnaire-form/questionnaire-form-builder';
-import {QuestionStore} from '@app/features/stores/question-store.service';
-import {QuestionnaireStore} from '@app/features/stores/questionnaire-store.service';
+import {QuestionListStore} from '@app/features/stores/question-list-store.service';
+
+import {QuestionnaireListStore} from '@app/features/stores/questionnaire-list-store.service';
 import {EditableFormComponent} from '@app/shared/material-components/editable-form/editableFormComponent';
+import {Select, Store} from '@ngxs/store';
 import {MdEditorOption} from 'ngx-markdown-editor';
+import {Observable} from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-questionnaire-form',
   templateUrl: './questionnaire-form.component.html',
   styleUrls: ['./questionnaire-form.component.scss'], providers: [QuestionnaireFormBuilder]
 })
-export class QuestionnaireFormComponent extends EditableFormComponent<Questionnaire, number> implements OnInit, AfterViewInit {
+export class QuestionnaireFormComponent extends EditableFormComponent<Questionnaire, string> implements OnInit, AfterViewInit {
 
   @Input()
   public questionnaire: Questionnaire;
@@ -31,6 +36,7 @@ export class QuestionnaireFormComponent extends EditableFormComponent<Questionna
   public description: string;
 
   public date: Date;
+
 
   public options: MdEditorOption = {
     showPreviewPanel: true,
@@ -49,19 +55,21 @@ export class QuestionnaireFormComponent extends EditableFormComponent<Questionna
   };
 
   constructor(private route: ActivatedRoute, protected notifierService: NotifierService,
-              protected router: Router, protected questionnaireStore: QuestionnaireStore,
-              protected questionStore: QuestionStore, private dialog: MatDialog,
+              protected router: Router, protected questionnaireListStore: QuestionnaireListStore,
+              protected questionListStore: QuestionListStore, private dialog: MatDialog,
               private categoryService: CategoryService,
-              private tagService: TagService, private formBuilder: QuestionnaireFormBuilder) {
-    super(questionnaireStore, notifierService, router);
-    this.edition = route.snapshot.params.id <= 0;
+              private tagService: TagService, private formBuilder: QuestionnaireFormBuilder,
+              private store: Store) {
+    super(questionnaireListStore, notifierService, router);
+    this.edition = route.snapshot.params.uuid <= 0;
     this.route.data.subscribe(data => {
       this.questionnaire = data.questionnaire;
       this.description = this.questionnaire.description;
       this.date = new Date(this.questionnaire.dateCreation);
       this.categories = data.categories;
+      this.store.dispatch(new SetCurrentQuestionnaireAction({uuid: this.questionnaire.uuid, title: this.questionnaire.title}));
+      // this.currentQuestionnaire$ = this.store.select(state => state.currentQuestionnaire);
     });
-
   }
 
   protected createForm(): void {
@@ -78,9 +86,11 @@ export class QuestionnaireFormComponent extends EditableFormComponent<Questionna
   }
 
   private loadCategories() {
-    this.categoryService.getCategories(CategoryType.QUESTIONNAIRE).subscribe((categories => {
-      this.categories = categories;
-    }));
+    this.categoryService
+      .getCategories(CategoryType.QUESTIONNAIRE)
+      .subscribe((categories => {
+        this.categories = categories;
+      }));
   }
 
   get tags(): FormArray {
@@ -102,6 +112,10 @@ export class QuestionnaireFormComponent extends EditableFormComponent<Questionna
     return f1 && f2 && f1.id === f2.id;
   }
 
+  public compareByUuid(f1: any, f2: any) {
+    return f1 && f2 && f1.uuid === f2.uuid;
+  }
+
   public removeChip(index: number): void {
     if (index >= 0) {
       const tags = this.form.get('tags') as FormArray;
@@ -110,7 +124,9 @@ export class QuestionnaireFormComponent extends EditableFormComponent<Questionna
   }
 
   public addTag(libelle: string) {
+
     const tags = this.form.get('tags') as FormArray;
+
     tags.push(this.formBuilder.createTagControl(new Tag(libelle), false));
   }
 
@@ -139,12 +155,12 @@ export class QuestionnaireFormComponent extends EditableFormComponent<Questionna
   public viewQuestionsByQuestionnaire() {
     // this.openCategoryDialog();
     // this.questionnaireStore.unSelectAllElement();
-    this.questionnaireStore.selectElement(this.questionnaire, true);
+    this.questionnaireListStore.selectElement(this.questionnaire, true);
     this.router.navigate(['/questions/list']);
   }
 
   public nbSelectedQuestion(): number {
-    return this.questionStore.selectedSize();
+    return this.questionListStore.selectedSize();
   }
 
   public add(): void {
@@ -155,7 +171,7 @@ export class QuestionnaireFormComponent extends EditableFormComponent<Questionna
   public openCategoryDialog() {
     const config = new MatDialogConfig();
 
-    config.data = {category: new Category(CategoryType[CategoryType.QUESTIONNAIRE]) }
+    config.data = {category: new Category(CategoryType[CategoryType.QUESTIONNAIRE])}
     config.panelClass = 'my-full-screen-dialog';
     const dialogRef = this.dialog.open(CategoryDialogComponent, config);
     dialogRef.afterClosed().subscribe(q => {

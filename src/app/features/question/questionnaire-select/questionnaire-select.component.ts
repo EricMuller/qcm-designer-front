@@ -3,7 +3,7 @@ import {MatChip} from '@angular/material';
 import {Criteria} from '@app/features/qcm-rest-api/model/criteria';
 import {Questionnaire} from '@app/features/qcm-rest-api/model/questionnaire.model';
 import {Letter} from '@app/features/tag/tag-select/Letter';
-import {QuestionnaireStore} from '@app/features/stores/questionnaire-store.service';
+import {QuestionnaireListStore} from '@app/features/stores/questionnaire-list-store.service';
 
 
 @Component({
@@ -27,21 +27,21 @@ export class QuestionnaireSelectComponent implements OnInit {
   private onSelected = new EventEmitter<Questionnaire[]>();
 
 
-  constructor(private questionnaireStore: QuestionnaireStore) {
+  constructor(private questionnaireListStore: QuestionnaireListStore) {
 
-    this.questionnaireStore.selected$.subscribe((selected) => {
+    this.questionnaireListStore.selected$.subscribe((selected) => {
       this.selected = selected;
       this.onSelected.emit(selected);
     });
 
-    this.questionnaireStore.page$.subscribe((page) => {
+    this.questionnaireListStore.page$.subscribe((page) => {
       this.questionnaires = page.content;
       if (this.letters.length === 0) {
         this.buildLetters();
       }
     });
 
-    this.questionnaireStore.getPage(0, 100, 'title');
+    this.questionnaireListStore.getPage(0, 100, 'title');
   }
 
   ngOnInit() {
@@ -60,21 +60,21 @@ export class QuestionnaireSelectComponent implements OnInit {
   }
 
   public isSelectItem(tag: Questionnaire): boolean {
-    return this.questionnaireStore.isSelected(tag);
+    return this.questionnaireListStore.isSelected(tag);
   }
 
   public unSelectItem(tag: Questionnaire) {
-    this.questionnaireStore.selectElement(tag, false);
+    this.questionnaireListStore.selectElement(tag, false);
   }
 
   public selectItem(tag: Questionnaire) {
-    this.questionnaireStore.selectElement(tag, true);
+    this.questionnaireListStore.selectElement(tag, true);
   }
 
   public selectLetter(letter) {
     const criteria: Criteria[] = [new Criteria(letter, 'firstLetter')];
 
-    this.questionnaireStore.getPageByCriteria(criteria, 0, 100, 'title');
+    this.questionnaireListStore.getPageByCriteria(criteria, 0, 100, 'title');
   }
 
 }

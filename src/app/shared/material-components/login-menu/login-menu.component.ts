@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {KeycloakGuardService} from '@app/core/auth/keycloak-guard.service';
+import {KeycloakGuard} from '@app/core/auth/keycloak.guard';
 
 
 @Component({
@@ -10,7 +10,7 @@ import {KeycloakGuardService} from '@app/core/auth/keycloak-guard.service';
 })
 export class LoginMenuComponent implements OnInit {
 
-  constructor(private keycloakGuardService: KeycloakGuardService, private router: Router) {
+  constructor(private keycloakGuardService: KeycloakGuard, private router: Router) {
   }
 
   ngOnInit() {
