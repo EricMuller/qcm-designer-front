@@ -3,8 +3,6 @@ import {FormArray} from '@angular/forms';
 import {MatChipInputEvent, MatDialog, MatDialogConfig} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SetCurrentQuestionnaireAction} from '@app/app/state/set-current-questionnaire-action';
-import {QuestionnaireModel} from '@app/app/state/questionnaire-model';
-import {AppState, AppStateModel} from '@app/app/state/app-state.service';
 import {NotifierService} from '@app/core/notifications/simple-notifier.service';
 import {CategoryDialogComponent} from '@app/features/category/category-dialog/category-dialog.component';
 import {Category} from '@app/features/qcm-rest-api/model/category.model';
@@ -18,9 +16,8 @@ import {QuestionListStore} from '@app/features/stores/question-list-store.servic
 
 import {QuestionnaireListStore} from '@app/features/stores/questionnaire-list-store.service';
 import {EditableFormComponent} from '@app/shared/material-components/editable-form/editableFormComponent';
-import {Select, Store} from '@ngxs/store';
+import {Store} from '@ngxs/store';
 import {MdEditorOption} from 'ngx-markdown-editor';
-import {Observable} from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-questionnaire-form',
@@ -141,6 +138,7 @@ export class QuestionnaireFormComponent extends EditableFormComponent<Questionna
     this.form = this.formBuilder.createForm(this.questionnaire);
     this.toggleEdition(false);
     this.notifierService.notifySuccess(data.title, 2000);
+
   }
 
   protected onDeleteForm(t: Questionnaire) {

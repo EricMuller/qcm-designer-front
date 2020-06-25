@@ -4,6 +4,7 @@ import {Criteria} from '@app/features/qcm-rest-api/model/criteria';
 import {Entity} from '@app/features/qcm-rest-api/model/entity';
 import {Page} from '@app/features/qcm-rest-api/services/page';
 import {CriteriaStore} from '@app/features/stores/store-api';
+import {ArrayCallback} from '@app/shared/material-components/selectable-list/arrayCallback';
 import {BehaviorSubject, Observable, of, ReplaySubject, Subject} from 'rxjs';
 import {concatMap} from 'rxjs/operators';
 import {environment} from '../../../../environments/environment';
@@ -174,6 +175,11 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
           this.paginator.firstPage();
         }
       });
+  }
+
+  public applySelected(uuid: string, callback: ArrayCallback<T>) {
+    this.store.selected$.forEach(
+      (s) => callback(uuid, s));
   }
 
   public selectAll() {

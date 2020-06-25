@@ -53,7 +53,7 @@ import { environment } from '../environments/environment';
 export class AppModule {
 
   constructor(overlayContainer: OverlayContainer) {
-    overlayContainer.getContainerElement().classList.add('light-blue-theme');
+   overlayContainer.getContainerElement().classList.add('light-blue-theme');
   }
 
 }

@@ -18,6 +18,7 @@ export class QuestionnaireService {
 
   public getQuestionnaires(page?: number, size?: number, sort?: string): Observable<Page> {
     const requestUrl = `${this.endPoint.QUESTIONNAIRES}?size=${size}&page=${page}&sort=${sort}`;
+
     return this.http
       .get<Page>(requestUrl)
       .pipe(publishLast(), refCount());
@@ -32,6 +33,7 @@ export class QuestionnaireService {
       }
     }
     const requestUrl = `${this.endPoint.QUESTIONNAIRES}?size=${size}&page=${page}&sort=${sort}` + params;
+
     return this.http
       .get<Page>(requestUrl)
       .pipe(publishLast(), refCount());
@@ -42,6 +44,7 @@ export class QuestionnaireService {
   }
 
   public getQuestionnaireByUuid(uuid: string) {
+
     return this.http.get<Questionnaire>(this.endPoint.QUESTIONNAIRES + uuid);
   }
 
@@ -61,6 +64,10 @@ export class QuestionnaireService {
 
   public putQuestion(uuid: string, question: Question) {
     return this.http.put<Questionnaire>(this.endPoint.QUESTIONNAIRES + uuid + '/questions', question);
+  }
+
+  public deleteQuestionByUuid(uuid: string, uuidQuestion: string) {
+    return this.http.delete<Questionnaire>(this.endPoint.QUESTIONNAIRES + uuid + '/questions/' + uuidQuestion);
   }
 
 }

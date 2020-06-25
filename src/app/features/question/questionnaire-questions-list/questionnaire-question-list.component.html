@@ -1,0 +1,90 @@
+<div class="page-center">
+
+  <button fxShow.xs="false" id="replay-btn-selectable-list" mat-mini-fab (click)="list.refresh(true);" class="fab-bottom-up1"
+          matTooltip="{{'qcm.selectable-list.menu.refresh' | translate}}">
+    <mat-icon>replay</mat-icon>
+  </button>
+
+  <!--  <button fxShow.xs="false" toolbar-view mat-mini-fab (click)="filter=!filter;" class="fab-bottom-up1"-->
+  <!--          color="primary"-->
+  <!--          matTooltip="{{'qcm.questionnaire.menu.filter' | translate}}">-->
+
+  <!--    <mat-icon *ngIf="(questionListStore.criteriaSize$ | async )>0"-->
+  <!--              matBadge="{{questionListStore.criteriaSize$ | async}}" matBadgeColor="warn"-->
+  <!--              matBadgePosition="above after">filter_list-->
+  <!--    </mat-icon>-->
+  <!--    <span></span>-->
+  <!--    <mat-icon *ngIf="(questionListStore.criteriaSize$ | async)==0">filter_list</mat-icon>-->
+  <!--  </button>-->
+
+  <!--  create new-->
+  <button id="add-btn-selectable-list" mat-fab (click)="list.onCreateElement($event)"  class="fab-bottom"
+          matTooltip="{{'qcm.selectable-list.menu.new' | translate }}" [hidden]="filter" color="primary">
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <!-- show list-->
+  <button id="list-btn-selectable-list" mat-fab (click)="list.refresh(true);filter=!filter;" class="fab-bottom"
+          matTooltip="{{'qcm.selectable-list.menu.new' | translate }}" [hidden]="!filter" color="primary">
+    <mat-icon>list</mat-icon>
+  </button>
+
+  <!-- end desktop fab -->
+
+  <!--  show  filtre -->
+<!--  <div fxLayout fxlayout="column" fxLayoutAlign="center center" fxLayout.xs="column" [hidden]="!filter">-->
+<!--     <span>-->
+<!--      <h1>{{'qcm.question.filtre.title' |translate }}</h1>-->
+<!--      ({{'qcm.question.filtre.found' | translate:{'nb': list.totalElements} }})-->
+<!--    </span>-->
+<!--  </div>-->
+
+<!--  <div fxLayout fxLayoutAlign="center center" fxLayout.xs="column" [hidden]="!filter">-->
+<!--    <div>{{'qcm.tag-select.title' | translate}}:</div>-->
+<!--    <app-tag-select></app-tag-select>-->
+<!--    <div>{{'qcm.questionnaire-select.title' | translate}}:</div>-->
+<!--    <app-questionnaire-select></app-questionnaire-select>-->
+<!--  </div>-->
+  <!--  end show filtre -->
+
+
+  <div fxlayout [hidden]="filter">
+
+    <app-selectable-list #list [store]="questionListStore"
+                         [sortBy]="'id'"
+                         (created)="create()">
+
+      <div toolbar-view style="display: flex;">
+        <span *ngIf="!list.isSelectedMode()"
+              style="align-items: center "> {{ "qcm.questionnaire.question.list.title" | translate}} {{(currentQuestionnaire$ |async)?.title }}</span>
+        <span *ngIf="list.isSelectedMode()"
+              style="align-items: center ">{{ "qcm.questionnaire.question.selected.title" | translate }} {{(currentQuestionnaire$ |async)?.title }}</span>
+      </div>
+
+      <div toolbar-view class="spacer"></div>
+
+      <!--  start mobile-->
+      <button fxShow.gt-xs="false" mat-icon-button (click)="filter=!filter;"
+              matTooltip="{{'qcm.form.menu.filter' | translate}}">
+        <mat-icon *ngIf="(questionListStore.criteriaSize$ |async ) > 0"
+                  matBadge="{{(questionListStore.criteriaSize$ |async )}}"
+                  matBadgeColor="warn"
+                  matBadgePosition="above after">filter_list
+        </mat-icon>
+        <mat-icon *ngIf="(questionListStore.criteriaSize$ |async ) ==0">filter_list</mat-icon>
+      </button>
+      <!-- end mobile-->
+
+      <app-questionnaire-question-nav-list elements-view
+                                           [elements$]="questionListStore.elements$"></app-questionnaire-question-nav-list>
+
+      <app-questionnaire-question-nav-list selected-view
+                                           [elements$]="questionListStore.selected$"></app-questionnaire-question-nav-list>
+
+    </app-selectable-list>
+
+  </div>
+
+</div>
+
+

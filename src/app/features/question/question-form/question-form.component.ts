@@ -2,10 +2,9 @@ import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
 import {MatChipInputEvent, MatDialog, MatDialogConfig} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
-import {SetCurrentQuestionAction} from '@app/app/state/set-current-question-action';
-import {SetCurrentQuestionnaireAction} from '@app/app/state/set-current-questionnaire-action';
-import {QuestionnaireModel} from '@app/app/state/questionnaire-model';
 import {AppState} from '@app/app/state/app-state.service';
+import {QuestionnaireModel} from '@app/app/state/questionnaire-model';
+import {SetCurrentQuestionAction} from '@app/app/state/set-current-question-action';
 import {NotifierService} from '@app/core/notifications/simple-notifier.service';
 import {CategoryDialogComponent} from '@app/features/category/category-dialog/category-dialog.component';
 import {Category} from '@app/features/qcm-rest-api/model/category.model';
@@ -13,12 +12,13 @@ import {Question} from '@app/features/qcm-rest-api/model/question.model';
 import {Reponse} from '@app/features/qcm-rest-api/model/response.model';
 import {Tag} from '@app/features/qcm-rest-api/model/tag.model';
 import {CategoryService} from '@app/features/qcm-rest-api/services/category.service';
+import {QuestionnaireService} from '@app/features/qcm-rest-api/services/questionnaire.service';
 import {CategoryType} from '@app/features/qcm-rest-api/services/type.enum';
 import {QuestionListStore} from '@app/features/stores/question-list-store.service';
 
 import {EditableFormComponent} from '@app/shared/material-components/editable-form/editableFormComponent';
-import {Select, Store} from '@ngxs/store';
-import {Observable} from 'rxjs/internal/Observable';
+import {TranslateService} from '@ngx-translate/core';
+import {Store} from '@ngxs/store';
 
 import {QuestionFormBuilder} from './question-form-builder';
 
@@ -51,7 +51,6 @@ export class QuestionFormComponent extends EditableFormComponent<Question, strin
   public status = [];
   public good: boolean;
 
-  @Select(AppState.currentQuestionnaire) public currentQuestionnaire$: Observable<QuestionnaireModel>;
 
   constructor(protected   crudStore: QuestionListStore,
               protected   notifierService: NotifierService,
@@ -59,7 +58,9 @@ export class QuestionFormComponent extends EditableFormComponent<Question, strin
               private formBuilder: QuestionFormBuilder,
               private route: ActivatedRoute,
               private categoryService: CategoryService,
-              private dialog: MatDialog, private store: Store) {
+              private dialog: MatDialog, private store: Store,
+              private questionnaireService: QuestionnaireService,
+              private translate: TranslateService) {
     super(crudStore, notifierService, router);
     this.types = this.getQuestionTypesEnum();
     this.status = this.getStatusEnum();
@@ -69,7 +70,7 @@ export class QuestionFormComponent extends EditableFormComponent<Question, strin
       this.categories = data.categories;
       this.store.dispatch(new SetCurrentQuestionAction({uuid: this.question.uuid, title: this.question.type}));
     });
-   //  this.currentQuestionnaire$ = this.store.select(state => state.currentQuestionnaire);
+    //  this.currentQuestionnaire$ = this.store.select(state => state.currentQuestionnaire);
 
   }
 
@@ -79,6 +80,11 @@ export class QuestionFormComponent extends EditableFormComponent<Question, strin
   }
 
   ngAfterViewInit(): void {
+  }
+
+  public create() {
+      this.toggleEdition(true);
+      this.router.navigate(['/questions/0']);
   }
 
   private loadCategories() {
@@ -94,6 +100,7 @@ export class QuestionFormComponent extends EditableFormComponent<Question, strin
   }
 
   protected createForm(): void {
+
     this.form = this.formBuilder.createForm(this.question);
   }
 
@@ -106,7 +113,23 @@ export class QuestionFormComponent extends EditableFormComponent<Question, strin
     this.toggleEdition(false);
     this.question = data;
     this.createForm();
-    this.notifierService.notifySuccess(data.title, 2000);
+
+    this.notifierService.notifySuccess(this.translate.instant('qcm.question.form.messages.questionCreated'), 2000);
+
+    const q: QuestionnaireModel = this.store.selectSnapshot<QuestionnaireModel>(AppState.currentQuestionnaire);
+
+    if (q.uuid) {
+      this.questionnaireService.putQuestion(q.uuid, data)
+        .subscribe(
+          () => {
+            this.notifierService
+              .notifySuccess(this.translate.instant('qcm.question.form.messages.questionAdded') + q.title, 2000);
+            this.router.navigate(['/questions/' + this.question.uuid]);
+          }
+        );
+    }
+    this.router.navigate(['/questions/' + this.question.uuid]);
+
   }
 
   public onSelectResponse(event) {

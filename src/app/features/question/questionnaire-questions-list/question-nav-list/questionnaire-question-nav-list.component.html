@@ -1,0 +1,43 @@
+<mat-nav-list class="nav-list">
+  <!--(mouseover)='over(item)'-->
+
+  <mat-list-item class="list mat-elevation-z2 list-item" *ngFor="let item of elements$ |async as q; index as i"
+
+                 attr.entityId="questionId_{{item.uuid}}">
+
+    <button mat-icon-button matListAvatar (click)="setClickedRow(item)">
+      <mat-icon matListIcon *ngIf="!isSelected(item)">question_answer</mat-icon>
+      <mat-checkbox *ngIf="isSelected(item)" matListAvatar [checked]="isSelected(item)"></mat-checkbox>
+    </button>
+
+    <div  style="overflow: hidden">
+      <div><p class="cursor-pointer" [routerLink]="['/questions/'+ item.uuid ]"
+         style="overflow: hidden;white-space:nowrap;margin-bottom: 1px" matTooltip="{{item.question}}"> {{item.question}} </p></div>
+      <div>
+
+        <p style="overflow: hidden;white-space:nowrap;margin-bottom: 1px" class="md-caption">
+          <span fxShow.xs="false" *ngIf="item.status == 'TO_BE_VALIDATED'" class="label label-danger">{{item.status}}</span>
+          <span fxShow.xs="false" *ngIf="item.status == 'DRAFT'" class="label label-warning">{{item.status}}</span>
+          at {{item.dateCreation | date:'dd/MM/yyyy HH:mm'}}
+        </p></div>
+    </div>
+    <div class="spacer"></div>
+
+
+    <span fxShow.xs="false" *ngFor="let tag of item.tags" class="label label-info list-item-tag" (click)="swapTag(tag)">{{tag.libelle}}</span>
+
+    <button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="questionMenu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <!-- line menu -->
+    <mat-menu #questionMenu="matMenu" yPosition="below">
+      <button mat-menu-item [routerLink]="['/questions/'+ item.uuid ]">
+        <mat-icon>details</mat-icon>
+        Details
+      </button>
+    </mat-menu>
+
+  </mat-list-item>
+
+
+</mat-nav-list>

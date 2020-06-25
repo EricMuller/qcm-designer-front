@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {ClearCurrentQuestionnaireAction} from '@app/app/state/clear-current-questionnaire-action';
 import {NavigationModel} from '@app/app/state/navigation-model';
 import {QuestionModel} from '@app/app/state/question-model';
 import {QuestionnaireModel} from '@app/app/state/questionnaire-model';
@@ -50,9 +51,19 @@ export class AppState {
     return state.breadcrumb;
   }
 
+  @Action(ClearCurrentQuestionnaireAction)
+  clearCurrentQuestionnaireAction({getState, patchState}: StateContext<AppStateModel>) {
+    const state = getState();
+    patchState({
+      ...state,
+      currentQuestionnaire: null,
+      breadcrumb: []
+    });
+  }
+
 
   @Action(SetCurrentQuestionnaireAction)
-  currentQuestionnaire({getState, patchState}: StateContext<AppStateModel>, {payload}: SetCurrentQuestionnaireAction) {
+  currentQuestionnaireAction({getState, patchState}: StateContext<AppStateModel>, {payload}: SetCurrentQuestionnaireAction) {
     const state = getState();
     patchState({
       ...state,

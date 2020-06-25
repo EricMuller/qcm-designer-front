@@ -1,39 +1,37 @@
 import {Injectable} from '@angular/core';
+import {AppState} from '@app/app/state/app-state.service';
+import {QuestionnaireModel} from '@app/app/state/questionnaire-model';
 import {Criteria} from '@app/features/qcm-rest-api/model/criteria';
 import {Question} from '@app/features/qcm-rest-api/model/question.model';
 import {Page} from '@app/features/qcm-rest-api/services/page';
 import {QuestionService} from '@app/features/qcm-rest-api/services/question.service';
-import {QuestionnaireListStore} from '@app/features/stores/questionnaire-list-store.service';
+import {QuestionnaireService} from '@app/features/qcm-rest-api/services/questionnaire.service';
 import {SelectStoreAdapter} from '@app/features/stores/selection-store';
 import {CriteriaStore, CrudStore} from '@app/features/stores/store-api';
-import {TagListStore} from '@app/features/stores/tag-list-store.service';
+import {Select, Store} from '@ngxs/store';
 import {Observable} from 'rxjs';
 import {mergeMap, publishLast, refCount} from 'rxjs/operators';
 
 
 @Injectable()
-export class QuestionListStore extends SelectStoreAdapter<Question> implements CriteriaStore<Question>, CrudStore<Question, string> {
+export class QuestionnaireQuestionListStore extends SelectStoreAdapter<Question>
+  implements CriteriaStore<Question>, CrudStore<Question, string> {
 
-  constructor(private questionService: QuestionService, private tagStore: TagListStore,
-              private questionnaireListStore: QuestionnaireListStore) {
+  @Select(AppState.currentQuestionnaire) public currentQuestionnaire$: Observable<QuestionnaireModel>;
 
+  constructor(private questionService: QuestionService, private questionnaireService: QuestionnaireService, private store: Store) {
     super();
 
-    this.tagStore.selected$.subscribe((tags) => {
-      this.deleteCriteriabyName('tag_uuid');
-      for (const tag of tags) {
-        this.addCriteria(new Criteria(tag.uuid.toString(), 'tag_uuid'));
-      }
-    });
-
-
-    this.questionnaireListStore.selected$
-      .subscribe((questionnaires) => {
-        this.deleteCriteriabyName('questionnaire_uuid');
-        for (const tag of questionnaires) {
-          this.addCriteria(new Criteria(tag.uuid.toString(), 'questionnaire_uuid'));
+    this
+      .currentQuestionnaire$
+      .subscribe((q) => {
+          this.deleteCriteriabyName('questionnaire_uuid');
+          if (q) {
+            this.addCriteria(new Criteria(q.uuid, 'questionnaire_uuid'));
+          }
         }
-      });
+      )
+    ;
   }
 
   getElement(uuid: string): Observable<Question> {
@@ -50,8 +48,11 @@ export class QuestionListStore extends SelectStoreAdapter<Question> implements C
   }
 
   deleteElement(question: Question): Observable<Question> {
-    return this.questionService
-      .deleteQuestionByUuid(question.uuid)
+
+    const q = this.store.selectSnapshot<QuestionnaireModel>(AppState.currentQuestionnaire);
+
+    return this.questionnaireService
+      .deleteQuestionByUuid(q.uuid, question.uuid)
       .pipe(
         mergeMap((data) => {
           return this.deletePageElement(question);
@@ -59,9 +60,11 @@ export class QuestionListStore extends SelectStoreAdapter<Question> implements C
   }
 
   deleteElements(questions: Question[]) {
+
+    const q = this.store.selectSnapshot<QuestionnaireModel>(AppState.currentQuestionnaire);
+
     for (const question of questions) {
-      this.questionService
-        .deleteQuestionByUuid(question.uuid)
+      this.questionnaireService.deleteQuestionByUuid(q.uuid, question.uuid)
         .subscribe((data) => {
             return this.deletePageElement(question);
           }
@@ -92,8 +95,6 @@ export class QuestionListStore extends SelectStoreAdapter<Question> implements C
 
   clearCriteria() {
     // check constructor
-    this.tagStore.unSelectAllElement();
-    this.questionnaireListStore.unSelectAllElement();
   }
 
 }

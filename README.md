@@ -2,15 +2,14 @@
 
 [![Build Status](https://travis-ci.com/EricMuller/qcm-angular-frontend.svg?branch=master)](https://travis-ci.com/EricMuller/qcm-angular-frontend)[![License](http://img.shields.io/:license-mit-blue.svg)](https://opensource.org/licenses/mit-license.php)[![Known Vulnerabilities](https://snyk.io/test/github/EricMuller/qcm-angular-frontend/badge.svg)](https://snyk.io/test/github/EricMuller/qcm-angular-frontend)
   
-
 this is a sample QCM Angular Frontend
 
 You can also:
-  
-  - Create some Questions.
-  - Create some Questionnaires. 
-  - Create some Tags.
-  - Upload Questions from json files.
+    - Create some Questions.
+    - Create some Questionnaires. 
+    - Create some Categories.
+    - Export as WORD,PDF
+    - Import Questionnaires from file(s)
 
 ### Quality Gate
 
@@ -25,6 +24,8 @@ Qcm Angular Frontend uses a number of open source projects to work properly:
 * [Angular] - Angular is a platform for building mobile and desktop web applications
 * [Angular Material]  - provides  modern UI components that work across the web, mobile and desktop
 * [ngx-translate] - NGX-Translate is an internationalization library for Angular  
+* [ngXs] -  NGXS is a state management pattern + library for Angular
+* [qcm-rest-api] -  qcm-rest-api is a sample QCM Rest API
 
 
 ### Continuous integration
@@ -42,7 +43,6 @@ Qcm Angular Frontend uses a number of open source projects to work properly:
 ### Todos
 
  - Write more features
- - use ngRx
   
 ### License
 

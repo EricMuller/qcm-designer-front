@@ -15,12 +15,10 @@ import {MaterialModule} from '@app/shared/material/material.module';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 import {LMarkdownEditorModule} from 'ngx-markdown-editor';
-import {QuestionnaireQuestionListComponent} from './question-list/question-list.component';
 import {QuestionnaireDialogComponent} from './questionnaire-dialog/questionnaire-dialog.component';
 import {QuestionnaireFormComponent} from './questionnaire-form/questionnaire-form.component';
 import {QuestionnaireListComponent} from './questionnaire-list/questionnaire-list.component';
 import {QuestionnaireNavListComponent} from './questionnaire-list/questionnaire-nav-list/questionnaire-nav-list.component';
-import {QuestionnaireQuestionsComponent} from './questionnaire-questions/questionnaire-questions.component';
 import {SearchStore} from './services/questionnaire-search-store.service';
 
 @NgModule({
@@ -41,10 +39,8 @@ import {SearchStore} from './services/questionnaire-search-store.service';
   declarations: [
     QuestionnaireListComponent,
     QuestionnaireDialogComponent,
-    QuestionnaireQuestionListComponent,
     QuestionnaireNavListComponent,
-    QuestionnaireFormComponent,
-    QuestionnaireQuestionsComponent,
+    QuestionnaireFormComponent
   ],
   entryComponents: [QuestionnaireDialogComponent, CategoryDialogComponent],
   providers: [SearchStore, QuestionnaireListStore, TagListStore

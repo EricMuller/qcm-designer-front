@@ -3,8 +3,9 @@ import {AfterContentInit, Component, Input, OnDestroy, OnInit, ViewChild} from '
 import {MatSidenav} from '@angular/material';
 import {NavigationExtras, Router} from '@angular/router';
 import {AppState} from '@app/app/state/app-state.service';
+import {ClearCurrentQuestionnaireAction} from '@app/app/state/clear-current-questionnaire-action';
 import {NavigationModel} from '@app/app/state/navigation-model';
-import {QuestionnaireModel} from '@app/app/state/questionnaire-model';
+import {SetCurrentQuestionnaireAction} from '@app/app/state/set-current-questionnaire-action';
 import {KeycloakGuard} from '@app/core/auth/keycloak.guard';
 import {TranslateService} from '@ngx-translate/core';
 import {Select, Store} from '@ngxs/store';
@@ -82,6 +83,10 @@ export class SideNavLayoutComponent implements OnInit, OnDestroy, AfterContentIn
           })
       );
     console.log('SideNavLayoutComponent.ngAfterContentInit ok');
+  }
+
+  clear() {
+    this.store.dispatch(new ClearCurrentQuestionnaireAction());
   }
 
   checkScreen(): void {

@@ -15,7 +15,10 @@ export class QuestionResolver {
     if (route.params.uuid && route.params.uuid !== '0') {
       return this.questionService.getQuestionByUuid(route.params.uuid);
     } else {
-      return of(new Question());
+      const question = new Question();
+      question.type = 'FREE_TEXT';
+      question.status = 'DRAFT';
+      return of(question);
     }
   }
 }

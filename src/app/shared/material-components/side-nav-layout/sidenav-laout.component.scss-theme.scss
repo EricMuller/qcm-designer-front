@@ -5,11 +5,6 @@
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
 
-  $background: map-get($theme, background);
-  $foreground: map-get($theme, foreground);
-  background: mat-color($background, app-bar);
-  color: mat-color($foreground, text);
-
   mat-sidenav-container {
 
     mat-toolbar {
@@ -29,10 +24,10 @@
 
       button {
         &.active {
-          //color: mat-color($accent, default-contrast);
+          color: mat-color($primary, default-contrast);
           background-color: mat-color($primary);
           margin-right: 2px;
-         // clip-path: polygon(0 0, 0 100%, 100% 50%);
+         /* clip-path: polygon(0 0, 0 100%, 100% 50%);*/
         }
 
       }

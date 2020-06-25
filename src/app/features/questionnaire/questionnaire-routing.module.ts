@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {AppGuard} from '@app/shared/auth/app-guard.service';
-import {QuestionnaireQuestionListComponent} from '@app/features/questionnaire/question-list/question-list.component';
+import {QuestionnaireQuestionListComponent} from '@app/features/question/questionnaire-questions-list/questionnaire-question-list.component';
 import {QuestionnaireFormComponent} from '@app/features/questionnaire/questionnaire-form/questionnaire-form.component';
 import {QuestionnaireListComponent} from '@app/features/questionnaire/questionnaire-list/questionnaire-list.component';
 import {QuestionnaireModule} from '@app/features/questionnaire/questionnaire.module';
@@ -9,6 +8,7 @@ import {QuestionnaireCategoryResolver} from '@app/features/questionnaire/resolve
 import {QuestionnaireResolver} from '@app/features/questionnaire/resolvers/questionnaire-resolver.service';
 import {QuestionnairesResolver} from '@app/features/questionnaire/resolvers/questionnaires-resolver.service';
 import {QuestionsQuestionnaireResolver} from '@app/features/questionnaire/resolvers/questions-questionnaire-resolver.service';
+import {AppGuard} from '@app/shared/auth/app-guard.service';
 
 const routes: Routes = [
   {
@@ -18,7 +18,7 @@ const routes: Routes = [
     path: ':uuid/questions', component: QuestionnaireQuestionListComponent, canActivate: [AppGuard],
     resolve: {
       questionnaire: QuestionnaireResolver,
-      questions: QuestionsQuestionnaireResolver
+      // questions: QuestionsQuestionnaireResolver
     }
   },
   {

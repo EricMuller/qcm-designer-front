@@ -13,8 +13,8 @@
   <!--      <mat-icon *ngIf="(questionStore.criteriaSize$ |async ) ==0">filter_list</mat-icon>-->
   <!--    </button>-->
   <!--  </div>-->
-  <!--  start desktop fab -->
 
+  <!--  start desktop fab -->
   <button fxShow.xs="false" id="replay-btn-selectable-list" mat-mini-fab (click)="list.refresh(true);"
           class="fab-bottom-up2"
           matTooltip="{{'qcm.selectable-list.menu.refresh' | translate}}">
@@ -38,6 +38,7 @@
           matTooltip="{{'qcm.selectable-list.menu.new' | translate }}" [hidden]="filter">
     <mat-icon>add</mat-icon>
   </button>
+
   <!-- show list-->
   <button id="list-btn-selectable-list" mat-fab (click)="list.refresh(true);filter=!filter;" color="primary"
           class="fab-bottom"
@@ -78,7 +79,8 @@
       </div>
 
       <div toolbar-view class="spacer"></div>
-
+      <button mat-icon-button *ngIf="list.modeSelection$ |async" (click)="addToQuestionnaire(uuid,selected)" matTooltip="{{ 'qcm.question.list.addQuestionnaire' | translate}}"
+      ><mat-icon>library_add</mat-icon> </button>
       <!--  start mobile-->
       <button fxShow.gt-xs="false" mat-icon-button (click)="filter=!filter;"
               matTooltip="{{'qcm.form.menu.filter' | translate}}">

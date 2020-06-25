@@ -101,6 +101,7 @@ export class SelectStoreAdapter<T extends Entity> implements ListSelectStore<T> 
   }
 
   selectElement(q: T, select: boolean) {
+
     const itemIndex = this.selected.findIndex(item => item.uuid === q.uuid);
     if (select && itemIndex === -1) {
       this.selected.push(q);
