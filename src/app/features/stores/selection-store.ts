@@ -112,9 +112,29 @@ export class SelectStoreAdapter<T extends Entity> implements ListSelectStore<T> 
         this.selected.splice(itemIndex, 1);
         this.selectedSubject.next(this.selected);
         this.selectedSizeSubject.next(this.selected.length);
+      } else {
+        console.error('not found ' + q.uuid);
       }
     }
+
   }
+
+  updateElement(q: T) {
+    let itemIndex = this.selected.findIndex(item => item.uuid === q.uuid);
+    if (itemIndex !== -1) {
+      this.selected[itemIndex] = q;
+      this.selectedSubject.next(this.selected);
+      this.selectedSizeSubject.next(this.selected.length);
+
+      itemIndex = this.page.content.findIndex(item => item.uuid === q.uuid);
+      if (itemIndex !== -1) {
+        this.page.content[itemIndex] = q;
+        this.pageSubject.next(this.page);
+      }
+
+    }
+  }
+
 
   isSelected(q: T): boolean {
     return q ? this.selected.findIndex(item => item.uuid === q.uuid) !== -1 : false;
@@ -125,7 +145,9 @@ export class SelectStoreAdapter<T extends Entity> implements ListSelectStore<T> 
   }
 
   unSelectAllElement() {
-    this.selected.forEach((e) => this.selectElement(e, false));
+    this.selected = [];
+    this.selectedSubject.next(this.selected);
+    this.selectedSizeSubject.next(this.selected.length);
   }
 
 }

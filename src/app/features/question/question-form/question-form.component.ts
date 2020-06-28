@@ -8,6 +8,8 @@ import {SetCurrentQuestionAction} from '@app/app/state/set-current-question-acti
 import {NotifierService} from '@app/core/notifications/simple-notifier.service';
 import {CategoryDialogComponent} from '@app/features/category/category-dialog/category-dialog.component';
 import {Category} from '@app/features/qcm-rest-api/model/category.model';
+import {QuestionType} from '@app/features/qcm-rest-api/model/enums/QuestionType';
+import {ValidationStatus} from '@app/features/qcm-rest-api/model/enums/ValidationStatus';
 import {Question} from '@app/features/qcm-rest-api/model/question.model';
 import {Reponse} from '@app/features/qcm-rest-api/model/response.model';
 import {Tag} from '@app/features/qcm-rest-api/model/tag.model';
@@ -20,20 +22,9 @@ import {EditableFormComponent} from '@app/shared/material-components/editable-fo
 import {TranslateService} from '@ngx-translate/core';
 import {Store} from '@ngxs/store';
 
+
 import {QuestionFormBuilder} from './question-form-builder';
 
-enum Status {
-  DRAFT = 'Draft',
-  TO_BE_VALIDATED = ' To Validate',
-  VALIDATED = 'Validated'
-}
-
-enum QuestionType {
-  FREE_TEXT = 'Free Text',
-  MULTIPLE_CHOICE = 'Multiple Choice',
-  MULTIPLE_ANSWER = 'Multiple Answer',
-  TRUE_FALSE = 'True/False',
-}
 
 @Component({
   selector: 'app-question-form',
@@ -60,31 +51,30 @@ export class QuestionFormComponent extends EditableFormComponent<Question, strin
               private categoryService: CategoryService,
               private dialog: MatDialog, private store: Store,
               private questionnaireService: QuestionnaireService,
-              private translate: TranslateService) {
-    super(crudStore, notifierService, router);
+              protected translateService: TranslateService) {
+    super(crudStore, notifierService, router, translateService);
     this.types = this.getQuestionTypesEnum();
     this.status = this.getStatusEnum();
-    this.edition = route.snapshot.params.uuid <= 0;
     this.route.data.subscribe(data => {
       this.question = data.question;
       this.categories = data.categories;
       this.store.dispatch(new SetCurrentQuestionAction({uuid: this.question.uuid, title: this.question.type}));
+      this.createForm();
+      this.toggleEdition(route.snapshot.params.uuid <= 0);
     });
     //  this.currentQuestionnaire$ = this.store.select(state => state.currentQuestionnaire);
-
   }
 
   ngOnInit(): void {
-    this.createForm();
-    this.toggleEdition(this.edition);
+
   }
 
   ngAfterViewInit(): void {
+
   }
 
   public create() {
-      this.toggleEdition(true);
-      this.router.navigate(['/questions/0']);
+    this.router.navigate(['/questions/0']);
   }
 
   private loadCategories() {
@@ -114,7 +104,7 @@ export class QuestionFormComponent extends EditableFormComponent<Question, strin
     this.question = data;
     this.createForm();
 
-    this.notifierService.notifySuccess(this.translate.instant('qcm.question.form.messages.questionCreated'), 2000);
+    this.notifierService.notifySuccess(this.translateService.instant('qcm.question.form.messages.questionCreated'), 2000);
 
     const q: QuestionnaireModel = this.store.selectSnapshot<QuestionnaireModel>(AppState.currentQuestionnaire);
 
@@ -123,7 +113,7 @@ export class QuestionFormComponent extends EditableFormComponent<Question, strin
         .subscribe(
           () => {
             this.notifierService
-              .notifySuccess(this.translate.instant('qcm.question.form.messages.questionAdded') + q.title, 2000);
+              .notifySuccess(this.translateService.instant('qcm.question.form.messages.questionAdded') + q.title, 2000);
             this.router.navigate(['/questions/' + this.question.uuid]);
           }
         );
@@ -188,7 +178,7 @@ export class QuestionFormComponent extends EditableFormComponent<Question, strin
     const keys = Object.keys(QuestionType);
     const types = [];
     keys.map(Key => {
-      console.log(`color key = ${Key}, value = ${QuestionType[Key]}`);
+      console.log(`type key = ${Key}, value = ${QuestionType[Key]}`);
       const type = {'id': Key, 'name': QuestionType[Key]};
       types.push(type);
     });
@@ -196,10 +186,10 @@ export class QuestionFormComponent extends EditableFormComponent<Question, strin
   }
 
   private getStatusEnum(): any[] {
-    const keys = Object.keys(Status);
+    const keys = Object.keys(ValidationStatus);
     const status = [];
     keys.map(Key => {
-      const type = {'id': Key, 'name': Status[Key]};
+      const type = {'id': Key, 'name': ValidationStatus[Key]};
       status.push(type);
     });
     return status;

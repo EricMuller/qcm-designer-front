@@ -11,10 +11,19 @@
                     [checked]="isSelected(questionnaire)"></mat-checkbox>
     </button>
 
-    <p class="cursor-pointer" [routerLink]="['/questionnaires/'+ questionnaire.uuid +'/questions']"
-       matTooltip="{{questionnaire.title}}" style="overflow: hidden;white-space:nowrap;">
-      {{questionnaire.title}}
-    </p>
+    <div style="overflow: hidden">
+      <div>
+        <p class="cursor-pointer" [routerLink]="['/questionnaires/'+ questionnaire.uuid +'/questions']"
+         matTooltip="{{questionnaire.title}}" style="overflow: hidden;white-space:nowrap;margin-bottom: 1px">
+        {{questionnaire.title}}</p>
+      </div>
+      <div>
+        <p style="overflow: hidden;white-space:nowrap;margin-bottom: 1px" class="md-caption">
+
+          at {{questionnaire.dateCreation | date:'dd/MM/yyyy HH:mm'}}
+        </p>
+      </div>
+    </div>
 
     <div class="spacer"></div>
     <!--  start destktop -->
@@ -22,6 +31,9 @@
           class="label label-danger"> {{questionnaire.category?.libelle}}</span>
     <span fxShow.xs="false" *ngFor="let tag of questionnaire.tags" class="label label-info list-item-tag"
           (click)="swapTag(tag)">{{tag.libelle}}</span>
+
+    <span fxShow.xs="false" *ngIf="questionnaire.status == 'TO_BE_VALIDATED'"   class="label label-grey">{{'qcm.status.id.'+questionnaire.status |translate }}</span>
+    <span fxShow.xs="false" *ngIf="questionnaire.status == 'DRAFT'" class="label label-grey">{{'qcm.status.id.'+questionnaire.status |translate }}</span>
 
     <span *ngIf="questionnaire.published" class="label"> <mat-icon color="primary">public</mat-icon></span>
     <span *ngIf="!questionnaire.published" class="label_off"> <mat-icon>public_off</mat-icon></span>

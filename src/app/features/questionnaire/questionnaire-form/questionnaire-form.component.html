@@ -152,10 +152,20 @@
                placeholder="{{'qcm.questionnaire.form.input.modification.placeholder' |translate}}" readonly>
       </mat-form-field>
 
+      <!--status -->
+      <div fxLayout='row'>
+        <mat-form-field fxFlex="100%" fxFlex.gt-xs="40%">
+          <mat-select formControlName="status" placeholder="Status">
+            <mat-option *ngFor="let s of status"
+                        [value]="s.id">{{ 'qcm.status.id.' + s.id | translate}}</mat-option>
+            <mat-error *ngIf="form.get('status').hasError('required')">field required</mat-error>
+          </mat-select>
+        </mat-form-field>
+      </div>
 
-        <mat-checkbox  formControlName="published"  matInput *ngIf="questionnaire.uuid">
+      <mat-checkbox  formControlName="published"  matInput *ngIf="questionnaire.uuid">
                 {{'qcm.questionnaire.form.input.published.placeholder' |translate}}
-        </mat-checkbox>
+      </mat-checkbox>
 
 
     </div>

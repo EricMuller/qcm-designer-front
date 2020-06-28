@@ -3,7 +3,7 @@ import {Inject, Injectable} from '@angular/core';
 import {Criteria} from '@app/features/qcm-rest-api/model/criteria';
 import {QCM_API_ENDPOINT_TOKEN, QcmApiEndPoint} from '@app/features/qcm-rest-api/qcm-api-end-point';
 import {Observable} from 'rxjs';
-import {Question} from '../model/question.model';
+import {Question, QuestionPatch} from '../model/question.model';
 import {Page} from './page';
 
 
@@ -16,7 +16,6 @@ export class QuestionService {
   public getQuestionByUuid(questionUuid: string): Observable<Question> {
     return this.http.get<Question>(this.endPoint.QUESTIONS + questionUuid);
   }
-
 
 
   public getQuestionsByCriteria(criteria: Criteria[], page?: number, size?: number, sort?: string): Observable<Page> {
@@ -55,6 +54,10 @@ export class QuestionService {
 
   public putQuestion(q: Question) {
     return this.http.put<Question>(this.endPoint.QUESTIONS, q);
+  }
+
+  public patchQuestion(uuid: string, questionPatch: QuestionPatch){
+    return this.http.patch<Question>(this.endPoint.QUESTIONS + uuid, questionPatch);
   }
 
 }

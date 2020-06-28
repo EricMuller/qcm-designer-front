@@ -34,7 +34,7 @@ export class QuestionnaireNavListComponent implements OnInit {
     this.tagStore.swapElement(tag);
   }
 
-  public setClickedRow = function(questionnaire: Questionnaire) {
+  public setClickedRow = function (questionnaire: Questionnaire) {
     this.questionnaireListStore.swapElement(questionnaire);
   };
 
@@ -45,7 +45,7 @@ export class QuestionnaireNavListComponent implements OnInit {
         if (type === 'json') {
           type = 'txt';
         }
-        this.downLoadFile(data, questionnaire.title + '.' + type);
+        this.downLoadFile(data, questionnaire.title + '-' + questionnaire.status + '.' + type);
       });
   }
 

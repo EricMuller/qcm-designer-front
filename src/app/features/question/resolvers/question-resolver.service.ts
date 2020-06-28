@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot} from '@angular/router';
+import {QuestionTypeFreeText} from '@app/features/qcm-rest-api/model/enums/QuestionType';
+import {ValidationStatusDraft} from '@app/features/qcm-rest-api/model/enums/ValidationStatus';
 import {Question} from '@app/features/qcm-rest-api/model/question.model';
 import {QuestionService} from '@app/features/qcm-rest-api/services/question.service';
 import {Observable, of} from 'rxjs';
@@ -16,8 +18,9 @@ export class QuestionResolver {
       return this.questionService.getQuestionByUuid(route.params.uuid);
     } else {
       const question = new Question();
-      question.type = 'FREE_TEXT';
-      question.status = 'DRAFT';
+      question.type = QuestionTypeFreeText;
+      question.status = ValidationStatusDraft;
+      debugger
       return of(question);
     }
   }

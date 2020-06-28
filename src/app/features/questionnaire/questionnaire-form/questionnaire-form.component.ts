@@ -6,6 +6,7 @@ import {SetCurrentQuestionnaireAction} from '@app/app/state/set-current-question
 import {NotifierService} from '@app/core/notifications/simple-notifier.service';
 import {CategoryDialogComponent} from '@app/features/category/category-dialog/category-dialog.component';
 import {Category} from '@app/features/qcm-rest-api/model/category.model';
+import {ValidationStatus} from '@app/features/qcm-rest-api/model/enums/ValidationStatus';
 import {Questionnaire} from '@app/features/qcm-rest-api/model/questionnaire.model';
 import {Tag} from '@app/features/qcm-rest-api/model/tag.model';
 import {CategoryService} from '@app/features/qcm-rest-api/services/category.service';
@@ -16,8 +17,10 @@ import {QuestionListStore} from '@app/features/stores/question-list-store.servic
 
 import {QuestionnaireListStore} from '@app/features/stores/questionnaire-list-store.service';
 import {EditableFormComponent} from '@app/shared/material-components/editable-form/editableFormComponent';
+import {TranslateService} from '@ngx-translate/core';
 import {Store} from '@ngxs/store';
 import {MdEditorOption} from 'ngx-markdown-editor';
+
 
 @Component({
   selector: 'app-questionnaire-form',
@@ -30,6 +33,7 @@ export class QuestionnaireFormComponent extends EditableFormComponent<Questionna
   public questionnaire: Questionnaire;
 
   public categories: Category[];
+  public status = [];
   public description: string;
 
   public date: Date;
@@ -56,9 +60,10 @@ export class QuestionnaireFormComponent extends EditableFormComponent<Questionna
               protected questionListStore: QuestionListStore, private dialog: MatDialog,
               private categoryService: CategoryService,
               private tagService: TagService, private formBuilder: QuestionnaireFormBuilder,
-              private store: Store) {
-    super(questionnaireListStore, notifierService, router);
+              private store: Store, protected translateService: TranslateService) {
+    super(questionnaireListStore, notifierService, router, translateService);
     this.edition = route.snapshot.params.uuid <= 0;
+    this.status = this.getStatusEnum();
     this.route.data.subscribe(data => {
       this.questionnaire = data.questionnaire;
       this.description = this.questionnaire.description;
@@ -88,6 +93,16 @@ export class QuestionnaireFormComponent extends EditableFormComponent<Questionna
       .subscribe((categories => {
         this.categories = categories;
       }));
+  }
+
+  private getStatusEnum(): any[] {
+    const keys = Object.keys(ValidationStatus);
+    const status = [];
+    keys.map(Key => {
+      const type = {'id': Key, 'name': ValidationStatus[Key]};
+      status.push(type);
+    });
+    return status;
   }
 
   get tags(): FormArray {

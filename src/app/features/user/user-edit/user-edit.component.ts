@@ -6,6 +6,7 @@ import {NotifierService} from '@app/core/notifications/simple-notifier.service';
 import {UserStore} from '@app/features/stores/user-store.service';
 import {UserFormBuilder} from '@app/features/user/user-edit/user-form-builder';
 import {EditableFormComponent} from '@app/shared/material-components/editable-form/editableFormComponent';
+import {TranslateService} from '@ngx-translate/core';
 
 
 @Component({
@@ -26,8 +27,8 @@ export class UserEditComponent extends EditableFormComponent<User, number> imple
               protected notifierService: NotifierService,
               private route: ActivatedRoute,
               private userFormBuilder: UserFormBuilder,
-              protected router: Router) {
-    super(crudStore, notifierService, router);
+              protected router: Router, protected translateService: TranslateService) {
+    super(crudStore, notifierService, router, translateService);
     this.route.data.subscribe(data => {
       this.user = data.user;
       this.createForm();

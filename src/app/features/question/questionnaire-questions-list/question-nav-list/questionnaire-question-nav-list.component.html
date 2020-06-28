@@ -14,17 +14,21 @@
       <div><p class="cursor-pointer" [routerLink]="['/questions/'+ item.uuid ]"
          style="overflow: hidden;white-space:nowrap;margin-bottom: 1px" matTooltip="{{item.question}}"> {{item.question}} </p></div>
       <div>
-
-        <p style="overflow: hidden;white-space:nowrap;margin-bottom: 1px" class="md-caption">
-          <span fxShow.xs="false" *ngIf="item.status == 'TO_BE_VALIDATED'" class="label label-danger">{{item.status}}</span>
-          <span fxShow.xs="false" *ngIf="item.status == 'DRAFT'" class="label label-warning">{{item.status}}</span>
-          at {{item.dateCreation | date:'dd/MM/yyyy HH:mm'}}
-        </p></div>
+<!--        <p style="overflow: hidden;white-space:nowrap;margin-bottom: 1px" class="md-caption">-->
+<!--          <span fxShow.xs="false" *ngIf="item.status == 'TO_BE_VALIDATED'" class="label label-danger">{{item.status}}</span>-->
+<!--          <span fxShow.xs="false" *ngIf="item.status == 'DRAFT'" class="label label-warning">{{item.status}}</span>-->
+<!--          at {{item.dateCreation | date:'dd/MM/yyyy HH:mm'}}-->
+<!--        </p>-->
+      </div>
     </div>
     <div class="spacer"></div>
 
-
+    <p fxShow.xs="false"  style="overflow: hidden;white-space:nowrap;margin-bottom: 1px" class="md-caption">
+      {{item.dateCreation | date:'dd/MM/yy HH:mm'}}
+    </p>
     <span fxShow.xs="false" *ngFor="let tag of item.tags" class="label label-info list-item-tag" (click)="swapTag(tag)">{{tag.libelle}}</span>
+    <span fxShow.xs="false" *ngIf="item.status == 'TO_BE_VALIDATED'" class="label label-grey">{{'qcm.status.id.'+item.status |translate }}</span>
+    <span fxShow.xs="false" *ngIf="item.status == 'DRAFT'" class="label label-grey">{{'qcm.status.id.'+item.status |translate }}</span>
 
     <button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="questionMenu">
       <mat-icon>more_vert</mat-icon>

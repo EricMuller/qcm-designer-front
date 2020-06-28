@@ -69,7 +69,7 @@ export class AppState {
       ...state,
       currentQuestionnaire: payload,
       breadcrumb: [{link: '/questionnaires/' + payload.uuid, label: 'Questionnaire ' + payload.title},
-        {link: '/questionnaires/' + payload.uuid + '/questions', label: 'Questions ' + payload.title}
+        {link: '/questionnaires/' + payload.uuid + '/questions', label: 'Questions'}
       ]
     });
   }

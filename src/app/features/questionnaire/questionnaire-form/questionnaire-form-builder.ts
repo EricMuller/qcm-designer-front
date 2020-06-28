@@ -20,7 +20,8 @@ export class QuestionnaireFormBuilder {
       published: new FormControl({value: questionnaire.published, disabled: true}),
       tags: this.createTagsControl(questionnaire, true),
       dateCreation: new FormControl({value: new Date(questionnaire.dateCreation), disabled: true}),
-      dateModification: new FormControl({value: new Date(questionnaire.dateModification), disabled: true})
+      dateModification: new FormControl({value: new Date(questionnaire.dateModification), disabled: true}),
+      status: new FormControl({value: questionnaire.status, disabled: true}, Validators.required),
     });
   }
 

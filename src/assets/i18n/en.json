@@ -34,10 +34,21 @@
   "qcm.question.form.input.type.id.MULTIPLE_CHOICE": "Choix Multiple",
   "qcm.question.form.input.type.id.TRUE_FALSE": "Vrai/Faux",
 
-  "qcm.question.form.input.status.id.DRAFT" : "Brouillon" ,
-  "qcm.question.form.input.status.id.TO_BE_VALIDATED" :"A Valider" ,
-  "qcm.question.form.input.status.id.REJECTED": "Rejeté",
-  "qcm.question.form.input.status.id.VALIDATED": "Validé",
+  "qcm.status.id." : "Brouillon" ,
+  "qcm.status.id.DRAFT" : "Brouillon" ,
+  "qcm.status.id.TO_BE_VALIDATED" :"A Valider" ,
+  "qcm.status.id.REJECTED": "Rejeté",
+  "qcm.status.id.VALIDATED": "Validé",
+
+  "qcm.upload.status.id." : "Telechargé" ,
+  "qcm.upload.status.id.CREATED" : "Telechargé" ,
+  "qcm.upload.status.id.REJECTED" :"Rejeté" ,
+  "qcm.upload.status.id.DONE": "Importé",
+  "qcm.upload.status.id.RUNNING": "Import en cours",
+
+  "qcm.upload.type.id." : "Fichier inconnu" ,
+  "qcm.upload.type.id.EXPORT_JSON" : "Export JSON" ,
+  "qcm.upload.type.id.BINARY" : "Fichier binaire" ,
 
   "qcm.question.menu.category.create" : "Creer une nouvelle categorie",
   "qcm.question.form.input.category.placeholder" : "Catégorie",
@@ -50,9 +61,14 @@
   "qcm.question.selected.title" : "Mes Questions selectionnée(s)",
   "qcm.question.list.addQuestionnaire" : "Ajouter au questionnaire selectionné",
 
+  "qcm.question.list.createdAt": "Crée le ",
+
   "qcm.questionnaire.question.list.title": "Les Questions du questionnaire",
   "qcm.questionnaire.question.list.title.short": "Les questions du questionnaire",
   "qcm.questionnaire.question.selected.title" : "Liste des Questions selectionnée(s) du questionnaire",
+
+  "qcm.questionnaire.question.selected.validate" : "Valider les questions selectionées",
+
 
   "qcm.upload.list.title": "Mes Téléchargements",
   "qcm.upload.list.title.short": "Mes Téléchargements",
@@ -69,7 +85,8 @@
   "menu.about" : "A propos",
   "menu.login": "Connection",
 
-  "qcm.selectable-list.menu.selectAll": "Selectionner tous les enregistrements",
+  "qcm.selectable-list.menu.selectAll": "Selectionner tous les enregistrements de la Page",
+  "qcm.selectable-list.menu.unselectAll": "Deselectionner tous les enregistrements",
   "qcm.selectable-list.menu.viewSelected": "Voir tous les enregistrements selectionnés",
   "qcm.selectable-list.menu.new" : "Creer un enregistrement",
   "qcm.selectable-list.menu.deleteAll":"Supprimer les enregistrements selectionnés",
@@ -102,6 +119,7 @@
   "qcm.form.menu.filter": "Filtrer les enregistrements",
   "qcm.form.toggle.on":"Mode edition",
   "qcm.form.toggle.off":"Annuler edition",
+  "qcm.form.messages.validation_required": "Le formulaire n'est pas valide, verifier la saisie !",
 
   "qcm.import.title": "Selectionner un fichier json à importer",
   "qcm.upload.title": "Selectionner un fichier json à télécharger",

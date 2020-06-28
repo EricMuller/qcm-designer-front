@@ -188,6 +188,10 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
     });
   }
 
+  public unSelectAll() {
+        this.store.unSelectAllElement();
+  }
+
   swapSelectedMode() {
     if (this.currentView === ViewMode.List) {
       this.currentView = ViewMode.Select;

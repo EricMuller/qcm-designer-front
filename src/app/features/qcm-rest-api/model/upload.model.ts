@@ -21,6 +21,6 @@ export class Upload extends Entity {
 
   version?: number;
 
-
+  type?: string;
 
 }

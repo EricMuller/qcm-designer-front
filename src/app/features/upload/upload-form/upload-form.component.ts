@@ -10,6 +10,7 @@ import {CategoryType} from '@app/features/qcm-rest-api/services/type.enum';
 import {UploadStore} from '@app/features/stores/upload-store.service';
 import {UploadFormBuilder} from '@app/features/upload/upload-form/upload-form-builder';
 import {EditableFormComponent} from '@app/shared/material-components/editable-form/editableFormComponent';
+import {TranslateService} from '@ngx-translate/core';
 
 enum ImportStatus {
   CREATED = 'Created',
@@ -35,9 +36,10 @@ export class UploadFormComponent extends EditableFormComponent<Upload, string> i
               protected   router: Router,
               private categoryService: CategoryService, private dialog: MatDialog,
               private route: ActivatedRoute,
-              private formBuilder: UploadFormBuilder
+              private formBuilder: UploadFormBuilder,
+              protected translateService: TranslateService
   ) {
-    super(crudStore, notifierService, router);
+    super(crudStore, notifierService, router, translateService);
 
     this.status = this.getImportStatusEnum();
     this.edition = route.snapshot.params.uuid;

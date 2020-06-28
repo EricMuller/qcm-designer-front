@@ -113,16 +113,7 @@
           </mat-form-field>
         </div>
 
-        <!-- Status question-->
-        <div fxLayout='row'>
-          <mat-form-field fxFlex="100%" fxFlex.gt-xs="40%">
-            <mat-select formControlName="status" placeholder="Status">
-              <mat-option *ngFor="let s of status"
-                          [value]="s.id">{{ 'qcm.question.form.input.status.id.' + s.id | translate}}</mat-option>
-              <mat-error *ngIf="form.get('status').hasError('required')">field required</mat-error>
-            </mat-select>
-          </mat-form-field>
-        </div>
+
 
         <!-- Categories question-->
         <div fxLayout='row'>
@@ -175,6 +166,17 @@
           <input matInput [value]="form.get('dateModification').value | date: 'dd/MM/yyyy hh:mm:ss' "
                  placeholder="{{'qcm.question.form.input.modification.placeholder' |translate}}" readonly>
         </mat-form-field>
+
+        <!-- Status question-->
+        <div fxLayout='row'>
+          <mat-form-field fxFlex="100%" fxFlex.gt-xs="40%">
+            <mat-select formControlName="status" placeholder="Status">
+              <mat-option *ngFor="let s of status"
+                          [value]="s.id">{{ 'qcm.status.id.' + s.id | translate}}</mat-option>
+              <mat-error *ngIf="form.get('status').hasError('required')">field required</mat-error>
+            </mat-select>
+          </mat-form-field>
+        </div>
 
       </div>
 

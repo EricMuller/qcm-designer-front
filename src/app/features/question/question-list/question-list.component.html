@@ -79,8 +79,13 @@
       </div>
 
       <div toolbar-view class="spacer"></div>
-      <button mat-icon-button *ngIf="list.modeSelection$ |async" (click)="addToQuestionnaire(uuid,selected)" matTooltip="{{ 'qcm.question.list.addQuestionnaire' | translate}}"
-      ><mat-icon>library_add</mat-icon> </button>
+
+      <!-- add to questionnaire  -->
+      <button id="addToQuestionnaireButtionId" mat-icon-button *ngIf="list.modeSelection$ |async"
+              (click)="addToQuestionnaire(uuid,selected)" matTooltip="{{ 'qcm.question.list.addQuestionnaire' | translate}}">
+        <mat-icon>library_add</mat-icon>
+      </button>
+
       <!--  start mobile-->
       <button fxShow.gt-xs="false" mat-icon-button (click)="filter=!filter;"
               matTooltip="{{'qcm.form.menu.filter' | translate}}">

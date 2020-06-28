@@ -70,4 +70,6 @@ export class QuestionnaireService {
     return this.http.delete<Questionnaire>(this.endPoint.QUESTIONNAIRES + uuid + '/questions/' + uuidQuestion);
   }
 
+
+
 }

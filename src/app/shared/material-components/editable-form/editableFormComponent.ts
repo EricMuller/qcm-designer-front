@@ -4,6 +4,7 @@ import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {NotifierService} from '@app/core/notifications/simple-notifier.service';
 import {CrudStore} from '@app/features/stores/store-api';
+import {TranslateService} from '@ngx-translate/core';
 
 export abstract class EditableFormComponent<T, K> implements OnInit {
 
@@ -16,7 +17,8 @@ export abstract class EditableFormComponent<T, K> implements OnInit {
 
   public separatorKeysCodes = [ENTER, COMMA];
 
-  protected constructor(protected crudStore: CrudStore<T, K>, protected  notifierService: NotifierService, protected router: Router) {
+  protected constructor(protected crudStore: CrudStore<T, K>, protected  notifierService: NotifierService,
+                        protected router: Router, protected translateService: TranslateService) {
 
   }
 
@@ -69,6 +71,7 @@ export abstract class EditableFormComponent<T, K> implements OnInit {
         .subscribe(this.onSaveForm.bind(this)
         );
     } else {
+      this.notifierService.notifyInfo(this.translateService.instant('qcm.form.messages.validation_required'), 1000);
       this.validateAllFormFields(this.form);
     }
   }

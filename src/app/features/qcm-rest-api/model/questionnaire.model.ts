@@ -7,6 +7,7 @@ export class Questionnaire extends Entity {
 
   title?: string;
   description?: string;
+  status?:string;
   website?: string;
   category?: Category;
   questions?: Array<Question>;

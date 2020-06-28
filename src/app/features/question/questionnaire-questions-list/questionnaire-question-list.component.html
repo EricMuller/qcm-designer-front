@@ -1,6 +1,7 @@
 <div class="page-center">
 
-  <button fxShow.xs="false" id="replay-btn-selectable-list" mat-mini-fab (click)="list.refresh(true);" class="fab-bottom-up1"
+  <button fxShow.xs="false" id="replay-btn-selectable-list" mat-mini-fab (click)="list.refresh(true);"
+          class="fab-bottom-up1"
           matTooltip="{{'qcm.selectable-list.menu.refresh' | translate}}">
     <mat-icon>replay</mat-icon>
   </button>
@@ -18,7 +19,7 @@
   <!--  </button>-->
 
   <!--  create new-->
-  <button id="add-btn-selectable-list" mat-fab (click)="list.onCreateElement($event)"  class="fab-bottom"
+  <button id="add-btn-selectable-list" mat-fab (click)="list.onCreateElement($event)" class="fab-bottom"
           matTooltip="{{'qcm.selectable-list.menu.new' | translate }}" [hidden]="filter" color="primary">
     <mat-icon>add</mat-icon>
   </button>
@@ -32,19 +33,19 @@
   <!-- end desktop fab -->
 
   <!--  show  filtre -->
-<!--  <div fxLayout fxlayout="column" fxLayoutAlign="center center" fxLayout.xs="column" [hidden]="!filter">-->
-<!--     <span>-->
-<!--      <h1>{{'qcm.question.filtre.title' |translate }}</h1>-->
-<!--      ({{'qcm.question.filtre.found' | translate:{'nb': list.totalElements} }})-->
-<!--    </span>-->
-<!--  </div>-->
+  <!--  <div fxLayout fxlayout="column" fxLayoutAlign="center center" fxLayout.xs="column" [hidden]="!filter">-->
+  <!--     <span>-->
+  <!--      <h1>{{'qcm.question.filtre.title' |translate }}</h1>-->
+  <!--      ({{'qcm.question.filtre.found' | translate:{'nb': list.totalElements} }})-->
+  <!--    </span>-->
+  <!--  </div>-->
 
-<!--  <div fxLayout fxLayoutAlign="center center" fxLayout.xs="column" [hidden]="!filter">-->
-<!--    <div>{{'qcm.tag-select.title' | translate}}:</div>-->
-<!--    <app-tag-select></app-tag-select>-->
-<!--    <div>{{'qcm.questionnaire-select.title' | translate}}:</div>-->
-<!--    <app-questionnaire-select></app-questionnaire-select>-->
-<!--  </div>-->
+  <!--  <div fxLayout fxLayoutAlign="center center" fxLayout.xs="column" [hidden]="!filter">-->
+  <!--    <div>{{'qcm.tag-select.title' | translate}}:</div>-->
+  <!--    <app-tag-select></app-tag-select>-->
+  <!--    <div>{{'qcm.questionnaire-select.title' | translate}}:</div>-->
+  <!--    <app-questionnaire-select></app-questionnaire-select>-->
+  <!--  </div>-->
   <!--  end show filtre -->
 
 
@@ -62,6 +63,11 @@
       </div>
 
       <div toolbar-view class="spacer"></div>
+
+      <button id="addToQuestionnaireButtionId" mat-icon-button *ngIf="list.modeSelection$ |async"
+              (click)="validateAll()" matTooltip="{{ 'qcm.questionnaire.question.selected.validate' | translate}}">
+        <mat-icon>done_all</mat-icon>
+      </button>
 
       <!--  start mobile-->
       <button fxShow.gt-xs="false" mat-icon-button (click)="filter=!filter;"
@@ -81,10 +87,10 @@
       <app-questionnaire-question-nav-list selected-view
                                            [elements$]="questionListStore.selected$"></app-questionnaire-question-nav-list>
 
+
     </app-selectable-list>
 
   </div>
-
 </div>
 
 

@@ -42,6 +42,8 @@ export interface ListSelectStore<T extends Entity> {
 
   addPageElement(q: T): Observable<T>;
 
+  updateElement(q: T);
+
 }
 
 /**

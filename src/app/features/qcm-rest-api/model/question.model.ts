@@ -15,3 +15,9 @@ export class Question extends Entity {
   version?: number;
 
 }
+
+
+export class QuestionPatch  {
+
+  status: string;
+}
