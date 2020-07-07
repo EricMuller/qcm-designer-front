@@ -1,5 +1,4 @@
 import {InjectionToken} from '@angular/core';
-import {environment} from '../../../environments/environment';
 
 export interface QcmApiEndPoint {
   CATEGORY: string;
@@ -9,6 +8,7 @@ export interface QcmApiEndPoint {
   QUESTIONS: string;
   UPLOAD: string;
   EXPORT: string;
+  IMPORT: string;
 }
 
 

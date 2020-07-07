@@ -13,7 +13,7 @@
 
     <div style="overflow: hidden">
       <div>
-        <p class="cursor-pointer" [routerLink]="['/questionnaires/'+ questionnaire.uuid +'/questions']"
+        <p class="cursor-pointer" [routerLink]="['/questionnaires/'+ questionnaire.uuid ]"
          matTooltip="{{questionnaire.title}}" style="overflow: hidden;white-space:nowrap;margin-bottom: 1px">
         {{questionnaire.title}}</p>
       </div>
@@ -44,7 +44,7 @@
     </button>
     <!-- line menu -->
     <mat-menu #questionnaireMenu="matMenu" yPosition="below">
-      <button mat-menu-item [routerLink]="['/questionnaires/'+ questionnaire.uuid +'/questions']">
+      <button mat-menu-item [routerLink]="['/questionnaires/'+ questionnaire.uuid ]">
         <mat-icon>details</mat-icon>
         Details
       </button>

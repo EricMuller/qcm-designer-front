@@ -12,7 +12,7 @@
 
     <div  style="overflow: hidden">
       <div><p class="cursor-pointer" [routerLink]="['/questions/'+ item.uuid ]"
-         style="overflow: hidden;white-space:nowrap;margin-bottom: 1px" matTooltip="{{item.question}}"> {{item.question}} </p></div>
+         style="overflow: hidden;white-space:nowrap;margin-bottom: 1px" matTooltip="{{item.question}}">{{item.position}}.{{item.question}} </p></div>
       <div>
 <!--        <p style="overflow: hidden;white-space:nowrap;margin-bottom: 1px" class="md-caption">-->
 <!--          <span fxShow.xs="false" *ngIf="item.status == 'TO_BE_VALIDATED'" class="label label-danger">{{item.status}}</span>-->

@@ -14,10 +14,25 @@ export class Question extends Entity {
   status: string;
   version?: number;
 
-}
 
+}
 
 export class QuestionPatch  {
 
   status: string;
+}
+
+
+export class QuestionnaireQuestion extends Entity {
+  dateModification?: number;
+  dateCreation: Date;
+  question: string;
+  responses: Reponse[];
+  tags?: Tag[];
+  type: string;
+  category?: Category;
+  status: string;
+  version?: number;
+  position?: number;
+
 }

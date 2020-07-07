@@ -48,6 +48,7 @@ export class QuestionFormBuilder {
       id: new FormControl({value: response.uuid ? response.uuid : 0, disabled}),
       version: new FormControl({value: response.version, disabled: true}),
       good: new FormControl({value: response.good ? response.good : false, disabled}),
+      number: new FormControl({value: response.number ? response.number : 0, disabled}),
       response: new FormControl({value: response.response, disabled}, Validators.required),
     });
   }

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NotifierService} from '@app/core/notifications/simple-notifier.service';
 import {Upload} from '@app/features/qcm-rest-api/model/upload.model';
+import {ImportService} from '@app/features/qcm-rest-api/services/import.service';
 import {UploadService} from '@app/features/qcm-rest-api/services/upload.service';
 import {UploadStore} from '@app/features/stores/upload-store.service';
 import {Observable} from 'rxjs/internal/Observable';
@@ -20,7 +21,8 @@ export class UploadNavListComponent implements OnInit {
 
   constructor(private uploadService: UploadService,
               private notifier: NotifierService,
-              public uploadStore: UploadStore) {
+              public uploadStore: UploadStore,
+              private importService: ImportService) {
   }
 
   ngOnInit() {
@@ -31,7 +33,7 @@ export class UploadNavListComponent implements OnInit {
   import(upload: Upload) {
     upload.loading = true;
 
-    this.uploadService.importUploadByUuid(upload.uuid)
+    this.importService.importUploadByUuid(upload.uuid)
       .subscribe((message: Upload) => {
         upload.loading = false;
         this.notifier.notifyInfo(message.status, 1000);

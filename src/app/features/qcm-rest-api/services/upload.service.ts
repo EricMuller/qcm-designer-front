@@ -44,10 +44,6 @@ export class UploadService {
     return this.http.get<Page>(requestUrl);
   }
 
-  public importUploadByUuid(uuid: string): Observable<Upload> {
-    return this.http.get<Upload>(this.endPoint.UPLOAD + uuid + '/import');
-  }
-
   public getUploadByUuid(uuid: string): Observable<Upload> {
     return this.http.get<Upload>(this.endPoint.UPLOAD + uuid);
   }
