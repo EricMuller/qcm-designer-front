@@ -21,7 +21,7 @@ install:
   - npm install
 
 script:
-  - ng build --prod
+  - ng build --configuration=heroku
 
 deploy:
   provider: heroku
