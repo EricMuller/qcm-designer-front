@@ -6,9 +6,10 @@ export interface QcmApiEndPoint {
   USERS: string;
   QUESTIONNAIRES: string;
   QUESTIONS: string;
-  UPLOAD: string;
+  UPLOADS: string;
   EXPORT: string;
-  IMPORT: string;
+  IMPORTS: string;
+  WEBHOOKS: string;
 }
 
 

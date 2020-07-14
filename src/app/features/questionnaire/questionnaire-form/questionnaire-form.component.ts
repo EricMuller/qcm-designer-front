@@ -69,7 +69,9 @@ export class QuestionnaireFormComponent extends EditableFormComponent<Questionna
       this.description = this.questionnaire.description;
       this.date = new Date(this.questionnaire.dateCreation);
       this.categories = data.categories;
-      this.store.dispatch(new SetCurrentQuestionnaireAction({uuid: this.questionnaire.uuid, title: this.questionnaire.title}));
+      if (this.questionnaire.uuid) {
+        this.store.dispatch(new SetCurrentQuestionnaireAction({uuid: this.questionnaire.uuid, title: this.questionnaire.title}));
+      }
       // this.currentQuestionnaire$ = this.store.select(state => state.currentQuestionnaire);
     });
   }
@@ -149,10 +151,14 @@ export class QuestionnaireFormComponent extends EditableFormComponent<Questionna
   }
 
   protected onSaveForm(data) {
+    this.toggleEdition(false);
     this.questionnaire = data;
     this.form = this.formBuilder.createForm(this.questionnaire);
-    this.toggleEdition(false);
+
     this.notifierService.notifySuccess(data.title, 2000);
+    this.store.dispatch(new SetCurrentQuestionnaireAction({uuid: this.questionnaire.uuid, title: this.questionnaire.title}));
+
+    this.router.navigate(['/questionnaires/' + this.questionnaire.uuid]);
 
   }
 

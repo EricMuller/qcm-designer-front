@@ -31,6 +31,7 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
   public last = false;
   public numberOfElements = 0;
 
+  @Input()
   public pageSize: number = environment.PAGE_SIZE;
   pageSizeOptions: number[] = [5, 10, 25, 100];
 

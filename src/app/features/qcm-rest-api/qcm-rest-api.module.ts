@@ -21,9 +21,10 @@ export const QCM_API_ENDPOINT = {
   QUESTIONNAIRES: environment.QCM_REST_API_HOST + '/qcm/api/v1/questionnaires/',
   QUESTIONS: environment.QCM_REST_API_HOST + '/qcm/api/v1/questions/',
   TAGS: environment.QCM_REST_API_HOST + '/qcm/api/v1/tags/',
-  UPLOAD: environment.QCM_REST_API_HOST + '/qcm/api/v1/upload/',
+  UPLOADS: environment.QCM_REST_API_HOST + '/qcm/api/v1/uploads/',
   USERS: environment.QCM_REST_API_HOST + '/qcm/api/v1/users/',
-  IMPORT: environment.QCM_REST_API_HOST + '/qcm/api/v1/imports/',
+  IMPORTS: environment.QCM_REST_API_HOST + '/qcm/api/v1/imports/',
+  WEBHOOKS: environment.QCM_REST_API_HOST + '/qcm/api/v1/webhooks/',
 };
 
 @NgModule({

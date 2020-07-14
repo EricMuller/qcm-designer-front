@@ -52,6 +52,7 @@
   <div fxlayout [hidden]="filter">
 
     <app-selectable-list #list [store]="questionListStore"
+                         [pageSize]="10"
                          [sortBy]="'id'"
                          (created)="create()">
 

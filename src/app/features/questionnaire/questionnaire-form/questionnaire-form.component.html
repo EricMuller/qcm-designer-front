@@ -27,10 +27,10 @@
     <mat-toolbar-row>
 
       <!-- start mobile -->
-      <button fxShow.gt-xs="false" mat-icon-button [routerLink]="['/questionnaires/list']">
-        <mat-icon [hidden]="edition">arrow_back</mat-icon>
-        <mat-icon [hidden]="!edition">close</mat-icon>
-      </button>
+<!--      <button fxShow.gt-xs="false" mat-icon-button [routerLink]="['/questionnaires/list']">-->
+<!--        <mat-icon [hidden]="edition">arrow_back</mat-icon>-->
+<!--        <mat-icon [hidden]="!edition">close</mat-icon>-->
+<!--      </button>-->
       <!-- end mobile -->
 
       <div *ngIf="questionnaire.uuid  && !edition">{{'qcm.questionnaire.view.title' | translate}}{{questionnaire.title}}</div>
@@ -152,15 +152,24 @@
                placeholder="{{'qcm.questionnaire.form.input.modification.placeholder' |translate}}" readonly>
       </mat-form-field>
 
+      <mat-form-field *ngIf="questionnaire.uuid">
+        <input matInput [value]="questionnaire.version"
+               placeholder="{{'qcm.questionnaire.form.input.version.placeholder' |translate}}" readonly>
+      </mat-form-field>
+
+<!--      <span fxFlex="50%" fxFlex.gt-xs="40%"  class="mat-label" >version {{questionnaire.version}} </span>-->
+
       <!--status -->
       <div fxLayout='row'>
-        <mat-form-field fxFlex="100%" fxFlex.gt-xs="40%">
+        <mat-form-field fxFlex="50%" fxFlex.gt-xs="40%">
           <mat-select formControlName="status" placeholder="Status">
             <mat-option *ngFor="let s of status"
                         [value]="s.id">{{ 'qcm.status.id.' + s.id | translate}}</mat-option>
             <mat-error *ngIf="form.get('status').hasError('required')">field required</mat-error>
           </mat-select>
         </mat-form-field>
+
+
       </div>
 
       <mat-checkbox  formControlName="published"  matInput *ngIf="questionnaire.uuid">

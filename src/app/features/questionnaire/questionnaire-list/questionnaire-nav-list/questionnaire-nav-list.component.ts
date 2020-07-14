@@ -45,7 +45,7 @@ export class QuestionnaireNavListComponent implements OnInit {
         if (type === 'json') {
           type = 'txt';
         }
-        this.downLoadFile(data, questionnaire.title + '-' + questionnaire.status + '.' + type);
+        this.downLoadFile(data, questionnaire.title + '-' + questionnaire.status + '-' + questionnaire.version + '.' + type);
       });
   }
 

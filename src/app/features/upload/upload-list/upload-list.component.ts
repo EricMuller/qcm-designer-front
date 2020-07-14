@@ -16,7 +16,7 @@ import {SelectableListComponent} from '@app/shared/material-components/selectabl
 })
 export class UploadListComponent implements OnInit {
 
-  apiEndPoint = this.endPoint.UPLOAD + 'json';
+  apiEndPoint = this.endPoint.UPLOADS + 'json';
   accept = 'application/json,.json';
   sample =
     {

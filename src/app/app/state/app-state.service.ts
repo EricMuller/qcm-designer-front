@@ -68,7 +68,7 @@ export class AppState {
     patchState({
       ...state,
       currentQuestionnaire: payload,
-      breadcrumb: [{link: '/questionnaires/' + payload.uuid, label: 'Questionnaire ' + payload.title},
+      breadcrumb: [{link: '/questionnaires/' + payload.uuid, label: payload.title},
         {link: '/questionnaires/' + payload.uuid + '/questions', label: 'Questions'}
       ]
     });

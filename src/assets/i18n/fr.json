@@ -19,6 +19,7 @@
   "qcm.questionnaire.form.input.tag.placeholder" : "Etiquette",
   "qcm.questionnaire.form.input.creation.placeholder":"Crée le",
   "qcm.questionnaire.form.input.modification.placeholder":"Modifié le",
+  "qcm.questionnaire.form.input.version.placeholder":"Version",
   "qcm.questionnaire.form.input.published.placeholder": "Public",
 
   "qcm.question.form.input.creation.placeholder" : "Date création",

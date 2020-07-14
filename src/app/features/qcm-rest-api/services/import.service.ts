@@ -12,7 +12,7 @@ export class ImportService {
 
 
   public importUploadByUuid(uuid: string): Observable<Upload> {
-    return this.http.get<Upload>(this.endPoint.IMPORT + uuid);
+    return this.http.get<Upload>(this.endPoint.IMPORTS + uuid);
   }
 
 }

@@ -43,9 +43,14 @@ export class QuestionService {
   //   return this.http.get<Question[]>(this.endPoint.QUESTIONS + '?questionnaireId=' + questionnaireUuid);
   // }
 
-  public getPageQuestionsByQuestionnaireUuid(questionnaireUuid: string): Observable<Page> {
-    alert('getPageQuestionsByQuestionnaireUuid');
-    return this.http.get<Page>(this.endPoint.QUESTIONS + '?questionnaireId=' + questionnaireUuid);
+  // public getPageQuestionsByQuestionnaireUuid(questionnaireUuid: string): Observable<Page> {
+  //   alert('getPageQuestionsByQuestionnaireUuid');
+  //   return this.http.get<Page>(this.endPoint.QUESTIONS + '?questionnaireId=' + questionnaireUuid);
+  // }
+
+  public getPageQuestionsByQuestionnaireUuid(questionnaireUuid: string, page?: number, size?: number, sort?: string): Observable<Page> {
+
+    return this.http.get<Page>(`${this.endPoint.QUESTIONNAIRES}${questionnaireUuid}/questions?size=${size}&page=${page}&sort=${sort}`);
   }
 
   public postQuestion(q: Question) {
@@ -56,7 +61,7 @@ export class QuestionService {
     return this.http.put<Question>(this.endPoint.QUESTIONS, q);
   }
 
-  public patchQuestion(uuid: string, questionPatch: QuestionPatch){
+  public patchQuestion(uuid: string, questionPatch: QuestionPatch) {
     return this.http.patch<Question>(this.endPoint.QUESTIONS + uuid, questionPatch);
   }
 
