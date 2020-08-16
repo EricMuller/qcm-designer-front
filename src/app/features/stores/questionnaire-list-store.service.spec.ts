@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { QuestionnaireListStore } from './questionnaire-store.service';
+import { QuestionnaireListStore } from './questionnaire-list-store.service';
 
 describe('QuestionnaireStoreService', () => {
   beforeEach(() => {
