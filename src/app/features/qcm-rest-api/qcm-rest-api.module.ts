@@ -6,6 +6,7 @@ import {QCM_API_ENDPOINT_TOKEN} from '@app/features/qcm-rest-api/qcm-api-end-poi
 import {ExportService} from '@app/features/qcm-rest-api/services/export.service';
 import {ImportService} from '@app/features/qcm-rest-api/services/import.service';
 import {UploadService} from '@app/features/qcm-rest-api/services/upload.service';
+import {WebHookService} from '@app/features/qcm-rest-api/services/web-hook.service';
 
 import {environment} from '../../../environments/environment';
 import {CategoryService} from './services/category.service';
@@ -42,7 +43,7 @@ export class QcmRestApiModule {
     return {
       ngModule: QcmRestApiModule,
       providers: [QuestionService, QuestionnaireService, UserService, TagService, CategoryService,
-        TagService, UploadService, ExportService, ImportService]
+        TagService, UploadService, ExportService, ImportService, WebHookService]
     };
   }
 }

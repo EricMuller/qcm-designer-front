@@ -65,7 +65,7 @@ export class KeycloakService {
   }
 
   hasAnyRole(roles: string[]): boolean {
-    for(let i = 0; i < roles.length; i++) {
+    for (let i = 0; i < roles.length; i++) {
       if (this.hasRole(roles[i])) {
         return true;
       }
@@ -92,7 +92,9 @@ export class KeycloakService {
           .success(() => {
             resolve(KeycloakService.auth.authz.token);
           })
-          .error(() => {
+          .error((m) => {
+            console.error(m);
+            console.error('Failed to refresh token');
             reject('Failed to refresh token');
           });
       } else {

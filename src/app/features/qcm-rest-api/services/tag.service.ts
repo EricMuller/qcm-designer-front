@@ -14,7 +14,6 @@ export class TagService {
   constructor(private http: HttpClient, @Inject(QCM_API_ENDPOINT_TOKEN) private endPoint: QcmApiEndPoint) {
   }
 
-
   public posTag(tag: Tag) {
     return this.http.post<Tag>(this.endPoint.TAGS, tag);
   }

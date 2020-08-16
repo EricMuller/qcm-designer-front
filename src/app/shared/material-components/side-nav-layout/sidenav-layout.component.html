@@ -5,12 +5,12 @@
 
     <mat-toolbar color="primary">
       <a routerLink="/">
-        <div style="padding-right: 5px"><img src="/favicon.ico"></div>
+        <div style="padding-right: 5px"><img src="/assets/images/questionnaire/QCM-0-red.png" width="32"></div>
       </a> {{appName}}.
     </mat-toolbar>
 
     <mat-nav-list>
-      <a mat-list-item *ngFor="let menu of navigation$ | async" [routerLinkActive]="['active']"
+      <a mat-list-item *ngFor="let menu  of navigation$ | async" [routerLinkActive]="['active']"
          routerLink="{{menu.link}}" (click)="routeLink(menu.link)">{{menu.label | translate }}</a>
     </mat-nav-list>
 
@@ -35,9 +35,9 @@
         </button>
       </div>
 
-      <a routerLink="/">
-        <div style="padding-right: 5px"><img src="/favicon.ico"></div>
-      </a> {{appName}}.
+      <a routerLink="/" *ngIf="!(isHandset$ | async)">
+        <div style="padding-right: 5px"><img src="/assets/images/questionnaire/QCM-0-red.png" width="32"></div>
+      </a>{{appName}}.
 
       <div class="spacer"></div>
 
@@ -49,7 +49,7 @@
         </div>
       </div>
 
-      <button mat-icon-button>
+      <button mat-icon-button [routerLink]="['/settings/edit']">
         <mat-icon>settings</mat-icon>
       </button>
 

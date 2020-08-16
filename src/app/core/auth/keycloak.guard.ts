@@ -21,6 +21,7 @@ export class KeycloakGuard implements CanActivate, CanActivateChild {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+
     return fromPromise(this.keycloakService.getToken())
       .pipe(
         map((token) => {

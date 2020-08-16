@@ -43,6 +43,11 @@ const routes: Routes = [
     data: {preload: true, breadcrumb: null},
   },
   {
+    path: 'settings',
+    loadChildren: () => import('./features/settings/settings-routing.module').then(m => m.SettingsRoutingModule),
+    data: {preload: true, breadcrumb: null},
+  },
+  {
     path: '', redirectTo: 'home', pathMatch: 'full'
   }
 

@@ -5,7 +5,7 @@
 
 export const environment = {
   application: 'QCM ',
-  production: true,
+  production: false,
   KEYCLOAK: true,
   KEYCLOAK_URL: 'https://keycloak.webmarks.net/auth',
   KEYCLOAK_REALM: 'qcm',
@@ -16,4 +16,5 @@ export const environment = {
   // QCM_REST_API_HOST: 'https://qcm-api.webmarks.net'
   // QCM_REST_API_HOST: 'http://163.172.48.36:9090'
   QCM_REST_API_HOST: 'https://qcm-rest-api.herokuapp.com'
+
 };

@@ -3,7 +3,7 @@ import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTre
 import {KeycloakGuard} from '@app/core/auth/keycloak.guard';
 import {UserGuard} from '@app/shared/auth/user.guard';
 import {of} from 'rxjs';
-import {take} from 'rxjs/operators';
+import {first, take} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,10 @@ export class AppGuard implements CanActivate {
   // }
   public async canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean | UrlTree> {
 
-    if (await this.keycloakGuard.canActivate(next, state).pipe(take(1)).toPromise() === false) {
+
+    if (await this.keycloakGuard.canActivate(next, state)
+      .pipe(first())
+      .toPromise() === false) {
       return of(false).toPromise();
     }
 

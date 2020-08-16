@@ -3,24 +3,24 @@ import {HttpClient} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {AppState} from '@app/app/state/app-state.service';
-import {QuestionListStore} from '@app/features/stores/question-list-store.service';
-import {MaterialComponentsModule} from '@app/shared/material-components/material-components.module';
-import {QcmRestApiModule} from '@app/features/qcm-rest-api/qcm-rest-api.module';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {ServiceWorkerModule} from '@angular/service-worker';
 import {AppRoutingModule} from '@app/app-routing.module';
 
 import {AppComponent} from '@app/app/app.component';
+import {AppState} from '@app/app/state/app-state.service';
+import {HomeComponent} from '@app/features/home/home.component';
+import {QcmRestApiModule} from '@app/features/qcm-rest-api/qcm-rest-api.module';
+import {QuestionListStore} from '@app/features/stores/question-list-store.service';
+
+import {AngularModule} from '@app/shared/angular/angular.module';
+import {MaterialComponentsModule} from '@app/shared/material-components/material-components.module';
+import {MaterialModule} from '@app/shared/material/material.module';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
 import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
 import {NgxsModule} from '@ngxs/store';
+import {environment} from '../environments/environment';
 import {CoreModule, createTranslateLoader} from './core/core.module';
-import {HomeComponent} from '@app/features/home/home.component';
-
-import {AngularModule} from '@app/shared/angular/angular.module';
-import {MaterialModule} from '@app/shared/material/material.module';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ import { environment } from '../environments/environment';
     BrowserAnimationsModule,
     AngularModule,
     MaterialModule,
-    NgxsModule.forRoot([AppState]),
+    NgxsModule.forRoot([AppState], { developmentMode: !environment.production }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
     QcmRestApiModule.forRoot(),

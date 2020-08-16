@@ -41,6 +41,7 @@ export class KeyCloakInterceptor implements HttpInterceptor {
                 // server-side error
                 errorMessage = `Error Code: ${error.status}\nMessage: ${error.error.message}`;
               }
+              console.error(errorMessage);
               this.notifierService.notifyError(errorMessage, 'OK');
               return throwError(errorMessage);
             })

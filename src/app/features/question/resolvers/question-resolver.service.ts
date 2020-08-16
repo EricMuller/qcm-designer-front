@@ -20,7 +20,7 @@ export class QuestionResolver {
       const question = new Question();
       question.type = QuestionTypeFreeText;
       question.status = ValidationStatusDraft;
-      debugger
+
       return of(question);
     }
   }
