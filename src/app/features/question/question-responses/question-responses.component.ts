@@ -9,7 +9,7 @@ import {Question} from '@app/features/qcm-rest-api/model/question.model';
 export class QuestionResponsesComponent implements OnInit {
 
   @Input()
-  private question: Question;
+  public question: Question;
 
   constructor() {
   }
