@@ -33,6 +33,7 @@ export class UserEditComponent extends EditableFormComponent<User, number> imple
       this.user = data.user;
       this.createForm();
       this.toggleEdition(true);
+      this.form.controls.email.disable();
     });
   }
 
@@ -42,6 +43,12 @@ export class UserEditComponent extends EditableFormComponent<User, number> imple
 
   protected createForm(): void {
     this.form = this.userFormBuilder.createForm(this.user);
+  }
+
+  public saveForm() {
+    this.form.controls.email.enable();
+    super.saveForm();
+    this.form.controls.email.disable();
   }
 
   protected onDeleteForm(t: User) {
