@@ -5,7 +5,25 @@
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
 
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  $drawer-background-color: mat-color($background, dialog);
+  $drawer-container-background-color:  mat-color($background, background);
+  $drawer-push-background-color: mat-color($background, dialog);
+  $drawer-side-border: solid 1px mat-color($foreground, divider);
+
+  .mat-drawer-container {
+    background-color: $drawer-container-background-color;
+    color: mat-color($foreground, text);
+  }
+
+
+
   mat-sidenav-container {
+
+    //background-color:#7b1fa2 !important;// $drawer-container-background-color;
+    //color: #7b1fa2 !important;//mat-color($foreground, text);
 
     mat-toolbar {
       button {

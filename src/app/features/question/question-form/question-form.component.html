@@ -18,7 +18,7 @@
   </button>
 
 
-  <button id='cancelButtonId' fxShow.xs="false" mat-mini-fab [routerLink]="['/questions/list']" class="fab-mini-bottom-up1"
+  <button id='cancelButtonId' fxShow.xs="false" mat-mini-fab (click)="close()"  class="fab-mini-bottom-up1"
           matTooltip="{{'qcm.form.menu.cancel' | translate }}" color="primary">
     <mat-icon>reply</mat-icon>
   </button>
@@ -41,12 +41,12 @@
 
     <mat-toolbar-row>
 
-      <!-- start mobile -->
-      <button fxShow.gt-xs="false" mat-icon-button [routerLink]="['/questions/list']">
+<!--       start mobile-->
+      <button fxShow.gt-xs="false" mat-icon-button (click)="close()" >
         <mat-icon [hidden]="edition">arrow_back</mat-icon>
         <mat-icon [hidden]="!edition">close</mat-icon>
       </button>
-      <!-- end mobile -->
+<!--       end mobile-->
 
       <div *ngIf="question.uuid && !edition">{{'qcm.question.view.title' | translate}}  {{'qcm.question.form.input.type.id.' + question.type | translate }}</div>
       <div *ngIf="question.uuid && edition">{{'qcm.question.edit.title' | translate}}  {{'qcm.question.form.input.type.id.' + question.type | translate }}</div>
@@ -157,13 +157,13 @@
       <div id="col3" fxLayout='column' fxFlex="100%" fxFlex.gt-xs="20%">
         <!--      <div  fxFlex="100%" fxFlex.gt-xs="50%">-->
         <mat-form-field *ngIf="question.uuid">
-          <input matInput [value]="form.get('dateCreation').value | date: 'dd/MM/yyyy hh:mm:ss' "
+          <input matInput [value]="form.get('dateCreation').value | date: 'dd/MM/yyyy HH:mm:ss' "
                  placeholder="{{'qcm.question.form.input.creation.placeholder' |translate}}" readonly>
         </mat-form-field>
 
         <!-- </div> -->
         <mat-form-field *ngIf="question.uuid">
-          <input matInput [value]="form.get('dateModification').value | date: 'dd/MM/yyyy hh:mm:ss' "
+          <input matInput [value]="form.get('dateModification').value | date: 'dd/MM/yyyy HH:mm:ss' "
                  placeholder="{{'qcm.question.form.input.modification.placeholder' |translate}}" readonly>
         </mat-form-field>
 

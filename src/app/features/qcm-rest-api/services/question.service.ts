@@ -3,6 +3,7 @@ import {Inject, Injectable} from '@angular/core';
 import {Criteria} from '@app/features/qcm-rest-api/model/criteria';
 import {QCM_API_ENDPOINT_TOKEN, QcmApiEndPoint} from '@app/features/qcm-rest-api/qcm-api-end-point';
 import {Observable} from 'rxjs';
+import {publishLast, refCount} from 'rxjs/operators';
 import {Question, QuestionPatch} from '../model/question.model';
 import {Page} from './page';
 
@@ -50,7 +51,9 @@ export class QuestionService {
 
   public getPageQuestionsByQuestionnaireUuid(questionnaireUuid: string, page?: number, size?: number, sort?: string): Observable<Page> {
 
-    return this.http.get<Page>(`${this.endPoint.QUESTIONNAIRES}${questionnaireUuid}/questions?size=${size}&page=${page}&sort=${sort}`);
+    console.warn('question.services-getPageQuestionsByQuestionnaireUuid');
+    return this.http.get<Page>(`${this.endPoint.QUESTIONNAIRES}${questionnaireUuid}/questions?size=${size}&page=${page}&sort=${sort}`)
+      .pipe(publishLast(), refCount());
   }
 
   public postQuestion(q: Question) {

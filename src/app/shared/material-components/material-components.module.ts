@@ -8,6 +8,7 @@ import {FabButtonComponent} from '@app/shared/material-components/fab/fab-button
 import {FabMenuComponent} from '@app/shared/material-components/fab/fab-menu/fab-menu.component';
 import {FabToggleComponent} from '@app/shared/material-components/fab/fab-toggle/fab-toggle.component';
 import {FabModule} from '@app/shared/material-components/fab/fab.module';
+import {LayoutDialogModule} from '@app/shared/material-components/layout-module/layout-dialog.module';
 import {LoginMenuComponent} from '@app/shared/material-components/login-menu/login-menu.component';
 import {SelectableListComponent} from '@app/shared/material-components/selectable-list/selectable-list.component';
 import {SideNavLayoutComponent} from '@app/shared/material-components/side-nav-layout/sidenav-layout.component';
@@ -22,6 +23,7 @@ import {TranslateModule} from '@ngx-translate/core';
     FabModule,
     FlexLayoutModule,
     FormsModule,
+    LayoutDialogModule,
     TranslateModule.forChild()
   ],
   declarations: [SelectableListComponent, SideNavLayoutComponent, LoginMenuComponent]

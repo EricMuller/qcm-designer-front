@@ -1,10 +1,13 @@
 import {Component, OnInit} from '@angular/core';
+import {MatDialog, MatDialogConfig} from '@angular/material';
 import {Router} from '@angular/router';
 import {AppState} from '@app/app/state/app-state.service';
 import {QuestionnaireModel} from '@app/app/state/questionnaire-model';
 import {Question} from '@app/features/qcm-rest-api/model/question.model';
 import {QuestionnaireService} from '@app/features/qcm-rest-api/services/questionnaire.service';
+import {QuestionDialogComponent} from '@app/features/question/question-dialog/question-dialog.component';
 import {QuestionListStore} from '@app/features/stores/question-list-store.service';
+import {LayoutDialogModule} from '@app/shared/material-components/layout-module/layout-dialog.module';
 import {Select} from '@ngxs/store';
 import {Observable} from 'rxjs/internal/Observable';
 
@@ -25,6 +28,7 @@ export class QuestionListComponent implements OnInit {
 
   constructor(public questionListStore: QuestionListStore,
               private router: Router, private questionnaireService: QuestionnaireService
+
   ) {
 
     this.currentQuestionnaire$.subscribe(value => {
@@ -51,5 +55,7 @@ export class QuestionListComponent implements OnInit {
       }
     }
   }
+
+
 
 }

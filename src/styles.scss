@@ -1,19 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import 'themes/styles-variables';
 
 html, body {
   height: 100%;
-}
-
-body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  /*background: #fafafa;*/
-  background: #f5f5f5;
-  font-weight: 400;
-  text-align: left;
-
 }
+
+//body {
+//  margin: 0;
+//  font-family: Roboto, "Helvetica Neue", sans-serif;
+//  /*background: #fafafa;*/
+//  /*background: #f5f5f5;*/
+//  background: $background-color;
+//  font-weight: 400;
+//  text-align: left;
+//}
 
 /*@media only screen and (max-width: 599px) and (min-width: 600px){*/
 
@@ -213,18 +214,22 @@ body .push-md {
 
 .label-warning {
   background-color: #FF5733;
+  height: 20px;
 }
 
 .label-danger {
   background-color: #fc4b6c;
+  height: 20px;
 }
 
 .label-info {
   background-color: #1e88e5;
+  height: 20px;
 }
 
 .label-grey {
   background-color: #bec4c9;
+  height: 20px;
 }
 
 .label {
@@ -264,3 +269,15 @@ body .push-md {
 
 /*}*/
 
+.mat-paginator-wrapper{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 50px; // change it based on your requirement
+  width: 100%;
+}
+html, body, material-app, mat-sidenav-container {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}

@@ -1,5 +1,5 @@
-<div class="page-center">
-
+<!--<div class="page-center">-->
+<div>
   <button fxShow.xs="false" id="replay-btn-selectable-list" mat-mini-fab (click)="list.refresh(true);"
           class="fab-bottom-up1"
           matTooltip="{{'qcm.selectable-list.menu.refresh' | translate}}">
@@ -52,7 +52,7 @@
   <div fxlayout [hidden]="filter">
 
     <app-selectable-list #list [store]="questionListStore"
-                         [pageSize]="10"
+                         [pageSize]="200"
                          [sortBy]="'id'"
                          (created)="create()">
 

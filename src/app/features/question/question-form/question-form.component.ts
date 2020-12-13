@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
 import {MatChipInputEvent, MatDialog, MatDialogConfig} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -42,6 +42,8 @@ export class QuestionFormComponent extends EditableFormComponent<Question, strin
   public status = [];
   public good: boolean;
 
+  @Output() cancel = new EventEmitter<string>();
+
 
   constructor(protected   crudStore: QuestionListStore,
               protected   notifierService: NotifierService,
@@ -56,21 +58,26 @@ export class QuestionFormComponent extends EditableFormComponent<Question, strin
     this.types = this.getQuestionTypesEnum();
     this.status = this.getStatusEnum();
     this.route.data.subscribe(data => {
-      this.question = data.question;
-      this.categories = data.categories;
-      this.store.dispatch(new SetCurrentQuestionAction({uuid: this.question.uuid, title: this.question.type}));
-      this.createForm();
-      this.toggleEdition(route.snapshot.params.uuid <= 0);
-    });
+        this.question = data.question;
+        this.categories = data.categories;
+        if (route.snapshot.params.uuid) {
+          this.toggleEdition(route.snapshot.params.uuid <= 0);
+        }
+      }
+    );
     //  this.currentQuestionnaire$ = this.store.select(state => state.currentQuestionnaire);
   }
 
   ngOnInit(): void {
-
+    console.log(this.question);
+    this.store.dispatch(new SetCurrentQuestionAction({uuid: this.question.uuid, title: this.question.type}));
+    this.createForm();
+    // this.toggleEdition(this.question.uuid != null);
   }
 
-  ngAfterViewInit(): void {
-
+  ngAfterViewInit()
+    :
+    void {
   }
 
   public create() {
@@ -118,8 +125,8 @@ export class QuestionFormComponent extends EditableFormComponent<Question, strin
           }
         );
     }
-    this.router.navigate(['/questions/' + this.question.uuid]);
-
+    // this.router.navigate(['/questions/' + this.question.uuid]);
+    this.cancel.emit(q.uuid);
   }
 
   public onSelectResponse(event) {
@@ -145,10 +152,12 @@ export class QuestionFormComponent extends EditableFormComponent<Question, strin
     return this.form.get('tags') as FormArray;
   }
 
-  public addChip(event: MatChipInputEvent): void {
+  public addChip(event: MatChipInputEvent):
+    void {
     const input = event.input;
     const value = event.value;
-    if ((value || '').trim()) {
+    if ((value || '').trim()
+    ) {
       this.addTag(value.trim());
     }
     if (input) {
@@ -158,7 +167,8 @@ export class QuestionFormComponent extends EditableFormComponent<Question, strin
 
   public removeChip(index: number): void {
 
-    if (index >= 0) {
+    if (index >= 0
+    ) {
       const tags = this.form.get('tags') as FormArray;
       tags.removeAt(index);
     }
@@ -169,15 +179,15 @@ export class QuestionFormComponent extends EditableFormComponent<Question, strin
     tags.push(this.formBuilder.createTagControl(new Tag(libelle), false));
   }
 
-  // private getErrorMessage() {
-  //   return this.questionForm.get('question').hasError('required') ? 'You must enter a value' :
-  //     this.questionForm.hasError('question') ? 'Not a valid item' : '';
-  // }
+// private getErrorMessage() {
+//   return this.questionForm.get('question').hasError('required') ? 'You must enter a value' :
+//     this.questionForm.hasError('question') ? 'Not a valid item' : '';
+// }
 
   private getQuestionTypesEnum(): any[] {
     const keys = Object.keys(QuestionType);
     const types = [];
-    keys.map(Key => {
+    keys.forEach(Key => {
       console.log(`type key = ${Key}, value = ${QuestionType[Key]}`);
       const type = {'id': Key, 'name': QuestionType[Key]};
       types.push(type);
@@ -188,7 +198,7 @@ export class QuestionFormComponent extends EditableFormComponent<Question, strin
   private getStatusEnum(): any[] {
     const keys = Object.keys(ValidationStatus);
     const status = [];
-    keys.map(Key => {
+    keys.forEach(Key => {
       const type = {'id': Key, 'name': ValidationStatus[Key]};
       status.push(type);
     });
@@ -201,7 +211,7 @@ export class QuestionFormComponent extends EditableFormComponent<Question, strin
 
   public openCategoryDialog() {
     const config = new MatDialogConfig();
-    config.data = {category: new Category(CategoryType[CategoryType.QUESTION])}
+    config.data = {category: new Category(CategoryType[CategoryType.QUESTION])};
     config.panelClass = 'my-full-screen-dialog';
     const dialogRef = this.dialog.open(CategoryDialogComponent, config);
     dialogRef.afterClosed().subscribe(q => {
@@ -224,6 +234,10 @@ export class QuestionFormComponent extends EditableFormComponent<Question, strin
 
   public compareByUuid(f1: any, f2: any) {
     return f1 && f2 && f1.uuid === f2.uuid;
+  }
+
+  public close(): void {
+    this.cancel.emit(this.question.uuid ? this.question.uuid : '');
   }
 
 }

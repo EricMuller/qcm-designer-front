@@ -1,10 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {MatDialog, MatDialogConfig} from '@angular/material';
 import {Router} from '@angular/router';
 import {Question} from '@app/features/qcm-rest-api/model/question.model';
 import {Tag} from '@app/features/qcm-rest-api/model/tag.model';
+import {QuestionService} from '@app/features/qcm-rest-api/services/question.service';
+import {QuestionDialogComponent} from '@app/features/question/question-dialog/question-dialog.component';
 import {QuestionListStore} from '@app/features/stores/question-list-store.service';
 
 import {TagListStore} from '@app/features/stores/tag-list-store.service';
+import {LayoutDialogModule} from '@app/shared/material-components/layout-module/layout-dialog.module';
 import {Observable} from 'rxjs/internal/Observable';
 
 
@@ -19,7 +23,9 @@ export class QuestionNavListComponent implements OnInit {
   public elements$: Observable<Question[]>;
 
   constructor(private questionListStore: QuestionListStore,
-              private tagListStore: TagListStore, private router: Router) {
+              private tagListStore: TagListStore, private router: Router,
+              private dialog: MatDialog, private layout: LayoutDialogModule,
+              private questionService: QuestionService) {
   }
 
   ngOnInit() {
@@ -33,11 +39,25 @@ export class QuestionNavListComponent implements OnInit {
     this.tagListStore.swapElement(tag);
   }
 
-  public setClickedRow = function(question: Question) {
+  public setClickedRow = function (question: Question) {
     this.questionListStore.swapElement(question);
-  }
+  };
 
   public create() {
     this.router.navigate(['/questions/0']);
+  }
+
+  public openQuestionDialog(SelectedQuestion: Question) {
+
+    this.questionService.getQuestionByUuid(SelectedQuestion.uuid)
+      .subscribe(q => {
+        const config = new MatDialogConfig();
+        //
+        config.data = {question: q};
+
+        this.layout.openCenterFull(this.dialog, QuestionDialogComponent, config);
+      });
+
+
   }
 }

@@ -142,13 +142,13 @@
     <div fxLayout='column' fxFlex="100%" fxFlex.gt-xs="20%">
       <!--      <div  fxFlex="100%" fxFlex.gt-xs="50%">-->
       <mat-form-field *ngIf="questionnaire.uuid">
-        <input matInput [value]="form.get('dateCreation').value | date: 'dd/MM/yyyy hh:mm:ss' "
+        <input matInput [value]="form.get('dateCreation').value | date: 'dd/MM/yyyy HH:mm:ss' "
                placeholder="{{'qcm.questionnaire.form.input.creation.placeholder' |translate}}" readonly>
       </mat-form-field>
 
       <!-- </div> -->
       <mat-form-field *ngIf="questionnaire.uuid">
-        <input matInput [value]="form.get('dateModification').value | date: 'dd/MM/yyyy hh:mm:ss' "
+        <input matInput [value]="form.get('dateModification').value | date: 'dd/MM/yyyy HH:mm:ss' "
                placeholder="{{'qcm.questionnaire.form.input.modification.placeholder' |translate}}" readonly>
       </mat-form-field>
 

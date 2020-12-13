@@ -1,0 +1,35 @@
+
+
+<div [ngSwitch]="question.type" style="display:flex;flex-direction: column">
+
+  <ng-template [ngSwitchCase]="'FREE_TEXT'">
+
+    <div *ngFor="let response of  question.responses; let i=index" >
+
+
+<!--      <div>>{{response.response}}</div>-->
+      <md-editor name="Content"
+                 [ngModel]="response.response"
+                 [height]="calculResponseHeigth(response.response)+'px'"
+                 [mode]="'preview'"
+                 required
+                 maxlength="500">
+      </md-editor>
+
+    </div>
+  </ng-template>
+
+  <ng-template [ngSwitchCase]="'MULTIPLE_ANSWER'">
+    MULTIPLE_ANSWER
+  </ng-template>
+
+  <ng-template [ngSwitchCase]="'MULTIPLE_CHOICE'">
+    MULTIPLE_CHOICE
+  </ng-template>
+
+  <ng-template [ngSwitchCase]="'TRUE_FALSE'">
+    false
+
+  </ng-template>
+
+</div>

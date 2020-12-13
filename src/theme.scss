@@ -23,6 +23,10 @@
   @include angular-material-theme($light-blue-theme);
 }
 
+//html, body {
+//  background-color: #00E676;
+//}
+
 .page-content {
   height: 100%;
 }
@@ -63,3 +67,6 @@
     background: url(./assets/favicon.ico) center center no-repeat;
   }
 }
+
+
+

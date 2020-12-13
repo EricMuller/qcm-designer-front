@@ -17,10 +17,12 @@ import {AngularModule} from '@app/shared/angular/angular.module';
 import {MaterialComponentsModule} from '@app/shared/material-components/material-components.module';
 import {MaterialModule} from '@app/shared/material/material.module';
 import {TranslateModule} from '@ngx-translate/core';
+import {LMarkdownEditorModule} from 'ngx-markdown-editor';
 import {QuestionDialogComponent} from './question-dialog/question-dialog.component';
 import {QuestionFormComponent} from './question-form/question-form.component';
 import {QuestionListComponent} from './question-list/question-list.component';
 import {QuestionNavListComponent} from './question-list/question-nav-list/question-nav-list.component';
+import {QuestionResponsesComponent} from './question-responses/question-responses.component';
 
 @NgModule({
   imports: [
@@ -32,12 +34,13 @@ import {QuestionNavListComponent} from './question-list/question-nav-list/questi
     FlexLayoutModule,
     CategoryModule,
     TranslateModule.forChild(),
+    LMarkdownEditorModule
   ],
   declarations: [QuestionListComponent, QuestionDialogComponent,
     QuestionNavListComponent, QuestionFormComponent, QuestionnaireSelectComponent,
-    QuestionnaireQuestionListComponent, QuestionnaireQuestionNavListComponent],
+    QuestionnaireQuestionListComponent, QuestionnaireQuestionNavListComponent, QuestionResponsesComponent],
   entryComponents: [QuestionDialogComponent, CategoryDialogComponent],
-  exports: [QuestionListComponent],
+  exports: [QuestionListComponent, QuestionnaireQuestionListComponent],
   providers: [SearchStore, QuestionnaireListStore, TagListStore, QuestionListStore, QuestionnaireQuestionListStore]
 })
 export class QuestionModule {

@@ -18,11 +18,13 @@ export class QuestionDialogComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<QuestionnaireDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.question = Object.assign({}, this.data['question']);
+    this.questionnaire = Object.assign({}, this.data['questionnaire']);
   }
 
   ngOnInit() {
-    this.questionnaire = Object.assign({}, this.data['questionnaire']);
-    this.question = Object.assign({}, this.data['question']);
+
+
   }
 
   public closeDialog() {

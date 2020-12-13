@@ -46,7 +46,7 @@ export class SelectableListComponent<T extends Entity> implements OnInit, AfterC
 
   public currentView: ViewMode = ViewMode.List;
 
-  private loadingDataSubject: Subject<boolean> = new BehaviorSubject(false);
+  private loadingDataSubject: Subject<boolean> = new BehaviorSubject(false); // progress info
   readonly loadingData$: Observable<boolean> = this.loadingDataSubject.asObservable();
 
 

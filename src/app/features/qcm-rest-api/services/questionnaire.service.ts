@@ -26,11 +26,12 @@ export class QuestionnaireService {
 
   public getQuestionnairesByCriteria(criteria: Criteria[], page?: number, size?: number, sort?: string): Observable<Page> {
 
+
     let params = '';
     if (criteria) {
-      for (let i = 0; i < criteria.length; i++) {
-        params += '&' + criteria[i].name + '=' + criteria[i].value;
-      }
+      criteria.forEach(item => {
+        params += '&' + item.name + '=' + item.value;
+      });
     }
     const requestUrl = `${this.endPoint.QUESTIONNAIRES}?size=${size}&page=${page}&sort=${sort}` + params;
 
@@ -57,6 +58,7 @@ export class QuestionnaireService {
   }
 
   public getPageQuestionsProjectionByQuestionnaireUuid(questionnaireUuid: string): Observable<Questionnaire[]> {
+
     return this.http
       .get<Questionnaire[]>(this.endPoint.QUESTIONNAIRES + questionnaireUuid + '/questions')
       .pipe(publishLast(), refCount());

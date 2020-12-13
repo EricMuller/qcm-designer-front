@@ -20,6 +20,7 @@ import {QuestionnaireFormComponent} from './questionnaire-form/questionnaire-for
 import {QuestionnaireListComponent} from './questionnaire-list/questionnaire-list.component';
 import {QuestionnaireNavListComponent} from './questionnaire-list/questionnaire-nav-list/questionnaire-nav-list.component';
 import {SearchStore} from './services/questionnaire-search-store.service';
+import { QuestionnaireDetailComponent } from './questionnaire-detail/questionnaire-detail.component';
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import {SearchStore} from './services/questionnaire-search-store.service';
     QuestionnaireListComponent,
     QuestionnaireDialogComponent,
     QuestionnaireNavListComponent,
-    QuestionnaireFormComponent
+    QuestionnaireFormComponent,
+    QuestionnaireDetailComponent
   ],
   entryComponents: [QuestionnaireDialogComponent, CategoryDialogComponent],
   providers: [SearchStore, QuestionnaireListStore, TagListStore
