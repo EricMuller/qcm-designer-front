@@ -58,7 +58,7 @@
     "immutable": "^3.8.2",
     "moment": "^2.24.0",
     "ngx-cookie-service": "^2.3.0",
-    "ngx-markdown-editor": "^2.5.0",
+    "ngx-markdown-editor": "^3.3.0",
     "ngx-translate-cache": "^0.1.2",
     "path": "^0.12.7",
     "rxjs": "^6.5.4",
